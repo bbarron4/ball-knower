@@ -432,8 +432,7 @@ async function startGameSession() {
     currentGame.maxStreak = 0;
     currentGame.gameStartTime = Date.now();
     
-    // Show loading state
-    showMessage('Loading questions...', 'info');
+    // Remove loading message - questions load quickly now
     
     try {
         // Generate questions (now async)

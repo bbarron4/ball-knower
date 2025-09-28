@@ -19,7 +19,8 @@ class DataLoader {
         }
 
         try {
-            const response = await fetch(`data/${league}_${tier}.json`, {
+            // Try to load from server first
+            const response = await fetch(`${league}_${tier}.json`, {
                 cache: 'force-cache'
             });
             
@@ -30,11 +31,45 @@ class DataLoader {
             const players = await response.json();
             this.cache.set(cacheKey, players);
             
-            console.log(`✅ Loaded ${players.length} ${league} ${tier} players`);
+            console.log(`✅ Loaded ${players.length} ${league} ${tier} players from server`);
             return players;
         } catch (error) {
-            console.error(`❌ Failed to load ${cacheKey}:`, error);
-            return [];
+            console.error(`❌ Failed to load ${cacheKey} from server:`, error);
+            console.log(`🔄 Trying to load from data directory...`);
+            
+            try {
+                // Try to load from data directory
+                const response = await fetch(`data/${league}_${tier}.json`, {
+                    cache: 'force-cache'
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`Failed to load from data directory: ${response.status}`);
+                }
+                
+                const players = await response.json();
+                this.cache.set(cacheKey, players);
+                
+                console.log(`✅ Loaded ${players.length} ${league} ${tier} players from data directory`);
+                return players;
+            } catch (dataError) {
+                console.error(`❌ Failed to load from data directory:`, dataError);
+                console.log(`🔄 Using fallback data for ${cacheKey}`);
+                
+                // Try to use sample data if available (real API data)
+                if (typeof SAMPLE_DATA !== 'undefined' && SAMPLE_DATA.length > 0) {
+                    console.log(`✅ Using real API data: ${SAMPLE_DATA.length} players`);
+                    return SAMPLE_DATA;
+                }
+                
+                // Try to use fallback data if available
+                if (typeof FALLBACK_DATA !== 'undefined' && FALLBACK_DATA[cacheKey]) {
+                    console.log(`✅ Using fallback data: ${FALLBACK_DATA[cacheKey].length} players`);
+                    return FALLBACK_DATA[cacheKey];
+                }
+                
+                return [];
+            }
         }
     }
 
@@ -43,7 +78,7 @@ class DataLoader {
      */
     async checkDataVersion() {
         try {
-            const response = await fetch('data/data_version.json', {
+            const response = await fetch('data_version.json', {
                 cache: 'no-cache'
             });
             
