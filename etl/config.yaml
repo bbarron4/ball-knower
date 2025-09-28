@@ -1,0 +1,48 @@
+﻿sources:
+  nfl_players_csv: etl/input/nfl_players.csv
+  nba_players_csv: etl/input/nba_players.csv
+
+export_dir: data
+data_version: auto
+
+tiers:
+  nfl: 
+    easy_pct: 0.20
+    medium_pct: 0.55
+  nba: 
+    easy_pct: 0.20
+    medium_pct: 0.55
+
+tiering:
+  small_sample_threshold: 50
+
+scoring:
+  nfl:
+    award_points: 
+      MVP: 10
+      SB: 8
+      SBMVP: 6
+      AllPro: 4
+      ProBowl: 2
+    weights: 
+      log_games: 0.35
+      log_seasons: 0.25
+      awards: 0.00
+      log_recent_starts: 0.25
+      log_approx_value: 0.15
+      active_bonus: 5
+  nba:
+    award_points: 
+      MVP: 10
+      Champ: 8
+      FMVP: 6
+      AllNBA: 3
+      AllStar: 2
+      DPOY: 4
+    weights: 
+      log_games: 0.35
+      log_seasons: 0.25
+      awards: 0.00
+      log_recent_starts: 0.25
+      log_win_shares: 0.15
+      active_bonus: 5

@@ -1,0 +1,2915 @@
+[
+  {
+    "id": "nba_garrett_temple",
+    "name": "Garrett Temple",
+    "league": "NBA",
+    "team": "TOR",
+    "college": "Louisiana State",
+    "hs": null,
+    "jersey_current": 17,
+    "jerseys": [
+      17
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2010,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_dwight_powell",
+    "name": "Dwight Powell",
+    "league": "NBA",
+    "team": "DAL",
+    "college": "Stanford",
+    "hs": null,
+    "jersey_current": 7,
+    "jerseys": [
+      7
+    ],
+    "positions": [
+      "C"
+    ],
+    "from": 2014,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_marcus_smart",
+    "name": "Marcus Smart",
+    "league": "NBA",
+    "team": "LAL",
+    "college": "Oklahoma State",
+    "hs": null,
+    "jersey_current": 36,
+    "jerseys": [
+      36
+    ],
+    "positions": [
+      "PG"
+    ],
+    "from": 2014,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_kevin_love",
+    "name": "Kevin Love",
+    "league": "NBA",
+    "team": "UTA",
+    "college": "UCLA",
+    "hs": null,
+    "jersey_current": 42,
+    "jerseys": [
+      42
+    ],
+    "positions": [
+      "PF"
+    ],
+    "from": 2008,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_mason_plumlee",
+    "name": "Mason Plumlee",
+    "league": "NBA",
+    "team": "CHA",
+    "college": "Duke",
+    "hs": null,
+    "jersey_current": 22,
+    "jerseys": [
+      22
+    ],
+    "positions": [
+      "C"
+    ],
+    "from": 2013,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_jeff_green",
+    "name": "Jeff Green",
+    "league": "NBA",
+    "team": "HOU",
+    "college": "Georgetown",
+    "hs": null,
+    "jersey_current": 32,
+    "jerseys": [
+      32
+    ],
+    "positions": [
+      "PF"
+    ],
+    "from": 2008,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_kyle_anderson",
+    "name": "Kyle Anderson",
+    "league": "NBA",
+    "team": "UTA",
+    "college": "UCLA",
+    "hs": null,
+    "jersey_current": 2,
+    "jerseys": [
+      2
+    ],
+    "positions": [
+      "SF"
+    ],
+    "from": 2014,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_jordan_clarkson",
+    "name": "Jordan Clarkson",
+    "league": "NBA",
+    "team": "NY",
+    "college": "Missouri",
+    "hs": null,
+    "jersey_current": null,
+    "jerseys": [],
+    "positions": [
+      "SG"
+    ],
+    "from": 2014,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_tim_hardaway_jr",
+    "name": "Tim Hardaway Jr.",
+    "league": "NBA",
+    "team": "DEN",
+    "college": "Michigan",
+    "hs": null,
+    "jersey_current": 10,
+    "jerseys": [
+      10
+    ],
+    "positions": [
+      "SF"
+    ],
+    "from": 2013,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_zach_lavine",
+    "name": "Zach LaVine",
+    "league": "NBA",
+    "team": "SAC",
+    "college": "UCLA",
+    "hs": null,
+    "jersey_current": 8,
+    "jerseys": [
+      8
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2014,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_andre_drummond",
+    "name": "Andre Drummond",
+    "league": "NBA",
+    "team": "PHI",
+    "college": "Connecticut",
+    "hs": null,
+    "jersey_current": 1,
+    "jerseys": [
+      1
+    ],
+    "positions": [
+      "C"
+    ],
+    "from": 2012,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_gary_harris",
+    "name": "Gary Harris",
+    "league": "NBA",
+    "team": "MIL",
+    "college": "Michigan State",
+    "hs": null,
+    "jersey_current": 11,
+    "jerseys": [
+      11
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2014,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_dante_exum",
+    "name": "Dante Exum",
+    "league": "NBA",
+    "team": "DAL",
+    "college": null,
+    "hs": null,
+    "jersey_current": null,
+    "jerseys": [],
+    "positions": [
+      "PG"
+    ],
+    "from": 2017,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_norman_powell",
+    "name": "Norman Powell",
+    "league": "NBA",
+    "team": "MIA",
+    "college": "UCLA",
+    "hs": null,
+    "jersey_current": 24,
+    "jerseys": [
+      24
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2015,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_delon_wright",
+    "name": "Delon Wright",
+    "league": "NBA",
+    "team": "IND",
+    "college": "Utah",
+    "hs": null,
+    "jersey_current": null,
+    "jerseys": [],
+    "positions": [
+      "PG"
+    ],
+    "from": 2015,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_bobby_portis",
+    "name": "Bobby Portis",
+    "league": "NBA",
+    "team": "MIL",
+    "college": "Arkansas",
+    "hs": null,
+    "jersey_current": 9,
+    "jerseys": [
+      9
+    ],
+    "positions": [
+      "PF"
+    ],
+    "from": 2015,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_pat_connaughton",
+    "name": "Pat Connaughton",
+    "league": "NBA",
+    "team": "CHA",
+    "college": "Notre Dame",
+    "hs": null,
+    "jersey_current": 21,
+    "jerseys": [
+      21
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2015,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_t_j_mcconnell",
+    "name": "T.J. McConnell",
+    "league": "NBA",
+    "team": "IND",
+    "college": "Arizona",
+    "hs": null,
+    "jersey_current": 9,
+    "jerseys": [
+      9
+    ],
+    "positions": [
+      "PG"
+    ],
+    "from": 2015,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_dario_šarić",
+    "name": "Dario Šarić",
+    "league": "NBA",
+    "team": "SAC",
+    "college": null,
+    "hs": null,
+    "jersey_current": 9,
+    "jerseys": [
+      9
+    ],
+    "positions": [
+      "PF"
+    ],
+    "from": 2017,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_kris_dunn",
+    "name": "Kris Dunn",
+    "league": "NBA",
+    "team": "LAC",
+    "college": "Providence",
+    "hs": null,
+    "jersey_current": 8,
+    "jerseys": [
+      8
+    ],
+    "positions": [
+      "PG"
+    ],
+    "from": 2016,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_malcolm_brogdon",
+    "name": "Malcolm Brogdon",
+    "league": "NBA",
+    "team": "NY",
+    "college": "Virginia",
+    "hs": null,
+    "jersey_current": 5,
+    "jerseys": [
+      5
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2016,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_caris_levert",
+    "name": "Caris LeVert",
+    "league": "NBA",
+    "team": "DET",
+    "college": "Michigan",
+    "hs": null,
+    "jersey_current": 8,
+    "jerseys": [
+      8
+    ],
+    "positions": [
+      "SF"
+    ],
+    "from": 2016,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_georges_niang",
+    "name": "Georges Niang",
+    "league": "NBA",
+    "team": "UTA",
+    "college": "Iowa State",
+    "hs": null,
+    "jersey_current": 31,
+    "jerseys": [
+      31
+    ],
+    "positions": [
+      "SF"
+    ],
+    "from": 2016,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_bogdan_bogdanović",
+    "name": "Bogdan Bogdanović",
+    "league": "NBA",
+    "team": "LAC",
+    "college": null,
+    "hs": null,
+    "jersey_current": 10,
+    "jerseys": [
+      10
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2017,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_zach_collins",
+    "name": "Zach Collins",
+    "league": "NBA",
+    "team": "CHI",
+    "college": "Gonzaga",
+    "hs": null,
+    "jersey_current": 12,
+    "jerseys": [
+      12
+    ],
+    "positions": [
+      "C"
+    ],
+    "from": 2018,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_luke_kennard",
+    "name": "Luke Kennard",
+    "league": "NBA",
+    "team": "ATL",
+    "college": "Duke",
+    "hs": null,
+    "jersey_current": 3,
+    "jerseys": [
+      3
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2017,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_thomas_bryant",
+    "name": "Thomas Bryant",
+    "league": "NBA",
+    "team": "CLE",
+    "college": "Indiana",
+    "hs": null,
+    "jersey_current": 3,
+    "jerseys": [
+      3
+    ],
+    "positions": [
+      "C"
+    ],
+    "from": 2017,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_luke_kornet",
+    "name": "Luke Kornet",
+    "league": "NBA",
+    "team": "SA",
+    "college": "Vanderbilt",
+    "hs": null,
+    "jersey_current": 7,
+    "jerseys": [
+      7
+    ],
+    "positions": [
+      "C"
+    ],
+    "from": 2017,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_maxi_kleber",
+    "name": "Maxi Kleber",
+    "league": "NBA",
+    "team": "LAL",
+    "college": null,
+    "hs": null,
+    "jersey_current": 14,
+    "jerseys": [
+      14
+    ],
+    "positions": [
+      "C"
+    ],
+    "from": 2017,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_royce_o_neale",
+    "name": "Royce O'Neale",
+    "league": "NBA",
+    "team": "PHO",
+    "college": "Baylor",
+    "hs": null,
+    "jersey_current": null,
+    "jerseys": [],
+    "positions": [
+      "PF"
+    ],
+    "from": 2017,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_mo_bamba",
+    "name": "Mo Bamba",
+    "league": "NBA",
+    "team": "UTA",
+    "college": "Texas",
+    "hs": null,
+    "jersey_current": 11,
+    "jerseys": [
+      11
+    ],
+    "positions": [
+      "C"
+    ],
+    "from": 2018,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_marvin_bagley_iii",
+    "name": "Marvin Bagley III",
+    "league": "NBA",
+    "team": "WAS",
+    "college": "Duke",
+    "hs": null,
+    "jersey_current": 35,
+    "jerseys": [
+      35
+    ],
+    "positions": [
+      "PF"
+    ],
+    "from": 2018,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_josh_okogie",
+    "name": "Josh Okogie",
+    "league": "NBA",
+    "team": "HOU",
+    "college": "Georgia Tech",
+    "hs": null,
+    "jersey_current": 20,
+    "jerseys": [
+      20
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2018,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_jarred_vanderbilt",
+    "name": "Jarred Vanderbilt",
+    "league": "NBA",
+    "team": "LAL",
+    "college": "Kentucky",
+    "hs": null,
+    "jersey_current": 2,
+    "jerseys": [
+      2
+    ],
+    "positions": [
+      "SF"
+    ],
+    "from": 2018,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_mitchell_robinson",
+    "name": "Mitchell Robinson",
+    "league": "NBA",
+    "team": "NY",
+    "college": "Western Kentucky",
+    "hs": null,
+    "jersey_current": 23,
+    "jerseys": [
+      23
+    ],
+    "positions": [
+      "C"
+    ],
+    "from": 2018,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_landry_shamet",
+    "name": "Landry Shamet",
+    "league": "NBA",
+    "team": "NY",
+    "college": "Wichita State",
+    "hs": null,
+    "jersey_current": 44,
+    "jerseys": [
+      44
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2018,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_drew_eubanks",
+    "name": "Drew Eubanks",
+    "league": "NBA",
+    "team": "SAC",
+    "college": "Oregon State",
+    "hs": null,
+    "jersey_current": 19,
+    "jerseys": [
+      19
+    ],
+    "positions": [
+      "C"
+    ],
+    "from": 2018,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_duncan_robinson",
+    "name": "Duncan Robinson",
+    "league": "NBA",
+    "team": "DET",
+    "college": "Michigan",
+    "hs": null,
+    "jersey_current": 55,
+    "jerseys": [
+      55
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2018,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_duop_reath",
+    "name": "Duop Reath",
+    "league": "NBA",
+    "team": "POR",
+    "college": "Louisiana State",
+    "hs": null,
+    "jersey_current": 26,
+    "jerseys": [
+      26
+    ],
+    "positions": [
+      "C"
+    ],
+    "from": 2023,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_haywood_highsmith",
+    "name": "Haywood Highsmith",
+    "league": "NBA",
+    "team": "BKN",
+    "college": "Wheeling Jesuit",
+    "hs": null,
+    "jersey_current": 7,
+    "jerseys": [
+      7
+    ],
+    "positions": [
+      "SF"
+    ],
+    "from": 2020,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_javonte_green",
+    "name": "Javonte Green",
+    "league": "NBA",
+    "team": "DET",
+    "college": "Radford",
+    "hs": null,
+    "jersey_current": 31,
+    "jerseys": [
+      31
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2019,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_jae_sean_tate",
+    "name": "Jae'Sean Tate",
+    "league": "NBA",
+    "team": "HOU",
+    "college": "Ohio State",
+    "hs": null,
+    "jersey_current": 8,
+    "jerseys": [
+      8
+    ],
+    "positions": [
+      "SF"
+    ],
+    "from": 2020,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_ja_morant",
+    "name": "Ja Morant",
+    "league": "NBA",
+    "team": "MEM",
+    "college": "Murray State",
+    "hs": null,
+    "jersey_current": 12,
+    "jerseys": [
+      12
+    ],
+    "positions": [
+      "PG"
+    ],
+    "from": 2019,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_de_andre_hunter",
+    "name": "De'Andre Hunter",
+    "league": "NBA",
+    "team": "CLE",
+    "college": "Virginia",
+    "hs": null,
+    "jersey_current": 12,
+    "jerseys": [
+      12
+    ],
+    "positions": [
+      "SF"
+    ],
+    "from": 2019,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_jaxson_hayes",
+    "name": "Jaxson Hayes",
+    "league": "NBA",
+    "team": "LAL",
+    "college": "Texas",
+    "hs": null,
+    "jersey_current": 11,
+    "jerseys": [
+      11
+    ],
+    "positions": [
+      "C"
+    ],
+    "from": 2019,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_rui_hachimura",
+    "name": "Rui Hachimura",
+    "league": "NBA",
+    "team": "LAL",
+    "college": "Gonzaga",
+    "hs": null,
+    "jersey_current": 28,
+    "jerseys": [
+      28
+    ],
+    "positions": [
+      "PF"
+    ],
+    "from": 2019,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_grant_williams",
+    "name": "Grant Williams",
+    "league": "NBA",
+    "team": "CHA",
+    "college": "Tennessee",
+    "hs": null,
+    "jersey_current": 2,
+    "jerseys": [
+      2
+    ],
+    "positions": [
+      "PF"
+    ],
+    "from": 2019,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_goga_bitadze",
+    "name": "Goga Bitadze",
+    "league": "NBA",
+    "team": "ORL",
+    "college": null,
+    "hs": null,
+    "jersey_current": 35,
+    "jerseys": [
+      35
+    ],
+    "positions": [
+      "C"
+    ],
+    "from": 2019,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_tyler_herro",
+    "name": "Tyler Herro",
+    "league": "NBA",
+    "team": "MIA",
+    "college": "Kentucky",
+    "hs": null,
+    "jersey_current": 14,
+    "jerseys": [
+      14
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2019,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_nickeil_alexander_walker",
+    "name": "Nickeil Alexander-Walker",
+    "league": "NBA",
+    "team": "ATL",
+    "college": "Virginia Tech",
+    "hs": null,
+    "jersey_current": 7,
+    "jerseys": [
+      7
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2019,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_matisse_thybulle",
+    "name": "Matisse Thybulle",
+    "league": "NBA",
+    "team": "POR",
+    "college": "Washington",
+    "hs": null,
+    "jersey_current": 4,
+    "jerseys": [
+      4
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2019,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_keldon_johnson",
+    "name": "Keldon Johnson",
+    "league": "NBA",
+    "team": "SA",
+    "college": "Kentucky",
+    "hs": null,
+    "jersey_current": 3,
+    "jerseys": [
+      3
+    ],
+    "positions": [
+      "SF"
+    ],
+    "from": 2019,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_john_konchar",
+    "name": "John Konchar",
+    "league": "NBA",
+    "team": "MEM",
+    "college": "Indiana-Purdue Fort Wayne",
+    "hs": null,
+    "jersey_current": 46,
+    "jerseys": [
+      46
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2019,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_dean_wade",
+    "name": "Dean Wade",
+    "league": "NBA",
+    "team": "CLE",
+    "college": "Kansas State",
+    "hs": null,
+    "jersey_current": 32,
+    "jerseys": [
+      32
+    ],
+    "positions": [
+      "PF"
+    ],
+    "from": 2019,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_naz_reid",
+    "name": "Naz Reid",
+    "league": "NBA",
+    "team": "MIN",
+    "college": "Louisiana State",
+    "hs": null,
+    "jersey_current": 11,
+    "jerseys": [
+      11
+    ],
+    "positions": [
+      "C"
+    ],
+    "from": 2019,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_moses_brown",
+    "name": "Moses Brown",
+    "league": "NBA",
+    "team": "DEN",
+    "college": "UCLA",
+    "hs": null,
+    "jersey_current": 34,
+    "jerseys": [
+      34
+    ],
+    "positions": [
+      "C"
+    ],
+    "from": 2019,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_amir_coffey",
+    "name": "Amir Coffey",
+    "league": "NBA",
+    "team": "MIL",
+    "college": "Minnesota",
+    "hs": null,
+    "jersey_current": 17,
+    "jerseys": [
+      17
+    ],
+    "positions": [
+      "PF"
+    ],
+    "from": 2019,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_garrison_mathews",
+    "name": "Garrison Mathews",
+    "league": "NBA",
+    "team": "NY",
+    "college": "Lipscomb",
+    "hs": null,
+    "jersey_current": 14,
+    "jerseys": [
+      14
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2019,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_caleb_martin",
+    "name": "Caleb Martin",
+    "league": "NBA",
+    "team": "DAL",
+    "college": "Nevada",
+    "hs": null,
+    "jersey_current": 16,
+    "jerseys": [
+      16
+    ],
+    "positions": [
+      "PF"
+    ],
+    "from": 2019,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_james_wiseman",
+    "name": "James Wiseman",
+    "league": "NBA",
+    "team": "IND",
+    "college": "Memphis",
+    "hs": null,
+    "jersey_current": 11,
+    "jerseys": [
+      11
+    ],
+    "positions": [
+      "C"
+    ],
+    "from": 2021,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_lamelo_ball",
+    "name": "LaMelo Ball",
+    "league": "NBA",
+    "team": "CHA",
+    "college": null,
+    "hs": "Chino Hills (CA)",
+    "jersey_current": 1,
+    "jerseys": [
+      1
+    ],
+    "positions": [
+      "PG"
+    ],
+    "from": 2020,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_patrick_williams",
+    "name": "Patrick Williams",
+    "league": "NBA",
+    "team": "CHI",
+    "college": "Florida State",
+    "hs": null,
+    "jersey_current": 44,
+    "jerseys": [
+      44
+    ],
+    "positions": [
+      "PF"
+    ],
+    "from": 2020,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_isaac_okoro",
+    "name": "Isaac Okoro",
+    "league": "NBA",
+    "team": "CHI",
+    "college": "Auburn",
+    "hs": null,
+    "jersey_current": 35,
+    "jerseys": [
+      35
+    ],
+    "positions": [
+      "SF"
+    ],
+    "from": 2020,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_onyeka_okongwu",
+    "name": "Onyeka Okongwu",
+    "league": "NBA",
+    "team": "ATL",
+    "college": "Southern California",
+    "hs": null,
+    "jersey_current": 17,
+    "jerseys": [
+      17
+    ],
+    "positions": [
+      "C"
+    ],
+    "from": 2020,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_killian_hayes",
+    "name": "Killian Hayes",
+    "league": "NBA",
+    "team": "CLE",
+    "college": null,
+    "hs": null,
+    "jersey_current": null,
+    "jerseys": [],
+    "positions": [
+      "PG"
+    ],
+    "from": 2020,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_obi_toppin",
+    "name": "Obi Toppin",
+    "league": "NBA",
+    "team": "IND",
+    "college": "Dayton",
+    "hs": null,
+    "jersey_current": 1,
+    "jerseys": [
+      1
+    ],
+    "positions": [
+      "PF"
+    ],
+    "from": 2020,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_jalen_smith",
+    "name": "Jalen Smith",
+    "league": "NBA",
+    "team": "CHI",
+    "college": "Maryland",
+    "hs": null,
+    "jersey_current": 25,
+    "jerseys": [
+      25
+    ],
+    "positions": [
+      "PF"
+    ],
+    "from": 2020,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_aaron_nesmith",
+    "name": "Aaron Nesmith",
+    "league": "NBA",
+    "team": "IND",
+    "college": "Vanderbilt",
+    "hs": null,
+    "jersey_current": 23,
+    "jerseys": [
+      23
+    ],
+    "positions": [
+      "PF"
+    ],
+    "from": 2020,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_isaiah_stewart",
+    "name": "Isaiah Stewart",
+    "league": "NBA",
+    "team": "DET",
+    "college": "Washington",
+    "hs": null,
+    "jersey_current": 28,
+    "jerseys": [
+      28
+    ],
+    "positions": [
+      "PF"
+    ],
+    "from": 2020,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_josh_green",
+    "name": "Josh Green",
+    "league": "NBA",
+    "team": "CHA",
+    "college": "Arizona",
+    "hs": null,
+    "jersey_current": 10,
+    "jerseys": [
+      10
+    ],
+    "positions": [
+      "SF"
+    ],
+    "from": 2020,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_saddiq_bey",
+    "name": "Saddiq Bey",
+    "league": "NBA",
+    "team": "NO",
+    "college": "Villanova",
+    "hs": null,
+    "jersey_current": 41,
+    "jerseys": [
+      41
+    ],
+    "positions": [
+      "PF"
+    ],
+    "from": 2021,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_precious_achiuwa",
+    "name": "Precious Achiuwa",
+    "league": "NBA",
+    "team": "MIA",
+    "college": "Memphis",
+    "hs": null,
+    "jersey_current": 8,
+    "jerseys": [
+      8
+    ],
+    "positions": [
+      "PF"
+    ],
+    "from": 2020,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_immanuel_quickley",
+    "name": "Immanuel Quickley",
+    "league": "NBA",
+    "team": "TOR",
+    "college": "Kentucky",
+    "hs": null,
+    "jersey_current": 5,
+    "jerseys": [
+      5
+    ],
+    "positions": [
+      "PG"
+    ],
+    "from": 2020,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_payton_pritchard",
+    "name": "Payton Pritchard",
+    "league": "NBA",
+    "team": "BOS",
+    "college": "Oregon",
+    "hs": null,
+    "jersey_current": 11,
+    "jerseys": [
+      11
+    ],
+    "positions": [
+      "PG"
+    ],
+    "from": 2020,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_desmond_bane",
+    "name": "Desmond Bane",
+    "league": "NBA",
+    "team": "ORL",
+    "college": "TCU",
+    "hs": null,
+    "jersey_current": 3,
+    "jerseys": [
+      3
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2020,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_xavier_tillman",
+    "name": "Xavier Tillman",
+    "league": "NBA",
+    "team": "BOS",
+    "college": "Michigan State",
+    "hs": null,
+    "jersey_current": 26,
+    "jerseys": [
+      26
+    ],
+    "positions": [
+      "C"
+    ],
+    "from": 2020,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_vít_krejčí",
+    "name": "Vít Krejčí",
+    "league": "NBA",
+    "team": "ATL",
+    "college": null,
+    "hs": null,
+    "jersey_current": 27,
+    "jerseys": [
+      27
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2021,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_tre_jones",
+    "name": "Tre Jones",
+    "league": "NBA",
+    "team": "CHI",
+    "college": "Duke",
+    "hs": null,
+    "jersey_current": 30,
+    "jerseys": [
+      30
+    ],
+    "positions": [
+      "PG"
+    ],
+    "from": 2020,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_nick_richards",
+    "name": "Nick Richards",
+    "league": "NBA",
+    "team": "PHO",
+    "college": "Kentucky",
+    "hs": null,
+    "jersey_current": 2,
+    "jerseys": [
+      2
+    ],
+    "positions": [
+      "C"
+    ],
+    "from": 2020,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_paul_reed",
+    "name": "Paul Reed",
+    "league": "NBA",
+    "team": "DET",
+    "college": "DePaul",
+    "hs": null,
+    "jersey_current": 7,
+    "jerseys": [
+      7
+    ],
+    "positions": [
+      "PF"
+    ],
+    "from": 2020,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_corey_kispert",
+    "name": "Corey Kispert",
+    "league": "NBA",
+    "team": "WAS",
+    "college": "Gonzaga",
+    "hs": null,
+    "jersey_current": 24,
+    "jerseys": [
+      24
+    ],
+    "positions": [
+      "SF"
+    ],
+    "from": 2021,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_moses_moody",
+    "name": "Moses Moody",
+    "league": "NBA",
+    "team": "GS",
+    "college": "Arkansas",
+    "hs": null,
+    "jersey_current": 4,
+    "jerseys": [
+      4
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2021,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_ziaire_williams",
+    "name": "Ziaire Williams",
+    "league": "NBA",
+    "team": "BKN",
+    "college": "Stanford",
+    "hs": null,
+    "jersey_current": 1,
+    "jerseys": [
+      1
+    ],
+    "positions": [
+      "SF"
+    ],
+    "from": 2021,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_jalen_johnson",
+    "name": "Jalen Johnson",
+    "league": "NBA",
+    "team": "ATL",
+    "college": "Duke",
+    "hs": null,
+    "jersey_current": 1,
+    "jerseys": [
+      1
+    ],
+    "positions": [
+      "PF"
+    ],
+    "from": 2021,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_cam_thomas",
+    "name": "Cam Thomas",
+    "league": "NBA",
+    "team": "BKN",
+    "college": "Louisiana State",
+    "hs": null,
+    "jersey_current": 24,
+    "jerseys": [
+      24
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2021,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_jonathan_kuminga",
+    "name": "Jonathan Kuminga",
+    "league": "NBA",
+    "team": "GS",
+    "college": null,
+    "hs": "The Patrick School (NJ)",
+    "jersey_current": null,
+    "jerseys": [],
+    "positions": [
+      "PF"
+    ],
+    "from": 2021,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_scottie_barnes",
+    "name": "Scottie Barnes",
+    "league": "NBA",
+    "team": "TOR",
+    "college": "Florida State",
+    "hs": null,
+    "jersey_current": 4,
+    "jerseys": [
+      4
+    ],
+    "positions": [
+      "SF"
+    ],
+    "from": 2021,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_davion_mitchell",
+    "name": "Davion Mitchell",
+    "league": "NBA",
+    "team": "MIA",
+    "college": "Baylor",
+    "hs": null,
+    "jersey_current": 45,
+    "jerseys": [
+      45
+    ],
+    "positions": [
+      "PG"
+    ],
+    "from": 2021,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_evan_mobley",
+    "name": "Evan Mobley",
+    "league": "NBA",
+    "team": "CLE",
+    "college": "Southern California",
+    "hs": null,
+    "jersey_current": 4,
+    "jerseys": [
+      4
+    ],
+    "positions": [
+      "PF"
+    ],
+    "from": 2021,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_ayo_dosunmu",
+    "name": "Ayo Dosunmu",
+    "league": "NBA",
+    "team": "CHI",
+    "college": "Illinois",
+    "hs": null,
+    "jersey_current": 11,
+    "jerseys": [
+      11
+    ],
+    "positions": [
+      "PG"
+    ],
+    "from": 2021,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_tre_mann",
+    "name": "Tre Mann",
+    "league": "NBA",
+    "team": "CHA",
+    "college": "Florida",
+    "hs": null,
+    "jersey_current": 23,
+    "jerseys": [
+      23
+    ],
+    "positions": [
+      "PG"
+    ],
+    "from": 2021,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_quentin_grimes",
+    "name": "Quentin Grimes",
+    "league": "NBA",
+    "team": "PHI",
+    "college": "Houston",
+    "hs": null,
+    "jersey_current": 5,
+    "jerseys": [
+      5
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2021,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_sam_hauser",
+    "name": "Sam Hauser",
+    "league": "NBA",
+    "team": "BOS",
+    "college": "Virginia",
+    "hs": null,
+    "jersey_current": 30,
+    "jerseys": [
+      30
+    ],
+    "positions": [
+      "SF"
+    ],
+    "from": 2021,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_jericho_sims",
+    "name": "Jericho Sims",
+    "league": "NBA",
+    "team": "MIL",
+    "college": "Texas",
+    "hs": null,
+    "jersey_current": null,
+    "jerseys": [],
+    "positions": [
+      "C"
+    ],
+    "from": 2021,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_miles_mcbride",
+    "name": "Miles McBride",
+    "league": "NBA",
+    "team": "NY",
+    "college": "West Virginia",
+    "hs": null,
+    "jersey_current": 2,
+    "jerseys": [
+      2
+    ],
+    "positions": [
+      "PG"
+    ],
+    "from": 2021,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_isaiah_livers",
+    "name": "Isaiah Livers",
+    "league": "NBA",
+    "team": "PHO",
+    "college": "Michigan",
+    "hs": null,
+    "jersey_current": 18,
+    "jerseys": [
+      18
+    ],
+    "positions": [
+      "SF"
+    ],
+    "from": 2022,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_trey_murphy_iii",
+    "name": "Trey Murphy III",
+    "league": "NBA",
+    "team": "NO",
+    "college": "Virginia",
+    "hs": null,
+    "jersey_current": 25,
+    "jerseys": [
+      25
+    ],
+    "positions": [
+      "SF"
+    ],
+    "from": 2021,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_bones_hyland",
+    "name": "Bones Hyland",
+    "league": "NBA",
+    "team": "MIN",
+    "college": "Virginia Commonwealth",
+    "hs": null,
+    "jersey_current": 8,
+    "jerseys": [
+      8
+    ],
+    "positions": [
+      "PG"
+    ],
+    "from": 2021,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_sandro_mamukelashvili",
+    "name": "Sandro Mamukelashvili",
+    "league": "NBA",
+    "team": "TOR",
+    "college": "Seton Hall",
+    "hs": null,
+    "jersey_current": 54,
+    "jerseys": [
+      54
+    ],
+    "positions": [
+      "PF"
+    ],
+    "from": 2021,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_santi_aldama",
+    "name": "Santi Aldama",
+    "league": "NBA",
+    "team": "MEM",
+    "college": "Loyola-Maryland",
+    "hs": null,
+    "jersey_current": 7,
+    "jerseys": [
+      7
+    ],
+    "positions": [
+      "PF"
+    ],
+    "from": 2021,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_aaron_wiggins",
+    "name": "Aaron Wiggins",
+    "league": "NBA",
+    "team": "OKC",
+    "college": "Maryland",
+    "hs": null,
+    "jersey_current": 21,
+    "jerseys": [
+      21
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2021,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_austin_reaves",
+    "name": "Austin Reaves",
+    "league": "NBA",
+    "team": "LAL",
+    "college": "Oklahoma",
+    "hs": null,
+    "jersey_current": 15,
+    "jerseys": [
+      15
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2021,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_jordan_goodwin",
+    "name": "Jordan Goodwin",
+    "league": "NBA",
+    "team": "PHO",
+    "college": "St. Louis",
+    "hs": null,
+    "jersey_current": 23,
+    "jerseys": [
+      23
+    ],
+    "positions": [
+      "PG"
+    ],
+    "from": 2021,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_ochai_agbaji",
+    "name": "Ochai Agbaji",
+    "league": "NBA",
+    "team": "TOR",
+    "college": "Kansas",
+    "hs": null,
+    "jersey_current": 30,
+    "jerseys": [
+      30
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2022,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_patrick_baldwin_jr",
+    "name": "Patrick Baldwin Jr.",
+    "league": "NBA",
+    "team": "LAC",
+    "college": "Milwaukee",
+    "hs": null,
+    "jersey_current": 23,
+    "jerseys": [
+      23
+    ],
+    "positions": [
+      "SF"
+    ],
+    "from": 2022,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_malaki_branham",
+    "name": "Malaki Branham",
+    "league": "NBA",
+    "team": "WAS",
+    "college": "Ohio State",
+    "hs": null,
+    "jersey_current": 8,
+    "jerseys": [
+      8
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2022,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_chet_holmgren",
+    "name": "Chet Holmgren",
+    "league": "NBA",
+    "team": "OKC",
+    "college": "Gonzaga",
+    "hs": null,
+    "jersey_current": 7,
+    "jerseys": [
+      7
+    ],
+    "positions": [
+      "C"
+    ],
+    "from": 2023,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_jaden_ivey",
+    "name": "Jaden Ivey",
+    "league": "NBA",
+    "team": "DET",
+    "college": "Purdue",
+    "hs": null,
+    "jersey_current": 23,
+    "jerseys": [
+      23
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2022,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_shaedon_sharpe",
+    "name": "Shaedon Sharpe",
+    "league": "NBA",
+    "team": "POR",
+    "college": "Kentucky",
+    "hs": null,
+    "jersey_current": 17,
+    "jerseys": [
+      17
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2022,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_jalen_duren",
+    "name": "Jalen Duren",
+    "league": "NBA",
+    "team": "DET",
+    "college": "Memphis",
+    "hs": null,
+    "jersey_current": null,
+    "jerseys": [],
+    "positions": [
+      "C"
+    ],
+    "from": 2022,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_dyson_daniels",
+    "name": "Dyson Daniels",
+    "league": "NBA",
+    "team": "ATL",
+    "college": null,
+    "hs": "Australian Institute of Sport (Australia)",
+    "jersey_current": 5,
+    "jerseys": [
+      5
+    ],
+    "positions": [
+      "PG"
+    ],
+    "from": 2022,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_bennedict_mathurin",
+    "name": "Bennedict Mathurin",
+    "league": "NBA",
+    "team": "IND",
+    "college": "Arizona",
+    "hs": null,
+    "jersey_current": null,
+    "jerseys": [],
+    "positions": [
+      "SG"
+    ],
+    "from": 2022,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_mark_williams",
+    "name": "Mark Williams",
+    "league": "NBA",
+    "team": "PHO",
+    "college": "Duke",
+    "hs": null,
+    "jersey_current": 15,
+    "jerseys": [
+      15
+    ],
+    "positions": [
+      "C"
+    ],
+    "from": 2022,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_nikola_jović",
+    "name": "Nikola Jović",
+    "league": "NBA",
+    "team": "MIA",
+    "college": null,
+    "hs": null,
+    "jersey_current": 5,
+    "jerseys": [
+      5
+    ],
+    "positions": [
+      "SF"
+    ],
+    "from": 2022,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_walker_kessler",
+    "name": "Walker Kessler",
+    "league": "NBA",
+    "team": "UTA",
+    "college": "Auburn",
+    "hs": null,
+    "jersey_current": 24,
+    "jerseys": [
+      24
+    ],
+    "positions": [
+      "C"
+    ],
+    "from": 2022,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_jaden_hardy",
+    "name": "Jaden Hardy",
+    "league": "NBA",
+    "team": "DAL",
+    "college": null,
+    "hs": "Coronado High School (Nevada)",
+    "jersey_current": 1,
+    "jerseys": [
+      1
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2022,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_bryce_mcgowens",
+    "name": "Bryce McGowens",
+    "league": "NBA",
+    "team": "NO",
+    "college": "Nebraska",
+    "hs": null,
+    "jersey_current": 11,
+    "jerseys": [
+      11
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2022,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_jalen_williams",
+    "name": "Jalen Williams",
+    "league": "NBA",
+    "team": "OKC",
+    "college": "Santa Clara",
+    "hs": null,
+    "jersey_current": 8,
+    "jerseys": [
+      8
+    ],
+    "positions": [
+      "SF"
+    ],
+    "from": 2022,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_julian_champagnie",
+    "name": "Julian Champagnie",
+    "league": "NBA",
+    "team": "SA",
+    "college": "St. John's",
+    "hs": null,
+    "jersey_current": 30,
+    "jerseys": [
+      30
+    ],
+    "positions": [
+      "SF"
+    ],
+    "from": 2022,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_max_christie",
+    "name": "Max Christie",
+    "league": "NBA",
+    "team": "DAL",
+    "college": "MIchigan State",
+    "hs": null,
+    "jersey_current": null,
+    "jerseys": [],
+    "positions": [
+      "SG"
+    ],
+    "from": 2022,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_keon_ellis",
+    "name": "Keon Ellis",
+    "league": "NBA",
+    "team": "SAC",
+    "college": "Alabama",
+    "hs": null,
+    "jersey_current": 23,
+    "jerseys": [
+      23
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2022,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_caleb_houstan",
+    "name": "Caleb Houstan",
+    "league": "NBA",
+    "team": "ATL",
+    "college": "Michigan",
+    "hs": null,
+    "jersey_current": 33,
+    "jerseys": [
+      33
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2022,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_jake_laravia",
+    "name": "Jake LaRavia",
+    "league": "NBA",
+    "team": "LAL",
+    "college": "Wake Forest",
+    "hs": null,
+    "jersey_current": 12,
+    "jerseys": [
+      12
+    ],
+    "positions": [
+      "PF"
+    ],
+    "from": 2022,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_andrew_nembhard",
+    "name": "Andrew Nembhard",
+    "league": "NBA",
+    "team": "IND",
+    "college": "Gonzaga",
+    "hs": null,
+    "jersey_current": 2,
+    "jerseys": [
+      2
+    ],
+    "positions": [
+      "PG"
+    ],
+    "from": 2022,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_scotty_pippen_jr",
+    "name": "Scotty Pippen Jr.",
+    "league": "NBA",
+    "team": "MEM",
+    "college": "Vanderbilt",
+    "hs": null,
+    "jersey_current": 1,
+    "jerseys": [
+      1
+    ],
+    "positions": [
+      "PG"
+    ],
+    "from": 2022,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_jabari_walker",
+    "name": "Jabari Walker",
+    "league": "NBA",
+    "team": "PHI",
+    "college": "Colorado",
+    "hs": null,
+    "jersey_current": 33,
+    "jerseys": [
+      33
+    ],
+    "positions": [
+      "PF"
+    ],
+    "from": 2022,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_vince_williams_jr",
+    "name": "Vince Williams Jr.",
+    "league": "NBA",
+    "team": "MEM",
+    "college": "Virginia Commonwealth",
+    "hs": null,
+    "jersey_current": 5,
+    "jerseys": [
+      5
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2022,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_johnny_juzang",
+    "name": "Johnny Juzang",
+    "league": "NBA",
+    "team": "MIN",
+    "college": "UCLA",
+    "hs": null,
+    "jersey_current": null,
+    "jerseys": [],
+    "positions": [
+      "SG"
+    ],
+    "from": 2022,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_orlando_robinson",
+    "name": "Orlando Robinson",
+    "league": "NBA",
+    "team": "ORL",
+    "college": "Fresno State",
+    "hs": null,
+    "jersey_current": 7,
+    "jerseys": [
+      7
+    ],
+    "positions": [
+      "C"
+    ],
+    "from": 2022,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_simone_fontecchio",
+    "name": "Simone Fontecchio",
+    "league": "NBA",
+    "team": "MIA",
+    "college": null,
+    "hs": null,
+    "jersey_current": null,
+    "jerseys": [],
+    "positions": [
+      "SF"
+    ],
+    "from": 2022,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_victor_wembanyama",
+    "name": "Victor Wembanyama",
+    "league": "NBA",
+    "team": "SA",
+    "college": null,
+    "hs": null,
+    "jersey_current": 1,
+    "jerseys": [
+      1
+    ],
+    "positions": [
+      "PF"
+    ],
+    "from": 2023,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_brandon_miller",
+    "name": "Brandon Miller",
+    "league": "NBA",
+    "team": "CHA",
+    "college": "Alabama",
+    "hs": null,
+    "jersey_current": 24,
+    "jerseys": [
+      24
+    ],
+    "positions": [
+      "SF"
+    ],
+    "from": 2023,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_scoot_henderson",
+    "name": "Scoot Henderson",
+    "league": "NBA",
+    "team": "POR",
+    "college": null,
+    "hs": "Carlton J. Kell (GA)",
+    "jersey_current": null,
+    "jerseys": [],
+    "positions": [
+      "PG"
+    ],
+    "from": 2023,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_amen_thompson",
+    "name": "Amen Thompson",
+    "league": "NBA",
+    "team": "HOU",
+    "college": null,
+    "hs": "Pine Crest (FL)",
+    "jersey_current": 1,
+    "jerseys": [
+      1
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2023,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_ausar_thompson",
+    "name": "Ausar Thompson",
+    "league": "NBA",
+    "team": "DET",
+    "college": null,
+    "hs": "Pine Crest (FL)",
+    "jersey_current": 9,
+    "jerseys": [
+      9
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2023,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_anthony_black",
+    "name": "Anthony Black",
+    "league": "NBA",
+    "team": "ORL",
+    "college": "Arkansas",
+    "hs": null,
+    "jersey_current": null,
+    "jerseys": [],
+    "positions": [
+      "PG"
+    ],
+    "from": 2023,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_gradey_dick",
+    "name": "Gradey Dick",
+    "league": "NBA",
+    "team": "TOR",
+    "college": "Kansas",
+    "hs": null,
+    "jersey_current": 1,
+    "jerseys": [
+      1
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2023,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_taylor_hendricks",
+    "name": "Taylor Hendricks",
+    "league": "NBA",
+    "team": "UTA",
+    "college": "Central Florida",
+    "hs": null,
+    "jersey_current": null,
+    "jerseys": [],
+    "positions": [
+      "PF"
+    ],
+    "from": 2023,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_jordan_hawkins",
+    "name": "Jordan Hawkins",
+    "league": "NBA",
+    "team": "NO",
+    "college": "Connecticut",
+    "hs": null,
+    "jersey_current": 24,
+    "jerseys": [
+      24
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2023,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_cason_wallace",
+    "name": "Cason Wallace",
+    "league": "NBA",
+    "team": "OKC",
+    "college": "Kentucky",
+    "hs": null,
+    "jersey_current": 22,
+    "jerseys": [
+      22
+    ],
+    "positions": [
+      "PG"
+    ],
+    "from": 2023,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_keyonte_george",
+    "name": "Keyonte George",
+    "league": "NBA",
+    "team": "UTA",
+    "college": "Baylor",
+    "hs": null,
+    "jersey_current": 3,
+    "jerseys": [
+      3
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2023,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_rayan_rupert",
+    "name": "Rayan Rupert",
+    "league": "NBA",
+    "team": "POR",
+    "college": null,
+    "hs": null,
+    "jersey_current": 21,
+    "jerseys": [
+      21
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2023,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_brice_sensabaugh",
+    "name": "Brice Sensabaugh",
+    "league": "NBA",
+    "team": "UTA",
+    "college": "Ohio State",
+    "hs": null,
+    "jersey_current": 28,
+    "jerseys": [
+      28
+    ],
+    "positions": [
+      "SF"
+    ],
+    "from": 2023,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_bilal_coulibaly",
+    "name": "Bilal Coulibaly",
+    "league": "NBA",
+    "team": "WAS",
+    "college": null,
+    "hs": null,
+    "jersey_current": null,
+    "jerseys": [],
+    "positions": [
+      "SG"
+    ],
+    "from": 2023,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_kris_murray",
+    "name": "Kris Murray",
+    "league": "NBA",
+    "team": "POR",
+    "college": "Iowa",
+    "hs": null,
+    "jersey_current": 24,
+    "jerseys": [
+      24
+    ],
+    "positions": [
+      "PF"
+    ],
+    "from": 2023,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_dereck_lively_ii",
+    "name": "Dereck Lively II",
+    "league": "NBA",
+    "team": "DAL",
+    "college": "Duke",
+    "hs": null,
+    "jersey_current": 2,
+    "jerseys": [
+      2
+    ],
+    "positions": [
+      "C"
+    ],
+    "from": 2023,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_andre_jackson_jr",
+    "name": "Andre Jackson Jr.",
+    "league": "NBA",
+    "team": "MIL",
+    "college": "Connecticut",
+    "hs": null,
+    "jersey_current": 44,
+    "jerseys": [
+      44
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2023,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_jaime_jaquez_jr",
+    "name": "Jaime Jaquez Jr.",
+    "league": "NBA",
+    "team": "MIA",
+    "college": "UCLA",
+    "hs": null,
+    "jersey_current": 11,
+    "jerseys": [
+      11
+    ],
+    "positions": [
+      "SF"
+    ],
+    "from": 2023,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_gg_jackson_ii",
+    "name": "GG Jackson II",
+    "league": "NBA",
+    "team": "MEM",
+    "college": "South Carolina",
+    "hs": null,
+    "jersey_current": 45,
+    "jerseys": [
+      45
+    ],
+    "positions": [
+      "PF"
+    ],
+    "from": 2023,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_trayce_jackson_davis",
+    "name": "Trayce Jackson-Davis",
+    "league": "NBA",
+    "team": "GS",
+    "college": "Indiana",
+    "hs": null,
+    "jersey_current": 32,
+    "jerseys": [
+      32
+    ],
+    "positions": [
+      "PF"
+    ],
+    "from": 2023,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_brandin_podziemski",
+    "name": "Brandin Podziemski",
+    "league": "NBA",
+    "team": "GS",
+    "college": "Santa Clara",
+    "hs": null,
+    "jersey_current": 2,
+    "jerseys": [
+      2
+    ],
+    "positions": [
+      "SG"
+    ],
+    "from": 2023,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_marcus_sasser",
+    "name": "Marcus Sasser",
+    "league": "NBA",
+    "team": "DET",
+    "college": "Houston",
+    "hs": null,
+    "jersey_current": 25,
+    "jerseys": [
+      25
+    ],
+    "positions": [
+      "PG"
+    ],
+    "from": 2023,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_toumani_camara",
+    "name": "Toumani Camara",
+    "league": "NBA",
+    "team": "POR",
+    "college": "Dayton",
+    "hs": null,
+    "jersey_current": 33,
+    "jerseys": [
+      33
+    ],
+    "positions": [
+      "SF"
+    ],
+    "from": 2023,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_tosan_evbuomwan",
+    "name": "Tosan Evbuomwan",
+    "league": "NBA",
+    "team": "NY",
+    "college": "Princeton",
+    "hs": null,
+    "jersey_current": 20,
+    "jerseys": [
+      20
+    ],
+    "positions": [
+      "SF"
+    ],
+    "from": 2023,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  },
+  {
+    "id": "nba_trey_jemison_iii",
+    "name": "Trey Jemison III",
+    "league": "NBA",
+    "team": "NY",
+    "college": "UAB",
+    "hs": null,
+    "jersey_current": 50,
+    "jerseys": [
+      50
+    ],
+    "positions": [
+      "C"
+    ],
+    "from": 2023,
+    "to": 2025,
+    "active": true,
+    "tier": "medium"
+  }
+]

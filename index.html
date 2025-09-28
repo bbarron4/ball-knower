@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ball Knower - Sports Trivia Game</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Navigation Header -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-menu">
+                    <button class="nav-btn" onclick="showHome()">
+                        <i class="fas fa-home"></i>
+                        Home
+                    </button>
+                    <button class="nav-btn" onclick="showLeaderboard()">
+                        <i class="fas fa-trophy"></i>
+                        Leaderboard
+                    </button>
+                    <button class="nav-btn" onclick="showProfile()">
+                        <i class="fas fa-user"></i>
+                        Profile
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Home Screen -->
+        <div id="home-screen" class="screen active">
+            <div class="hero-section">
+                <div class="hero-banner" id="hero-banner">
+                    <div class="hero-content">
+                        <h1>Ball Knower</h1>
+                        <p>Test your sports knowledge against friends!</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="game-modes">
+                <div class="mode-card" onclick="startGame('jersey-guesser')">
+                    <div class="mode-icon">
+                        <i class="fas fa-tshirt"></i>
+                    </div>
+                    <h3>Jersey Guesser</h3>
+                    <p>Guess a player's jersey number</p>
+                </div>
+
+                <div class="mode-card" onclick="startGame('college-guesser')">
+                    <div class="mode-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>College Guesser</h3>
+                    <p>Guess which college a player attended</p>
+                </div>
+
+                <div class="mode-card" onclick="startGame('achievement-guesser')">
+                    <div class="mode-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>Achievement Guesser</h3>
+                    <p>Compare Pro Bowls, Super Bowls & MVPs</p>
+                </div>
+
+                <div class="mode-card" onclick="startGame('survival')">
+                    <div class="mode-icon">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <h3>Survival Mode</h3>
+                    <p>Keep going until you get one wrong!</p>
+                    <div class="mode-stats">
+                        <span><i class="fas fa-clock"></i> 20 sec</span>
+                        <span><i class="fas fa-infinity"></i> Unlimited</span>
+                    </div>
+                </div>
+
+                <div class="mode-card" onclick="showMultiplayerSetup()">
+                    <div class="mode-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Multiplayer</h3>
+                    <p>Compete against friends in real-time</p>
+                    <div class="mode-stats">
+                        <span><i class="fas fa-clock"></i> 2 min</span>
+                        <span><i class="fas fa-users"></i> 2-8 players</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recent-games">
+                <h3>Recent Games</h3>
+                <div class="game-list">
+                    <div class="game-item">
+                        <div class="game-info">
+                            <span class="game-mode">Player to Fact</span>
+                            <span class="game-date">2 hours ago</span>
+                        </div>
+                        <div class="game-result">
+                            <span class="score">8/10</span>
+                            <span class="rating">Great!</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Setup Screen -->
+        <div id="setup-screen" class="screen">
+            <div class="setup-container">
+                <h2 id="setup-title">Game Setup</h2>
+                
+                <div class="sport-selection">
+                    <h3>Choose Sport</h3>
+                    <div class="sport-options">
+                        <button class="sport-btn active" onclick="selectSport('nfl')">
+                            <i class="fas fa-football-ball"></i>
+                            NFL
+                        </button>
+                        <button class="sport-btn" onclick="selectSport('nba')">
+                            <i class="fas fa-basketball-ball"></i>
+                            NBA
+                        </button>
+                        <button class="sport-btn" onclick="selectSport('both')">
+                            <i class="fas fa-random"></i>
+                            Both
+                        </button>
+                    </div>
+                </div>
+
+                <div class="difficulty-selection">
+                    <h3>Difficulty</h3>
+                    <div class="difficulty-options">
+                        <button class="diff-btn active" onclick="selectDifficulty('easy')">Easy</button>
+                        <button class="diff-btn" onclick="selectDifficulty('medium')">Medium</button>
+                        <button class="diff-btn" onclick="selectDifficulty('hard')">Hard</button>
+                        
+                    </div>
+                    <div class="difficulty-info">
+                        <p><strong>Easy:</strong> Household names everyone knows - Mahomes, Brady, Aaron Donald</p>
+                        <p><strong>Medium:</strong> Well-known players regular fans recognize - Pro Bowlers, team stars</p>
+                        <p><strong>Hard:</strong> Deep cuts only serious fans know - Specialists, backups, role players</p>
+                        
+                    </div>
+                </div>
+
+                <div class="input-type-selection">
+                    <h3>Answer Type</h3>
+                    <div class="input-type-options">
+                        <button class="input-type-btn active" onclick="selectInputType('multiple-choice')">Multiple Choice</button>
+                        <button class="input-type-btn" onclick="selectInputType('text-input')">Type Answer</button>
+                    </div>
+                    <div class="input-type-info">
+                        <p><strong>Multiple Choice:</strong> Choose from 4 options (10 seconds per question)</p>
+                        <p><strong>Type Answer:</strong> Type your answer (20 seconds per question)</p>
+                    </div>
+                </div>
+
+                <div class="player-count">
+                    <h3>Number of Players</h3>
+                    <div class="count-selector">
+                        <button onclick="changePlayerCount(-1)">-</button>
+                        <span id="player-count">1</span>
+                        <button onclick="changePlayerCount(1)">+</button>
+                    </div>
+                </div>
+
+                <div class="question-count">
+                    <h3>Number of Questions</h3>
+                    <div class="count-selector">
+                        <button onclick="changeQuestionCount(-1)">-</button>
+                        <span id="question-count">10</span>
+                        <button onclick="changeQuestionCount(1)">+</button>
+                    </div>
+                </div>
+
+                <div class="game-controls">
+                    <button class="btn-secondary" onclick="showHome()">Back</button>
+                    <button class="btn-primary" onclick="startGameSession()">Start Game</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen">
+            <div class="game-header">
+                <div class="game-info">
+                    <span class="game-mode-badge" id="current-mode">Player to Fact</span>
+                    <span class="sport-badge" id="current-sport">NFL</span>
+                </div>
+                <div class="game-timer">
+                    <i class="fas fa-clock"></i>
+                    <span id="timer">2:00</span>
+                </div>
+            </div>
+
+            <div class="game-content">
+                <div class="question-container">
+                    <div class="question-header">
+                        <span class="question-number">Question 1 of 10</span>
+                        <span class="score">Score: 0</span>
+                    </div>
+                    
+                    <div class="player-card" id="player-card">
+                        <div class="player-image">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="player-info">
+                            <h3 id="player-name">Tom Brady</h3>
+                            <p id="player-team">Tampa Bay Buccaneers</p>
+                        </div>
+                    </div>
+
+                    <div class="question-image-container" id="question-image-container" style="display: none;">
+                        <img id="question-image" src="" alt="Question Image">
+                    </div>
+
+                    <div class="question-text">
+                        <h2 id="question-text">What college did Tom Brady attend?</h2>
+                    </div>
+
+                    <div class="answer-options" id="answer-options">
+                        <button class="answer-btn" onclick="selectAnswer(0)">Michigan</button>
+                        <button class="answer-btn" onclick="selectAnswer(1)">Alabama</button>
+                        <button class="answer-btn" onclick="selectAnswer(2)">Ohio State</button>
+                        <button class="answer-btn" onclick="selectAnswer(3)">USC</button>
+                    </div>
+                    
+                    <div class="text-input-container" id="text-input-container" style="display: none;">
+                        <input type="text" id="text-answer-input" placeholder="Type your answer here..." autocomplete="off">
+                        <button class="submit-btn" onclick="submitTextAnswer()">Submit</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 10%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="screen">
+            <div class="results-container">
+                <h2>Game Complete!</h2>
+                
+                <div class="final-score">
+                    <div class="score-circle">
+                        <span class="score-number">8</span>
+                        <span class="score-total">/10</span>
+                    </div>
+                    <h3>Great Job!</h3>
+                    <p>You scored 80%</p>
+                </div>
+
+                <div class="results-breakdown">
+                    <div class="stat-item">
+                        <span class="stat-label">Correct Answers</span>
+                        <span class="stat-value">8</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Time Used</span>
+                        <span class="stat-value">1:45</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Streak</span>
+                        <span class="stat-value">5</span>
+                    </div>
+                </div>
+
+                <div class="results-actions">
+                    <button class="btn-secondary" onclick="showHome()">Home</button>
+                    <button class="btn-primary" onclick="playAgain()">Play Again</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Leaderboard Screen -->
+        <div id="leaderboard-screen" class="screen">
+            <div class="leaderboard-container">
+                <h2>Leaderboard</h2>
+                
+                <div class="leaderboard-tabs">
+                    <button class="tab-btn active" onclick="showLeaderboardTab('weekly')">This Week</button>
+                    <button class="tab-btn" onclick="showLeaderboardTab('monthly')">This Month</button>
+                    <button class="tab-btn" onclick="showLeaderboardTab('all-time')">All Time</button>
+                </div>
+
+                <div class="leaderboard-list" id="leaderboard-list">
+                    <div class="leaderboard-item rank-1">
+                        <div class="rank">1</div>
+                        <div class="player-info">
+                            <div class="player-avatar">JD</div>
+                            <div class="player-details">
+                                <span class="player-name">John Doe</span>
+                                <span class="player-stats">15 games • 85% avg</span>
+                            </div>
+                        </div>
+                        <div class="score">1,250</div>
+                    </div>
+                    
+                    <div class="leaderboard-item">
+                        <div class="rank">2</div>
+                        <div class="player-info">
+                            <div class="player-avatar">JS</div>
+                            <div class="player-details">
+                                <span class="player-name">Jane Smith</span>
+                                <span class="player-stats">12 games • 82% avg</span>
+                            </div>
+                        </div>
+                        <div class="score">1,180</div>
+                    </div>
+
+                    <div class="leaderboard-item">
+                        <div class="rank">3</div>
+                        <div class="player-info">
+                            <div class="player-avatar">MJ</div>
+                            <div class="player-details">
+                                <span class="player-name">Mike Johnson</span>
+                                <span class="player-stats">18 games • 78% avg</span>
+                            </div>
+                        </div>
+                        <div class="score">1,120</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Multiplayer Setup Screen -->
+        <div id="multiplayer-setup-screen" class="screen">
+            <div class="setup-container">
+                <h2>Multiplayer Setup</h2>
+                
+                <div class="multiplayer-options">
+                    <div class="option-card" onclick="createRoom()">
+                        <div class="option-icon">
+                            <i class="fas fa-plus-circle"></i>
+                        </div>
+                        <h3>Create Room</h3>
+                        <p>Start a new game room and invite friends</p>
+                    </div>
+                    
+                    <div class="option-card" onclick="showJoinRoom()">
+                        <div class="option-icon">
+                            <i class="fas fa-sign-in-alt"></i>
+                        </div>
+                        <h3>Join Room</h3>
+                        <p>Enter a room code to join an existing game</p>
+                    </div>
+                </div>
+
+                <div class="room-code-input" id="room-code-input" style="display: none;">
+                    <h3>Enter Room Code</h3>
+                    <input type="text" id="room-code" placeholder="Enter 6-digit code" maxlength="6">
+                    <div class="game-controls">
+                        <button class="btn-secondary" onclick="showMultiplayerSetup()">Back</button>
+                        <button class="btn-primary" onclick="joinRoom()">Join Room</button>
+                    </div>
+                </div>
+
+                <div class="created-room" id="created-room" style="display: none;">
+                    <h3>Room Created!</h3>
+                    <div class="room-info">
+                        <div class="room-code-display">
+                            <span>Room Code:</span>
+                            <span id="display-room-code">ABC123</span>
+                        </div>
+                        <div class="players-list" id="players-list">
+                            <div class="player-item">
+                                <i class="fas fa-user"></i>
+                                <span>You (Host)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="game-controls">
+                        <button class="btn-secondary" onclick="showMultiplayerSetup()">Cancel</button>
+                        <button class="btn-primary" onclick="startMultiplayerGame()">Start Game</button>
+                    </div>
+                </div>
+
+                <div class="game-controls">
+                    <button class="btn-secondary" onclick="showHome()">Back to Home</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Screen -->
+        <div id="profile-screen" class="screen">
+            <div class="profile-container">
+                <div class="profile-header">
+                    <div class="profile-avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="profile-info">
+                        <h2>Player Name</h2>
+                        <p>Member since January 2024</p>
+                    </div>
+                </div>
+
+                <div class="profile-stats">
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-games">0</div>
+                        <div class="stat-label">Games Played</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="average-score">0%</div>
+                        <div class="stat-label">Average Score</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="best-streak">0</div>
+                        <div class="stat-label">Best Streak</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="achievements-earned">0</div>
+                        <div class="stat-label">Achievements</div>
+                    </div>
+                </div>
+
+                <div class="achievements">
+                    <h3>Achievements</h3>
+                    <div class="achievement-list" id="achievement-list">
+                        <!-- Achievements will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="utils/dataLoader.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
