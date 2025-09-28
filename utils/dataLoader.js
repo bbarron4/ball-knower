@@ -7,69 +7,47 @@ class DataLoader {
         this.dataVersion = null;
     }
 
+    // Helper to resolve the correct base path for both local and GitHub Pages
+    resolveBase() {
+        const path = window.location.pathname;
+        const pagesBase = path.match(/^(.*\/ball-knower\/)/);
+        if (pagesBase) return pagesBase[1];           // e.g., /ball-knower/
+        return path.endsWith('/') ? path : path.replace(/[^/]+$/, '/'); // local
+    }
+
+    // Helper to try multiple URLs until one works
+    async tryFetch(paths) {
+        for (const url of paths) {
+            try {
+                const r = await fetch(url, { cache: 'force-cache' });
+                if (r.ok) return await r.json();
+            } catch {}
+        }
+        throw new Error('All candidate URLs failed: ' + paths.join(', '));
+    }
+
     /**
      * Load players for a specific league and difficulty tier
      */
     async loadTier(league, tier) {
         const cacheKey = `${league}_${tier}`;
-        
-        // Return cached data if available
-        if (this.cache.has(cacheKey)) {
-            return this.cache.get(cacheKey);
-        }
+        if (this.cache.has(cacheKey)) return this.cache.get(cacheKey);
+
+        const base = this.resolveBase();
+        const candidates = [
+            `${base}${league}_${tier}.json`,        // root (GitHub Pages root of repo)
+            `${base}data/${league}_${tier}.json`,   // /data folder
+            `data/${league}_${tier}.json`           // local fallback
+        ];
 
         try {
-            // Try to load from server first
-            const response = await fetch(`${league}_${tier}.json`, {
-                cache: 'force-cache'
-            });
-            
-            if (!response.ok) {
-                throw new Error(`Failed to load ${cacheKey}: ${response.status}`);
-            }
-            
-            const players = await response.json();
+            const players = await this.tryFetch(candidates);
             this.cache.set(cacheKey, players);
-            
-            console.log(`✅ Loaded ${players.length} ${league} ${tier} players from server`);
+            console.log(`✅ Loaded ${players.length} ${league} ${tier} players`);
             return players;
-        } catch (error) {
-            console.error(`❌ Failed to load ${cacheKey} from server:`, error);
-            console.log(`🔄 Trying to load from data directory...`);
-            
-            try {
-                // Try to load from data directory
-                const response = await fetch(`data/${league}_${tier}.json`, {
-                    cache: 'force-cache'
-                });
-                
-                if (!response.ok) {
-                    throw new Error(`Failed to load from data directory: ${response.status}`);
-                }
-                
-                const players = await response.json();
-                this.cache.set(cacheKey, players);
-                
-                console.log(`✅ Loaded ${players.length} ${league} ${tier} players from data directory`);
-                return players;
-            } catch (dataError) {
-                console.error(`❌ Failed to load from data directory:`, dataError);
-                console.log(`🔄 Using fallback data for ${cacheKey}`);
-                
-                // Try to use sample data if available (real API data)
-                if (typeof SAMPLE_DATA !== 'undefined' && SAMPLE_DATA.length > 0) {
-                    console.log(`✅ Using real API data: ${SAMPLE_DATA.length} players`);
-                    return SAMPLE_DATA;
-                }
-                
-                // Try to use fallback data if available
-                if (typeof FALLBACK_DATA !== 'undefined' && FALLBACK_DATA[cacheKey]) {
-                    console.log(`✅ Using fallback data: ${FALLBACK_DATA[cacheKey].length} players`);
-                    return FALLBACK_DATA[cacheKey];
-                }
-                
-                return [];
-            }
+        } catch (e) {
+            console.error('❌ Failed to load', cacheKey, e);
+            return [];
         }
     }
 
@@ -77,139 +55,85 @@ class DataLoader {
      * Check if data version has changed and clear cache if needed
      */
     async checkDataVersion() {
+        const base = this.resolveBase();
         try {
-            const response = await fetch('data_version.json', {
-                cache: 'no-cache'
-            });
-            
-            if (response.ok) {
-                const versionData = await response.json();
-                
-                if (this.dataVersion && this.dataVersion !== versionData.version) {
-                    console.log('🔄 Data version changed, clearing cache');
-                    this.cache.clear();
-                }
-                
-                this.dataVersion = versionData.version;
-                return versionData;
-            }
-        } catch (error) {
-            console.warn('Could not check data version:', error);
-        }
-        
-        return null;
+            const r = await fetch(`${base}data_version.json`, { cache: 'no-cache' });
+            if (!r.ok) return;
+            const { version } = await r.json();
+            const prev = localStorage.getItem('data_version');
+            if (prev && prev !== version) this.cache.clear();
+            if (!prev || prev !== version) localStorage.setItem('data_version', version);
+        } catch {}
     }
 
     /**
-     * Generate smart distractors for multiple choice questions
+     * Create a college question
      */
-    generateDistractors(correctAnswer, allPlayers, type, count = 3) {
-        const distractors = new Set();
-        
-        // Filter players to create realistic wrong answers
-        const candidates = allPlayers.filter(p => {
-            if (type === 'college') {
-                return p.college && p.college !== correctAnswer;
-            } else if (type === 'jersey') {
-                return p.jersey_current && p.jersey_current !== correctAnswer;
-            } else if (type === 'team') {
-                return p.team && p.team !== correctAnswer;
-            }
-            return false;
-        });
+    createCollegeQuestion(players) {
+        if (players.length < 4) return null;
 
-        // Shuffle and take unique distractors
-        const shuffled = [...candidates].sort(() => Math.random() - 0.5);
-        
-        for (const candidate of shuffled) {
-            if (distractors.size >= count) break;
-            
-            let value;
-            if (type === 'college') value = candidate.college;
-            else if (type === 'jersey') value = candidate.jersey_current;
-            else if (type === 'team') value = candidate.team;
-            
-            if (value && value !== correctAnswer) {
-                distractors.add(value);
+        const correctPlayer = players[Math.floor(Math.random() * players.length)];
+        const correctCollege = correctPlayer.college;
+        if (!correctCollege) return null;
+
+        const wrongColleges = [];
+        const usedColleges = new Set([correctCollege]);
+
+        for (const player of players) {
+            if (player.college && !usedColleges.has(player.college) && wrongColleges.length < 3) {
+                wrongColleges.push(player.college);
+                usedColleges.add(player.college);
             }
         }
 
-        // Fill with generic options if needed
-        while (distractors.size < count) {
-            if (type === 'college') {
-                const generic = ['Alabama', 'Ohio State', 'Michigan', 'Georgia', 'Clemson', 'Notre Dame', 'USC', 'Texas', 'Florida', 'Penn State'];
-                const option = generic[Math.floor(Math.random() * generic.length)];
-                if (option !== correctAnswer) distractors.add(option);
-            } else if (type === 'jersey') {
-                const option = Math.floor(Math.random() * 99) + 1;
-                if (option !== correctAnswer) distractors.add(option.toString());
-            } else if (type === 'team') {
-                const generic = ['Patriots', 'Cowboys', 'Packers', 'Steelers', 'Giants', 'Eagles', '49ers', 'Bears'];
-                const option = generic[Math.floor(Math.random() * generic.length)];
-                if (option !== correctAnswer) distractors.add(option);
-            }
-        }
+        if (wrongColleges.length < 3) return null;
 
-        return Array.from(distractors).slice(0, count);
-    }
-
-    /**
-     * Create a college question with smart distractors
-     */
-    createCollegeQuestion(player, allPlayers) {
-        if (!player.college) return null;
-
-        const distractors = this.generateDistractors(player.college, allPlayers, 'college', 3);
-        const options = [player.college, ...distractors].sort(() => Math.random() - 0.5);
+        const options = [correctCollege, ...wrongColleges].sort(() => Math.random() - 0.5);
 
         return {
             type: 'college',
-            player: player,
-            question: `What college did ${player.name} attend?`,
+            player: correctPlayer,
+            question: `Which college did ${correctPlayer.name} attend?`,
             options: options,
-            correctAnswer: player.college,
-            correctIndex: options.indexOf(player.college)
+            correct: correctCollege
         };
     }
 
     /**
-     * Create a jersey question with smart distractors
+     * Create a jersey question
      */
-    createJerseyQuestion(player, allPlayers) {
-        if (!player.jersey_current) return null;
+    createJerseyQuestion(players) {
+        if (players.length < 4) return null;
 
-        const distractors = this.generateDistractors(player.jersey_current, allPlayers, 'jersey', 3);
-        const options = [player.jersey_current.toString(), ...distractors].sort(() => Math.random() - 0.5);
+        const playersWithJerseys = players.filter(p => p.jersey_current && p.jersey_current > 0);
+        if (playersWithJerseys.length === 0) return null;
+
+        const correctPlayer = playersWithJerseys[Math.floor(Math.random() * playersWithJerseys.length)];
+        const correctJersey = correctPlayer.jersey_current;
+
+        const wrongJerseys = [];
+        const usedJerseys = new Set([correctJersey]);
+
+        for (const player of playersWithJerseys) {
+            if (player.jersey_current && !usedJerseys.has(player.jersey_current) && wrongJerseys.length < 3) {
+                wrongJerseys.push(player.jersey_current);
+                usedJerseys.add(player.jersey_current);
+            }
+        }
+
+        if (wrongJerseys.length < 3) return null;
+
+        const options = [correctJersey, ...wrongJerseys].sort(() => Math.random() - 0.5);
 
         return {
             type: 'jersey',
-            player: player,
-            question: `What jersey number does ${player.name} wear?`,
+            player: correctPlayer,
+            question: `What jersey number does ${correctPlayer.name} wear?`,
             options: options,
-            correctAnswer: player.jersey_current.toString(),
-            correctIndex: options.indexOf(player.jersey_current.toString())
-        };
-    }
-
-    /**
-     * Create a team question with smart distractors
-     */
-    createTeamQuestion(player, allPlayers) {
-        if (!player.team) return null;
-
-        const distractors = this.generateDistractors(player.team, allPlayers, 'team', 3);
-        const options = [player.team, ...distractors].sort(() => Math.random() - 0.5);
-
-        return {
-            type: 'team',
-            player: player,
-            question: `What team does ${player.name} play for?`,
-            options: options,
-            correctAnswer: player.team,
-            correctIndex: options.indexOf(player.team)
+            correct: correctJersey
         };
     }
 }
 
-// Global instance
+// Create global instance
 const dataLoader = new DataLoader();
