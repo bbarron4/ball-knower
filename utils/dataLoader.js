@@ -95,19 +95,19 @@ class DataLoader {
     createJerseyQuestion(players) {
         if (players.length < 4) return null;
 
-        const playersWithJerseys = players.filter(p => p.jersey_current && p.jersey_current > 0);
+        const playersWithJerseys = players.filter(p => p.jersey && p.jersey > 0);
         if (playersWithJerseys.length === 0) return null;
 
         const correctPlayer = playersWithJerseys[Math.floor(Math.random() * playersWithJerseys.length)];
-        const correctJersey = correctPlayer.jersey_current;
+        const correctJersey = correctPlayer.jersey;
 
         const wrongJerseys = [];
         const usedJerseys = new Set([correctJersey]);
 
         for (const player of playersWithJerseys) {
-            if (player.jersey_current && !usedJerseys.has(player.jersey_current) && wrongJerseys.length < 3) {
-                wrongJerseys.push(player.jersey_current);
-                usedJerseys.add(player.jersey_current);
+            if (player.jersey && !usedJerseys.has(player.jersey) && wrongJerseys.length < 3) {
+                wrongJerseys.push(player.jersey);
+                usedJerseys.add(player.jersey);
             }
         }
 
