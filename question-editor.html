@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ball Knower - Question Editor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .sport-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .sport-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .sport-btn.active {
+            background: #667eea;
+            color: white;
+        }
+        .question-list {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .question-item {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: #f9f9f9;
+        }
+        .question-text {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .choices {
+            margin-left: 20px;
+        }
+        .choice {
+            margin: 5px 0;
+        }
+        .correct-choice {
+            background: #d4edda;
+            padding: 5px;
+            border-radius: 3px;
+        }
+        .question-meta {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 10px;
+        }
+        .add-question-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .add-question-btn:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🏀 Ball Knower - Question Editor</h1>
+        <p>Manage your NBA and NFL trivia questions</p>
+    </div>
+
+    <div class="sport-selector">
+        <button class="sport-btn active" onclick="selectSport('nfl')">NFL Questions</button>
+        <button class="sport-btn" onclick="selectSport('nba')">NBA Questions</button>
+    </div>
+
+    <div class="question-list">
+        <h2 id="sport-title">NFL Questions</h2>
+        <button class="add-question-btn" onclick="addQuestion()">+ Add New Question</button>
+        <div id="questions-container">
+            <!-- Questions will be loaded here -->
+        </div>
+    </div>
+
+    <script>
+        let currentSport = 'nfl';
+        let questions = [];
+
+        function selectSport(sport) {
+            currentSport = sport;
+            
+            // Update button states
+            document.querySelectorAll('.sport-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update title
+            document.getElementById('sport-title').textContent = 
+                sport.toUpperCase() + ' Questions';
+            
+            // Load questions for this sport
+            loadQuestions(sport);
+        }
+
+        async function loadQuestions(sport) {
+            try {
+                const response = await fetch(`data/trivia/${sport}_questions.json`);
+                if (response.ok) {
+                    questions = await response.json();
+                    displayQuestions();
+                } else {
+                    console.error('Failed to load questions');
+                    questions = [];
+                    displayQuestions();
+                }
+            } catch (error) {
+                console.error('Error loading questions:', error);
+                questions = [];
+                displayQuestions();
+            }
+        }
+
+        function displayQuestions() {
+            const container = document.getElementById('questions-container');
+            container.innerHTML = '';
+
+            if (questions.length === 0) {
+                container.innerHTML = '<p>No questions found. Click "Add New Question" to get started!</p>';
+                return;
+            }
+
+            questions.forEach((question, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question-item';
+                questionDiv.innerHTML = `
+                    <div class="question-text">${question.question}</div>
+                    <div class="choices">
+                        ${question.choices.map(choice => `
+                            <div class="choice ${choice.id === question.correctChoiceId ? 'correct-choice' : ''}">
+                                ${choice.text} ${choice.id === question.correctChoiceId ? '✓' : ''}
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="question-meta">
+                        Category: ${question.category} | 
+                        Difficulty: ${question.difficulty} | 
+                        Number: ${question.number}
+                    </div>
+                `;
+                container.appendChild(questionDiv);
+            });
+        }
+
+        function addQuestion() {
+            // Simple prompt for now - you can enhance this
+            const question = prompt('Enter the question:');
+            if (question) {
+                const newQuestion = {
+                    id: `new_question_${Date.now()}`,
+                    question: question,
+                    choices: [
+                        { id: 'a', text: 'Option A' },
+                        { id: 'b', text: 'Option B' },
+                        { id: 'c', text: 'Option C' },
+                        { id: 'd', text: 'Option D' }
+                    ],
+                    correctChoiceId: 'a',
+                    category: 'General',
+                    difficulty: 'medium',
+                    tags: [],
+                    contextNote: '',
+                    isActive: true,
+                    createdAt: new Date().toISOString().split('T')[0],
+                    number: questions.length + 1
+                };
+                
+                questions.push(newQuestion);
+                displayQuestions();
+            }
+        }
+
+        // Load NFL questions by default
+        loadQuestions('nfl');
+    </script>
+</body>
+</html>

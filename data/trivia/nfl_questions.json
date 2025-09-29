@@ -1,0 +1,3316 @@
+[
+  {
+    "id": "qb-debut-400yd-cam",
+    "question": "Who became the first QB in NFL history to throw 400+ yards in his debut game?",
+    "choices": [
+      {
+        "id": "cam_newton",
+        "text": "Cam Newton"
+      },
+      {
+        "id": "andrew_luck",
+        "text": "Andrew Luck"
+      },
+      {
+        "id": "jameis_winston",
+        "text": "Jameis Winston"
+      },
+      {
+        "id": "trevor_lawrence",
+        "text": "Trevor Lawrence"
+      }
+    ],
+    "correctChoiceId": "cam_newton",
+    "category": "QB",
+    "difficulty": "easy",
+    "tags": [
+      "record",
+      "rookie",
+      "modern"
+    ],
+    "contextNote": "Debut burst that shocked the league.",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 1
+  },
+  {
+    "id": "qb-50tds-twice-mahomes",
+    "question": "Who became the first QB to post 50+ passing TDs in two different seasons?",
+    "choices": [
+      {
+        "id": "patrick_mahomes",
+        "text": "Patrick Mahomes"
+      },
+      {
+        "id": "peyton_manning",
+        "text": "Peyton Manning"
+      },
+      {
+        "id": "tom_brady",
+        "text": "Tom Brady"
+      },
+      {
+        "id": "aaron_rodgers",
+        "text": "Aaron Rodgers"
+      }
+    ],
+    "correctChoiceId": "patrick_mahomes",
+    "category": "QB",
+    "difficulty": "medium",
+    "tags": [
+      "record",
+      "tds"
+    ],
+    "contextNote": "Second 50+ TD season cemented the 'Baby GOAT' talk.",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 2
+  },
+  {
+    "id": "qb-2022-passyards-leader",
+    "question": "Who led the NFL in passing yards in 2022 (5,250+)?",
+    "choices": [
+      {
+        "id": "patrick_mahomes",
+        "text": "Patrick Mahomes"
+      },
+      {
+        "id": "josh_allen",
+        "text": "Josh Allen"
+      },
+      {
+        "id": "joe_burrow",
+        "text": "Joe Burrow"
+      },
+      {
+        "id": "justin_herbert",
+        "text": "Justin Herbert"
+      }
+    ],
+    "correctChoiceId": "patrick_mahomes",
+    "category": "QB",
+    "difficulty": "easy",
+    "tags": [
+      "leader",
+      "2022"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 3
+  },
+  {
+    "id": "qb-rookie-tds-2020-herbert",
+    "question": "Which rookie set a then-record 31 passing TDs in 2020?",
+    "choices": [
+      {
+        "id": "justin_herbert",
+        "text": "Justin Herbert"
+      },
+      {
+        "id": "joe_burrow",
+        "text": "Joe Burrow"
+      },
+      {
+        "id": "dak_prescott",
+        "text": "Dak Prescott"
+      },
+      {
+        "id": "cj_stroud",
+        "text": "C.J. Stroud"
+      }
+    ],
+    "correctChoiceId": "justin_herbert",
+    "category": "QB",
+    "difficulty": "easy",
+    "tags": [
+      "rookie",
+      "record"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 4
+  },
+  {
+    "id": "qb-rookie-yds-470-stroud-2023",
+    "question": "Which rookie threw for 470 yards in a single game in 2023, the most ever by a rookie?",
+    "choices": [
+      {
+        "id": "cj_stroud",
+        "text": "C.J. Stroud"
+      },
+      {
+        "id": "bryce_young",
+        "text": "Bryce Young"
+      },
+      {
+        "id": "anthony_richardson",
+        "text": "Anthony Richardson"
+      },
+      {
+        "id": "joe_burrow",
+        "text": "Joe Burrow"
+      }
+    ],
+    "correctChoiceId": "cj_stroud",
+    "category": "QB",
+    "difficulty": "medium",
+    "tags": [
+      "rookie",
+      "record",
+      "2023"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 5
+  },
+  {
+    "id": "qb-playoff-24pt-comeback-mahomes",
+    "question": "Which QB led a comeback from down 24–0 vs the Texans in the playoffs?",
+    "choices": [
+      {
+        "id": "patrick_mahomes",
+        "text": "Patrick Mahomes"
+      },
+      {
+        "id": "josh_allen",
+        "text": "Josh Allen"
+      },
+      {
+        "id": "tom_brady",
+        "text": "Tom Brady"
+      },
+      {
+        "id": "joe_burrow",
+        "text": "Joe Burrow"
+      }
+    ],
+    "correctChoiceId": "patrick_mahomes",
+    "category": "QB",
+    "difficulty": "easy",
+    "tags": [
+      "playoffs",
+      "comeback"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 6
+  },
+  {
+    "id": "rb-2000yd-2020-henry",
+    "question": "Which RB rushed for 2,000+ yards in 2020?",
+    "choices": [
+      {
+        "id": "derrick_henry",
+        "text": "Derrick Henry"
+      },
+      {
+        "id": "dalvin_cook",
+        "text": "Dalvin Cook"
+      },
+      {
+        "id": "jonathan_taylor",
+        "text": "Jonathan Taylor"
+      },
+      {
+        "id": "nick_chubb",
+        "text": "Nick Chubb"
+      }
+    ],
+    "correctChoiceId": "derrick_henry",
+    "category": "RB",
+    "difficulty": "easy",
+    "tags": [
+      "rushing",
+      "record",
+      "2020"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 7
+  },
+  {
+    "id": "rb-2021-rush-leader-jt",
+    "question": "Who led the NFL in rushing yards in 2021 (1,800+)?",
+    "choices": [
+      {
+        "id": "jonathan_taylor",
+        "text": "Jonathan Taylor"
+      },
+      {
+        "id": "derrick_henry",
+        "text": "Derrick Henry"
+      },
+      {
+        "id": "nick_chubb",
+        "text": "Nick Chubb"
+      },
+      {
+        "id": "dalvin_cook",
+        "text": "Dalvin Cook"
+      }
+    ],
+    "correctChoiceId": "jonathan_taylor",
+    "category": "RB",
+    "difficulty": "easy",
+    "tags": [
+      "leader",
+      "2021"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 8
+  },
+  {
+    "id": "rb-rookie-scrimmage-2018-saquon",
+    "question": "Which rookie set the record for most scrimmage yards in 2018?",
+    "choices": [
+      {
+        "id": "saquon_barkley",
+        "text": "Saquon Barkley"
+      },
+      {
+        "id": "ezekiel_elliott",
+        "text": "Ezekiel Elliott"
+      },
+      {
+        "id": "alvin_kamara",
+        "text": "Alvin Kamara"
+      },
+      {
+        "id": "josh_jacobs",
+        "text": "Josh Jacobs"
+      }
+    ],
+    "correctChoiceId": "saquon_barkley",
+    "category": "RB",
+    "difficulty": "medium",
+    "tags": [
+      "rookie",
+      "record",
+      "scrimmage"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 9
+  },
+  {
+    "id": "rb-rookie-1500yd-zeke-2016",
+    "question": "Who was the first rookie RB since Adrian Peterson to rush for 1,500+ yards?",
+    "choices": [
+      {
+        "id": "ezekiel_elliott",
+        "text": "Ezekiel Elliott"
+      },
+      {
+        "id": "saquon_barkley",
+        "text": "Saquon Barkley"
+      },
+      {
+        "id": "kareem_hunt",
+        "text": "Kareem Hunt"
+      },
+      {
+        "id": "najee_harris",
+        "text": "Najee Harris"
+      }
+    ],
+    "correctChoiceId": "ezekiel_elliott",
+    "category": "RB",
+    "difficulty": "medium",
+    "tags": [
+      "rookie",
+      "milestone",
+      "2016"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 10
+  },
+  {
+    "id": "wr-rookie-yds-2021-chase",
+    "question": "Who set the rookie record for receiving yards in 2021 (1,455)?",
+    "choices": [
+      {
+        "id": "jamarr_chase",
+        "text": "Ja'Marr Chase"
+      },
+      {
+        "id": "justin_jefferson",
+        "text": "Justin Jefferson"
+      },
+      {
+        "id": "odell_beckham_jr",
+        "text": "Odell Beckham Jr."
+      },
+      {
+        "id": "garrett_wilson",
+        "text": "Garrett Wilson"
+      }
+    ],
+    "correctChoiceId": "jamarr_chase",
+    "category": "WR",
+    "difficulty": "easy",
+    "tags": [
+      "rookie",
+      "record",
+      "2021"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 11
+  },
+  {
+    "id": "wr-receptions-2020-diggs",
+    "question": "Who led the NFL in receptions in 2020 with 149?",
+    "choices": [
+      {
+        "id": "stefon_diggs",
+        "text": "Stefon Diggs"
+      },
+      {
+        "id": "davante_adams",
+        "text": "Davante Adams"
+      },
+      {
+        "id": "tyreek_hill",
+        "text": "Tyreek Hill"
+      },
+      {
+        "id": "deandre_hopkins",
+        "text": "DeAndre Hopkins"
+      }
+    ],
+    "correctChoiceId": "stefon_diggs",
+    "category": "WR",
+    "difficulty": "medium",
+    "tags": [
+      "leader",
+      "2020"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 12
+  },
+  {
+    "id": "wr-catches-record-2019-thomas",
+    "question": "Who set the NFL single-season receptions record with 149 in 2019?",
+    "choices": [
+      {
+        "id": "michael_thomas",
+        "text": "Michael Thomas"
+      },
+      {
+        "id": "cooper_kupp",
+        "text": "Cooper Kupp"
+      },
+      {
+        "id": "antonio_brown",
+        "text": "Antonio Brown"
+      },
+      {
+        "id": "julio_jones",
+        "text": "Julio Jones"
+      }
+    ],
+    "correctChoiceId": "michael_thomas",
+    "category": "WR",
+    "difficulty": "medium",
+    "tags": [
+      "record",
+      "receptions",
+      "2019"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 13
+  },
+  {
+    "id": "wr-opy-2022-jefferson",
+    "question": "Which WR led the league in yards in 2022 and won Offensive Player of the Year?",
+    "choices": [
+      {
+        "id": "justin_jefferson",
+        "text": "Justin Jefferson"
+      },
+      {
+        "id": "tyreek_hill",
+        "text": "Tyreek Hill"
+      },
+      {
+        "id": "davante_adams",
+        "text": "Davante Adams"
+      },
+      {
+        "id": "cooper_kupp",
+        "text": "Cooper Kupp"
+      }
+    ],
+    "correctChoiceId": "justin_jefferson",
+    "category": "WR",
+    "difficulty": "easy",
+    "tags": [
+      "leader",
+      "OPY",
+      "2022"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 14
+  },
+  {
+    "id": "def-sacks-22_5-2021-tjwatt",
+    "question": "Who tied the single-season sack record (22.5) in 2021?",
+    "choices": [
+      {
+        "id": "tj_watt",
+        "text": "T.J. Watt"
+      },
+      {
+        "id": "aaron_donald",
+        "text": "Aaron Donald"
+      },
+      {
+        "id": "myles_garrett",
+        "text": "Myles Garrett"
+      },
+      {
+        "id": "chandler_jones",
+        "text": "Chandler Jones"
+      }
+    ],
+    "correctChoiceId": "tj_watt",
+    "category": "Defense",
+    "difficulty": "easy",
+    "tags": [
+      "record",
+      "sacks",
+      "2021"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 15
+  },
+  {
+    "id": "def-int-leader-2021-diggs",
+    "question": "Which CB led the NFL with 11 interceptions in 2021?",
+    "choices": [
+      {
+        "id": "trevon_diggs",
+        "text": "Trevon Diggs"
+      },
+      {
+        "id": "jc_jackson",
+        "text": "J.C. Jackson"
+      },
+      {
+        "id": "xavien_howard",
+        "text": "Xavien Howard"
+      },
+      {
+        "id": "minkah_fitzpatrick",
+        "text": "Minkah Fitzpatrick"
+      }
+    ],
+    "correctChoiceId": "trevon_diggs",
+    "category": "Defense",
+    "difficulty": "easy",
+    "tags": [
+      "leader",
+      "interceptions",
+      "2021"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 16
+  },
+  {
+    "id": "def-99yd-fumble-hubbard-2022",
+    "question": "Who returned a 99-yard fumble for a TD in the 2022 playoffs (longest possible)?",
+    "choices": [
+      {
+        "id": "sam_hubbard",
+        "text": "Sam Hubbard"
+      },
+      {
+        "id": "jj_watt",
+        "text": "J.J. Watt"
+      },
+      {
+        "id": "micah_parsons",
+        "text": "Micah Parsons"
+      },
+      {
+        "id": "bradley_chubb",
+        "text": "Bradley Chubb"
+      }
+    ],
+    "correctChoiceId": "sam_hubbard",
+    "category": "Defense",
+    "difficulty": "medium",
+    "tags": [
+      "playoffs",
+      "defense",
+      "record"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 17
+  },
+  {
+    "id": "moment-obj-onehand-cowboys",
+    "question": "Which WR made the viral one‑handed TD catch vs the Cowboys on Sunday night?",
+    "choices": [
+      {
+        "id": "odell_beckham_jr",
+        "text": "Odell Beckham Jr."
+      },
+      {
+        "id": "deandre_hopkins",
+        "text": "DeAndre Hopkins"
+      },
+      {
+        "id": "justin_jefferson",
+        "text": "Justin Jefferson"
+      },
+      {
+        "id": "stefon_diggs",
+        "text": "Stefon Diggs"
+      }
+    ],
+    "correctChoiceId": "odell_beckham_jr",
+    "category": "Moment",
+    "difficulty": "easy",
+    "tags": [
+      "viral",
+      "catch"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 18
+  },
+  {
+    "id": "moment-philly-special-td-catcher",
+    "question": "Who caught the 'Philly Special' touchdown?",
+    "choices": [
+      {
+        "id": "nick_foles",
+        "text": "Nick Foles"
+      },
+      {
+        "id": "zach_ertz",
+        "text": "Zach Ertz"
+      },
+      {
+        "id": "nelson_agholor",
+        "text": "Nelson Agholor"
+      },
+      {
+        "id": "corey_clement",
+        "text": "Corey Clement"
+      }
+    ],
+    "correctChoiceId": "nick_foles",
+    "category": "Moment",
+    "difficulty": "easy",
+    "tags": [
+      "trick_play",
+      "super_bowl"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 19
+  },
+  {
+    "id": "moment-minneapolis-miracle-opponent",
+    "question": "The 'Minneapolis Miracle' came against which opponent?",
+    "choices": [
+      {
+        "id": "new_orleans_saints",
+        "text": "New Orleans Saints"
+      },
+      {
+        "id": "green_bay_packers",
+        "text": "Green Bay Packers"
+      },
+      {
+        "id": "seattle_seahawks",
+        "text": "Seattle Seahawks"
+      },
+      {
+        "id": "philadelphia_eagles",
+        "text": "Philadelphia Eagles"
+      }
+    ],
+    "correctChoiceId": "new_orleans_saints",
+    "category": "Moment",
+    "difficulty": "easy",
+    "tags": [
+      "playoffs",
+      "walkoff"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 20
+  },
+  {
+    "id": "moment-double-doink-bears",
+    "question": "The infamous 'Double Doink' playoff miss knocked out which team?",
+    "choices": [
+      {
+        "id": "chicago_bears",
+        "text": "Chicago Bears"
+      },
+      {
+        "id": "detroit_lions",
+        "text": "Detroit Lions"
+      },
+      {
+        "id": "minnesota_vikings",
+        "text": "Minnesota Vikings"
+      },
+      {
+        "id": "dallas_cowboys",
+        "text": "Dallas Cowboys"
+      }
+    ],
+    "correctChoiceId": "chicago_bears",
+    "category": "Moment",
+    "difficulty": "easy",
+    "tags": [
+      "kicking",
+      "viral"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 21
+  },
+  {
+    "id": "coach-youngest-sb-winner-tomlin",
+    "question": "Who is the youngest head coach to win a Super Bowl?",
+    "choices": [
+      {
+        "id": "mike_tomlin",
+        "text": "Mike Tomlin"
+      },
+      {
+        "id": "sean_mcvay",
+        "text": "Sean McVay"
+      },
+      {
+        "id": "jon_gruden",
+        "text": "Jon Gruden"
+      },
+      {
+        "id": "kyle_shanahan",
+        "text": "Kyle Shanahan"
+      }
+    ],
+    "correctChoiceId": "mike_tomlin",
+    "category": "Coach",
+    "difficulty": "medium",
+    "tags": [
+      "record",
+      "coaches"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 22
+  },
+  {
+    "id": "coach-bite-kneecaps-lions",
+    "question": "Which head coach gave the 'bite kneecaps' introductory speech with Detroit?",
+    "choices": [
+      {
+        "id": "dan_campbell",
+        "text": "Dan Campbell"
+      },
+      {
+        "id": "mike_vrabel",
+        "text": "Mike Vrabel"
+      },
+      {
+        "id": "arthur_smith",
+        "text": "Arthur Smith"
+      },
+      {
+        "id": "robert_saleh",
+        "text": "Robert Saleh"
+      }
+    ],
+    "correctChoiceId": "dan_campbell",
+    "category": "Coach",
+    "difficulty": "easy",
+    "tags": [
+      "press_conference",
+      "lions"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 23
+  },
+  {
+    "id": "coach-texans-2023-demeco",
+    "question": "Who became Texans head coach in 2023 and drafted C.J. Stroud?",
+    "choices": [
+      {
+        "id": "demeco_ryans",
+        "text": "DeMeco Ryans"
+      },
+      {
+        "id": "lovie_smith",
+        "text": "Lovie Smith"
+      },
+      {
+        "id": "david_culley",
+        "text": "David Culley"
+      },
+      {
+        "id": "matt_eberflus",
+        "text": "Matt Eberflus"
+      }
+    ],
+    "correctChoiceId": "demeco_ryans",
+    "category": "Coach",
+    "difficulty": "easy",
+    "tags": [
+      "hire",
+      "2023"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 24
+  },
+  {
+    "id": "coach-jags-hc-pederson-from-reid-tree",
+    "question": "Which coach from Andy Reid's tree became Jaguars head coach and won a Super Bowl earlier with Philly?",
+    "choices": [
+      {
+        "id": "doug_pederson",
+        "text": "Doug Pederson"
+      },
+      {
+        "id": "eric_bieniemy",
+        "text": "Eric Bieniemy"
+      },
+      {
+        "id": "matt_nagy",
+        "text": "Matt Nagy"
+      },
+      {
+        "id": "brian_daboll",
+        "text": "Brian Daboll"
+      }
+    ],
+    "correctChoiceId": "doug_pederson",
+    "category": "Coach",
+    "difficulty": "easy",
+    "tags": [
+      "coaching_tree",
+      "reid"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 25
+  },
+  {
+    "id": "coach-vikings-oc-to-hc-oconnell",
+    "question": "Which former Rams OC became Vikings head coach in 2022?",
+    "choices": [
+      {
+        "id": "kevin_oconnell",
+        "text": "Kevin O'Connell"
+      },
+      {
+        "id": "zac_taylor",
+        "text": "Zac Taylor"
+      },
+      {
+        "id": "shane_steichen",
+        "text": "Shane Steichen"
+      },
+      {
+        "id": "mike_mcdaniel",
+        "text": "Mike McDaniel"
+      }
+    ],
+    "correctChoiceId": "kevin_oconnell",
+    "category": "Coach",
+    "difficulty": "easy",
+    "tags": [
+      "coaching_tree",
+      "mcvay"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 26
+  },
+  {
+    "id": "coach-lions-current-dan-campbell",
+    "question": "Who is the current head coach of the Detroit Lions known for aggressive fourth-down calls?",
+    "choices": [
+      {
+        "id": "dan_campbell",
+        "text": "Dan Campbell"
+      },
+      {
+        "id": "matt_patircia",
+        "text": "Matt Patricia"
+      },
+      {
+        "id": "jim_caldwell",
+        "text": "Jim Caldwell"
+      },
+      {
+        "id": "mike_vrabel",
+        "text": "Mike Vrabel"
+      }
+    ],
+    "correctChoiceId": "dan_campbell",
+    "category": "Coach",
+    "difficulty": "easy",
+    "tags": [
+      "current",
+      "lions"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 27
+  },
+  {
+    "id": "coach-texans-current-demeco",
+    "question": "Who is the current head coach of the Houston Texans?",
+    "choices": [
+      {
+        "id": "demeco_ryans",
+        "text": "DeMeco Ryans"
+      },
+      {
+        "id": "bill_o_brien",
+        "text": "Bill O'Brien"
+      },
+      {
+        "id": "romeo_crennel",
+        "text": "Romeo Crennel"
+      },
+      {
+        "id": "lovie_smith",
+        "text": "Lovie Smith"
+      }
+    ],
+    "correctChoiceId": "demeco_ryans",
+    "category": "Coach",
+    "difficulty": "easy",
+    "tags": [
+      "current",
+      "texans"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 28
+  },
+  {
+    "id": "coach-patriots-post-belichick-2024",
+    "question": "Who took over as Patriots head coach after Bill Belichick?",
+    "choices": [
+      {
+        "id": "jerod_mayo",
+        "text": "Jerod Mayo"
+      },
+      {
+        "id": "josh_mcdaniels",
+        "text": "Josh McDaniels"
+      },
+      {
+        "id": "joe_judge",
+        "text": "Joe Judge"
+      },
+      {
+        "id": "matt_patricia",
+        "text": "Matt Patricia"
+      }
+    ],
+    "correctChoiceId": "jerod_mayo",
+    "category": "Coach",
+    "difficulty": "easy",
+    "tags": [
+      "current",
+      "patriots",
+      "2024"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 29
+  },
+  {
+    "id": "coach-falcons-2024-joined-after-vikings-qb-move",
+    "question": "Which QB signed with the Falcons in 2024, reshaping the NFC South race?",
+    "choices": [
+      {
+        "id": "kirk_cousins",
+        "text": "Kirk Cousins"
+      },
+      {
+        "id": "justin_fields",
+        "text": "Justin Fields"
+      },
+      {
+        "id": "baker_mayfield",
+        "text": "Baker Mayfield"
+      },
+      {
+        "id": "ryan_tannehill",
+        "text": "Ryan Tannehill"
+      }
+    ],
+    "correctChoiceId": "kirk_cousins",
+    "category": "Team",
+    "difficulty": "easy",
+    "tags": [
+      "free_agency",
+      "2024"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 30
+  },
+  {
+    "id": "coach-raiders-current-antonio-pierce",
+    "question": "Who is the Raiders head coach elevated after an interim stint?",
+    "choices": [
+      {
+        "id": "antonio_pierce",
+        "text": "Antonio Pierce"
+      },
+      {
+        "id": "josh_mcdaniels",
+        "text": "Josh McDaniels"
+      },
+      {
+        "id": "rich_bisaccia",
+        "text": "Rich Bisaccia"
+      },
+      {
+        "id": "jon_gruden",
+        "text": "Jon Gruden"
+      }
+    ],
+    "correctChoiceId": "antonio_pierce",
+    "category": "Coach",
+    "difficulty": "easy",
+    "tags": [
+      "current",
+      "raiders"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 31
+  },
+  {
+    "id": "coach-chargers-current-jim-harbaugh",
+    "question": "Who became the Chargers head coach after winning a college title at Michigan?",
+    "choices": [
+      {
+        "id": "jim_harbaugh",
+        "text": "Jim Harbaugh"
+      },
+      {
+        "id": "brandon_staley",
+        "text": "Brandon Staley"
+      },
+      {
+        "id": "kellen_moore",
+        "text": "Kellen Moore"
+      },
+      {
+        "id": "sean_payton",
+        "text": "Sean Payton"
+      }
+    ],
+    "correctChoiceId": "jim_harbaugh",
+    "category": "Coach",
+    "difficulty": "easy",
+    "tags": [
+      "current",
+      "chargers",
+      "2024"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 32
+  },
+  {
+    "id": "coach-seahawks-current-mike-macdonald",
+    "question": "Who replaced Pete Carroll as Seahawks head coach?",
+    "choices": [
+      {
+        "id": "mike_macdonald",
+        "text": "Mike Macdonald"
+      },
+      {
+        "id": "dan_quinn",
+        "text": "Dan Quinn"
+      },
+      {
+        "id": "shane_waldron",
+        "text": "Shane Waldron"
+      },
+      {
+        "id": "leslie_frazier",
+        "text": "Leslie Frazier"
+      }
+    ],
+    "correctChoiceId": "mike_macdonald",
+    "category": "Coach",
+    "difficulty": "easy",
+    "tags": [
+      "current",
+      "seahawks",
+      "2024"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 33
+  },
+  {
+    "id": "coach-commanders-current-dan-quinn",
+    "question": "Who became Commanders head coach in 2024?",
+    "choices": [
+      {
+        "id": "dan_quinn",
+        "text": "Dan Quinn"
+      },
+      {
+        "id": "ron_rivera",
+        "text": "Ron Rivera"
+      },
+      {
+        "id": "eric_bieniemy",
+        "text": "Eric Bieniemy"
+      },
+      {
+        "id": "raheem_morris",
+        "text": "Raheem Morris"
+      }
+    ],
+    "correctChoiceId": "dan_quinn",
+    "category": "Coach",
+    "difficulty": "easy",
+    "tags": [
+      "current",
+      "commanders",
+      "2024"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 34
+  },
+  {
+    "id": "coach-titans-current-brian-callahan",
+    "question": "Who succeeded Mike Vrabel as Titans head coach in 2024?",
+    "choices": [
+      {
+        "id": "brian_callahan",
+        "text": "Brian Callahan"
+      },
+      {
+        "id": "arthur_smith",
+        "text": "Arthur Smith"
+      },
+      {
+        "id": "mike_mcdaniel",
+        "text": "Mike McDaniel"
+      },
+      {
+        "id": "dom_capers",
+        "text": "Dom Capers"
+      }
+    ],
+    "correctChoiceId": "brian_callahan",
+    "category": "Coach",
+    "difficulty": "easy",
+    "tags": [
+      "current",
+      "titans",
+      "2024"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 35
+  },
+  {
+    "id": "coach-panthers-current-dave-canales",
+    "question": "Who became the Panthers head coach in 2024 to work with Bryce Young?",
+    "choices": [
+      {
+        "id": "dave_canales",
+        "text": "Dave Canales"
+      },
+      {
+        "id": "frank_reich",
+        "text": "Frank Reich"
+      },
+      {
+        "id": "matt_rhule",
+        "text": "Matt Rhule"
+      },
+      {
+        "id": "greg_olsen",
+        "text": "Greg Olsen"
+      }
+    ],
+    "correctChoiceId": "dave_canales",
+    "category": "Coach",
+    "difficulty": "easy",
+    "tags": [
+      "current",
+      "panthers",
+      "2024"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 36
+  },
+  {
+    "id": "roster-jets-qb2-2024-tyrod",
+    "question": "Who backed up Aaron Rodgers on the Jets in 2024?",
+    "choices": [
+      {
+        "id": "tyrod_taylor",
+        "text": "Tyrod Taylor"
+      },
+      {
+        "id": "zach_wilson",
+        "text": "Zach Wilson"
+      },
+      {
+        "id": "mike_white",
+        "text": "Mike White"
+      },
+      {
+        "id": "joe_flacco",
+        "text": "Joe Flacco"
+      }
+    ],
+    "correctChoiceId": "tyrod_taylor",
+    "category": "Roster",
+    "difficulty": "medium",
+    "tags": [
+      "qb2",
+      "jets",
+      "2024"
+    ],
+    "contextNote": "Wilson was traded; Jets added Tyrod in 2024.",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 37
+  },
+  {
+    "id": "roster-eagles-qb2-2024-pickett",
+    "question": "Who served as QB2 behind Jalen Hurts after a 2024 trade?",
+    "choices": [
+      {
+        "id": "kenny_pickett",
+        "text": "Kenny Pickett"
+      },
+      {
+        "id": "marcus_mariota",
+        "text": "Marcus Mariota"
+      },
+      {
+        "id": "gardner_minshew",
+        "text": "Gardner Minshew"
+      },
+      {
+        "id": "sam_darnold",
+        "text": "Sam Darnold"
+      }
+    ],
+    "correctChoiceId": "kenny_pickett",
+    "category": "Roster",
+    "difficulty": "medium",
+    "tags": [
+      "qb2",
+      "eagles",
+      "2024"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 38
+  },
+  {
+    "id": "roster-bengals-qb2-2024-browning",
+    "question": "Who was QB2 behind Joe Burrow during the 2024 season?",
+    "choices": [
+      {
+        "id": "jake_browning",
+        "text": "Jake Browning"
+      },
+      {
+        "id": "aj_mccarron",
+        "text": "AJ McCarron"
+      },
+      {
+        "id": "trevor_siemian",
+        "text": "Trevor Siemian"
+      },
+      {
+        "id": "brandon_allen",
+        "text": "Brandon Allen"
+      }
+    ],
+    "correctChoiceId": "jake_browning",
+    "category": "Roster",
+    "difficulty": "easy",
+    "tags": [
+      "qb2",
+      "bengals",
+      "2024"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 39
+  },
+  {
+    "id": "roster-dolphins-qb2-2024-mike-white",
+    "question": "Who backed up Tua Tagovailoa for Miami in 2024?",
+    "choices": [
+      {
+        "id": "mike_white",
+        "text": "Mike White"
+      },
+      {
+        "id": "teddy_bridgewater",
+        "text": "Teddy Bridgewater"
+      },
+      {
+        "id": "skylar_thompson",
+        "text": "Skylar Thompson"
+      },
+      {
+        "id": "jacoby_brissett",
+        "text": "Jacoby Brissett"
+      }
+    ],
+    "correctChoiceId": "mike_white",
+    "category": "Roster",
+    "difficulty": "easy",
+    "tags": [
+      "qb2",
+      "dolphins",
+      "2024"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 40
+  },
+  {
+    "id": "roster-bills-qb2-2024-trubisky",
+    "question": "Who returned to Buffalo as Josh Allen’s backup in 2024?",
+    "choices": [
+      {
+        "id": "mitch_trubisky",
+        "text": "Mitch Trubisky"
+      },
+      {
+        "id": "kyle_allen",
+        "text": "Kyle Allen"
+      },
+      {
+        "id": "case_keenum",
+        "text": "Case Keenum"
+      },
+      {
+        "id": "matt_barkley",
+        "text": "Matt Barkley"
+      }
+    ],
+    "correctChoiceId": "mitch_trubisky",
+    "category": "Roster",
+    "difficulty": "easy",
+    "tags": [
+      "qb2",
+      "bills",
+      "2024"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 41
+  },
+  {
+    "id": "qb-unanimous-mvp-lamar-2019",
+    "question": "Who became the NFL’s first unanimous MVP since 2010?",
+    "choices": [
+      {
+        "id": "lamar_jackson",
+        "text": "Lamar Jackson"
+      },
+      {
+        "id": "tom_brady",
+        "text": "Tom Brady"
+      },
+      {
+        "id": "patrick_mahomes",
+        "text": "Patrick Mahomes"
+      },
+      {
+        "id": "aaron_rodgers",
+        "text": "Aaron Rodgers"
+      }
+    ],
+    "correctChoiceId": "lamar_jackson",
+    "category": "QB",
+    "difficulty": "medium",
+    "tags": [
+      "award",
+      "mvp",
+      "2019"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 42
+  },
+  {
+    "id": "wr-superbowl-mvp-2022-kupp",
+    "question": "Which WR won Super Bowl MVP with two TDs for the Rams?",
+    "choices": [
+      {
+        "id": "cooper_kupp",
+        "text": "Cooper Kupp"
+      },
+      {
+        "id": "odell_beckham_jr",
+        "text": "Odell Beckham Jr."
+      },
+      {
+        "id": "tee_higgins",
+        "text": "Tee Higgins"
+      },
+      {
+        "id": "deebo_samuel",
+        "text": "Deebo Samuel"
+      }
+    ],
+    "correctChoiceId": "cooper_kupp",
+    "category": "WR",
+    "difficulty": "easy",
+    "tags": [
+      "super_bowl",
+      "mvp"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 43
+  },
+  {
+    "id": "team-first-7seed-playoff-win-packers-2023",
+    "question": "Which team became the NFL’s first 7‑seed to win a playoff game (2023 season)?",
+    "choices": [
+      {
+        "id": "green_bay_packers",
+        "text": "Green Bay Packers"
+      },
+      {
+        "id": "pittsburgh_steelers",
+        "text": "Pittsburgh Steelers"
+      },
+      {
+        "id": "miami_dolphins",
+        "text": "Miami Dolphins"
+      },
+      {
+        "id": "tampa_bay_buccaneers",
+        "text": "Tampa Bay Buccaneers"
+      }
+    ],
+    "correctChoiceId": "green_bay_packers",
+    "category": "Team",
+    "difficulty": "medium",
+    "tags": [
+      "playoffs",
+      "seed",
+      "2023"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 44
+  },
+  {
+    "id": "wr-rookie-single-game-yds-266-chase",
+    "question": "Which rookie posted 266 receiving yards in a single game in 2021?",
+    "choices": [
+      {
+        "id": "jamarr_chase",
+        "text": "Ja'Marr Chase"
+      },
+      {
+        "id": "justin_jefferson",
+        "text": "Justin Jefferson"
+      },
+      {
+        "id": "garrett_wilson",
+        "text": "Garrett Wilson"
+      },
+      {
+        "id": "amon_ra_st_brown",
+        "text": "Amon‑Ra St. Brown"
+      }
+    ],
+    "correctChoiceId": "jamarr_chase",
+    "category": "WR",
+    "difficulty": "medium",
+    "tags": [
+      "rookie",
+      "record",
+      "single_game"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 45
+  },
+  {
+    "id": "defensive_rookie_2021_micah",
+    "question": "Who won Defensive Rookie of the Year in 2021 and became an instant star?",
+    "choices": [
+      {
+        "id": "micah_parsons",
+        "text": "Micah Parsons"
+      },
+      {
+        "id": "aidan_hutchinson",
+        "text": "Aidan Hutchinson"
+      },
+      {
+        "id": "sauce_gardner",
+        "text": "Sauce Gardner"
+      },
+      {
+        "id": "patrick_surtain_ii",
+        "text": "Patrick Surtain II"
+      }
+    ],
+    "correctChoiceId": "micah_parsons",
+    "category": "Defense",
+    "difficulty": "easy",
+    "tags": [
+      "award",
+      "rookie",
+      "2021"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29",
+    "number": 46
+  },
+  {
+    "id": "qb-you-like-that-cousins",
+    "number": 47,
+    "question": "Which QB famously shouted 'You like that?!' after a comeback win?",
+    "choices": [
+      {
+        "id": "kirk_cousins",
+        "text": "Kirk Cousins"
+      },
+      {
+        "id": "aaron_rodgers",
+        "text": "Aaron Rodgers"
+      },
+      {
+        "id": "case_keenum",
+        "text": "Case Keenum"
+      },
+      {
+        "id": "baker_mayfield",
+        "text": "Baker Mayfield"
+      }
+    ],
+    "correctChoiceId": "kirk_cousins",
+    "category": "QB",
+    "difficulty": "easy",
+    "tags": [
+      "viral",
+      "quote"
+    ],
+    "contextNote": "Became his catchphrase.",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "wr-griddy-jefferson",
+    "number": 48,
+    "question": "Which WR popularized the Griddy dance in the NFL?",
+    "choices": [
+      {
+        "id": "justin_jefferson",
+        "text": "Justin Jefferson"
+      },
+      {
+        "id": "jamarr_chase",
+        "text": "Ja'Marr Chase"
+      },
+      {
+        "id": "tyreek_hill",
+        "text": "Tyreek Hill"
+      },
+      {
+        "id": "jaylen_waddle",
+        "text": "Jaylen Waddle"
+      }
+    ],
+    "correctChoiceId": "justin_jefferson",
+    "category": "WR",
+    "difficulty": "easy",
+    "tags": [
+      "celebration",
+      "viral"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "wr-waddle-dance",
+    "number": 49,
+    "question": "Which WR does the penguin Waddle dance after scoring TDs?",
+    "choices": [
+      {
+        "id": "jaylen_waddle",
+        "text": "Jaylen Waddle"
+      },
+      {
+        "id": "tyreek_hill",
+        "text": "Tyreek Hill"
+      },
+      {
+        "id": "deebo_samuel",
+        "text": "Deebo Samuel"
+      },
+      {
+        "id": "aj_brown",
+        "text": "A.J. Brown"
+      }
+    ],
+    "correctChoiceId": "jaylen_waddle",
+    "category": "WR",
+    "difficulty": "easy",
+    "tags": [
+      "celebration",
+      "viral"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "def-sauce-gardner",
+    "number": 50,
+    "question": "Which CB is nicknamed 'Sauce'?",
+    "choices": [
+      {
+        "id": "ahmad_gardner",
+        "text": "Ahmad 'Sauce' Gardner"
+      },
+      {
+        "id": "patrick_surtain_ii",
+        "text": "Patrick Surtain II"
+      },
+      {
+        "id": "derek_stingley",
+        "text": "Derek Stingley Jr."
+      },
+      {
+        "id": "jalen_ramsey",
+        "text": "Jalen Ramsey"
+      }
+    ],
+    "correctChoiceId": "ahmad_gardner",
+    "category": "Defense",
+    "difficulty": "easy",
+    "tags": [
+      "nickname"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "wr-obj-catch",
+    "number": 51,
+    "question": "Which WR made the one-handed TD catch vs the Cowboys that went viral?",
+    "choices": [
+      {
+        "id": "odell_beckham_jr",
+        "text": "Odell Beckham Jr."
+      },
+      {
+        "id": "justin_jefferson",
+        "text": "Justin Jefferson"
+      },
+      {
+        "id": "stefon_diggs",
+        "text": "Stefon Diggs"
+      },
+      {
+        "id": "deandre_hopkins",
+        "text": "DeAndre Hopkins"
+      }
+    ],
+    "correctChoiceId": "odell_beckham_jr",
+    "category": "WR",
+    "difficulty": "easy",
+    "tags": [
+      "moment",
+      "catch",
+      "viral"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "team-double-doink",
+    "number": 52,
+    "question": "The infamous 'Double Doink' playoff miss eliminated which team?",
+    "choices": [
+      {
+        "id": "chicago_bears",
+        "text": "Chicago Bears"
+      },
+      {
+        "id": "minnesota_vikings",
+        "text": "Minnesota Vikings"
+      },
+      {
+        "id": "dallas_cowboys",
+        "text": "Dallas Cowboys"
+      },
+      {
+        "id": "detroit_lions",
+        "text": "Detroit Lions"
+      }
+    ],
+    "correctChoiceId": "chicago_bears",
+    "category": "Team",
+    "difficulty": "easy",
+    "tags": [
+      "moment",
+      "kicking"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "moment-minneapolis-miracle",
+    "number": 53,
+    "question": "The 'Minneapolis Miracle' was a last-second TD catch by which WR?",
+    "choices": [
+      {
+        "id": "stefon_diggs",
+        "text": "Stefon Diggs"
+      },
+      {
+        "id": "adam_thielen",
+        "text": "Adam Thielen"
+      },
+      {
+        "id": "justin_jefferson",
+        "text": "Justin Jefferson"
+      },
+      {
+        "id": "kyle_rudolph",
+        "text": "Kyle Rudolph"
+      }
+    ],
+    "correctChoiceId": "stefon_diggs",
+    "category": "Moment",
+    "difficulty": "easy",
+    "tags": [
+      "playoffs",
+      "walkoff"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "team-bills-mafia",
+    "number": 54,
+    "question": "Which fanbase is known for breaking tables at tailgates?",
+    "choices": [
+      {
+        "id": "buffalo_bills",
+        "text": "Buffalo Bills"
+      },
+      {
+        "id": "philadelphia_eagles",
+        "text": "Philadelphia Eagles"
+      },
+      {
+        "id": "las_vegas_raiders",
+        "text": "Las Vegas Raiders"
+      },
+      {
+        "id": "cleveland_browns",
+        "text": "Cleveland Browns"
+      }
+    ],
+    "correctChoiceId": "buffalo_bills",
+    "category": "Team",
+    "difficulty": "easy",
+    "tags": [
+      "fans",
+      "culture"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "qb-dangerwich-russ",
+    "number": 55,
+    "question": "Which QB was clowned for Subway's 'Dangerwich' ads?",
+    "choices": [
+      {
+        "id": "russell_wilson",
+        "text": "Russell Wilson"
+      },
+      {
+        "id": "tom_brady",
+        "text": "Tom Brady"
+      },
+      {
+        "id": "joe_burrow",
+        "text": "Joe Burrow"
+      },
+      {
+        "id": "josh_allen",
+        "text": "Josh Allen"
+      }
+    ],
+    "correctChoiceId": "russell_wilson",
+    "category": "QB",
+    "difficulty": "medium",
+    "tags": [
+      "pop_culture",
+      "ads"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "te-travis-kelce-taylor",
+    "number": 56,
+    "question": "Which TE became even more famous after dating Taylor Swift?",
+    "choices": [
+      {
+        "id": "travis_kelce",
+        "text": "Travis Kelce"
+      },
+      {
+        "id": "george_kittle",
+        "text": "George Kittle"
+      },
+      {
+        "id": "zach_ertz",
+        "text": "Zach Ertz"
+      },
+      {
+        "id": "mark_andrews",
+        "text": "Mark Andrews"
+      }
+    ],
+    "correctChoiceId": "travis_kelce",
+    "category": "TE",
+    "difficulty": "easy",
+    "tags": [
+      "pop_culture",
+      "swifties"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "coach-bite-kneecaps",
+    "number": 57,
+    "question": "Which coach went viral for saying 'Bite kneecaps' in his intro presser?",
+    "choices": [
+      {
+        "id": "dan_campbell",
+        "text": "Dan Campbell"
+      },
+      {
+        "id": "mike_vrabel",
+        "text": "Mike Vrabel"
+      },
+      {
+        "id": "arthur_smith",
+        "text": "Arthur Smith"
+      },
+      {
+        "id": "nick_sirianni",
+        "text": "Nick Sirianni"
+      }
+    ],
+    "correctChoiceId": "dan_campbell",
+    "category": "Coach",
+    "difficulty": "easy",
+    "tags": [
+      "press_conference"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "qb-buttsanchez",
+    "number": 58,
+    "question": "Which QB is forever linked to the 'Butt Fumble'?",
+    "choices": [
+      {
+        "id": "mark_sanchez",
+        "text": "Mark Sanchez"
+      },
+      {
+        "id": "sam_darnold",
+        "text": "Sam Darnold"
+      },
+      {
+        "id": "daniel_jones",
+        "text": "Daniel Jones"
+      },
+      {
+        "id": "ryan_fitzpatrick",
+        "text": "Ryan Fitzpatrick"
+      }
+    ],
+    "correctChoiceId": "mark_sanchez",
+    "category": "QB",
+    "difficulty": "easy",
+    "tags": [
+      "viral",
+      "moment"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "qb-trips-longrun",
+    "number": 59,
+    "question": "Which QB tripped on an 80-yard run before the end zone?",
+    "choices": [
+      {
+        "id": "daniel_jones",
+        "text": "Daniel Jones"
+      },
+      {
+        "id": "josh_allen",
+        "text": "Josh Allen"
+      },
+      {
+        "id": "sam_darnold",
+        "text": "Sam Darnold"
+      },
+      {
+        "id": "justin_fields",
+        "text": "Justin Fields"
+      }
+    ],
+    "correctChoiceId": "daniel_jones",
+    "category": "QB",
+    "difficulty": "easy",
+    "tags": [
+      "viral",
+      "moment"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "qb-dangeruss",
+    "number": 60,
+    "question": "Which QB called himself 'Mr. Unlimited' in a cringy viral clip?",
+    "choices": [
+      {
+        "id": "russell_wilson",
+        "text": "Russell Wilson"
+      },
+      {
+        "id": "dak_prescott",
+        "text": "Dak Prescott"
+      },
+      {
+        "id": "kyler_murray",
+        "text": "Kyler Murray"
+      },
+      {
+        "id": "jared_goff",
+        "text": "Jared Goff"
+      }
+    ],
+    "correctChoiceId": "russell_wilson",
+    "category": "QB",
+    "difficulty": "easy",
+    "tags": [
+      "pop_culture",
+      "viral"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "team-americas-cowboys",
+    "number": 61,
+    "question": "Which franchise is nicknamed 'America’s Team'?",
+    "choices": [
+      {
+        "id": "dallas_cowboys",
+        "text": "Dallas Cowboys"
+      },
+      {
+        "id": "green_bay_packers",
+        "text": "Green Bay Packers"
+      },
+      {
+        "id": "pittsburgh_steelers",
+        "text": "Pittsburgh Steelers"
+      },
+      {
+        "id": "new_england_patriots",
+        "text": "New England Patriots"
+      }
+    ],
+    "correctChoiceId": "dallas_cowboys",
+    "category": "Team",
+    "difficulty": "easy",
+    "tags": [
+      "culture",
+      "nickname"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "draft-2000-tom-brady-round",
+    "number": 62,
+    "question": "In which round was Tom Brady drafted in 2000?",
+    "choices": [
+      {
+        "id": "6th_round",
+        "text": "6th Round"
+      },
+      {
+        "id": "1st_round",
+        "text": "1st Round"
+      },
+      {
+        "id": "3rd_round",
+        "text": "3rd Round"
+      },
+      {
+        "id": "7th_round",
+        "text": "7th Round"
+      }
+    ],
+    "correctChoiceId": "6th_round",
+    "category": "Draft",
+    "difficulty": "medium",
+    "tags": [
+      "draft"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "draft-2017-mitch-ahead-mahomes",
+    "number": 63,
+    "question": "Which QB was drafted ahead of Patrick Mahomes in 2017?",
+    "choices": [
+      {
+        "id": "mitchell_trubisky",
+        "text": "Mitchell Trubisky"
+      },
+      {
+        "id": "deshaun_watson",
+        "text": "Deshaun Watson"
+      },
+      {
+        "id": "josh_allen",
+        "text": "Josh Allen"
+      },
+      {
+        "id": "sam_darnold",
+        "text": "Sam Darnold"
+      }
+    ],
+    "correctChoiceId": "mitchell_trubisky",
+    "category": "Draft",
+    "difficulty": "medium",
+    "tags": [
+      "draft"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "draft-2018-baker-ahead-joshallen",
+    "number": 64,
+    "question": "Which QB was drafted #1 overall in 2018 ahead of Josh Allen and Lamar Jackson?",
+    "choices": [
+      {
+        "id": "baker_mayfield",
+        "text": "Baker Mayfield"
+      },
+      {
+        "id": "sam_darnold",
+        "text": "Sam Darnold"
+      },
+      {
+        "id": "josh_rosen",
+        "text": "Josh Rosen"
+      },
+      {
+        "id": "saquon_barkley",
+        "text": "Saquon Barkley (RB)"
+      }
+    ],
+    "correctChoiceId": "baker_mayfield",
+    "category": "Draft",
+    "difficulty": "medium",
+    "tags": [
+      "draft"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "draft-2020-burrow-tua-herbert",
+    "number": 65,
+    "question": "Who was drafted #1 overall in 2020 ahead of Tua Tagovailoa and Justin Herbert?",
+    "choices": [
+      {
+        "id": "joe_burrow",
+        "text": "Joe Burrow"
+      },
+      {
+        "id": "tua_tagovailoa",
+        "text": "Tua Tagovailoa"
+      },
+      {
+        "id": "justin_herbert",
+        "text": "Justin Herbert"
+      },
+      {
+        "id": "jordan_love",
+        "text": "Jordan Love"
+      }
+    ],
+    "correctChoiceId": "joe_burrow",
+    "category": "Draft",
+    "difficulty": "medium",
+    "tags": [
+      "draft"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "draft-2021-lawrence-overall",
+    "number": 66,
+    "question": "Which QB was drafted #1 overall in 2021 ahead of Zach Wilson and Trey Lance?",
+    "choices": [
+      {
+        "id": "trevor_lawrence",
+        "text": "Trevor Lawrence"
+      },
+      {
+        "id": "zach_wilson",
+        "text": "Zach Wilson"
+      },
+      {
+        "id": "trey_lance",
+        "text": "Trey Lance"
+      },
+      {
+        "id": "mac_jones",
+        "text": "Mac Jones"
+      }
+    ],
+    "correctChoiceId": "trevor_lawrence",
+    "category": "Draft",
+    "difficulty": "medium",
+    "tags": [
+      "draft"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "draft-2023-bryceyoung-ahead-stroud",
+    "number": 67,
+    "question": "Which QB was drafted #1 overall in 2023 ahead of C.J. Stroud and Anthony Richardson?",
+    "choices": [
+      {
+        "id": "bryce_young",
+        "text": "Bryce Young"
+      },
+      {
+        "id": "cj_stroud",
+        "text": "C.J. Stroud"
+      },
+      {
+        "id": "anthony_richardson",
+        "text": "Anthony Richardson"
+      },
+      {
+        "id": "will_levis",
+        "text": "Will Levis"
+      }
+    ],
+    "correctChoiceId": "bryce_young",
+    "category": "Draft",
+    "difficulty": "medium",
+    "tags": [
+      "draft"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "qb-first-600tds-brady",
+    "number": 68,
+    "question": "Who was the first QB in NFL history to throw 600 career TD passes?",
+    "choices": [
+      {
+        "id": "tom_brady",
+        "text": "Tom Brady"
+      },
+      {
+        "id": "peyton_manning",
+        "text": "Peyton Manning"
+      },
+      {
+        "id": "drew_brees",
+        "text": "Drew Brees"
+      },
+      {
+        "id": "brett_favre",
+        "text": "Brett Favre"
+      }
+    ],
+    "correctChoiceId": "tom_brady",
+    "category": "QB",
+    "difficulty": "medium",
+    "tags": [
+      "record"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "rb-most-career-yds-emmitt",
+    "number": 69,
+    "question": "Who holds the all-time rushing yards record?",
+    "choices": [
+      {
+        "id": "emmitt_smith",
+        "text": "Emmitt Smith"
+      },
+      {
+        "id": "walter_payton",
+        "text": "Walter Payton"
+      },
+      {
+        "id": "barry_sanders",
+        "text": "Barry Sanders"
+      },
+      {
+        "id": "adrian_peterson",
+        "text": "Adrian Peterson"
+      }
+    ],
+    "correctChoiceId": "emmitt_smith",
+    "category": "RB",
+    "difficulty": "medium",
+    "tags": [
+      "record"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "wr-most-career-tds-rice",
+    "number": 70,
+    "question": "Who holds the all-time receiving TD record?",
+    "choices": [
+      {
+        "id": "jerry_rice",
+        "text": "Jerry Rice"
+      },
+      {
+        "id": "randy_moss",
+        "text": "Randy Moss"
+      },
+      {
+        "id": "terrell_owens",
+        "text": "Terrell Owens"
+      },
+      {
+        "id": "marvin_harrison",
+        "text": "Marvin Harrison"
+      }
+    ],
+    "correctChoiceId": "jerry_rice",
+    "category": "WR",
+    "difficulty": "medium",
+    "tags": [
+      "record"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "qb-playoff-wins-leader-brady",
+    "number": 71,
+    "question": "Which QB has the most career playoff wins?",
+    "choices": [
+      {
+        "id": "tom_brady",
+        "text": "Tom Brady"
+      },
+      {
+        "id": "peyton_manning",
+        "text": "Peyton Manning"
+      },
+      {
+        "id": "joe_montana",
+        "text": "Joe Montana"
+      },
+      {
+        "id": "patrick_mahomes",
+        "text": "Patrick Mahomes"
+      }
+    ],
+    "correctChoiceId": "tom_brady",
+    "category": "QB",
+    "difficulty": "medium",
+    "tags": [
+      "record"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "coach-most-superbowls-belichick",
+    "number": 72,
+    "question": "Which coach has the most Super Bowl wins?",
+    "choices": [
+      {
+        "id": "bill_belichick",
+        "text": "Bill Belichick"
+      },
+      {
+        "id": "chuck_noll",
+        "text": "Chuck Noll"
+      },
+      {
+        "id": "vince_lombardi",
+        "text": "Vince Lombardi"
+      },
+      {
+        "id": "bill_walsh",
+        "text": "Bill Walsh"
+      }
+    ],
+    "correctChoiceId": "bill_belichick",
+    "category": "Coach",
+    "difficulty": "medium",
+    "tags": [
+      "record"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "team-never-superbowl-lions",
+    "number": 73,
+    "question": "Which of these teams has never appeared in a Super Bowl?",
+    "choices": [
+      {
+        "id": "detroit_lions",
+        "text": "Detroit Lions"
+      },
+      {
+        "id": "buffalo_bills",
+        "text": "Buffalo Bills"
+      },
+      {
+        "id": "minnesota_vikings",
+        "text": "Minnesota Vikings"
+      },
+      {
+        "id": "atlanta_falcons",
+        "text": "Atlanta Falcons"
+      }
+    ],
+    "correctChoiceId": "detroit_lions",
+    "category": "Team",
+    "difficulty": "medium",
+    "tags": [
+      "franchise",
+      "history"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "team-never-superbowl-browns",
+    "number": 74,
+    "question": "Which of these franchises has never reached a Super Bowl?",
+    "choices": [
+      {
+        "id": "cleveland_browns",
+        "text": "Cleveland Browns"
+      },
+      {
+        "id": "cincinnati_bengals",
+        "text": "Cincinnati Bengals"
+      },
+      {
+        "id": "carolina_panthers",
+        "text": "Carolina Panthers"
+      },
+      {
+        "id": "tennessee_titans",
+        "text": "Tennessee Titans"
+      }
+    ],
+    "correctChoiceId": "cleveland_browns",
+    "category": "Team",
+    "difficulty": "medium",
+    "tags": [
+      "franchise",
+      "history"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "team-most-superbowls-patriots-steelers",
+    "number": 75,
+    "question": "Which two franchises are tied with the most Super Bowl wins (6 each)?",
+    "choices": [
+      {
+        "id": "patriots_steelers",
+        "text": "Patriots & Steelers"
+      },
+      {
+        "id": "cowboys_49ers",
+        "text": "Cowboys & 49ers"
+      },
+      {
+        "id": "packers_giants",
+        "text": "Packers & Giants"
+      },
+      {
+        "id": "raiders_dolphins",
+        "text": "Raiders & Dolphins"
+      }
+    ],
+    "correctChoiceId": "patriots_steelers",
+    "category": "Team",
+    "difficulty": "medium",
+    "tags": [
+      "franchise",
+      "history"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "team-longest-superbowl-drought-jets",
+    "number": 76,
+    "question": "Which team holds the NFL's longest active playoff drought as of 2024?",
+    "choices": [
+      {
+        "id": "new_york_jets",
+        "text": "New York Jets"
+      },
+      {
+        "id": "detroit_lions",
+        "text": "Detroit Lions"
+      },
+      {
+        "id": "cleveland_browns",
+        "text": "Cleveland Browns"
+      },
+      {
+        "id": "miami_dolphins",
+        "text": "Miami Dolphins"
+      }
+    ],
+    "correctChoiceId": "new_york_jets",
+    "category": "Team",
+    "difficulty": "medium",
+    "tags": [
+      "franchise",
+      "history"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "team-first-superbowl-win-chiefs-1970",
+    "number": 77,
+    "question": "Which team won Super Bowl IV, their first in franchise history?",
+    "choices": [
+      {
+        "id": "kansas_city_chiefs",
+        "text": "Kansas City Chiefs"
+      },
+      {
+        "id": "new_york_jets",
+        "text": "New York Jets"
+      },
+      {
+        "id": "green_bay_packers",
+        "text": "Green Bay Packers"
+      },
+      {
+        "id": "miami_dolphins",
+        "text": "Miami Dolphins"
+      }
+    ],
+    "correctChoiceId": "kansas_city_chiefs",
+    "category": "Team",
+    "difficulty": "medium",
+    "tags": [
+      "franchise",
+      "history"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "team-perfected-season-dolphins",
+    "number": 78,
+    "question": "Which team is the only one to have a perfect season including the Super Bowl?",
+    "choices": [
+      {
+        "id": "miami_dolphins",
+        "text": "Miami Dolphins"
+      },
+      {
+        "id": "new_england_patriots",
+        "text": "New England Patriots"
+      },
+      {
+        "id": "chicago_bears",
+        "text": "Chicago Bears"
+      },
+      {
+        "id": "san_francisco_49ers",
+        "text": "San Francisco 49ers"
+      }
+    ],
+    "correctChoiceId": "miami_dolphins",
+    "category": "Team",
+    "difficulty": "medium",
+    "tags": [
+      "franchise",
+      "history"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "team-most-superbowl-losses-bills-vikings",
+    "number": 79,
+    "question": "Which two franchises are tied with the most Super Bowl losses (4 each without a win streak)?",
+    "choices": [
+      {
+        "id": "bills_vikings",
+        "text": "Bills & Vikings"
+      },
+      {
+        "id": "cowboys_patriots",
+        "text": "Cowboys & Patriots"
+      },
+      {
+        "id": "broncos_panthers",
+        "text": "Broncos & Panthers"
+      },
+      {
+        "id": "raiders_rams",
+        "text": "Raiders & Rams"
+      }
+    ],
+    "correctChoiceId": "bills_vikings",
+    "category": "Team",
+    "difficulty": "medium",
+    "tags": [
+      "franchise",
+      "history"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "team-longest-regular-win-streak-patriots-colts",
+    "number": 80,
+    "question": "Which two teams share the longest regular-season winning streak in NFL history (21 games)?",
+    "choices": [
+      {
+        "id": "patriots_colts",
+        "text": "Patriots & Colts"
+      },
+      {
+        "id": "dolphins_bears",
+        "text": "Dolphins & Bears"
+      },
+      {
+        "id": "49ers_packers",
+        "text": "49ers & Packers"
+      },
+      {
+        "id": "cowboys_raiders",
+        "text": "Cowboys & Raiders"
+      }
+    ],
+    "correctChoiceId": "patriots_colts",
+    "category": "Team",
+    "difficulty": "hard",
+    "tags": [
+      "streaks",
+      "records"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "team-longest-playoff-win-streak-patriots",
+    "number": 81,
+    "question": "Which team holds the longest playoff winning streak in NFL history (10 games)?",
+    "choices": [
+      {
+        "id": "new_england_patriots",
+        "text": "New England Patriots"
+      },
+      {
+        "id": "pittsburgh_steelers",
+        "text": "Pittsburgh Steelers"
+      },
+      {
+        "id": "san_francisco_49ers",
+        "text": "San Francisco 49ers"
+      },
+      {
+        "id": "dallas_cowboys",
+        "text": "Dallas Cowboys"
+      }
+    ],
+    "correctChoiceId": "new_england_patriots",
+    "category": "Team",
+    "difficulty": "hard",
+    "tags": [
+      "streaks",
+      "records"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "player-consec-td-games-rice",
+    "number": 82,
+    "question": "Which player holds the record for most consecutive games with a receiving TD (13)?",
+    "choices": [
+      {
+        "id": "jerry_rice",
+        "text": "Jerry Rice"
+      },
+      {
+        "id": "randy_moss",
+        "text": "Randy Moss"
+      },
+      {
+        "id": "calvin_johnson",
+        "text": "Calvin Johnson"
+      },
+      {
+        "id": "larry_fitzgerald",
+        "text": "Larry Fitzgerald"
+      }
+    ],
+    "correctChoiceId": "jerry_rice",
+    "category": "Team",
+    "difficulty": "hard",
+    "tags": [
+      "streaks",
+      "records"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "player-consec-rush-td-games-ladanian",
+    "number": 83,
+    "question": "Which RB holds the record for most consecutive games with a rushing TD (18)?",
+    "choices": [
+      {
+        "id": "ladanian_tomlinson",
+        "text": "LaDainian Tomlinson"
+      },
+      {
+        "id": "emmitt_smith",
+        "text": "Emmitt Smith"
+      },
+      {
+        "id": "derrick_henry",
+        "text": "Derrick Henry"
+      },
+      {
+        "id": "barry_sanders",
+        "text": "Barry Sanders"
+      }
+    ],
+    "correctChoiceId": "ladanian_tomlinson",
+    "category": "Team",
+    "difficulty": "hard",
+    "tags": [
+      "streaks",
+      "records"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "team-longest-home-win-streak-packers",
+    "number": 84,
+    "question": "Which team holds the record for the longest home winning streak in NFL history (29 games)?",
+    "choices": [
+      {
+        "id": "green_bay_packers",
+        "text": "Green Bay Packers"
+      },
+      {
+        "id": "miami_dolphins",
+        "text": "Miami Dolphins"
+      },
+      {
+        "id": "new_england_patriots",
+        "text": "New England Patriots"
+      },
+      {
+        "id": "denver_broncos",
+        "text": "Denver Broncos"
+      }
+    ],
+    "correctChoiceId": "green_bay_packers",
+    "category": "Team",
+    "difficulty": "hard",
+    "tags": [
+      "streaks",
+      "records"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "stadium-largest-nfl-at_t",
+    "number": 85,
+    "question": "Which NFL stadium has the largest seating capacity?",
+    "choices": [
+      {
+        "id": "at_t_stadium",
+        "text": "AT&T Stadium (Cowboys)"
+      },
+      {
+        "id": "metlife_stadium",
+        "text": "MetLife Stadium (Giants/Jets)"
+      },
+      {
+        "id": "lambeau_field",
+        "text": "Lambeau Field (Packers)"
+      },
+      {
+        "id": "fedex_field",
+        "text": "FedEx Field (Commanders)"
+      }
+    ],
+    "correctChoiceId": "at_t_stadium",
+    "category": "Stadium",
+    "difficulty": "medium",
+    "tags": [
+      "stadium",
+      "nfl"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "stadium-sofi-la",
+    "number": 86,
+    "question": "SoFi Stadium is home to which two NFL teams?",
+    "choices": [
+      {
+        "id": "rams_chargers",
+        "text": "Rams & Chargers"
+      },
+      {
+        "id": "raiders_rams",
+        "text": "Raiders & Rams"
+      },
+      {
+        "id": "chargers_raiders",
+        "text": "Chargers & Raiders"
+      },
+      {
+        "id": "rams_49ers",
+        "text": "Rams & 49ers"
+      }
+    ],
+    "correctChoiceId": "rams_chargers",
+    "category": "Stadium",
+    "difficulty": "medium",
+    "tags": [
+      "stadium",
+      "nfl"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "stadium-lambeau-nickname",
+    "number": 87,
+    "question": "Which stadium is nicknamed 'The Frozen Tundra'?",
+    "choices": [
+      {
+        "id": "lambeau_field",
+        "text": "Lambeau Field"
+      },
+      {
+        "id": "soldier_field",
+        "text": "Soldier Field"
+      },
+      {
+        "id": "gillette_stadium",
+        "text": "Gillette Stadium"
+      },
+      {
+        "id": "arrowhead_stadium",
+        "text": "Arrowhead Stadium"
+      }
+    ],
+    "correctChoiceId": "lambeau_field",
+    "category": "Stadium",
+    "difficulty": "medium",
+    "tags": [
+      "stadium",
+      "nfl"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "stadium-loudest-arrowhead",
+    "number": 88,
+    "question": "Which stadium set the Guinness World Record for loudest outdoor stadium?",
+    "choices": [
+      {
+        "id": "arrowhead_stadium",
+        "text": "Arrowhead Stadium"
+      },
+      {
+        "id": "centurylink_field",
+        "text": "Lumen Field (Seahawks)"
+      },
+      {
+        "id": "superdome",
+        "text": "Caesars Superdome"
+      },
+      {
+        "id": "metlife_stadium",
+        "text": "MetLife Stadium"
+      }
+    ],
+    "correctChoiceId": "arrowhead_stadium",
+    "category": "Stadium",
+    "difficulty": "medium",
+    "tags": [
+      "stadium",
+      "nfl"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "stadium-oldest-soldier",
+    "number": 89,
+    "question": "Which is the oldest stadium currently in use in the NFL?",
+    "choices": [
+      {
+        "id": "soldier_field",
+        "text": "Soldier Field"
+      },
+      {
+        "id": "lambeau_field",
+        "text": "Lambeau Field"
+      },
+      {
+        "id": "arrowhead_stadium",
+        "text": "Arrowhead Stadium"
+      },
+      {
+        "id": "metlife_stadium",
+        "text": "MetLife Stadium"
+      }
+    ],
+    "correctChoiceId": "soldier_field",
+    "category": "Stadium",
+    "difficulty": "medium",
+    "tags": [
+      "stadium",
+      "nfl"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "stadium-raiders-allegiant",
+    "number": 90,
+    "question": "What is the name of the Raiders' home stadium in Las Vegas?",
+    "choices": [
+      {
+        "id": "allegiant_stadium",
+        "text": "Allegiant Stadium"
+      },
+      {
+        "id": "sofi_stadium",
+        "text": "SoFi Stadium"
+      },
+      {
+        "id": "t_mobile_arena",
+        "text": "T-Mobile Arena"
+      },
+      {
+        "id": "sam_boyd_stadium",
+        "text": "Sam Boyd Stadium"
+      }
+    ],
+    "correctChoiceId": "allegiant_stadium",
+    "category": "Stadium",
+    "difficulty": "medium",
+    "tags": [
+      "stadium",
+      "nfl"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "stadium-seahawks-lumen",
+    "number": 91,
+    "question": "Lumen Field, famous for crowd noise, is home to which team?",
+    "choices": [
+      {
+        "id": "seattle_seahawks",
+        "text": "Seattle Seahawks"
+      },
+      {
+        "id": "san_francisco_49ers",
+        "text": "San Francisco 49ers"
+      },
+      {
+        "id": "denver_broncos",
+        "text": "Denver Broncos"
+      },
+      {
+        "id": "buffalo_bills",
+        "text": "Buffalo Bills"
+      }
+    ],
+    "correctChoiceId": "seattle_seahawks",
+    "category": "Stadium",
+    "difficulty": "medium",
+    "tags": [
+      "stadium",
+      "nfl"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "team-move-raiders-vegas",
+    "number": 92,
+    "question": "Which city did the Raiders move to in 2020?",
+    "choices": [
+      {
+        "id": "las_vegas",
+        "text": "Las Vegas"
+      },
+      {
+        "id": "los_angeles",
+        "text": "Los Angeles"
+      },
+      {
+        "id": "oakland",
+        "text": "Oakland"
+      },
+      {
+        "id": "san_diego",
+        "text": "San Diego"
+      }
+    ],
+    "correctChoiceId": "las_vegas",
+    "category": "Team",
+    "difficulty": "medium",
+    "tags": [
+      "relocation",
+      "history"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "team-move-rams-stl-la",
+    "number": 93,
+    "question": "Which city did the Rams relocate from to return to Los Angeles in 2016?",
+    "choices": [
+      {
+        "id": "st_louis",
+        "text": "St. Louis"
+      },
+      {
+        "id": "oakland",
+        "text": "Oakland"
+      },
+      {
+        "id": "san_diego",
+        "text": "San Diego"
+      },
+      {
+        "id": "houston",
+        "text": "Houston"
+      }
+    ],
+    "correctChoiceId": "st_louis",
+    "category": "Team",
+    "difficulty": "medium",
+    "tags": [
+      "relocation",
+      "history"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "team-move-chargers-la",
+    "number": 94,
+    "question": "The Chargers moved to Los Angeles in 2017 from which city?",
+    "choices": [
+      {
+        "id": "san_diego",
+        "text": "San Diego"
+      },
+      {
+        "id": "oakland",
+        "text": "Oakland"
+      },
+      {
+        "id": "st_louis",
+        "text": "St. Louis"
+      },
+      {
+        "id": "phoenix",
+        "text": "Phoenix"
+      }
+    ],
+    "correctChoiceId": "san_diego",
+    "category": "Team",
+    "difficulty": "medium",
+    "tags": [
+      "relocation",
+      "history"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "team-move-colts-indy",
+    "number": 95,
+    "question": "Which city did the Colts leave in 1984 to relocate to Indianapolis?",
+    "choices": [
+      {
+        "id": "baltimore",
+        "text": "Baltimore"
+      },
+      {
+        "id": "st_louis",
+        "text": "St. Louis"
+      },
+      {
+        "id": "oakland",
+        "text": "Oakland"
+      },
+      {
+        "id": "houston",
+        "text": "Houston"
+      }
+    ],
+    "correctChoiceId": "baltimore",
+    "category": "Team",
+    "difficulty": "medium",
+    "tags": [
+      "relocation",
+      "history"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "team-move-oilers-titans",
+    "number": 96,
+    "question": "The Tennessee Titans were originally known as what franchise?",
+    "choices": [
+      {
+        "id": "houston_oilers",
+        "text": "Houston Oilers"
+      },
+      {
+        "id": "san_diego_chargers",
+        "text": "San Diego Chargers"
+      },
+      {
+        "id": "st_louis_cardinals",
+        "text": "St. Louis Cardinals"
+      },
+      {
+        "id": "brooklyn_dodgers",
+        "text": "Brooklyn Dodgers"
+      }
+    ],
+    "correctChoiceId": "houston_oilers",
+    "category": "Team",
+    "difficulty": "medium",
+    "tags": [
+      "relocation",
+      "history"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "game-biggest-superbowl-comeback",
+    "number": 97,
+    "question": "Which team completed the largest Super Bowl comeback (down 28-3)?",
+    "choices": [
+      {
+        "id": "new_england_patriots",
+        "text": "New England Patriots"
+      },
+      {
+        "id": "philadelphia_eagles",
+        "text": "Philadelphia Eagles"
+      },
+      {
+        "id": "kansas_city_chiefs",
+        "text": "Kansas City Chiefs"
+      },
+      {
+        "id": "tampa_bay_buccaneers",
+        "text": "Tampa Bay Buccaneers"
+      }
+    ],
+    "correctChoiceId": "new_england_patriots",
+    "category": "Team",
+    "difficulty": "medium",
+    "tags": [
+      "comeback",
+      "moment"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "game-biggest-regular-comeback",
+    "number": 98,
+    "question": "Which team made the biggest regular season comeback in NFL history (down 33 points vs Colts, 2022)?",
+    "choices": [
+      {
+        "id": "minnesota_vikings",
+        "text": "Minnesota Vikings"
+      },
+      {
+        "id": "buffalo_bills",
+        "text": "Buffalo Bills"
+      },
+      {
+        "id": "houston_oilers",
+        "text": "Houston Oilers"
+      },
+      {
+        "id": "los_angeles_chargers",
+        "text": "Los Angeles Chargers"
+      }
+    ],
+    "correctChoiceId": "minnesota_vikings",
+    "category": "Team",
+    "difficulty": "medium",
+    "tags": [
+      "comeback",
+      "moment"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "game-music-city-miracle",
+    "number": 99,
+    "question": "Which team pulled off the 'Music City Miracle' kickoff return in the 1999 playoffs?",
+    "choices": [
+      {
+        "id": "tennessee_titans",
+        "text": "Tennessee Titans"
+      },
+      {
+        "id": "buffalo_bills",
+        "text": "Buffalo Bills"
+      },
+      {
+        "id": "jacksonville_jaguars",
+        "text": "Jacksonville Jaguars"
+      },
+      {
+        "id": "new_york_jets",
+        "text": "New York Jets"
+      }
+    ],
+    "correctChoiceId": "tennessee_titans",
+    "category": "Team",
+    "difficulty": "medium",
+    "tags": [
+      "comeback",
+      "moment"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "id": "game-beastquake-run",
+    "number": 100,
+    "question": "Which RB’s legendary 'Beast Quake' run came in the 2010 playoffs?",
+    "choices": [
+      {
+        "id": "marshawn_lynch",
+        "text": "Marshawn Lynch"
+      },
+      {
+        "id": "adrian_peterson",
+        "text": "Adrian Peterson"
+      },
+      {
+        "id": "derrick_henry",
+        "text": "Derrick Henry"
+      },
+      {
+        "id": "frank_gore",
+        "text": "Frank Gore"
+      }
+    ],
+    "correctChoiceId": "marshawn_lynch",
+    "category": "Team",
+    "difficulty": "medium",
+    "tags": [
+      "comeback",
+      "moment"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  }
+]
