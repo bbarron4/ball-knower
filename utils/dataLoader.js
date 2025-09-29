@@ -100,11 +100,15 @@ class DataLoader {
         const wrongColleges = [];
         const usedColleges = new Set([correctCollege]);
 
-        for (const player of allPlayers) {
+        // Shuffle players to get random wrong answers each time
+        const shuffledPlayers = [...allPlayers].sort(() => Math.random() - 0.5);
+
+        for (const player of shuffledPlayers) {
             if (player.college && !usedColleges.has(player.college) && wrongColleges.length < 3) {
                 wrongColleges.push(player.college);
                 usedColleges.add(player.college);
             }
+            if (wrongColleges.length >= 3) break;
         }
 
         if (wrongColleges.length < 3) return null;
@@ -138,11 +142,15 @@ class DataLoader {
         const wrongColleges = [];
         const usedColleges = new Set([correctCollege]);
 
-        for (const player of players) {
+        // Shuffle players to get random wrong answers each time
+        const shuffledPlayers = [...players].sort(() => Math.random() - 0.5);
+
+        for (const player of shuffledPlayers) {
             if (player.college && !usedColleges.has(player.college) && wrongColleges.length < 3) {
                 wrongColleges.push(player.college);
                 usedColleges.add(player.college);
             }
+            if (wrongColleges.length >= 3) break;
         }
 
         if (wrongColleges.length < 3) return null;
@@ -173,11 +181,15 @@ class DataLoader {
         const wrongJerseys = [];
         const usedJerseys = new Set([correctJersey]);
 
-        for (const player of allPlayers) {
+        // Shuffle players to get random wrong jerseys each time
+        const shuffledPlayers = [...allPlayers].sort(() => Math.random() - 0.5);
+
+        for (const player of shuffledPlayers) {
             if (player.jersey && !usedJerseys.has(player.jersey) && wrongJerseys.length < 3) {
                 wrongJerseys.push(player.jersey);
                 usedJerseys.add(player.jersey);
             }
+            if (wrongJerseys.length >= 3) break;
         }
 
         if (wrongJerseys.length < 3) return null;
@@ -211,11 +223,15 @@ class DataLoader {
         const wrongJerseys = [];
         const usedJerseys = new Set([correctJersey]);
 
-        for (const player of playersWithJerseys) {
+        // Shuffle players to get random wrong jerseys each time
+        const shuffledPlayers = [...playersWithJerseys].sort(() => Math.random() - 0.5);
+
+        for (const player of shuffledPlayers) {
             if (player.jersey && !usedJerseys.has(player.jersey) && wrongJerseys.length < 3) {
                 wrongJerseys.push(player.jersey);
                 usedJerseys.add(player.jersey);
             }
+            if (wrongJerseys.length >= 3) break;
         }
 
         if (wrongJerseys.length < 3) return null;

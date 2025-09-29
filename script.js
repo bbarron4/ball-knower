@@ -354,14 +354,17 @@ function showProfile() {
 function startGame(mode) {
     currentGame.mode = mode;
     
-    // Set default values
-    currentGame.sport = 'nfl';
-    currentGame.inputMode = 'multiple-choice';
-    currentGame.playerCount = 1;
-    currentGame.questionCount = 10;
+    // Keep previous settings if they exist, otherwise use defaults
+    if (!currentGame.sport) currentGame.sport = 'nfl';
+    if (!currentGame.inputMode) currentGame.inputMode = 'multiple-choice';
+    if (!currentGame.playerCount) currentGame.playerCount = 1;
+    if (!currentGame.questionCount) currentGame.questionCount = 10;
     
     // Show setup screen
     showScreen('setup-screen');
+    
+    // Restore UI to match current settings
+    restoreSetupUI();
     
     // Update setup title based on mode
     const titles = {
@@ -396,6 +399,32 @@ function startGame(mode) {
 }
 
 // Setup Functions
+function restoreSetupUI() {
+    // Restore sport selection
+    document.querySelectorAll('.sport-btn').forEach(btn => {
+        btn.classList.remove('active');
+        const btnSport = btn.getAttribute('onclick').match(/selectSport\('(.+?)'\)/);
+        if (btnSport && btnSport[1] === currentGame.sport) {
+            btn.classList.add('active');
+        }
+    });
+    
+    // Restore input type selection
+    document.querySelectorAll('.input-type-btn').forEach(btn => {
+        btn.classList.remove('active');
+        const btnInputType = btn.getAttribute('onclick').match(/selectInputType\('(.+?)'\)/);
+        if (btnInputType && btnInputType[1] === currentGame.inputMode) {
+            btn.classList.add('active');
+        }
+    });
+    
+    // Restore question count
+    const questionCountEl = document.getElementById('question-count');
+    if (questionCountEl) {
+        questionCountEl.textContent = currentGame.questionCount;
+    }
+}
+
 function selectSport(sport) {
     currentGame.sport = sport;
     
@@ -742,15 +771,49 @@ async function generateQuestions() {
     
     const questions = [];
     
-    // Shuffle players to ensure good randomization
-    const shuffledPlayers = [...players].sort(() => Math.random() - 0.5);
+    // Fisher-Yates shuffle for better randomization
+    function shuffleArray(array) {
+        const shuffled = [...array];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+    }
+    
+    // Shuffle players to ensure good randomization - fresh shuffle each game
+    const shuffledPlayers = shuffleArray(players);
     
     // For survival mode, generate unlimited questions with mixed modes
     const questionCount = currentGame.mode === 'survival' ? 1000 : currentGame.questionCount;
     
+    // For survival mode with multiple modes/sports, create a balanced mix
+    let modeRotation = [];
+    if (currentGame.mode === 'survival') {
+        const selectedModes = getSelectedGameModes();
+        if (selectedModes.length === 0) {
+            console.error('No game modes selected for survival mode');
+            return [];
+        }
+        
+        // Create a rotation array that evenly distributes modes
+        // For example: [college, jersey, trivia, college, jersey, trivia, ...]
+        for (let i = 0; i < questionCount; i++) {
+            modeRotation.push(selectedModes[i % selectedModes.length]);
+        }
+        // Shuffle the rotation to randomize order while keeping even distribution
+        modeRotation = shuffleArray(modeRotation);
+    }
+    
     for (let i = 0; i < questionCount; i++) {
-        // Use shuffled players to avoid duplicates
-        const player = shuffledPlayers[i % shuffledPlayers.length];
+        // Re-shuffle periodically to ensure variety across many questions
+        const playerIndex = i % shuffledPlayers.length;
+        if (playerIndex === 0 && i > 0) {
+            // Re-shuffle when we've used all players once
+            shuffleArray(shuffledPlayers);
+        }
+        
+        const player = shuffledPlayers[playerIndex];
         let question = null;
         
         // Generate different question types based on game mode
@@ -759,20 +822,14 @@ async function generateQuestions() {
         } else if (currentGame.mode === 'jersey-guesser') {
             question = dataLoader.createJerseyQuestionWithPlayer(player, players);
         } else if (currentGame.mode === 'survival') {
-            // For survival mode, randomly select from enabled game modes
-            const selectedModes = getSelectedGameModes();
-            if (selectedModes.length === 0) {
-                console.error('No game modes selected for survival mode');
-                return [];
-            }
+            // Use the pre-shuffled, evenly distributed mode rotation
+            const selectedMode = modeRotation[i];
             
-            const randomMode = selectedModes[Math.floor(Math.random() * selectedModes.length)];
-            
-            if (randomMode === 'college-guesser') {
+            if (selectedMode === 'college-guesser') {
                 question = dataLoader.createCollegeQuestionWithPlayer(player, players);
-            } else if (randomMode === 'jersey-guesser') {
+            } else if (selectedMode === 'jersey-guesser') {
                 question = dataLoader.createJerseyQuestionWithPlayer(player, players);
-            } else if (randomMode === 'achievement-guesser') {
+            } else if (selectedMode === 'achievement-guesser') {
                 // For now, use college questions as placeholder for achievement questions
                 question = dataLoader.createCollegeQuestionWithPlayer(player, players);
             }
@@ -2460,15 +2517,12 @@ function updateQuestionUI(question) {
         // For survival mode, show current streak instead of progress
         document.querySelector('.progress-fill').style.width = '100%'; // Always full for survival
         document.querySelector('.question-number').textContent = `Survival Streak: ${currentGame.streak}`;
-        document.querySelector('.score').style.display = 'none'; // Hide score for survival mode
     } else {
         // Regular mode - show progress and question count
-    const progress = ((currentGame.currentQuestion + 1) / currentGame.questionCount) * 100;
-    document.querySelector('.progress-fill').style.width = `${progress}%`;
-    document.querySelector('.question-number').textContent = 
-        `Question ${currentGame.currentQuestion + 1} of ${currentGame.questionCount}`;
-    document.querySelector('.score').textContent = `Score: ${currentGame.score}`;
-        document.querySelector('.score').style.display = 'block'; // Show score for regular modes
+        const progress = ((currentGame.currentQuestion + 1) / currentGame.questionCount) * 100;
+        document.querySelector('.progress-fill').style.width = `${progress}%`;
+        document.querySelector('.question-number').textContent = 
+            `Question ${currentGame.currentQuestion + 1} of ${currentGame.questionCount}`;
     }
     
     // Show player info
