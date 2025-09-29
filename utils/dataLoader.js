@@ -37,6 +37,20 @@ class DataLoader {
             return WELL_KNOWN_PLAYERS;
         }
 
+        // Fallback: try to load from GitHub Pages
+        console.log('⚠️ WELL_KNOWN_PLAYERS not found, trying to load from server...');
+        try {
+            const response = await fetch('./well_known_players.js');
+            if (response.ok) {
+                const text = await response.text();
+                // This is a hack - we can't eval the script content directly
+                // But we can at least try to load it
+                console.log('📁 Found well_known_players.js on server');
+            }
+        } catch (error) {
+            console.error('❌ Failed to load well_known_players.js:', error);
+        }
+
         console.error('❌ WELL_KNOWN_PLAYERS not found');
         return [];
     }
