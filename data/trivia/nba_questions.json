@@ -1,7 +1,8 @@
 [
   {
-    "id": "nba-all-time-scorer-lebron",
-    "question": "Who is the NBA's all-time leading scorer, having surpassed Kareem Abdul-Jabbar's career points total in 2023?",
+    "number": 1,
+    "id": "player-alltime-points-lebron",
+    "question": "Who is the NBA's all-time leading scorer, having surpassed Kareem Abdul-Jabbar in 2023?",
     "choices": [
       {
         "id": "kobe_bryant",
@@ -21,17 +22,20 @@
       }
     ],
     "correctChoiceId": "lebron_james",
-    "category": "Records",
+    "category": "Player",
     "difficulty": "easy",
-    "tags": ["scoring", "career", "modern"],
-    "contextNote": "LeBron surpassed Kareem's 38,387 points in 2023",
+    "tags": [
+      "record",
+      "points"
+    ],
+    "contextNote": "",
     "isActive": true,
-    "createdAt": "2025-01-27",
-    "number": 1
+    "createdAt": "2025-09-29"
   },
   {
-    "id": "nba-career-assists-stockton",
-    "question": "Which player holds the NBA record for the most career assists (over 15,800 assists)?",
+    "number": 2,
+    "id": "player-assists-leader-stockton",
+    "question": "Which player holds the NBA record for most career assists?",
     "choices": [
       {
         "id": "magic_johnson",
@@ -51,17 +55,20 @@
       }
     ],
     "correctChoiceId": "john_stockton",
-    "category": "Records",
-    "difficulty": "medium",
-    "tags": ["assists", "career", "utah"],
-    "contextNote": "John Stockton holds the record with 15,806 career assists",
+    "category": "Player",
+    "difficulty": "easy",
+    "tags": [
+      "record",
+      "assists"
+    ],
+    "contextNote": "",
     "isActive": true,
-    "createdAt": "2025-01-27",
-    "number": 2
+    "createdAt": "2025-09-29"
   },
   {
-    "id": "nba-3point-leader-curry",
-    "question": "Who is the NBA's all-time leader in made 3-point field goals?",
+    "number": 3,
+    "id": "player-3pm-leader-curry",
+    "question": "Who is the NBA's all-time leader in made three-pointers?",
     "choices": [
       {
         "id": "reggie_miller",
@@ -81,17 +88,20 @@
       }
     ],
     "correctChoiceId": "stephen_curry",
-    "category": "Records",
+    "category": "Player",
     "difficulty": "easy",
-    "tags": ["3-pointers", "shooting", "modern"],
-    "contextNote": "Stephen Curry revolutionized 3-point shooting in the NBA",
+    "tags": [
+      "record",
+      "3pt"
+    ],
+    "contextNote": "",
     "isActive": true,
-    "createdAt": "2025-01-27",
-    "number": 3
+    "createdAt": "2025-09-29"
   },
   {
-    "id": "nba-triple-doubles-westbrook",
-    "question": "Which player has recorded the most career triple-doubles in NBA history?",
+    "number": 4,
+    "id": "player-triple-doubles-westbrook",
+    "question": "Which player has the most career triple-doubles in NBA history?",
     "choices": [
       {
         "id": "magic_johnson",
@@ -111,17 +121,20 @@
       }
     ],
     "correctChoiceId": "russell_westbrook",
-    "category": "Records",
-    "difficulty": "medium",
-    "tags": ["triple-doubles", "versatility", "modern"],
-    "contextNote": "Russell Westbrook holds the record for most career triple-doubles",
+    "category": "Player",
+    "difficulty": "easy",
+    "tags": [
+      "record",
+      "triple_double"
+    ],
+    "contextNote": "",
     "isActive": true,
-    "createdAt": "2025-01-27",
-    "number": 4
+    "createdAt": "2025-09-29"
   },
   {
-    "id": "nba-youngest-mvp-rose",
-    "question": "Who is the youngest player ever to win the NBA MVP award, doing so at age 22?",
+    "number": 5,
+    "id": "player-youngest-mvp-rose",
+    "question": "Who is the youngest NBA MVP ever (age 22)?",
     "choices": [
       {
         "id": "lebron_james",
@@ -141,17 +154,20 @@
       }
     ],
     "correctChoiceId": "derrick_rose",
-    "category": "Awards",
-    "difficulty": "medium",
-    "tags": ["mvp", "youngest", "chicago"],
-    "contextNote": "Derrick Rose won MVP in 2011 at age 22",
+    "category": "Player",
+    "difficulty": "easy",
+    "tags": [
+      "award",
+      "mvp"
+    ],
+    "contextNote": "",
     "isActive": true,
-    "createdAt": "2025-01-27",
-    "number": 5
+    "createdAt": "2025-09-29"
   },
   {
-    "id": "nba-most-mvp-kareem",
-    "question": "Which player has won the most regular-season NBA MVP awards (6 total)?",
+    "number": 6,
+    "id": "player-most-mvps-kareem",
+    "question": "Which player has won the most regular-season MVP awards (6)?",
     "choices": [
       {
         "id": "michael_jordan",
@@ -171,47 +187,53 @@
       }
     ],
     "correctChoiceId": "kareem_abdul_jabbar",
-    "category": "Awards",
-    "difficulty": "hard",
-    "tags": ["mvp", "career", "legends"],
-    "contextNote": "Kareem won 6 MVP awards during his career",
+    "category": "Player",
+    "difficulty": "medium",
+    "tags": [
+      "award",
+      "mvp"
+    ],
+    "contextNote": "",
     "isActive": true,
-    "createdAt": "2025-01-27",
-    "number": 6
+    "createdAt": "2025-09-29"
   },
   {
-    "id": "nba-unanimous-mvp-curry",
-    "question": "Stephen Curry achieved a unique honor in the 2015–16 season. What was it?",
+    "number": 7,
+    "id": "player-only-unanimous-mvp-curry",
+    "question": "Who is the only unanimous MVP in NBA history (2016)?",
     "choices": [
       {
-        "id": "first_scoring_assists",
-        "text": "First player to lead the league in scoring and assists in the same season"
+        "id": "stephen_curry",
+        "text": "Stephen Curry"
       },
       {
-        "id": "unanimous_mvp",
-        "text": "Only player to win MVP unanimously"
+        "id": "michael_jordan",
+        "text": "Michael Jordan"
       },
       {
-        "id": "50_points_season",
-        "text": "First player to average 50 points per game in a season"
+        "id": "lebron_james",
+        "text": "LeBron James"
       },
       {
-        "id": "mvp_no_allstar",
-        "text": "Only player to win MVP without making the All-Star team"
+        "id": "shaquille_oneal",
+        "text": "Shaquille O'Neal"
       }
     ],
-    "correctChoiceId": "unanimous_mvp",
-    "category": "Awards",
-    "difficulty": "medium",
-    "tags": ["mvp", "unanimous", "warriors"],
-    "contextNote": "Curry was the first and only unanimous MVP in NBA history",
+    "correctChoiceId": "stephen_curry",
+    "category": "Player",
+    "difficulty": "easy",
+    "tags": [
+      "award",
+      "mvp"
+    ],
+    "contextNote": "",
     "isActive": true,
-    "createdAt": "2025-01-27",
-    "number": 7
+    "createdAt": "2025-09-29"
   },
   {
-    "id": "nba-most-championships-bill-russell",
-    "question": "Which NBA player won a record 11 championships as a player (the most all-time)?",
+    "number": 8,
+    "id": "player-11-rings-bill-russell",
+    "question": "Which NBA player won a record 11 championship rings?",
     "choices": [
       {
         "id": "michael_jordan",
@@ -222,26 +244,28 @@
         "text": "Bill Russell"
       },
       {
-        "id": "tim_duncan",
-        "text": "Tim Duncan"
-      },
-      {
         "id": "robert_horry",
         "text": "Robert Horry"
+      },
+      {
+        "id": "tim_duncan",
+        "text": "Tim Duncan"
       }
     ],
     "correctChoiceId": "bill_russell",
-    "category": "Championships",
+    "category": "Player",
     "difficulty": "easy",
-    "tags": ["championships", "celtics", "legends"],
-    "contextNote": "Bill Russell won 11 championships with the Boston Celtics",
+    "tags": [
+      "titles"
+    ],
+    "contextNote": "",
     "isActive": true,
-    "createdAt": "2025-01-27",
-    "number": 8
+    "createdAt": "2025-09-29"
   },
   {
-    "id": "nba-finals-mvp-losing-team-jerry-west",
-    "question": "Who is the only player to be named NBA Finals MVP despite playing for the losing team in the Finals?",
+    "number": 9,
+    "id": "player-finals-mvp-on-losing-team",
+    "question": "Who is the only player to win NBA Finals MVP from the losing team?",
     "choices": [
       {
         "id": "lebron_james",
@@ -261,18 +285,25 @@
       }
     ],
     "correctChoiceId": "jerry_west",
-    "category": "Awards",
-    "difficulty": "hard",
-    "tags": ["finals-mvp", "lakers", "legends"],
-    "contextNote": "Jerry West won Finals MVP in 1969 despite Lakers losing to Celtics",
+    "category": "Player",
+    "difficulty": "medium",
+    "tags": [
+      "finals",
+      "awards"
+    ],
+    "contextNote": "",
     "isActive": true,
-    "createdAt": "2025-01-27",
-    "number": 9
+    "createdAt": "2025-09-29"
   },
   {
-    "id": "nba-100-point-game-wilt",
-    "question": "Which player famously scored 100 points in a single NBA game, the highest individual scoring game ever?",
+    "number": 10,
+    "id": "player-100-points-wilt",
+    "question": "Who scored 100 points in a single NBA game (1962)?",
     "choices": [
+      {
+        "id": "wilt_chamberlain",
+        "text": "Wilt Chamberlain"
+      },
       {
         "id": "kobe_bryant",
         "text": "Kobe Bryant"
@@ -280,10 +311,6 @@
       {
         "id": "michael_jordan",
         "text": "Michael Jordan"
-      },
-      {
-        "id": "wilt_chamberlain",
-        "text": "Wilt Chamberlain"
       },
       {
         "id": "david_thompson",
@@ -291,29 +318,32 @@
       }
     ],
     "correctChoiceId": "wilt_chamberlain",
-    "category": "Records",
+    "category": "Player",
     "difficulty": "easy",
-    "tags": ["scoring", "single-game", "legends"],
-    "contextNote": "Wilt Chamberlain scored 100 points in 1962 for the Philadelphia Warriors",
+    "tags": [
+      "record",
+      "scoring"
+    ],
+    "contextNote": "",
     "isActive": true,
-    "createdAt": "2025-01-27",
-    "number": 10
+    "createdAt": "2025-09-29"
   },
   {
-    "id": "nba-81-point-game-kobe",
-    "question": "Who scored 81 points in a 2006 game, the second-highest single-game point total in NBA history?",
+    "number": 11,
+    "id": "player-81-points-kobe",
+    "question": "Who scored 81 points in a 2006 game vs the Raptors?",
     "choices": [
       {
         "id": "kobe_bryant",
         "text": "Kobe Bryant"
       },
       {
-        "id": "damian_lillard",
-        "text": "Damian Lillard"
+        "id": "devin_booker",
+        "text": "Devin Booker"
       },
       {
-        "id": "michael_jordan",
-        "text": "Michael Jordan"
+        "id": "damian_lillard",
+        "text": "Damian Lillard"
       },
       {
         "id": "james_harden",
@@ -321,17 +351,19 @@
       }
     ],
     "correctChoiceId": "kobe_bryant",
-    "category": "Records",
+    "category": "Player",
     "difficulty": "easy",
-    "tags": ["scoring", "single-game", "lakers"],
-    "contextNote": "Kobe Bryant scored 81 points against Toronto in 2006",
+    "tags": [
+      "scoring"
+    ],
+    "contextNote": "",
     "isActive": true,
-    "createdAt": "2025-01-27",
-    "number": 11
+    "createdAt": "2025-09-29"
   },
   {
-    "id": "nba-playoff-record-63-jordan",
-    "question": "Who holds the record for most points scored in a single NBA playoff game (63 points)?",
+    "number": 12,
+    "id": "player-playoff-63-jordan",
+    "question": "Who holds the record for most points in a single NBA playoff game (63)?",
     "choices": [
       {
         "id": "donovan_mitchell",
@@ -351,17 +383,20 @@
       }
     ],
     "correctChoiceId": "michael_jordan",
-    "category": "Records",
+    "category": "Player",
     "difficulty": "medium",
-    "tags": ["playoffs", "scoring", "bulls"],
-    "contextNote": "Michael Jordan scored 63 points in 1986 playoffs vs Celtics",
+    "tags": [
+      "record",
+      "playoffs"
+    ],
+    "contextNote": "",
     "isActive": true,
-    "createdAt": "2025-01-27",
-    "number": 12
+    "createdAt": "2025-09-29"
   },
   {
-    "id": "nba-rookie-finals-mvp-magic",
-    "question": "Who is the only rookie ever to win the NBA Finals MVP award, accomplishing this feat in 1980?",
+    "number": 13,
+    "id": "player-rookie-finals-mvp-magic",
+    "question": "Who is the only rookie to win NBA Finals MVP (1980)?",
     "choices": [
       {
         "id": "larry_bird",
@@ -381,17 +416,20 @@
       }
     ],
     "correctChoiceId": "magic_johnson",
-    "category": "Awards",
+    "category": "Player",
     "difficulty": "medium",
-    "tags": ["finals-mvp", "rookie", "lakers"],
-    "contextNote": "Magic Johnson won Finals MVP as a rookie in 1980",
+    "tags": [
+      "finals",
+      "awards"
+    ],
+    "contextNote": "",
     "isActive": true,
-    "createdAt": "2025-01-27",
-    "number": 13
+    "createdAt": "2025-09-29"
   },
   {
-    "id": "nba-mvp-dpoy-hakeem",
-    "question": "Michael Jordan won both the MVP and Defensive Player of the Year awards in 1988. Who was the next player to win both in the same season?",
+    "number": 14,
+    "id": "player-mvp-dpoy-same-season-hakeem",
+    "question": "Who was the next player after Michael Jordan to win MVP and DPOY in the same season?",
     "choices": [
       {
         "id": "david_robinson",
@@ -411,17 +449,20 @@
       }
     ],
     "correctChoiceId": "hakeem_olajuwon",
-    "category": "Awards",
+    "category": "Player",
     "difficulty": "hard",
-    "tags": ["mvp", "dpoy", "rockets"],
-    "contextNote": "Hakeem Olajuwon won both MVP and DPOY in 1994",
+    "tags": [
+      "awards",
+      "defense"
+    ],
+    "contextNote": "",
     "isActive": true,
-    "createdAt": "2025-01-27",
-    "number": 14
+    "createdAt": "2025-09-29"
   },
   {
-    "id": "nba-shortest-player-muggsy",
-    "question": "Who is the shortest player in NBA history, listed at just 5 feet 3 inches tall?",
+    "number": 15,
+    "id": "player-shortest-muggsy",
+    "question": "Who is the shortest player in NBA history (5'3\")?",
     "choices": [
       {
         "id": "spud_webb",
@@ -433,7 +474,7 @@
       },
       {
         "id": "isaiah_thomas",
-        "text": "Isaiah Thomas (modern era)"
+        "text": "Isaiah Thomas"
       },
       {
         "id": "earl_boykins",
@@ -441,47 +482,51 @@
       }
     ],
     "correctChoiceId": "muggsy_bogues",
-    "category": "Players",
-    "difficulty": "medium",
-    "tags": ["height", "hornets", "legends"],
-    "contextNote": "Muggsy Bogues was 5'3\" and played 14 seasons in the NBA",
+    "category": "Player",
+    "difficulty": "easy",
+    "tags": [
+      "fun_fact"
+    ],
+    "contextNote": "",
     "isActive": true,
-    "createdAt": "2025-01-27",
-    "number": 15
+    "createdAt": "2025-09-29"
   },
   {
-    "id": "nba-lebron-30k-10k-10k",
-    "question": "LeBron James achieved a one-of-a-kind career milestone in 2022. What was it?",
+    "number": 16,
+    "id": "player-30k-10k-10k-lebron",
+    "question": "Who is the only player with 30k points, 10k rebounds, and 10k assists?",
     "choices": [
       {
-        "id": "10000_assists",
-        "text": "Surpassing 10,000 career assists"
+        "id": "lebron_james",
+        "text": "LeBron James"
       },
       {
-        "id": "60_point_triple_double",
-        "text": "Recording a 60-point triple-double"
+        "id": "kevin_durant",
+        "text": "Kevin Durant"
       },
       {
-        "id": "30k_10k_10k",
-        "text": "Accumulating 30,000 points, 10,000 rebounds, and 10,000 assists"
+        "id": "kareem_abdul_jabbar",
+        "text": "Kareem Abdul-Jabbar"
       },
       {
-        "id": "olympic_nba_same_year",
-        "text": "Winning an Olympic gold medal and NBA title in the same year"
+        "id": "giannis_antetokounmpo",
+        "text": "Giannis Antetokounmpo"
       }
     ],
-    "correctChoiceId": "30k_10k_10k",
-    "category": "Records",
-    "difficulty": "medium",
-    "tags": ["career", "milestone", "lakers"],
-    "contextNote": "LeBron is the only player to reach 30K points, 10K rebounds, and 10K assists",
+    "correctChoiceId": "lebron_james",
+    "category": "Player",
+    "difficulty": "easy",
+    "tags": [
+      "milestone"
+    ],
+    "contextNote": "",
     "isActive": true,
-    "createdAt": "2025-01-27",
-    "number": 16
+    "createdAt": "2025-09-29"
   },
   {
-    "id": "nba-finals-mvp-three-teams-lebron",
-    "question": "Who is the only player to win NBA Finals MVP with three different franchises?",
+    "number": 17,
+    "id": "player-finals-mvp-three-teams-lebron",
+    "question": "Who is the only player to win Finals MVP with three different teams?",
     "choices": [
       {
         "id": "kawhi_leonard",
@@ -492,111 +537,484 @@
         "text": "LeBron James"
       },
       {
-        "id": "robert_horry",
-        "text": "Robert Horry"
+        "id": "kevin_durant",
+        "text": "Kevin Durant"
+      },
+      {
+        "id": "shaquille_oneal",
+        "text": "Shaquille O'Neal"
+      }
+    ],
+    "correctChoiceId": "lebron_james",
+    "category": "Player",
+    "difficulty": "medium",
+    "tags": [
+      "finals",
+      "awards"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 18,
+    "id": "player-60-21-10-luka",
+    "question": "Who recorded a 60-point, 21-rebound, 10-assist game in 2022?",
+    "choices": [
+      {
+        "id": "luka_doncic",
+        "text": "Luka Dončić"
+      },
+      {
+        "id": "james_harden",
+        "text": "James Harden"
+      },
+      {
+        "id": "damian_lillard",
+        "text": "Damian Lillard"
+      },
+      {
+        "id": "joel_embiid",
+        "text": "Joel Embiid"
+      }
+    ],
+    "correctChoiceId": "luka_doncic",
+    "category": "Player",
+    "difficulty": "medium",
+    "tags": [
+      "record",
+      "triple_double"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 19,
+    "id": "player-20-20-20-westbrook",
+    "question": "Who posted a 20-20-20 game in 2019, the first since Wilt Chamberlain?",
+    "choices": [
+      {
+        "id": "russell_westbrook",
+        "text": "Russell Westbrook"
+      },
+      {
+        "id": "nikola_jokic",
+        "text": "Nikola Jokić"
+      },
+      {
+        "id": "draymond_green",
+        "text": "Draymond Green"
+      },
+      {
+        "id": "giannis_antetokounmpo",
+        "text": "Giannis Antetokounmpo"
+      }
+    ],
+    "correctChoiceId": "russell_westbrook",
+    "category": "Player",
+    "difficulty": "medium",
+    "tags": [
+      "rare",
+      "triple_double"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 20,
+    "id": "player-3s-in-game-klay-14",
+    "question": "Who holds the record for most three-pointers in a game (14)?",
+    "choices": [
+      {
+        "id": "klay_thompson",
+        "text": "Klay Thompson"
+      },
+      {
+        "id": "stephen_curry",
+        "text": "Stephen Curry"
+      },
+      {
+        "id": "damian_lillard",
+        "text": "Damian Lillard"
+      },
+      {
+        "id": "zach_lavine",
+        "text": "Zach LaVine"
+      }
+    ],
+    "correctChoiceId": "klay_thompson",
+    "category": "Player",
+    "difficulty": "easy",
+    "tags": [
+      "record",
+      "3pt"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 21,
+    "id": "player-points-in-quarter-klay-37",
+    "question": "Who holds the record for most points in a quarter (37)?",
+    "choices": [
+      {
+        "id": "klay_thompson",
+        "text": "Klay Thompson"
+      },
+      {
+        "id": "kobe_bryant",
+        "text": "Kobe Bryant"
       },
       {
         "id": "kevin_durant",
         "text": "Kevin Durant"
+      },
+      {
+        "id": "stephen_curry",
+        "text": "Stephen Curry"
+      }
+    ],
+    "correctChoiceId": "klay_thompson",
+    "category": "Player",
+    "difficulty": "medium",
+    "tags": [
+      "record",
+      "scoring"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 22,
+    "id": "player-mip-mvp-dpoy-fmvp-giannis",
+    "question": "Who is the only player to win MIP, MVP, DPOY, and Finals MVP?",
+    "choices": [
+      {
+        "id": "giannis_antetokounmpo",
+        "text": "Giannis Antetokounmpo"
+      },
+      {
+        "id": "michael_jordan",
+        "text": "Michael Jordan"
+      },
+      {
+        "id": "lebron_james",
+        "text": "LeBron James"
+      },
+      {
+        "id": "kevin_garnett",
+        "text": "Kevin Garnett"
+      }
+    ],
+    "correctChoiceId": "giannis_antetokounmpo",
+    "category": "Player",
+    "difficulty": "hard",
+    "tags": [
+      "awards",
+      "unique"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 23,
+    "id": "player-71pts-mitchell-2023",
+    "question": "Which player scored 71 points in a 2023 game vs the Bulls?",
+    "choices": [
+      {
+        "id": "donovan_mitchell",
+        "text": "Donovan Mitchell"
+      },
+      {
+        "id": "damian_lillard",
+        "text": "Damian Lillard"
+      },
+      {
+        "id": "devin_booker",
+        "text": "Devin Booker"
+      },
+      {
+        "id": "joel_embiid",
+        "text": "Joel Embiid"
+      }
+    ],
+    "correctChoiceId": "donovan_mitchell",
+    "category": "Player",
+    "difficulty": "medium",
+    "tags": [
+      "scoring",
+      "moment"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 24,
+    "id": "player-73pts-luka-2024",
+    "question": "Which player scored 73 points in 2024, tying for 4th-most in NBA history?",
+    "choices": [
+      {
+        "id": "luka_doncic",
+        "text": "Luka Dončić"
+      },
+      {
+        "id": "joel_embiid",
+        "text": "Joel Embiid"
+      },
+      {
+        "id": "damian_lillard",
+        "text": "Damian Lillard"
+      },
+      {
+        "id": "devin_booker",
+        "text": "Devin Booker"
+      }
+    ],
+    "correctChoiceId": "luka_doncic",
+    "category": "Player",
+    "difficulty": "medium",
+    "tags": [
+      "scoring"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 25,
+    "id": "player-most-playoff-points-lebron",
+    "question": "Who holds the NBA record for most career playoff points?",
+    "choices": [
+      {
+        "id": "lebron_james",
+        "text": "LeBron James"
+      },
+      {
+        "id": "michael_jordan",
+        "text": "Michael Jordan"
+      },
+      {
+        "id": "kareem_abdul_jabbar",
+        "text": "Kareem Abdul-Jabbar"
+      },
+      {
+        "id": "kobe_bryant",
+        "text": "Kobe Bryant"
       }
     ],
     "correctChoiceId": "lebron_james",
-    "category": "Awards",
-    "difficulty": "medium",
-    "tags": ["finals-mvp", "multiple-teams", "lakers"],
-    "contextNote": "LeBron won Finals MVP with Miami, Cleveland, and LA Lakers",
+    "category": "Player",
+    "difficulty": "easy",
+    "tags": [
+      "record",
+      "playoffs"
+    ],
+    "contextNote": "",
     "isActive": true,
-    "createdAt": "2025-01-27",
-    "number": 17
+    "createdAt": "2025-09-29"
   },
   {
-    "id": "nba-1984-draft-sam-bowie",
-    "question": "In the famous 1984 NBA Draft, Michael Jordan was selected third overall. Which player was drafted one spot ahead of Jordan at #2?",
+    "number": 26,
+    "id": "player-most-fgm-kareem",
+    "question": "Who has the most career field goals made in NBA history?",
+    "choices": [
+      {
+        "id": "kareem_abdul_jabbar",
+        "text": "Kareem Abdul-Jabbar"
+      },
+      {
+        "id": "lebron_james",
+        "text": "LeBron James"
+      },
+      {
+        "id": "karl_malone",
+        "text": "Karl Malone"
+      },
+      {
+        "id": "michael_jordan",
+        "text": "Michael Jordan"
+      }
+    ],
+    "correctChoiceId": "kareem_abdul_jabbar",
+    "category": "Player",
+    "difficulty": "hard",
+    "tags": [
+      "record",
+      "fgm"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 27,
+    "id": "player-most-fta-karl-malone",
+    "question": "Who has attempted the most free throws in NBA history?",
+    "choices": [
+      {
+        "id": "karl_malone",
+        "text": "Karl Malone"
+      },
+      {
+        "id": "shaquille_oneal",
+        "text": "Shaquille O'Neal"
+      },
+      {
+        "id": "wilt_chamberlain",
+        "text": "Wilt Chamberlain"
+      },
+      {
+        "id": "lebron_james",
+        "text": "LeBron James"
+      }
+    ],
+    "correctChoiceId": "karl_malone",
+    "category": "Player",
+    "difficulty": "hard",
+    "tags": [
+      "record",
+      "fta"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 28,
+    "id": "player-most-assists-stockton-dup",
+    "question": "Who is the NBA's all-time steals leader?",
+    "choices": [
+      {
+        "id": "john_stockton",
+        "text": "John Stockton"
+      },
+      {
+        "id": "michael_jordan",
+        "text": "Michael Jordan"
+      },
+      {
+        "id": "chris_paul",
+        "text": "Chris Paul"
+      },
+      {
+        "id": "gary_payton",
+        "text": "Gary Payton"
+      }
+    ],
+    "correctChoiceId": "john_stockton",
+    "category": "Player",
+    "difficulty": "easy",
+    "tags": [
+      "record",
+      "steals"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 29,
+    "id": "player-rebounds-leader-wilt",
+    "question": "Who is the NBA's all-time rebounds leader?",
+    "choices": [
+      {
+        "id": "wilt_chamberlain",
+        "text": "Wilt Chamberlain"
+      },
+      {
+        "id": "bill_russell",
+        "text": "Bill Russell"
+      },
+      {
+        "id": "kareem_abdul_jabbar",
+        "text": "Kareem Abdul-Jabbar"
+      },
+      {
+        "id": "moses_malone",
+        "text": "Moses Malone"
+      }
+    ],
+    "correctChoiceId": "wilt_chamberlain",
+    "category": "Player",
+    "difficulty": "medium",
+    "tags": [
+      "record",
+      "rebounds"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 30,
+    "id": "player-blocks-leader-hakeem",
+    "question": "Who holds the NBA record for most career blocks?",
     "choices": [
       {
         "id": "hakeem_olajuwon",
         "text": "Hakeem Olajuwon"
       },
       {
-        "id": "sam_bowie",
-        "text": "Sam Bowie"
+        "id": "dikembe_mutombo",
+        "text": "Dikembe Mutombo"
       },
       {
-        "id": "charles_barkley",
-        "text": "Charles Barkley"
+        "id": "kareem_abdul_jabbar",
+        "text": "Kareem Abdul-Jabbar"
       },
       {
-        "id": "john_stockton",
-        "text": "John Stockton"
+        "id": "tim_duncan",
+        "text": "Tim Duncan"
       }
     ],
-    "correctChoiceId": "sam_bowie",
-    "category": "Draft",
-    "difficulty": "hard",
-    "tags": ["draft", "1984", "blazers"],
-    "contextNote": "Portland selected Sam Bowie #2, missing out on Jordan",
-    "isActive": true,
-    "createdAt": "2025-01-27",
-    "number": 18
-  },
-  {
-    "id": "nba-2003-draft-darko",
-    "question": "LeBron James was the #1 pick in the 2003 Draft. Which player was selected #2 overall in 2003, just ahead of Carmelo Anthony (#3) and Chris Bosh (#4)?",
-    "choices": [
-      {
-        "id": "chris_kaman",
-        "text": "Chris Kaman"
-      },
-      {
-        "id": "dwyane_wade",
-        "text": "Dwyane Wade"
-      },
-      {
-        "id": "darko_milicic",
-        "text": "Darko Miličić"
-      },
-      {
-        "id": "tj_ford",
-        "text": "T.J. Ford"
-      }
-    ],
-    "correctChoiceId": "darko_milicic",
-    "category": "Draft",
-    "difficulty": "hard",
-    "tags": ["draft", "2003", "pistons"],
-    "contextNote": "Detroit selected Darko Miličić #2 in the legendary 2003 draft",
-    "isActive": true,
-    "createdAt": "2025-01-27",
-    "number": 19
-  },
-  {
-    "id": "nba-kobe-drafted-charlotte",
-    "question": "Kobe Bryant was drafted in 1996. Which team originally drafted Kobe before trading his rights to the LA Lakers?",
-    "choices": [
-      {
-        "id": "charlotte_hornets",
-        "text": "Charlotte Hornets"
-      },
-      {
-        "id": "los_angeles_clippers",
-        "text": "Los Angeles Clippers"
-      },
-      {
-        "id": "new_jersey_nets",
-        "text": "New Jersey Nets"
-      },
-      {
-        "id": "boston_celtics",
-        "text": "Boston Celtics"
-      }
-    ],
-    "correctChoiceId": "charlotte_hornets",
-    "category": "Draft",
+    "correctChoiceId": "hakeem_olajuwon",
+    "category": "Player",
     "difficulty": "medium",
-    "tags": ["draft", "1996", "lakers"],
-    "contextNote": "Charlotte drafted Kobe #13 but traded him to Lakers for Vlade Divac",
+    "tags": [
+      "record",
+      "blocks"
+    ],
+    "contextNote": "",
     "isActive": true,
-    "createdAt": "2025-01-27",
-    "number": 20
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 31,
+    "id": "player-3pt-streak-curry",
+    "question": "Which player set the record for most consecutive games with a made three?",
+    "choices": [
+      {
+        "id": "stephen_curry",
+        "text": "Stephen Curry"
+      },
+      {
+        "id": "james_harden",
+        "text": "James Harden"
+      },
+      {
+        "id": "duncan_robinson",
+        "text": "Duncan Robinson"
+      },
+      {
+        "id": "kyle_korver",
+        "text": "Kyle Korver"
+      }
+    ],
+    "correctChoiceId": "stephen_curry",
+    "category": "Player",
+    "difficulty": "medium",
+    "tags": [
+      "streaks",
+      "3pt"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
   }
 ]

@@ -7,7 +7,7 @@ This will be a comprehensive database with 100+ questions.
 import json
 import os
 
-def create_complete_nba_questions():
+def create_complete_nba_database():
     """Create a complete NBA trivia database with all questions from the user's text."""
     
     questions = []
@@ -48,7 +48,7 @@ def main():
     print("Adding ALL questions from the user's comprehensive text...")
     
     # Create all questions
-    questions = create_complete_nba_questions()
+    questions = create_complete_nba_database()
     
     # Save to JSON file
     nba_file = 'data/trivia/nba_questions.json'
