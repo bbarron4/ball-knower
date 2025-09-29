@@ -279,17 +279,17 @@ function setHeroBanner() {
     if (!heroBanner) return;
 
     const sources = [
-        'images/football1.jpg',
-        'images/football2.jpg', 
-        'images/football3.jpg',
-        'images/basketball1.jpg'
-    ];
-
+            'images/football1.jpg',
+            'images/football2.jpg', 
+            'images/football3.jpg',
+            'images/basketball1.jpg'
+        ];
+        
     // Preload images to avoid decode jank on swap
     const preloaded = sources.map(src => { const img = new Image(); img.src = src; return img; });
-    let currentImageIndex = 0;
-
-    function changeBackground() {
+        let currentImageIndex = 0;
+        
+        function changeBackground() {
         const next = preloaded[currentImageIndex];
         if (next && next.complete) {
             heroBanner.style.backgroundImage = `url('${next.src}')`;
@@ -305,9 +305,9 @@ function setHeroBanner() {
             heroBanner.style.backgroundImage = `url('${preloaded[0].src}')`;
         });
     }
-
-    // Change background every 5 seconds
-    setInterval(changeBackground, 5000);
+        
+        // Change background every 5 seconds
+        setInterval(changeBackground, 5000);
 }
 
 // Initialize the app
@@ -366,13 +366,33 @@ function startGame(mode) {
     // Update setup title based on mode
     const titles = {
         'college-guesser': 'College Guesser - Setup',
-        'jersey-guesser': 'Jersey Guesser - Setup',
-        'achievement-guesser': 'Achievement Guesser - Setup',
+        'jersey-guesser': 'Jersey Number Guesser - Setup',
+        'achievement-guesser': 'General Trivia - Setup',
         'survival': 'Survival Mode - Setup',
         'multiplayer': 'Multiplayer - Setup'
     };
     
     document.getElementById('setup-title').textContent = titles[mode] || 'Game Setup';
+    
+    // Show/hide sections based on game mode
+    const gameModeSelection = document.getElementById('game-mode-selection');
+    const questionCountSection = document.getElementById('question-count-section');
+    const highScoreDisplay = document.getElementById('high-score-display');
+    
+    if (mode === 'survival') {
+        // Show game mode selection and high score, hide question count
+        gameModeSelection.style.display = 'block';
+        questionCountSection.style.display = 'none';
+        highScoreDisplay.style.display = 'block';
+        
+        // Load and display high score
+        loadHighScore();
+    } else {
+        // Show question count, hide game mode selection and high score
+        gameModeSelection.style.display = 'none';
+        questionCountSection.style.display = 'block';
+        highScoreDisplay.style.display = 'none';
+    }
 }
 
 // Setup Functions
@@ -398,11 +418,236 @@ function selectInputType(inputType) {
     event.target.classList.add('active');
 }
 
-function changePlayerCount(delta) {
-    const currentCount = parseInt(document.getElementById('player-count').textContent);
-    const newCount = Math.max(1, Math.min(8, currentCount + delta));
-    document.getElementById('player-count').textContent = newCount;
-    currentGame.playerCount = newCount;
+function submitTextAnswer() {
+    const textInput = document.getElementById('text-answer-input');
+    const userAnswer = textInput.value.trim();
+    
+    if (!userAnswer) {
+        showMessage('Please enter an answer!', 'error');
+        return;
+    }
+    
+    const question = currentGame.questions[currentGame.currentQuestion];
+    const isCorrect = checkTextAnswer(userAnswer, question.correctAnswer, question.type);
+    
+    // Clear the input
+    textInput.value = '';
+    
+    if (currentGame.timer) {
+        clearInterval(currentGame.timer);
+        currentGame.timer = null;
+    }
+    
+    if (isCorrect) {
+        currentGame.score += 10;
+        currentGame.correctAnswers++;
+        currentGame.streak++;
+        currentGame.maxStreak = Math.max(currentGame.maxStreak, currentGame.streak);
+        showMessage('Correct!', 'success');
+        
+        // Update UI immediately for survival mode
+        if (currentGame.mode === 'survival') {
+            document.querySelector('.question-number').textContent = `Survival Streak: ${currentGame.streak}`;
+        }
+    } else {
+        currentGame.streak = 0;
+        showMessage(`Incorrect! The answer was: ${question.correctAnswer}`, 'error');
+        
+        // In survival mode, end game immediately on wrong answer
+        if (currentGame.mode === 'survival') {
+            setTimeout(() => {
+                endGame();
+            }, 1000);
+            return;
+        }
+    }
+    
+    setTimeout(() => {
+        nextQuestion();
+    }, 1000);
+}
+
+function checkTextAnswer(userAnswer, correctAnswer, questionType) {
+    const userLower = userAnswer.toLowerCase().trim();
+    const correctLower = correctAnswer.toLowerCase().trim();
+    
+    // Direct match
+    if (userLower === correctLower) {
+        return true;
+    }
+    
+    if (questionType === 'college') {
+        return checkCollegeAnswer(userLower, correctLower);
+    } else if (questionType === 'jersey') {
+        return checkJerseyAnswer(userAnswer, correctAnswer);
+    }
+    
+    return false;
+}
+
+function checkCollegeAnswer(userAnswer, correctAnswer) {
+    // College name variations mapping
+    const collegeVariations = {
+        // Ohio State variations
+        'ohio state university': ['ohio state', 'osu', 'the ohio state university'],
+        'ohio state': ['ohio state university', 'osu', 'the ohio state university'],
+        'osu': ['ohio state', 'ohio state university', 'the ohio state university'],
+        
+        // Alabama variations
+        'university of alabama': ['alabama', 'bama', 'ua'],
+        'alabama': ['university of alabama', 'bama', 'ua'],
+        'bama': ['alabama', 'university of alabama', 'ua'],
+        
+        // USC variations
+        'university of southern california': ['usc', 'southern california', 'southern cal'],
+        'usc': ['university of southern california', 'southern california', 'southern cal'],
+        'southern california': ['usc', 'university of southern california', 'southern cal'],
+        
+        // Michigan variations
+        'university of michigan': ['michigan', 'u of m', 'um'],
+        'michigan': ['university of michigan', 'u of m', 'um'],
+        
+        // Texas variations
+        'university of texas': ['texas', 'ut', 'texas longhorns'],
+        'texas': ['university of texas', 'ut', 'texas longhorns'],
+        'ut': ['texas', 'university of texas', 'texas longhorns'],
+        
+        // Florida variations
+        'university of florida': ['florida', 'uf', 'florida gators'],
+        'florida': ['university of florida', 'uf', 'florida gators'],
+        'uf': ['florida', 'university of florida', 'florida gators'],
+        
+        // Georgia variations
+        'university of georgia': ['georgia', 'uga', 'georgia bulldogs'],
+        'georgia': ['university of georgia', 'uga', 'georgia bulldogs'],
+        'uga': ['georgia', 'university of georgia', 'georgia bulldogs'],
+        
+        // Notre Dame variations
+        'university of notre dame': ['notre dame', 'nd'],
+        'notre dame': ['university of notre dame', 'nd'],
+        'nd': ['notre dame', 'university of notre dame'],
+        
+        // Penn State variations
+        'pennsylvania state university': ['penn state', 'psu'],
+        'penn state': ['pennsylvania state university', 'psu'],
+        'psu': ['penn state', 'pennsylvania state university'],
+        
+        // LSU variations
+        'louisiana state university': ['lsu', 'louisiana state'],
+        'lsu': ['louisiana state university', 'louisiana state'],
+        
+        // California variations (UC Berkeley)
+        'university of california berkeley': ['california', 'cal', 'cal berkeley', 'uc berkeley', 'berkeley'],
+        'california': ['university of california berkeley', 'cal', 'cal berkeley', 'uc berkeley', 'berkeley'],
+        'cal': ['california', 'university of california berkeley', 'cal berkeley', 'uc berkeley', 'berkeley'],
+        'cal berkeley': ['california', 'university of california berkeley', 'cal', 'uc berkeley', 'berkeley'],
+        'uc berkeley': ['california', 'university of california berkeley', 'cal', 'cal berkeley', 'berkeley'],
+        'berkeley': ['california', 'university of california berkeley', 'cal', 'cal berkeley', 'uc berkeley'],
+        
+        // Add more as needed...
+    };
+    
+    // Check if user answer matches correct answer or any of its variations
+    if (userAnswer === correctAnswer) return true;
+    
+    const variations = collegeVariations[correctAnswer];
+    if (variations && variations.includes(userAnswer)) return true;
+    
+    const userVariations = collegeVariations[userAnswer];
+    if (userVariations && userVariations.includes(correctAnswer)) return true;
+    
+    return false;
+}
+
+function checkJerseyAnswer(userAnswer, correctAnswer) {
+    // For jersey numbers, just check if the numeric values match
+    const userNum = parseInt(userAnswer.replace(/\D/g, ''));
+    const correctNum = parseInt(correctAnswer.toString().replace(/\D/g, ''));
+    
+    return userNum === correctNum && !isNaN(userNum) && !isNaN(correctNum);
+}
+
+// Player count function removed - no longer needed
+
+// High Score Functions
+function loadHighScore() {
+    const highScore = localStorage.getItem('ballKnower_highScore');
+    if (highScore) {
+        const scoreData = JSON.parse(highScore);
+        document.getElementById('best-streak').textContent = scoreData.streak;
+        
+        // Use display modes if available, otherwise convert modes
+        const displayText = scoreData.displayModes ? 
+            scoreData.displayModes.join(' + ') : 
+            scoreData.modes.map(mode => {
+                switch(mode) {
+                    case 'college-guesser': return 'College';
+                    case 'jersey-guesser': return 'Jersey';
+                    case 'achievement-guesser': return 'Trivia';
+                    default: return mode;
+                }
+            }).join(' + ');
+            
+        document.getElementById('best-mode').textContent = displayText;
+    } else {
+        document.getElementById('best-streak').textContent = '0';
+        document.getElementById('best-mode').textContent = '-';
+    }
+}
+
+function saveHighScore(streak, modes) {
+    const currentHighScore = localStorage.getItem('ballKnower_highScore');
+    let shouldSave = false;
+    
+    if (!currentHighScore) {
+        shouldSave = true;
+    } else {
+        const scoreData = JSON.parse(currentHighScore);
+        if (streak > scoreData.streak) {
+            shouldSave = true;
+        }
+    }
+    
+    if (shouldSave) {
+        // Convert mode names to display names
+        const displayModes = modes.map(mode => {
+            switch(mode) {
+                case 'college-guesser': return 'College';
+                case 'jersey-guesser': return 'Jersey';
+                case 'achievement-guesser': return 'Trivia';
+                default: return mode;
+            }
+        });
+        
+        const scoreData = {
+            streak: streak,
+            modes: modes,
+            displayModes: displayModes,
+            date: new Date().toISOString()
+        };
+        localStorage.setItem('ballKnower_highScore', JSON.stringify(scoreData));
+        loadHighScore(); // Refresh display
+        
+        // Show achievement message for new high score
+        showMessage(`🏆 New High Score: ${streak} streak!`, 'success');
+    }
+}
+
+function getSelectedGameModes() {
+    const modes = [];
+    if (document.getElementById('college-mode').checked) modes.push('college-guesser');
+    if (document.getElementById('jersey-mode').checked) modes.push('jersey-guesser');
+    if (document.getElementById('trivia-mode').checked) modes.push('achievement-guesser');
+    return modes;
+}
+
+function validateSurvivalSetup() {
+    const selectedModes = getSelectedGameModes();
+    if (selectedModes.length === 0) {
+        showMessage('Please select at least one game mode for survival mode!', 'error');
+        return false;
+    }
+    return true;
 }
 
 function changeQuestionCount(delta) {
@@ -414,6 +659,11 @@ function changeQuestionCount(delta) {
 
 // Game Session
 async function startGameSession() {
+    // Validate survival mode setup
+    if (currentGame.mode === 'survival' && !validateSurvivalSetup()) {
+        return;
+    }
+    
     // Reset game state
     currentGame.currentQuestion = 0;
     currentGame.score = 0;
@@ -434,12 +684,12 @@ async function startGameSession() {
             showHome();
             return;
         }
-        
-        // Show game screen
-        showScreen('game-screen');
-        
-        // Start first question
-        startQuestion();
+    
+    // Show game screen
+    showScreen('game-screen');
+    
+    // Start first question
+    startQuestion();
     } catch (error) {
         console.error('Failed to start game:', error);
         showMessage('Failed to start game. Please try again.', 'error');
@@ -461,7 +711,10 @@ async function generateQuestions() {
     // Shuffle players to ensure good randomization
     const shuffledPlayers = [...players].sort(() => Math.random() - 0.5);
     
-    for (let i = 0; i < currentGame.questionCount; i++) {
+    // For survival mode, generate unlimited questions with mixed modes
+    const questionCount = currentGame.mode === 'survival' ? 1000 : currentGame.questionCount;
+    
+    for (let i = 0; i < questionCount; i++) {
         // Use shuffled players to avoid duplicates
         const player = shuffledPlayers[i % shuffledPlayers.length];
         let question = null;
@@ -471,6 +724,24 @@ async function generateQuestions() {
             question = dataLoader.createCollegeQuestionWithPlayer(player, players);
         } else if (currentGame.mode === 'jersey-guesser') {
             question = dataLoader.createJerseyQuestionWithPlayer(player, players);
+        } else if (currentGame.mode === 'survival') {
+            // For survival mode, randomly select from enabled game modes
+            const selectedModes = getSelectedGameModes();
+            if (selectedModes.length === 0) {
+                console.error('No game modes selected for survival mode');
+                return [];
+            }
+            
+            const randomMode = selectedModes[Math.floor(Math.random() * selectedModes.length)];
+            
+            if (randomMode === 'college-guesser') {
+                question = dataLoader.createCollegeQuestionWithPlayer(player, players);
+            } else if (randomMode === 'jersey-guesser') {
+                question = dataLoader.createJerseyQuestionWithPlayer(player, players);
+            } else if (randomMode === 'achievement-guesser') {
+                // For now, use college questions as placeholder for achievement questions
+                question = dataLoader.createCollegeQuestionWithPlayer(player, players);
+            }
         } else {
             // Default to college questions for now
             question = dataLoader.createCollegeQuestionWithPlayer(player, players);
@@ -494,7 +765,7 @@ function getPlayersForSport() {
     });
     
     // Filter by difficulty - all players are modern (2010+)
-    return players.filter(player => player.era === 'modern');
+        return players.filter(player => player.era === 'modern');
 }
 
 function generatePlayerData(playerName) {
@@ -2150,14 +2421,21 @@ function startQuestion() {
 }
 
 function updateQuestionUI(question) {
-    // Update progress
+    // Update progress and question display based on game mode
+    if (currentGame.mode === 'survival') {
+        // For survival mode, show current streak instead of progress
+        document.querySelector('.progress-fill').style.width = '100%'; // Always full for survival
+        document.querySelector('.question-number').textContent = `Survival Streak: ${currentGame.streak}`;
+        document.querySelector('.score').style.display = 'none'; // Hide score for survival mode
+    } else {
+        // Regular mode - show progress and question count
     const progress = ((currentGame.currentQuestion + 1) / currentGame.questionCount) * 100;
     document.querySelector('.progress-fill').style.width = `${progress}%`;
-    
-    // Update question number and score
     document.querySelector('.question-number').textContent = 
         `Question ${currentGame.currentQuestion + 1} of ${currentGame.questionCount}`;
     document.querySelector('.score').textContent = `Score: ${currentGame.score}`;
+        document.querySelector('.score').style.display = 'block'; // Show score for regular modes
+    }
     
     // Show player info
     document.getElementById('player-name').textContent = question.player.name;
@@ -2170,17 +2448,37 @@ function updateQuestionUI(question) {
     const answerOptions = document.getElementById('answer-options');
     answerOptions.innerHTML = '';
     
-    question.options.forEach((option, index) => {
-        const button = document.createElement('button');
-        button.className = 'answer-btn';
-        button.textContent = option;
-        button.onclick = () => selectAnswer(index);
-        answerOptions.appendChild(button);
-    });
-    
-    // Hide text input for now (only multiple choice)
-    document.getElementById('text-input-container').style.display = 'none';
-    document.getElementById('answer-options').style.display = 'grid';
+    // Show different input types based on game mode
+    if (currentGame.inputMode === 'text-input') {
+        // Show text input
+        document.getElementById('text-input-container').style.display = 'block';
+        document.getElementById('answer-options').style.display = 'none';
+        
+        // Focus on the text input and add Enter key support
+        setTimeout(() => {
+            const textInput = document.getElementById('text-answer-input');
+            textInput.focus();
+            
+            // Add Enter key listener
+            textInput.onkeypress = function(e) {
+                if (e.key === 'Enter') {
+                    submitTextAnswer();
+                }
+            };
+        }, 100);
+    } else {
+        // Show multiple choice
+        question.options.forEach((option, index) => {
+            const button = document.createElement('button');
+            button.className = 'answer-btn';
+            button.textContent = option;
+            button.onclick = () => selectAnswer(index);
+            answerOptions.appendChild(button);
+        });
+        
+        document.getElementById('text-input-container').style.display = 'none';
+        document.getElementById('answer-options').style.display = 'grid';
+    }
 }
 
 function showPlayerToFactQuestion(question) {
@@ -2308,11 +2606,22 @@ function timeUp() {
     
     if (currentScreen === 'game-screen') {
         showMessage('Time\'s up!', 'warning');
+        
+        // In survival mode, time up means game over
+        if (currentGame.mode === 'survival') {
+            setTimeout(() => {
+                if (currentScreen === 'game-screen') {
+                    endGame();
+                }
+            }, 1000); // Reduced from 2000ms to 1000ms for faster gameplay
+        } else {
+            // Regular mode - continue to next question
         setTimeout(() => {
             if (currentScreen === 'game-screen') {
                 nextQuestion();
             }
-        }, 2000);
+            }, 1000); // Reduced from 2000ms to 1000ms for faster gameplay
+        }
     }
 }
 
@@ -2332,16 +2641,31 @@ function selectAnswer(answerIndex) {
         currentGame.streak++;
         currentGame.maxStreak = Math.max(currentGame.maxStreak, currentGame.streak);
         showMessage('Correct!', 'success');
+        
+        // Update UI immediately for survival mode
+        if (currentGame.mode === 'survival') {
+            document.querySelector('.question-number').textContent = `Survival Streak: ${currentGame.streak}`;
+            // Don't show score in survival mode - streak is more important
+        }
     } else {
         currentGame.streak = 0;
         showMessage('Incorrect!', 'error');
+        
+        // In survival mode, end game immediately on wrong answer
+        if (currentGame.mode === 'survival') {
+            showCorrectAnswer(question, answerIndex, isCorrect);
+            setTimeout(() => {
+                endGame();
+            }, 1000); // Reduced from 2000ms to 1000ms for faster gameplay
+            return; // Don't continue to nextQuestion
+        }
     }
     
     showCorrectAnswer(question, answerIndex, isCorrect);
     
     setTimeout(() => {
         nextQuestion();
-    }, 2000);
+    }, 1000); // Reduced from 2000ms to 1000ms for faster gameplay
 }
 
 // Score function removed - using fixed score of 10 points per question
@@ -2393,16 +2717,26 @@ function showMessage(message, type) {
         setTimeout(() => {
             messageEl.remove();
         }, 300);
-    }, 1500);
+    }, 800); // Reduced from 1500ms to 800ms for faster gameplay
 }
 
 function nextQuestion() {
     currentGame.currentQuestion++;
     
+    // For survival mode, continue indefinitely until wrong answer
+    if (currentGame.mode === 'survival') {
+        // If we've used all pre-generated questions, cycle back to the beginning
+        if (currentGame.currentQuestion >= currentGame.questions.length) {
+            currentGame.currentQuestion = 0;
+        }
+        startQuestion();
+    } else {
+        // Regular game mode - check if we've reached the question limit
     if (currentGame.currentQuestion < currentGame.questionCount) {
         startQuestion();
     } else {
         endGame();
+        }
     }
 }
 
@@ -2417,11 +2751,51 @@ function endGame() {
     const minutes = Math.floor(gameTime / 60);
     const seconds = gameTime % 60;
     
-    // Update results UI
+    // Handle survival mode high score saving
+    if (currentGame.mode === 'survival') {
+        const selectedModes = getSelectedGameModes();
+        saveHighScore(currentGame.maxStreak, selectedModes);
+        
+        // Update results for survival mode
+        document.querySelector('.score-number').textContent = currentGame.maxStreak;
+        document.querySelector('.score-total').textContent = 'Streak';
+        document.querySelector('.final-score h3').textContent = `Survival Streak: ${currentGame.maxStreak}`;
+        document.querySelector('.final-score p').textContent = `You survived ${currentGame.maxStreak} questions!`;
+        
+        // Show and update high score comparison
+        document.getElementById('survival-high-score').style.display = 'block';
+        document.getElementById('current-streak').textContent = currentGame.maxStreak;
+        
+        // Load and display best score
+        const highScore = localStorage.getItem('ballKnower_highScore');
+        if (highScore) {
+            const scoreData = JSON.parse(highScore);
+            document.getElementById('best-streak-result').textContent = scoreData.streak;
+            
+            const displayText = scoreData.displayModes ? 
+                scoreData.displayModes.join(' + ') : 
+                scoreData.modes.map(mode => {
+                    switch(mode) {
+                        case 'college-guesser': return 'College';
+                        case 'jersey-guesser': return 'Jersey';
+                        case 'achievement-guesser': return 'Trivia';
+                        default: return mode;
+                    }
+                }).join(' + ');
+                
+            document.getElementById('best-modes-result').textContent = displayText;
+        } else {
+            document.getElementById('best-streak-result').textContent = '0';
+            document.getElementById('best-modes-result').textContent = '-';
+        }
+    } else {
+        // Regular game mode results - hide survival high score
+        document.getElementById('survival-high-score').style.display = 'none';
     document.querySelector('.score-number').textContent = correctAnswers;
     document.querySelector('.score-total').textContent = `/ ${totalQuestions}`;
     document.querySelector('.final-score h3').textContent = `Final Score: ${correctAnswers}/${totalQuestions}`;
     document.querySelector('.final-score p').textContent = `You scored ${Math.round((correctAnswers/totalQuestions) * 100)}%`;
+    }
     
     // Update stats
     const statItems = document.querySelectorAll('.stat-item');

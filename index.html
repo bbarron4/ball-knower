@@ -43,14 +43,6 @@
 
 
             <div class="game-modes">
-                <div class="mode-card" onclick="startGame('jersey-guesser')">
-                    <div class="mode-icon">
-                        <i class="fas fa-tshirt"></i>
-                    </div>
-                    <h3>Jersey Guesser</h3>
-                    <p>Guess a player's jersey number</p>
-                </div>
-
                 <div class="mode-card" onclick="startGame('college-guesser')">
                     <div class="mode-icon">
                         <i class="fas fa-graduation-cap"></i>
@@ -59,12 +51,12 @@
                     <p>Guess which college a player attended</p>
                 </div>
 
-                <div class="mode-card" onclick="startGame('achievement-guesser')">
+                <div class="mode-card" onclick="startGame('jersey-guesser')">
                     <div class="mode-icon">
-                        <i class="fas fa-trophy"></i>
+                        <i class="fas fa-tshirt"></i>
                     </div>
-                    <h3>Achievement Guesser</h3>
-                    <p>Compare Pro Bowls, Super Bowls & MVPs</p>
+                    <h3>Jersey Number Guesser</h3>
+                    <p>Guess a player's jersey number</p>
                 </div>
 
                 <div class="mode-card" onclick="startGame('survival')">
@@ -77,6 +69,14 @@
                         <span><i class="fas fa-clock"></i> 20 sec</span>
                         <span><i class="fas fa-infinity"></i> Unlimited</span>
                     </div>
+                </div>
+
+                <div class="mode-card" onclick="startGame('achievement-guesser')">
+                    <div class="mode-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>General Trivia</h3>
+                    <p>Compare Pro Bowls, Super Bowls & MVPs</p>
                 </div>
 
                 <div class="mode-card" onclick="showMultiplayerSetup()">
@@ -116,8 +116,9 @@
                 
                 <div class="sport-selection">
                     <h3>Choose Sport</h3>
+                    <p><strong>Select one or more sports</strong> - You can choose NFL, NBA, or both:</p>
                     <div class="sport-options">
-                        <button class="sport-btn active" onclick="selectSport('nfl')">
+                        <button class="sport-btn" onclick="selectSport('nfl')">
                             <i class="fas fa-football-ball"></i>
                             NFL
                         </button>
@@ -130,12 +131,11 @@
                             Both
                         </button>
                     </div>
+                    <div class="sport-selection-info">
+                        <p><i class="fas fa-info-circle"></i> <strong>Tip:</strong> Choose "Both" to get questions from both NFL and NBA players.</p>
+                    </div>
                 </div>
 
-                <div class="game-info">
-                    <h3>Well-Known NFL Players</h3>
-                    <p>Test your knowledge with household names and star players that most football fans recognize!</p>
-                </div>
 
                 <div class="input-type-selection">
                     <h3>Answer Type</h3>
@@ -149,21 +149,58 @@
                     </div>
                 </div>
 
-                <div class="player-count">
-                    <h3>Number of Players</h3>
-                    <div class="count-selector">
-                        <button onclick="changePlayerCount(-1)">-</button>
-                        <span id="player-count">1</span>
-                        <button onclick="changePlayerCount(1)">+</button>
+
+                <!-- Game Mode Selection (for Survival Mode) -->
+                <div id="game-mode-selection" class="game-mode-selection" style="display: none;">
+                    <h3>Choose Game Modes</h3>
+                    <p><strong>Select one or more game modes</strong> - You can choose any combination of the three modes below:</p>
+                    <div class="mode-options">
+                        <label class="mode-option">
+                            <input type="checkbox" id="college-mode">
+                            <span class="checkmark"></span>
+                            <i class="fas fa-graduation-cap"></i>
+                            College Guesser
+                        </label>
+                        <label class="mode-option">
+                            <input type="checkbox" id="jersey-mode">
+                            <span class="checkmark"></span>
+                            <i class="fas fa-tshirt"></i>
+                            Jersey Number Guesser
+                        </label>
+                        <label class="mode-option">
+                            <input type="checkbox" id="trivia-mode">
+                            <span class="checkmark"></span>
+                            <i class="fas fa-trophy"></i>
+                            General Trivia
+                        </label>
+                    </div>
+                    <div class="mode-selection-info">
+                        <p><i class="fas fa-info-circle"></i> <strong>Tip:</strong> You can select 1, 2, or all 3 modes. Questions will be randomly chosen from your selected modes.</p>
                     </div>
                 </div>
 
-                <div class="question-count">
+                <!-- Question Count (for regular modes) -->
+                <div id="question-count-section" class="question-count">
                     <h3>Number of Questions</h3>
                     <div class="count-selector">
                         <button onclick="changeQuestionCount(-1)">-</button>
                         <span id="question-count">10</span>
                         <button onclick="changeQuestionCount(1)">+</button>
+                    </div>
+                </div>
+
+                <!-- High Score Display -->
+                <div id="high-score-display" class="high-score-display" style="display: none;">
+                    <h3>🏆 High Score</h3>
+                    <div class="high-score-info">
+                        <div class="score-item">
+                            <span class="score-label">Best Streak:</span>
+                            <span id="best-streak" class="score-value">0</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="score-label">Game Mode:</span>
+                            <span id="best-mode" class="score-value">-</span>
+                        </div>
                     </div>
                 </div>
 
@@ -259,6 +296,28 @@
                     <div class="stat-item">
                         <span class="stat-label">Streak</span>
                         <span class="stat-value">5</span>
+                    </div>
+                </div>
+
+                <!-- High Score Display (Survival Mode Only) -->
+                <div id="survival-high-score" class="survival-high-score" style="display: none;">
+                    <h3>🏆 Personal Best</h3>
+                    <div class="high-score-comparison">
+                        <div class="score-comparison">
+                            <div class="current-score">
+                                <span class="score-label">This Run</span>
+                                <span id="current-streak" class="score-value">0</span>
+                            </div>
+                            <div class="vs-divider">vs</div>
+                            <div class="best-score">
+                                <span class="score-label">Best Ever</span>
+                                <span id="best-streak-result" class="score-value">0</span>
+                            </div>
+                        </div>
+                        <div class="best-modes">
+                            <span class="modes-label">Best achieved with:</span>
+                            <span id="best-modes-result" class="modes-value">-</span>
+                        </div>
                     </div>
                 </div>
 
