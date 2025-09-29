@@ -544,6 +544,40 @@ function checkCollegeAnswer(userAnswer, correctAnswer) {
         'uc berkeley': ['california', 'university of california berkeley', 'cal', 'cal berkeley', 'berkeley'],
         'berkeley': ['california', 'university of california berkeley', 'cal', 'cal berkeley', 'uc berkeley'],
         
+        // Duke variations
+        'duke university': ['duke', 'duke blue devils'],
+        'duke': ['duke university', 'duke blue devils'],
+        
+        // Kentucky variations
+        'university of kentucky': ['kentucky', 'uk', 'kentucky wildcats'],
+        'kentucky': ['university of kentucky', 'uk', 'kentucky wildcats'],
+        'uk': ['kentucky', 'university of kentucky', 'kentucky wildcats'],
+        
+        // North Carolina variations
+        'university of north carolina': ['north carolina', 'unc', 'unc chapel hill', 'tar heels'],
+        'north carolina': ['university of north carolina', 'unc', 'unc chapel hill', 'tar heels'],
+        'unc': ['north carolina', 'university of north carolina', 'unc chapel hill', 'tar heels'],
+        'unc chapel hill': ['north carolina', 'university of north carolina', 'unc', 'tar heels'],
+        
+        // UCLA variations
+        'university of california los angeles': ['ucla', 'los angeles', 'uc los angeles'],
+        'ucla': ['university of california los angeles', 'los angeles', 'uc los angeles'],
+        
+        // Kansas variations
+        'university of kansas': ['kansas', 'ku', 'kansas jayhawks'],
+        'kansas': ['university of kansas', 'ku', 'kansas jayhawks'],
+        'ku': ['kansas', 'university of kansas', 'kansas jayhawks'],
+        
+        // Syracuse variations
+        'syracuse university': ['syracuse', 'cuse'],
+        'syracuse': ['syracuse university', 'cuse'],
+        'cuse': ['syracuse', 'syracuse university'],
+        
+        // UConn variations
+        'university of connecticut': ['uconn', 'connecticut', 'ct'],
+        'uconn': ['university of connecticut', 'connecticut', 'ct'],
+        'connecticut': ['university of connecticut', 'uconn', 'ct'],
+        
         // Add more as needed...
     };
     
@@ -698,11 +732,11 @@ async function startGameSession() {
 }
 
 async function generateQuestions() {
-    // Load well-known players from Excel file
-    const players = await dataLoader.loadPlayers();
+    // Load well-known players from Excel file based on selected sport
+    const players = await dataLoader.loadPlayers(currentGame.sport);
     
     if (players.length === 0) {
-        console.error('No well-known players loaded');
+        console.error('No well-known players loaded for sport:', currentGame.sport);
         return [];
     }
     

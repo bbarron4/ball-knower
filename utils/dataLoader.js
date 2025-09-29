@@ -26,33 +26,53 @@ class DataLoader {
 
     /**
      * Load well-known players from Excel file
+     * @param {string} sport - 'NFL', 'NBA', or 'both' (default: 'both')
      */
-    async loadPlayers() {
-        if (this.cache.has('players')) return this.cache.get('players');
+    async loadPlayers(sport = 'both') {
+        const cacheKey = `players_${sport}`;
+        if (this.cache.has(cacheKey)) return this.cache.get(cacheKey);
 
-        // Use well-known players (guaranteed to work)
-        if (typeof WELL_KNOWN_PLAYERS !== 'undefined' && WELL_KNOWN_PLAYERS && WELL_KNOWN_PLAYERS.length > 0) {
-            console.log(`✅ Using well-known players: ${WELL_KNOWN_PLAYERS.length} players`);
-            this.cache.set('players', WELL_KNOWN_PLAYERS);
-            return WELL_KNOWN_PLAYERS;
-        }
+        let players = [];
 
-        // Fallback: try to load from GitHub Pages
-        console.log('⚠️ WELL_KNOWN_PLAYERS not found, trying to load from server...');
-        try {
-            const response = await fetch('./well_known_players.js');
-            if (response.ok) {
-                const text = await response.text();
-                // This is a hack - we can't eval the script content directly
-                // But we can at least try to load it
-                console.log('📁 Found well_known_players.js on server');
+        // Load based on sport selection
+        if (sport === 'nfl' || sport === 'NFL') {
+            if (typeof NFL_PLAYERS !== 'undefined' && NFL_PLAYERS && NFL_PLAYERS.length > 0) {
+                players = NFL_PLAYERS;
+                console.log(`✅ Using NFL players: ${players.length} players`);
             }
-        } catch (error) {
-            console.error('❌ Failed to load well_known_players.js:', error);
+        } else if (sport === 'nba' || sport === 'NBA') {
+            if (typeof NBA_PLAYERS !== 'undefined' && NBA_PLAYERS && NBA_PLAYERS.length > 0) {
+                players = NBA_PLAYERS;
+                console.log(`✅ Using NBA players: ${players.length} players`);
+            }
+        } else {
+            // Both or default - combine NFL and NBA
+            const nflPlayers = (typeof NFL_PLAYERS !== 'undefined' && NFL_PLAYERS) ? NFL_PLAYERS : [];
+            const nbaPlayers = (typeof NBA_PLAYERS !== 'undefined' && NBA_PLAYERS) ? NBA_PLAYERS : [];
+            players = [...nflPlayers, ...nbaPlayers];
+            console.log(`✅ Using combined players: ${nflPlayers.length} NFL + ${nbaPlayers.length} NBA = ${players.length} total`);
         }
 
-        console.error('❌ WELL_KNOWN_PLAYERS not found');
-        return [];
+        // Fallback to WELL_KNOWN_PLAYERS if specific arrays don't exist
+        if (players.length === 0 && typeof WELL_KNOWN_PLAYERS !== 'undefined' && WELL_KNOWN_PLAYERS && WELL_KNOWN_PLAYERS.length > 0) {
+            console.log(`⚠️ Using fallback WELL_KNOWN_PLAYERS: ${WELL_KNOWN_PLAYERS.length} players`);
+            // Filter by sport if needed
+            if (sport === 'nfl' || sport === 'NFL') {
+                players = WELL_KNOWN_PLAYERS.filter(p => p.league === 'NFL');
+            } else if (sport === 'nba' || sport === 'NBA') {
+                players = WELL_KNOWN_PLAYERS.filter(p => p.league === 'NBA');
+            } else {
+                players = WELL_KNOWN_PLAYERS;
+            }
+        }
+
+        if (players.length === 0) {
+            console.error('❌ No players found for sport:', sport);
+            return [];
+        }
+
+        this.cache.set(cacheKey, players);
+        return players;
     }
 
     /**
@@ -91,10 +111,15 @@ class DataLoader {
 
         const options = [correctCollege, ...wrongColleges].sort(() => Math.random() - 0.5);
 
+        // Use different wording for NBA players (could be college or origin)
+        const questionText = correctPlayer.league === 'NBA' 
+            ? `Where did ${correctPlayer.name} play college basketball?` 
+            : `Which college did ${correctPlayer.name} attend?`;
+
         return {
             type: 'college',
             player: correctPlayer,
-            question: `Which college did ${correctPlayer.name} attend?`,
+            question: questionText,
             options: options,
             correctAnswer: correctCollege
         };
@@ -124,10 +149,15 @@ class DataLoader {
 
         const options = [correctCollege, ...wrongColleges].sort(() => Math.random() - 0.5);
 
+        // Use different wording for NBA players (could be college or origin)
+        const questionText = correctPlayer.league === 'NBA' 
+            ? `Where did ${correctPlayer.name} play college basketball?` 
+            : `Which college did ${correctPlayer.name} attend?`;
+
         return {
             type: 'college',
             player: correctPlayer,
-            question: `Which college did ${correctPlayer.name} attend?`,
+            question: questionText,
             options: options,
             correctAnswer: correctCollege
         };
@@ -154,10 +184,13 @@ class DataLoader {
 
         const options = [correctJersey, ...wrongJerseys].sort(() => Math.random() - 0.5);
 
+        // Use present/past tense appropriately
+        const verb = correctPlayer.league === 'NBA' ? 'wore' : 'wear';
+
         return {
             type: 'jersey',
             player: correctPlayer,
-            question: `What jersey number does ${correctPlayer.name} wear?`,
+            question: `What jersey number does ${correctPlayer.name} ${verb}?`,
             options: options,
             correctAnswer: correctJersey
         };
@@ -189,10 +222,13 @@ class DataLoader {
 
         const options = [correctJersey, ...wrongJerseys].sort(() => Math.random() - 0.5);
 
+        // Use present/past tense appropriately
+        const verb = correctPlayer.league === 'NBA' ? 'wore' : 'wear';
+
         return {
             type: 'jersey',
             player: correctPlayer,
-            question: `What jersey number does ${correctPlayer.name} wear?`,
+            question: `What jersey number does ${correctPlayer.name} ${verb}?`,
             options: options,
             correctAnswer: correctJersey
         };
