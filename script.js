@@ -4,7 +4,6 @@ let currentScreen = 'home-screen';
 let currentGame = {
     mode: '',
     sport: 'nfl',
-    difficulty: 'easy',
     inputMode: 'multiple-choice',
     playerCount: 1,
     questionCount: 10,
@@ -357,7 +356,6 @@ function startGame(mode) {
     
     // Set default values
     currentGame.sport = 'nfl';
-    currentGame.difficulty = 'easy';
     currentGame.inputMode = 'multiple-choice';
     currentGame.playerCount = 1;
     currentGame.questionCount = 10;
@@ -388,15 +386,7 @@ function selectSport(sport) {
     event.target.classList.add('active');
 }
 
-function selectDifficulty(difficulty) {
-    currentGame.difficulty = difficulty;
-    
-    // Update UI
-    document.querySelectorAll('.diff-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    event.target.classList.add('active');
-}
+// Difficulty selection removed - using single well-known players dataset
 
 function selectInputType(inputType) {
     currentGame.inputMode = inputType;
@@ -432,6 +422,7 @@ async function startGameSession() {
     currentGame.maxStreak = 0;
     currentGame.gameStartTime = Date.now();
     
+
     // Remove loading message - questions load quickly now
     
     try {
@@ -457,23 +448,11 @@ async function startGameSession() {
 }
 
 async function generateQuestions() {
-    // Check for data updates
-    await dataLoader.checkDataVersion();
-    
-    // Determine league and tier
-    const league = currentGame.sport === 'nfl' ? 'NFL' : 'NBA';
-    let tier;
-    
-    if (currentGame.difficulty === 'easy') tier = 'easy';
-    else if (currentGame.difficulty === 'medium') tier = 'medium';
-    else if (currentGame.difficulty === 'hard') tier = 'hard';
-    else tier = 'easy'; // fallback
-    
-    // Load player data for this tier
-    const players = await dataLoader.loadTier(league, tier);
+    // Load well-known players from Excel file
+    const players = await dataLoader.loadPlayers();
     
     if (players.length === 0) {
-        console.error('No players loaded for', league, tier);
+        console.error('No well-known players loaded');
         return [];
     }
     
@@ -1960,7 +1939,6 @@ function generatePlayerToFactQuestion(player) {
         question: `What is a fact about ${player.name}?`,
         correctAnswer: fact,
         options: shuffleArray([fact, ...wrongAnswers]),
-        difficulty: getDifficultyForPlayer(player),
         isJersey: false
     };
 }
@@ -1998,7 +1976,6 @@ function generateCollegeQuestion(player) {
         question: `What college did ${player.name} attend?`,
         correctAnswer: player.college,
         options: shuffleArray(uniqueOptions.slice(0, 4)), // Ensure exactly 4 unique options
-        difficulty: getDifficultyForPlayer(player),
         isCollege: true
     };
 }
@@ -2036,7 +2013,6 @@ function generateJerseyQuestion(player) {
         question: `What jersey number does ${player.name} wear?`,
         correctAnswer: player.jerseyNumber,
         options: shuffleArray(uniqueOptions.slice(0, 4)), // Ensure exactly 4 unique options
-        difficulty: getDifficultyForPlayer(player),
         isJersey: true
     };
 }
@@ -2079,7 +2055,6 @@ function generateAchievementQuestion(player1, player2) {
         question: question,
         correctAnswer: correctAnswer,
         options: shuffleArray([player1.name, player2.name]),
-        difficulty: getDifficultyForPlayer(player1),
         achievementType: achievementType,
         player1Value: player1Value,
         player2Value: player2Value,
@@ -2142,11 +2117,7 @@ function generateWrongAnswers(correctFact, correctPlayer) {
     return shuffleArray(wrongAnswers).slice(0, 3);
 }
 
-function getDifficultyForPlayer(player) {
-    if (player.popularity >= 4) return 'easy';
-    if (player.popularity >= 2) return 'medium';
-    return 'hard';
-}
+// Difficulty function removed - using single well-known players dataset
 
 function shuffleArray(array) {
     const shuffled = [...array];
@@ -2352,7 +2323,7 @@ function selectAnswer(answerIndex) {
     const isCorrect = selectedAnswer === question.correctAnswer;
     
     if (isCorrect) {
-        currentGame.score += getScoreForDifficulty(currentGame.difficulty);
+        currentGame.score += 10; // Fixed score for all questions
         currentGame.correctAnswers++;
         currentGame.streak++;
         currentGame.maxStreak = Math.max(currentGame.maxStreak, currentGame.streak);
@@ -2369,14 +2340,7 @@ function selectAnswer(answerIndex) {
     }, 2000);
 }
 
-function getScoreForDifficulty(difficulty) {
-    const scores = {
-        'easy': 10,
-        'medium': 20,
-        'hard': 30
-    };
-    return scores[difficulty] || 10;
-}
+// Score function removed - using fixed score of 10 points per question
 
 function showCorrectAnswer(question, selectedIndex, isCorrect) {
     const buttons = document.querySelectorAll('.answer-btn');
@@ -2501,7 +2465,6 @@ function joinRoom() {
 function startMultiplayerGame() {
     currentGame.mode = 'multiplayer';
     currentGame.sport = 'nfl';
-    currentGame.difficulty = 'easy';
     currentGame.inputMode = 'multiple-choice';
     currentGame.playerCount = 1;
     currentGame.questionCount = 10;

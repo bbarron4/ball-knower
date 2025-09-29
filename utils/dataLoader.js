@@ -25,36 +25,20 @@ class DataLoader {
     }
 
     /**
-     * Load players for a specific league and difficulty tier
+     * Load well-known players from Excel file
      */
-    async loadTier(league, tier) {
-        const cacheKey = `${league}_${tier}`;
-        if (this.cache.has(cacheKey)) return this.cache.get(cacheKey);
+    async loadPlayers() {
+        if (this.cache.has('players')) return this.cache.get('players');
 
-        // Use embedded full data first (guaranteed to work)
-        if (typeof FULL_PLAYER_DATA !== 'undefined' && FULL_PLAYER_DATA.length > 0) {
-            console.log(`✅ Using embedded full data: ${FULL_PLAYER_DATA.length} players`);
-            this.cache.set(cacheKey, FULL_PLAYER_DATA);
-            return FULL_PLAYER_DATA;
+        // Use well-known players (guaranteed to work)
+        if (typeof WELL_KNOWN_PLAYERS !== 'undefined' && WELL_KNOWN_PLAYERS && WELL_KNOWN_PLAYERS.length > 0) {
+            console.log(`✅ Using well-known players: ${WELL_KNOWN_PLAYERS.length} players`);
+            this.cache.set('players', WELL_KNOWN_PLAYERS);
+            return WELL_KNOWN_PLAYERS;
         }
 
-        // Fallback to trying JSON files
-        const base = this.resolveBase();
-        const candidates = [
-            `${base}${league}_${tier}.json`,
-            `${base}data/${league}_${tier}.json`,
-            `data/${league}_${tier}.json`
-        ];
-
-        try {
-            const players = await this.tryFetch(candidates);
-            this.cache.set(cacheKey, players);
-            console.log(`✅ Loaded ${players.length} ${league} ${tier} players from JSON`);
-            return players;
-        } catch (e) {
-            console.error('❌ Failed to load', cacheKey, e);
-            return [];
-        }
+        console.error('❌ WELL_KNOWN_PLAYERS not found');
+        return [];
     }
 
     /**
