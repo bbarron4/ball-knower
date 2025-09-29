@@ -31,17 +31,25 @@ class DataLoader {
         const cacheKey = `${league}_${tier}`;
         if (this.cache.has(cacheKey)) return this.cache.get(cacheKey);
 
+        // Use embedded full data first (guaranteed to work)
+        if (typeof FULL_PLAYER_DATA !== 'undefined' && FULL_PLAYER_DATA.length > 0) {
+            console.log(`✅ Using embedded full data: ${FULL_PLAYER_DATA.length} players`);
+            this.cache.set(cacheKey, FULL_PLAYER_DATA);
+            return FULL_PLAYER_DATA;
+        }
+
+        // Fallback to trying JSON files
         const base = this.resolveBase();
         const candidates = [
-            `${base}${league}_${tier}.json`,        // root (GitHub Pages root of repo)
-            `${base}data/${league}_${tier}.json`,   // /data folder
-            `data/${league}_${tier}.json`           // local fallback
+            `${base}${league}_${tier}.json`,
+            `${base}data/${league}_${tier}.json`,
+            `data/${league}_${tier}.json`
         ];
 
         try {
             const players = await this.tryFetch(candidates);
             this.cache.set(cacheKey, players);
-            console.log(`✅ Loaded ${players.length} ${league} ${tier} players`);
+            console.log(`✅ Loaded ${players.length} ${league} ${tier} players from JSON`);
             return players;
         } catch (e) {
             console.error('❌ Failed to load', cacheKey, e);
