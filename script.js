@@ -458,18 +458,22 @@ async function generateQuestions() {
     
     const questions = [];
     
+    // Shuffle players to ensure good randomization
+    const shuffledPlayers = [...players].sort(() => Math.random() - 0.5);
+    
     for (let i = 0; i < currentGame.questionCount; i++) {
-        const player = players[Math.floor(Math.random() * players.length)];
+        // Use shuffled players to avoid duplicates
+        const player = shuffledPlayers[i % shuffledPlayers.length];
         let question = null;
         
         // Generate different question types based on game mode
         if (currentGame.mode === 'college-guesser') {
-            question = dataLoader.createCollegeQuestion(players);
+            question = dataLoader.createCollegeQuestionWithPlayer(player, players);
         } else if (currentGame.mode === 'jersey-guesser') {
-            question = dataLoader.createJerseyQuestion(players);
+            question = dataLoader.createJerseyQuestionWithPlayer(player, players);
         } else {
             // Default to college questions for now
-            question = dataLoader.createCollegeQuestion(players);
+            question = dataLoader.createCollegeQuestionWithPlayer(player, players);
         }
         
         if (question) {

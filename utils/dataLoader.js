@@ -71,7 +71,37 @@ class DataLoader {
     }
 
     /**
-     * Create a college question
+     * Create a college question with a specific player
+     */
+    createCollegeQuestionWithPlayer(correctPlayer, allPlayers) {
+        if (!correctPlayer || !correctPlayer.college) return null;
+
+        const correctCollege = correctPlayer.college;
+        const wrongColleges = [];
+        const usedColleges = new Set([correctCollege]);
+
+        for (const player of allPlayers) {
+            if (player.college && !usedColleges.has(player.college) && wrongColleges.length < 3) {
+                wrongColleges.push(player.college);
+                usedColleges.add(player.college);
+            }
+        }
+
+        if (wrongColleges.length < 3) return null;
+
+        const options = [correctCollege, ...wrongColleges].sort(() => Math.random() - 0.5);
+
+        return {
+            type: 'college',
+            player: correctPlayer,
+            question: `Which college did ${correctPlayer.name} attend?`,
+            options: options,
+            correctAnswer: correctCollege
+        };
+    }
+
+    /**
+     * Create a college question (legacy method)
      */
     createCollegeQuestion(players) {
         if (players.length < 4) return null;
@@ -104,7 +134,37 @@ class DataLoader {
     }
 
     /**
-     * Create a jersey question
+     * Create a jersey question with a specific player
+     */
+    createJerseyQuestionWithPlayer(correctPlayer, allPlayers) {
+        if (!correctPlayer || !correctPlayer.jersey || correctPlayer.jersey <= 0) return null;
+
+        const correctJersey = correctPlayer.jersey;
+        const wrongJerseys = [];
+        const usedJerseys = new Set([correctJersey]);
+
+        for (const player of allPlayers) {
+            if (player.jersey && !usedJerseys.has(player.jersey) && wrongJerseys.length < 3) {
+                wrongJerseys.push(player.jersey);
+                usedJerseys.add(player.jersey);
+            }
+        }
+
+        if (wrongJerseys.length < 3) return null;
+
+        const options = [correctJersey, ...wrongJerseys].sort(() => Math.random() - 0.5);
+
+        return {
+            type: 'jersey',
+            player: correctPlayer,
+            question: `What jersey number does ${correctPlayer.name} wear?`,
+            options: options,
+            correctAnswer: correctJersey
+        };
+    }
+
+    /**
+     * Create a jersey question (legacy method)
      */
     createJerseyQuestion(players) {
         if (players.length < 4) return null;
