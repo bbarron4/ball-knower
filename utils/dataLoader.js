@@ -109,25 +109,23 @@ class DataLoader {
         }
 
         try {
-            // Use the new trivia loader
-            if (typeof triviaLoader !== 'undefined') {
+            // Prioritize embedded questions to avoid CORS issues
+            if (sportLower === 'nfl' && typeof NFL_TRIVIA_QUESTIONS !== 'undefined') {
+                console.log(`📚 Using embedded NFL trivia: ${NFL_TRIVIA_QUESTIONS.length} questions`);
+                this.triviaQuestions[sportLower] = NFL_TRIVIA_QUESTIONS;
+                return NFL_TRIVIA_QUESTIONS;
+            } else if (sportLower === 'nba' && typeof NBA_TRIVIA_QUESTIONS !== 'undefined') {
+                console.log(`🏀 Using embedded NBA trivia: ${NBA_TRIVIA_QUESTIONS.length} questions`);
+                this.triviaQuestions[sportLower] = NBA_TRIVIA_QUESTIONS;
+                return NBA_TRIVIA_QUESTIONS;
+            } else if (typeof triviaLoader !== 'undefined') {
+                // Fallback to trivia loader if embedded questions not available
                 const questions = await triviaLoader.loadTriviaQuestions(sportLower);
                 this.triviaQuestions[sportLower] = questions;
                 return questions;
             } else {
-                // Fallback to embedded questions
-                if (sportLower === 'nfl' && typeof NFL_TRIVIA_QUESTIONS !== 'undefined') {
-                    console.log(`📚 Using embedded NFL trivia: ${NFL_TRIVIA_QUESTIONS.length} questions`);
-                    this.triviaQuestions[sportLower] = NFL_TRIVIA_QUESTIONS;
-                    return NFL_TRIVIA_QUESTIONS;
-                } else if (sportLower === 'nba' && typeof NBA_TRIVIA_QUESTIONS !== 'undefined') {
-                    console.log(`🏀 Using embedded NBA trivia: ${NBA_TRIVIA_QUESTIONS.length} questions`);
-                    this.triviaQuestions[sportLower] = NBA_TRIVIA_QUESTIONS;
-                    return NBA_TRIVIA_QUESTIONS;
-                } else {
-                    console.warn(`⚠️ No trivia found for ${sportLower}`);
-                    return [];
-                }
+                console.warn(`⚠️ No trivia found for ${sportLower}`);
+                return [];
             }
         } catch (error) {
             console.error(`❌ Error loading ${sport} trivia questions:`, error);
