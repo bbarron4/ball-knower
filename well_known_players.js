@@ -30,9 +30,9 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_aaron_rodgers",
     "name": "Aaron Rodgers",
-    "team": "New York Jets",
+    "team": "Pittsburgh Steelers",
     "college": "California",
-    "jersey": 12,
+    "jersey": 8,
     "position": "QB",
     "league": "NFL"
   },
@@ -219,9 +219,9 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_robert_griffin_iii",
     "name": "Robert Griffin III",
-    "team": "Baltimore Ravens",
+    "team": "Washington Commanders",
     "college": "Baylor",
-    "jersey": 3,
+    "jersey": 10,
     "position": "QB",
     "league": "NFL"
   },
@@ -237,7 +237,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_michael_vick",
     "name": "Michael Vick",
-    "team": "Pittsburgh Steelers",
+    "team": "Philadelphia Eagles",
     "college": "Virginia Tech",
     "jersey": 7,
     "position": "QB",
@@ -255,7 +255,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_carson_wentz",
     "name": "Carson Wentz",
-    "team": "Washington Commanders",
+    "team": "Minnesota Vikings",
     "college": "North Dakota State",
     "jersey": 11,
     "position": "QB",
@@ -264,7 +264,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_nick_foles",
     "name": "Nick Foles",
-    "team": "Indianapolis Colts",
+    "team": "Philadelphia Eagles",
     "college": "Arizona",
     "jersey": 9,
     "position": "QB",
@@ -318,9 +318,9 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_jameis_winston",
     "name": "Jameis Winston",
-    "team": "New Orleans Saints",
+    "team": "New York Giants",
     "college": "Florida State",
-    "jersey": 3,
+    "jersey": 19,
     "position": "QB",
     "league": "NFL"
   },
@@ -336,7 +336,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_mark_sanchez",
     "name": "Mark Sanchez",
-    "team": "Washington Redskins",
+    "team": "New York Jets",
     "college": "USC",
     "jersey": 6,
     "position": "QB",
@@ -345,7 +345,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_joe_flacco",
     "name": "Joe Flacco",
-    "team": "New York Jets",
+    "team": "Baltimore Ravens",
     "college": "Delaware",
     "jersey": 5,
     "position": "QB",
@@ -363,7 +363,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_jay_cutler",
     "name": "Jay Cutler",
-    "team": "Miami Dolphins",
+    "team": "Chicago Bears",
     "college": "Vanderbilt",
     "jersey": 6,
     "position": "QB",
@@ -444,7 +444,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_teddy_bridgewater",
     "name": "Teddy Bridgewater",
-    "team": "Detroit Lions",
+    "team": "Minnesota Vikings",
     "college": "Louisville",
     "jersey": 5,
     "position": "QB",
@@ -462,7 +462,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_sam_darnold",
     "name": "Sam Darnold",
-    "team": "San Francisco 49ers",
+    "team": "Seattle Seahawks",
     "college": "USC",
     "jersey": 14,
     "position": "QB",
@@ -471,7 +471,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_adrian_peterson",
     "name": "Adrian Peterson",
-    "team": "Seattle Seahawks",
+    "team": "Minnesota Vikings",
     "college": "Oklahoma",
     "jersey": 28,
     "position": "RB",
@@ -489,7 +489,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_frank_gore",
     "name": "Frank Gore",
-    "team": "New York Jets",
+    "team": "San Francisco 49ers",
     "college": "Miami (FL)",
     "jersey": 21,
     "position": "RB",
@@ -498,7 +498,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_lesean_mccoy",
     "name": "LeSean McCoy",
-    "team": "Tampa Bay Buccaneers",
+    "team": "Philadelphia Eagles",
     "college": "Pittsburgh",
     "jersey": 25,
     "position": "RB",
@@ -507,7 +507,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_jamaal_charles",
     "name": "Jamaal Charles",
-    "team": "Denver Broncos",
+    "team": "Kansas City Chiefs",
     "college": "Texas",
     "jersey": 25,
     "position": "RB",
@@ -516,7 +516,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_arian_foster",
     "name": "Arian Foster",
-    "team": "Miami Dolphins",
+    "team": "Houston Texans ",
     "college": "Tennessee",
     "jersey": 23,
     "position": "RB",
@@ -525,7 +525,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_le'veon_bell",
     "name": "Le'Veon Bell",
-    "team": "Tampa Bay Buccaneers",
+    "team": "Pittsburgh Steelers",
     "college": "Michigan State",
     "jersey": 26,
     "position": "RB",
@@ -534,7 +534,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_todd_gurley",
     "name": "Todd Gurley",
-    "team": "Atlanta Falcons",
+    "team": "Los Angeles Rams",
     "college": "Georgia",
     "jersey": 30,
     "position": "RB",
@@ -543,7 +543,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_ezekiel_elliott",
     "name": "Ezekiel Elliott",
-    "team": "New England Patriots",
+    "team": "Dallas Cowboys",
     "college": "Ohio State",
     "jersey": 15,
     "position": "RB",
@@ -552,7 +552,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_derrick_henry",
     "name": "Derrick Henry",
-    "team": "Tennessee Titans",
+    "team": "Baltimore Ravens",
     "college": "Alabama",
     "jersey": 22,
     "position": "RB",
@@ -570,7 +570,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_saquon_barkley",
     "name": "Saquon Barkley",
-    "team": "New York Giants",
+    "team": "Philadelphia Eagles",
     "college": "Penn State",
     "jersey": 26,
     "position": "RB",
@@ -588,7 +588,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_reggie_bush",
     "name": "Reggie Bush",
-    "team": "Buffalo Bills",
+    "team": "New Orleans Saints",
     "college": "USC",
     "jersey": 25,
     "position": "RB",
@@ -597,7 +597,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_chris_johnson",
     "name": "Chris Johnson",
-    "team": "Arizona Cardinals",
+    "team": "Tennessee Titans",
     "college": "East Carolina",
     "jersey": 28,
     "position": "RB",
@@ -633,7 +633,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_maurice_jones-drew",
     "name": "Maurice Jones-Drew",
-    "team": "Oakland Raiders",
+    "team": "Jacksonville Jaguars",
     "college": "UCLA",
     "jersey": 32,
     "position": "RB",
@@ -696,7 +696,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_eddie_lacy",
     "name": "Eddie Lacy",
-    "team": "Seattle Seahawks",
+    "team": "Green Bay Packers",
     "college": "Alabama",
     "jersey": 27,
     "position": "RB",
@@ -705,7 +705,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_matt_forte",
     "name": "Matt Forte",
-    "team": "New York Jets",
+    "team": "Chicago Bears",
     "college": "Tulane",
     "jersey": 22,
     "position": "RB",
@@ -759,7 +759,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_julio_jones",
     "name": "Julio Jones",
-    "team": "Tampa Bay Buccaneers",
+    "team": "Atlanta Falcons",
     "college": "Alabama",
     "jersey": 11,
     "position": "WR",
@@ -777,7 +777,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_odell_beckham_jr",
     "name": "Odell Beckham Jr.",
-    "team": "Baltimore Ravens",
+    "team": "New York Giants",
     "college": "LSU",
     "jersey": 13,
     "position": "WR",
@@ -849,7 +849,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_cooper_kupp",
     "name": "Cooper Kupp",
-    "team": "Los Angeles Rams",
+    "team": "Seattle Seahawks",
     "college": "Eastern Washington",
     "jersey": 10,
     "position": "WR",
@@ -876,7 +876,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_dez_bryant",
     "name": "Dez Bryant",
-    "team": "Baltimore Ravens",
+    "team": "Dallas Cowboys",
     "college": "Oklahoma State",
     "jersey": 88,
     "position": "WR",
@@ -885,7 +885,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_wes_welker",
     "name": "Wes Welker",
-    "team": "Denver Broncos",
+    "team": "New England Patriots",
     "college": "Texas Tech",
     "jersey": 83,
     "position": "WR",
@@ -903,7 +903,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_brandon_marshall",
     "name": "Brandon Marshall",
-    "team": "New York Giants",
+    "team": "Denver Broncos",
     "college": "UCF",
     "jersey": 15,
     "position": "WR",
@@ -921,7 +921,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_chad_johnson",
     "name": "Chad Johnson",
-    "team": "New England Patriots",
+    "team": "Cincinnati Bengals",
     "college": "Oregon State",
     "jersey": 85,
     "position": "WR",
@@ -930,7 +930,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_demaryius_thomas",
     "name": "Demaryius Thomas",
-    "team": "New York Jets",
+    "team": "Denver Broncos",
     "college": "Georgia Tech",
     "jersey": 88,
     "position": "WR",
@@ -948,18 +948,18 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_deebo_samuel",
     "name": "Deebo Samuel",
-    "team": "San Francisco 49ers",
+    "team": "Washington Commanders",
     "college": "South Carolina",
-    "jersey": 19,
+    "jersey": 1,
     "position": "WR",
     "league": "NFL"
   },
   {
     "id": "nfl_amari_cooper",
     "name": "Amari Cooper",
-    "team": "Cleveland Browns",
+    "team": "Las Vegas Raiders",
     "college": "Alabama",
-    "jersey": 2,
+    "jersey": 89,
     "position": "WR",
     "league": "NFL"
   },
@@ -975,7 +975,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_steve_smith_sr",
     "name": "Steve Smith Sr.",
-    "team": "Baltimore Ravens",
+    "team": "Carolina Panthers",
     "college": "Utah",
     "jersey": 89,
     "position": "WR",
@@ -984,7 +984,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_andre_johnson",
     "name": "Andre Johnson",
-    "team": "Indianapolis Colts",
+    "team": "Houston Texans ",
     "college": "Miami (FL)",
     "jersey": 80,
     "position": "WR",
@@ -993,7 +993,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_anquan_boldin",
     "name": "Anquan Boldin",
-    "team": "Detroit Lions",
+    "team": "Baltimore Ravens",
     "college": "Florida State",
     "jersey": 81,
     "position": "WR",
@@ -1011,7 +1011,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_desean_jackson",
     "name": "DeSean Jackson",
-    "team": "Las Vegas Raiders",
+    "team": "Philadelphia Eagles",
     "college": "California",
     "jersey": 10,
     "position": "WR",
@@ -1020,7 +1020,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_jarvis_landry",
     "name": "Jarvis Landry",
-    "team": "New Orleans Saints",
+    "team": "Cleveland Browns",
     "college": "LSU",
     "jersey": 80,
     "position": "WR",
@@ -1029,18 +1029,18 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_josh_gordon",
     "name": "Josh Gordon",
-    "team": "Kansas City Chiefs",
+    "team": "Cleveland Browns",
     "college": "Baylor",
-    "jersey": 19,
+    "jersey": 12,
     "position": "WR",
     "league": "NFL"
   },
   {
     "id": "nfl_juju_smith-schuster",
     "name": "JuJu Smith-Schuster",
-    "team": "New England Patriots",
+    "team": "Kansas City Chiefs",
     "college": "USC",
-    "jersey": 7,
+    "jersey": 9,
     "position": "WR",
     "league": "NFL"
   },
@@ -1056,9 +1056,9 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_percy_harvin",
     "name": "Percy Harvin",
-    "team": "Buffalo Bills",
+    "team": "Minnesota Vikings",
     "college": "Florida",
-    "jersey": 11,
+    "jersey": 12,
     "position": "WR",
     "league": "NFL"
   },
@@ -1101,7 +1101,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_michael_crabtree",
     "name": "Michael Crabtree",
-    "team": "Arizona Cardinals",
+    "team": "San Francisco 49ers",
     "college": "Texas Tech",
     "jersey": 15,
     "position": "WR",
@@ -1110,7 +1110,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_golden_tate",
     "name": "Golden Tate",
-    "team": "New York Giants",
+    "team": "Seattle Seahawks",
     "college": "Notre Dame",
     "jersey": 15,
     "position": "WR",
@@ -1128,7 +1128,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_plaxico_burress",
     "name": "Plaxico Burress",
-    "team": "Pittsburgh Steelers",
+    "team": "New York Jets",
     "college": "Michigan State",
     "jersey": 17,
     "position": "WR",
@@ -1146,7 +1146,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_randall_cobb",
     "name": "Randall Cobb",
-    "team": "New York Jets",
+    "team": "Green Bay Packers",
     "college": "Kentucky",
     "jersey": 18,
     "position": "WR",
@@ -1155,7 +1155,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_eric_decker",
     "name": "Eric Decker",
-    "team": "Tennessee Titans",
+    "team": "Denver Broncos",
     "college": "Minnesota",
     "jersey": 87,
     "position": "WR",
@@ -1200,7 +1200,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_jason_witten",
     "name": "Jason Witten",
-    "team": "Las Vegas Raiders",
+    "team": "Dallas Cowboys",
     "college": "Tennessee",
     "jersey": 82,
     "position": "TE",
@@ -1218,7 +1218,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_jimmy_graham",
     "name": "Jimmy Graham",
-    "team": "Chicago Bears",
+    "team": "New Orleans Saints",
     "college": "Miami (FL)",
     "jersey": 80,
     "position": "TE",
@@ -1227,7 +1227,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_greg_olsen",
     "name": "Greg Olsen",
-    "team": "Seattle Seahawks",
+    "team": "Carolina Panthers",
     "college": "Miami (FL)",
     "jersey": 88,
     "position": "TE",
@@ -1245,7 +1245,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_vernon_davis",
     "name": "Vernon Davis",
-    "team": "Washington Redskins",
+    "team": "San Francisco 49ers",
     "college": "Maryland",
     "jersey": 85,
     "position": "TE",
@@ -1257,15 +1257,6 @@ const WELL_KNOWN_PLAYERS = [
     "team": "New York Giants",
     "college": "Georgia Tech",
     "jersey": 12,
-    "position": "TE",
-    "league": "NFL"
-  },
-  {
-    "id": "nfl_martellus_bennett",
-    "name": "Martellus Bennett",
-    "team": "New England Patriots",
-    "college": "Texas A&M",
-    "jersey": 88,
     "position": "TE",
     "league": "NFL"
   },
@@ -1290,7 +1281,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_ed_reed",
     "name": "Ed Reed",
-    "team": "New York Jets",
+    "team": "Baltimore Ravens",
     "college": "Miami (FL)",
     "jersey": 20,
     "position": "S",
@@ -1299,16 +1290,16 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_charles_woodson",
     "name": "Charles Woodson",
-    "team": "Oakland Raiders",
+    "team": "Green Bay Packers",
     "college": "Michigan",
-    "jersey": 24,
+    "jersey": 21,
     "position": "CB/S",
     "league": "NFL"
   },
   {
     "id": "nfl_darrelle_revis",
     "name": "Darrelle Revis",
-    "team": "Kansas City Chiefs",
+    "team": "New York Jets",
     "college": "Pittsburgh",
     "jersey": 24,
     "position": "CB",
@@ -1317,7 +1308,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_richard_sherman",
     "name": "Richard Sherman",
-    "team": "San Francisco 49ers",
+    "team": "Seattle Seahawks",
     "college": "Stanford",
     "jersey": 25,
     "position": "CB",
@@ -1344,9 +1335,9 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_von_miller",
     "name": "Von Miller",
-    "team": "Buffalo Bills",
+    "team": "Denver Broncos",
     "college": "Texas A&M",
-    "jersey": 40,
+    "jersey": 58,
     "position": "OLB",
     "league": "NFL"
   },
@@ -1371,25 +1362,16 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_ndamukong_suh",
     "name": "Ndamukong Suh",
-    "team": "Philadelphia Eagles",
+    "team": "Detroit Lions",
     "college": "Nebraska",
-    "jersey": 93,
+    "jersey": 90,
     "position": "DT",
-    "league": "NFL"
-  },
-  {
-    "id": "nfl_jalen_ramsey",
-    "name": "Jalen Ramsey",
-    "team": "Miami Dolphins",
-    "college": "Florida State",
-    "jersey": 20,
-    "position": "CB",
     "league": "NFL"
   },
   {
     "id": "nfl_clay_matthews_iii",
     "name": "Clay Matthews III",
-    "team": "Los Angeles Rams",
+    "team": "Green Bay Packers",
     "college": "USC",
     "jersey": 52,
     "position": "LB",
@@ -1398,7 +1380,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_julius_peppers",
     "name": "Julius Peppers",
-    "team": "Carolina Panthers",
+    "team": "Chicago Bears",
     "college": "North Carolina",
     "jersey": 90,
     "position": "DE",
@@ -1416,16 +1398,16 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_patrick_peterson",
     "name": "Patrick Peterson",
-    "team": "Minnesota Vikings",
+    "team": "Arizona Cardinals",
     "college": "LSU",
-    "jersey": 7,
+    "jersey": 21,
     "position": "CB",
     "league": "NFL"
   },
   {
     "id": "nfl_james_harrison",
     "name": "James Harrison",
-    "team": "New England Patriots",
+    "team": "Pittsburgh Steelers",
     "college": "Kent State",
     "jersey": 92,
     "position": "LB",
@@ -1443,7 +1425,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_jason_pierre-paul",
     "name": "Jason Pierre-Paul",
-    "team": "Tampa Bay Buccaneers",
+    "team": "New York Giants",
     "college": "South Florida",
     "jersey": 90,
     "position": "DE",
@@ -1452,7 +1434,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_jared_allen",
     "name": "Jared Allen",
-    "team": "Carolina Panthers",
+    "team": "Minnesota Vikings",
     "college": "Idaho State",
     "jersey": 69,
     "position": "DE",
@@ -1488,16 +1470,16 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_micah_parsons",
     "name": "Micah Parsons",
-    "team": "Dallas Cowboys",
+    "team": "Green Bay Packers",
     "college": "Penn State",
-    "jersey": 11,
+    "jersey": 1,
     "position": "LB",
     "league": "NFL"
   },
   {
     "id": "nfl_terrell_suggs",
     "name": "Terrell Suggs",
-    "team": "Kansas City Chiefs",
+    "team": "Baltimore Ravens",
     "college": "Arizona State",
     "jersey": 55,
     "position": "OLB",
@@ -1560,7 +1542,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_earl_thomas",
     "name": "Earl Thomas",
-    "team": "Baltimore Ravens",
+    "team": "Seattle Seahawks",
     "college": "Texas",
     "jersey": 29,
     "position": "S",
@@ -1569,7 +1551,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_aqib_talib",
     "name": "Aqib Talib",
-    "team": "Los Angeles Rams",
+    "team": "Denver Broncos",
     "college": "Kansas",
     "jersey": 21,
     "position": "CB",
@@ -1578,25 +1560,25 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_jadeveon_clowney",
     "name": "Jadeveon Clowney",
-    "team": "Baltimore Ravens",
+    "team": "Carolina Panthers",
     "college": "South Carolina",
-    "jersey": 24,
+    "jersey": 7,
     "position": "DE",
     "league": "NFL"
   },
   {
     "id": "nfl_stephon_gilmore",
     "name": "Stephon Gilmore",
-    "team": "Dallas Cowboys",
+    "team": "New England Patriots",
     "college": "South Carolina",
-    "jersey": 21,
+    "jersey": 24,
     "position": "CB",
     "league": "NFL"
   },
   {
     "id": "nfl_josh_norman",
     "name": "Josh Norman",
-    "team": "Washington Redskins",
+    "team": "Carolina Panthers",
     "college": "Coastal Carolina",
     "jersey": 24,
     "position": "CB",
@@ -1621,15 +1603,6 @@ const WELL_KNOWN_PLAYERS = [
     "league": "NFL"
   },
   {
-    "id": "nfl_sauce_gardner",
-    "name": "Sauce Gardner",
-    "team": "New York Jets",
-    "college": "Cincinnati",
-    "jersey": 1,
-    "position": "CB",
-    "league": "NFL"
-  },
-  {
     "id": "nfl_malcolm_jenkins",
     "name": "Malcolm Jenkins",
     "team": "New Orleans Saints",
@@ -1641,25 +1614,16 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_haloti_ngata",
     "name": "Haloti Ngata",
-    "team": "Philadelphia Eagles",
+    "team": "Baltimore Ravens",
     "college": "Oregon",
     "jersey": 92,
     "position": "DT",
     "league": "NFL"
   },
   {
-    "id": "nfl_mario_williams",
-    "name": "Mario Williams",
-    "team": "Miami Dolphins",
-    "college": "NC State",
-    "jersey": 94,
-    "position": "DE",
-    "league": "NFL"
-  },
-  {
     "id": "nfl_charles_tillman",
     "name": "Charles Tillman",
-    "team": "Carolina Panthers",
+    "team": "Chicago Bears",
     "college": "Louisiana-Lafayette",
     "jersey": 33,
     "position": "CB",
@@ -1668,7 +1632,7 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_dwight_freeney",
     "name": "Dwight Freeney",
-    "team": "Seattle Seahawks",
+    "team": "Indianapolis Colts",
     "college": "Syracuse",
     "jersey": 93,
     "position": "DE",
@@ -1677,9 +1641,9 @@ const WELL_KNOWN_PLAYERS = [
   {
     "id": "nfl_champ_bailey",
     "name": "Champ Bailey",
-    "team": "New Orleans Saints",
+    "team": "Denver Broncos",
     "college": "Georgia",
-    "jersey": 27,
+    "jersey": 24,
     "position": "CB",
     "league": "NFL"
   },
@@ -1690,24 +1654,6 @@ const WELL_KNOWN_PLAYERS = [
     "college": "Utah",
     "jersey": 20,
     "position": "S",
-    "league": "NFL"
-  },
-  {
-    "id": "nfl_antonio_cromartie",
-    "name": "Antonio Cromartie",
-    "team": "Indianapolis Colts",
-    "college": "Florida State",
-    "jersey": 31,
-    "position": "CB",
-    "league": "NFL"
-  },
-  {
-    "id": "nfl_london_fletcher",
-    "name": "London Fletcher",
-    "team": "Washington Redskins",
-    "college": "John Carroll",
-    "jersey": 59,
-    "position": "LB",
     "league": "NFL"
   },
   {
@@ -1798,6 +1744,636 @@ const WELL_KNOWN_PLAYERS = [
     "college": "Washington",
     "jersey": 9,
     "position": "QB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_rome_odunze_",
+    "name": "Rome Odunze ",
+    "team": "Chicago Bears",
+    "college": "Washington",
+    "jersey": 15,
+    "position": "WR",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_jj_mccarthy",
+    "name": "J.J. McCarthy",
+    "team": "Minnesota Vikings",
+    "college": "Michigan",
+    "jersey": 9,
+    "position": "QB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_bo_nix",
+    "name": "Bo Nix",
+    "team": "Denver Broncos",
+    "college": "Oregon",
+    "jersey": 10,
+    "position": "QB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_brock_bowers",
+    "name": "Brock Bowers",
+    "team": "Las Vegas Raiders",
+    "college": "Georgia",
+    "jersey": 89,
+    "position": "TE",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_brian_thomas_jr",
+    "name": "Brian Thomas Jr.",
+    "team": "Jacksonville Jaguars",
+    "college": "LSU",
+    "jersey": 7,
+    "position": "WR",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_ricky_peasrsall",
+    "name": "Ricky Peasrsall",
+    "team": "San Francisco 49ers",
+    "college": "Florida",
+    "jersey": 14,
+    "position": "WR",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_bryce_young",
+    "name": "Bryce Young",
+    "team": "Carolina Panthers",
+    "college": "Alabama",
+    "jersey": 9,
+    "position": "QB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_cj_stroud_",
+    "name": "C.J. Stroud ",
+    "team": "Houston Texans ",
+    "college": "Ohio State",
+    "jersey": 7,
+    "position": "QB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_anthony_richardson",
+    "name": "Anthony Richardson",
+    "team": "Indianapolis Colts",
+    "college": "Florida",
+    "jersey": 5,
+    "position": "QB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_bijan_robinson",
+    "name": "Bijan Robinson",
+    "team": "Atlanta Falcons ",
+    "college": "Texas",
+    "jersey": 7,
+    "position": "RB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_jahmyr_gibbs",
+    "name": "Jahmyr Gibbs",
+    "team": "Detroit Lions",
+    "college": "Alabama",
+    "jersey": 0,
+    "position": "RB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_jaxon_smith-njigba",
+    "name": "Jaxon Smith-Njigba",
+    "team": "Seattle Seahawks",
+    "college": "Ohio State",
+    "jersey": 11,
+    "position": "WR",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_quentin_johnston",
+    "name": "Quentin Johnston",
+    "team": "Los Angeles Chargers",
+    "college": "TCU",
+    "jersey": 1,
+    "position": "WR",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_zay_flowers",
+    "name": "Zay Flowers",
+    "team": "Baltimore Ravens",
+    "college": "Boston College",
+    "jersey": 4,
+    "position": "WR",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_jordan_addison",
+    "name": "Jordan Addison",
+    "team": "Minnesota Vikings",
+    "college": "USC",
+    "jersey": 3,
+    "position": "WR",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_dalton_kincaid",
+    "name": "Dalton Kincaid",
+    "team": "Buffalo Bills",
+    "college": "Utah",
+    "jersey": 86,
+    "position": "TE",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_aidan_hutchinson",
+    "name": "Aidan Hutchinson",
+    "team": "Detroit Lions",
+    "college": "Michigan",
+    "jersey": 97,
+    "position": "DE",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_sauce_gardner",
+    "name": "Sauce Gardner",
+    "team": "New York Jets",
+    "college": "Cincinnati",
+    "jersey": 1,
+    "position": "CB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_drake_london",
+    "name": "Drake London",
+    "team": "Atlanta Falcons",
+    "college": "USC",
+    "jersey": 5,
+    "position": "WR",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_garrett_wilson",
+    "name": "Garrett Wilson",
+    "team": "New York Jets",
+    "college": "Ohio State",
+    "jersey": 5,
+    "position": "WR",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_chris_olave",
+    "name": "Chris Olave",
+    "team": "New Orleans Saints",
+    "college": "Ohio State",
+    "jersey": 12,
+    "position": "WR",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_kenny_pickett",
+    "name": "Kenny Pickett",
+    "team": "Pittsburgh Steelers",
+    "college": "Pittsburgh",
+    "jersey": 8,
+    "position": "QB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_trent_mcduffie",
+    "name": "Trent McDuffie",
+    "team": "Kansas City Chiefs",
+    "college": "Washington",
+    "jersey": 22,
+    "position": "CB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_zach_wilson",
+    "name": "Zach Wilson",
+    "team": "New York Jets",
+    "college": "BYU",
+    "jersey": 2,
+    "position": "QB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_kyle_pitts",
+    "name": "Kyle Pitts",
+    "team": "Atlanta Falcons",
+    "college": "Florida",
+    "jersey": 8,
+    "position": "TE",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_jaylen_waddle",
+    "name": "Jaylen Waddle",
+    "team": "Miami Dolphins",
+    "college": "Alabama",
+    "jersey": 17,
+    "position": "WR",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_pat_surtain_iii",
+    "name": "Pat Surtain III",
+    "team": "Denver Broncos",
+    "college": "Alabama",
+    "jersey": 2,
+    "position": "CB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_devonta_smith",
+    "name": "DeVonta Smith",
+    "team": "Philadelphia Eagles",
+    "college": "Alabama",
+    "jersey": 6,
+    "position": "WR",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_justin_fields",
+    "name": "Justin Fields",
+    "team": "New York Jets",
+    "college": "Ohio State",
+    "jersey": 7,
+    "position": "QB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_mac_jones",
+    "name": "Mac Jones",
+    "team": "San Francisco 49ers",
+    "college": "Alabama",
+    "jersey": 10,
+    "position": "QB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_najee_harris",
+    "name": "Najee Harris",
+    "team": "Los Angeles Chargers",
+    "college": "Alabama",
+    "jersey": 22,
+    "position": "RB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_travis_etienne",
+    "name": "Travis Etienne",
+    "team": "Jacksonville Jaguars",
+    "college": "Clemson",
+    "jersey": 1,
+    "position": "RB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_jerry_jeudy",
+    "name": "Jerry Jeudy",
+    "team": "Cleveland Browns",
+    "college": "Alabama",
+    "jersey": 3,
+    "position": "WR",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_ceedee_lamb",
+    "name": "CeeDee Lamb",
+    "team": "Dallas Cowboys",
+    "college": "Oklahoma",
+    "jersey": 88,
+    "position": "WR",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_jordan_love",
+    "name": "Jordan Love",
+    "team": "Green Bay Packers",
+    "college": "Utah State",
+    "jersey": 10,
+    "position": "QB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_daniel_jones",
+    "name": "Daniel Jones",
+    "team": "Indianapolis Colts",
+    "college": "Duke",
+    "jersey": 17,
+    "position": "QB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_tj_hockenson",
+    "name": "T.J. Hockenson",
+    "team": "Detroit Lions",
+    "college": "Iowa",
+    "jersey": 87,
+    "position": "TE",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_josh_jacobs",
+    "name": "Josh Jacobs",
+    "team": "Green Bay Packers",
+    "college": "Alabama",
+    "jersey": 8,
+    "position": "RB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_derwin_james",
+    "name": "Derwin James",
+    "team": "Los Angeles Chargers",
+    "college": "Florida State",
+    "jersey": 3,
+    "position": "S",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_jaire_alexander",
+    "name": "Jaire Alexander",
+    "team": "Baltimore Ravens",
+    "college": "Louisville",
+    "jersey": 23,
+    "position": "CB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_leonard_fournette",
+    "name": "Leonard Fournette",
+    "team": "Tampa Bay Buccaneers",
+    "college": "LSU",
+    "jersey": 26,
+    "position": "RB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_jared_goff",
+    "name": "Jared Goff",
+    "team": "Detroit Lions",
+    "college": "California",
+    "jersey": 16,
+    "position": "QB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_carson_wentz",
+    "name": "Carson Wentz",
+    "team": "Minnesota Vikings",
+    "college": "North Dakota State",
+    "jersey": 11,
+    "position": "QB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_ezekiel_elliott",
+    "name": "Ezekiel Elliott",
+    "team": "Dallas Cowboys",
+    "college": "Ohio State",
+    "jersey": 21,
+    "position": "RB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_jalen_ramsey",
+    "name": "Jalen Ramsey",
+    "team": "Pittsburgh Steelers",
+    "college": "Florida State",
+    "jersey": 5,
+    "position": "CB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_brandin_cooks",
+    "name": "Brandin Cooks",
+    "team": "New Orleans Saints",
+    "college": "Oregon State",
+    "jersey": 10,
+    "position": "WR",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_ladd_mcconkey",
+    "name": "Ladd McConkey",
+    "team": "Los Angeles Chargers",
+    "college": "Georgia",
+    "jersey": 15,
+    "position": "WR",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_aaron_jones",
+    "name": "Aaron Jones",
+    "team": "Minnesota Vikings",
+    "college": "UTEP",
+    "jersey": 33,
+    "position": "RB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_kyren_williams",
+    "name": "Kyren Williams",
+    "team": "Los Angeles Rams",
+    "college": "Notre Dame",
+    "jersey": 23,
+    "position": "RB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_cooper_dejean",
+    "name": "Cooper Dejean",
+    "team": "Philadelphia Eagles",
+    "college": "Iowa",
+    "jersey": 33,
+    "position": "CB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_nico_collins",
+    "name": "Nico Collins",
+    "team": "Houston Texans ",
+    "college": "Michigan",
+    "jersey": 12,
+    "position": "WR",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_cam_newton",
+    "name": "Cam Newton",
+    "team": "Carolina Panthers",
+    "college": "Auburn",
+    "jersey": 1,
+    "position": "QB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_kareem_hunt",
+    "name": "Kareem Hunt",
+    "team": "Kansas City Chiefs",
+    "college": "Toledo",
+    "jersey": 27,
+    "position": "RB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_ray_rice",
+    "name": "Ray Rice",
+    "team": "Baltimore Ravens",
+    "college": "Rutgers",
+    "jersey": 27,
+    "position": "RB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_steven_jackson",
+    "name": "Steven Jackson",
+    "team": "St Louis Rams",
+    "college": "Oregon State",
+    "jersey": 39,
+    "position": "RB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_mike_wallace_",
+    "name": "Mike Wallace ",
+    "team": "Pittsburgh Steelers",
+    "college": "Ole Miss",
+    "jersey": 17,
+    "position": "WR",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_devin_hester",
+    "name": "Devin Hester",
+    "team": "Chicago Bears",
+    "college": "Miami (FL)",
+    "jersey": 23,
+    "position": "WR",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_darren_mcfadden",
+    "name": "Darren McFadden",
+    "team": "Las Vegas Raiders",
+    "college": "Arkansas",
+    "jersey": 20,
+    "position": "RB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_phillip_rivers",
+    "name": "Phillip Rivers",
+    "team": "Los Angeles Chargers",
+    "college": "NC State",
+    "jersey": 17,
+    "position": "QB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_matt_schaub",
+    "name": "Matt Schaub",
+    "team": "Houston Texans ",
+    "college": "Virginia",
+    "jersey": 8,
+    "position": "QB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_dallas_clark",
+    "name": "Dallas Clark",
+    "team": "Indianapolis Colts",
+    "college": "Iowa",
+    "jersey": 44,
+    "position": "TE",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_pierre_garcon",
+    "name": "Pierre Garcon",
+    "team": "Washington Commanders",
+    "college": "Mount Union",
+    "jersey": 88,
+    "position": "WR",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_randy_moss",
+    "name": "Randy Moss",
+    "team": "Minnesota Vikings",
+    "college": "Marshall",
+    "jersey": 84,
+    "position": "WR",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_brett_farve",
+    "name": "Brett Farve",
+    "team": "Green Bay Packers",
+    "college": "Southern Mississippi",
+    "jersey": 4,
+    "position": "QB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_ladainian_tomlinson",
+    "name": "LaDainian Tomlinson",
+    "team": "Los Angeles Chargers",
+    "college": "TCU",
+    "jersey": 21,
+    "position": "RB",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_terry_mclaurin",
+    "name": "Terry McLaurin",
+    "team": "Washington Commanders",
+    "college": "Ohio State",
+    "jersey": 17,
+    "position": "WR",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_trent_williams",
+    "name": "Trent Williams",
+    "team": "San Francisco 49ers",
+    "college": "Oklahoma",
+    "jersey": 71,
+    "position": "LT",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_puka_nacua",
+    "name": "Puka Nacua",
+    "team": "Los Angeles Rams",
+    "college": "BYU",
+    "jersey": 12,
+    "position": "WR",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_maxx_crosby",
+    "name": "Maxx Crosby",
+    "team": "Las Vegas Raiders",
+    "college": "Eastern Michigan",
+    "jersey": 98,
+    "position": "DE",
+    "league": "NFL"
+  },
+  {
+    "id": "nfl_deion_sanders",
+    "name": "Deion Sanders",
+    "team": "Dallas Cowboys",
+    "college": "Florida State",
+    "jersey": 21,
+    "position": "CB",
     "league": "NFL"
   }
 ];
