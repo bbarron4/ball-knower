@@ -464,12 +464,12 @@ async function generateQuestions() {
         
         // Generate different question types based on game mode
         if (currentGame.mode === 'college-guesser') {
-            question = dataLoader.createCollegeQuestion(player, players);
+            question = dataLoader.createCollegeQuestion(players);
         } else if (currentGame.mode === 'jersey-guesser') {
-            question = dataLoader.createJerseyQuestion(player, players);
+            question = dataLoader.createJerseyQuestion(players);
         } else {
             // Default to college questions for now
-            question = dataLoader.createCollegeQuestion(player, players);
+            question = dataLoader.createCollegeQuestion(players);
         }
         
         if (question) {
