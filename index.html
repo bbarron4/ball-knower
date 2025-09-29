@@ -421,6 +421,20 @@
     </div>
 
     <script src="well_known_players.js"></script>
+    <script>
+        // Fallback data in case well_known_players.js doesn't load on GitHub Pages
+        if (typeof WELL_KNOWN_PLAYERS === 'undefined') {
+            console.log('⚠️ Loading fallback player data...');
+            window.WELL_KNOWN_PLAYERS = [
+                {"id": "nfl_tom_brady", "name": "Tom Brady", "team": "Tampa Bay Buccaneers", "college": "Michigan", "jersey": 12, "position": "QB", "league": "NFL"},
+                {"id": "nfl_peyton_manning", "name": "Peyton Manning", "team": "Denver Broncos", "college": "Tennessee", "jersey": 18, "position": "QB", "league": "NFL"},
+                {"id": "nfl_aaron_rodgers", "name": "Aaron Rodgers", "team": "New York Jets", "college": "California", "jersey": 8, "position": "QB", "league": "NFL"},
+                {"id": "nfl_drew_brees", "name": "Drew Brees", "team": "New Orleans Saints", "college": "Purdue", "jersey": 9, "position": "QB", "league": "NFL"},
+                {"id": "nfl_russell_wilson", "name": "Russell Wilson", "team": "Denver Broncos", "college": "Wisconsin", "jersey": 3, "position": "QB", "league": "NFL"}
+            ];
+            console.log('✅ Fallback data loaded: 5 players');
+        }
+    </script>
     <script src="utils/dataLoader.js"></script>
     <script src="script.js"></script>
 </body>
