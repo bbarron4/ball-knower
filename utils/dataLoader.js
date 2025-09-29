@@ -85,7 +85,7 @@ class DataLoader {
             player: correctPlayer,
             question: `Which college did ${correctPlayer.name} attend?`,
             options: options,
-            correct: correctCollege
+            correctAnswer: correctCollege
         };
     }
 
@@ -120,7 +120,7 @@ class DataLoader {
             player: correctPlayer,
             question: `What jersey number does ${correctPlayer.name} wear?`,
             options: options,
-            correct: correctJersey
+            correctAnswer: correctJersey
         };
     }
 }
