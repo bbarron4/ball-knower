@@ -7,18 +7,16 @@ class DataLoader {
         this.dataVersion = null;
     }
 
-    // Helper to resolve the correct base path for both local and GitHub Pages
+    // Helper to resolve absolute base path for GitHub Pages
     resolveBase() {
-        const path = window.location.pathname;
-        const pagesBase = path.match(/^(.*\/ball-knower\/)/);
-        if (pagesBase) return pagesBase[1];           // e.g., /ball-knower/
-        return path.endsWith('/') ? path : path.replace(/[^/]+$/, '/'); // local
+        return `${location.origin}/ball-knower/`;
     }
 
     // Helper to try multiple URLs until one works
     async tryFetch(paths) {
         for (const url of paths) {
             try {
+
                 const r = await fetch(url, { cache: 'force-cache' });
                 if (r.ok) return await r.json();
             } catch {}
