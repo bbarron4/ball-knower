@@ -5,6 +5,10 @@ class DataLoader {
     constructor() {
         this.cache = new Map();
         this.dataVersion = null;
+        this.triviaQuestions = {
+            nfl: [],
+            nba: []
+        };
     }
 
     // Helper to resolve absolute base path for GitHub Pages
@@ -88,6 +92,81 @@ class DataLoader {
             if (prev && prev !== version) this.cache.clear();
             if (!prev || prev !== version) localStorage.setItem('data_version', version);
         } catch {}
+    }
+
+    /**
+     * Load trivia questions from JSON file
+     * @param {string} sport - 'nfl' or 'nba'
+     */
+    async loadTriviaQuestions(sport) {
+        const sportLower = sport.toLowerCase();
+        console.log(`🔍 Loading trivia questions for sport: ${sportLower}`);
+        
+        // Return cached if available
+        if (this.triviaQuestions[sportLower].length > 0) {
+            console.log(`📋 Using cached ${sportLower} trivia: ${this.triviaQuestions[sportLower].length} questions`);
+            return this.triviaQuestions[sportLower];
+        }
+
+        try {
+            // Use embedded questions instead of fetching
+            if (sportLower === 'nfl' && typeof NFL_TRIVIA_QUESTIONS !== 'undefined') {
+                console.log(`📚 Using embedded NFL trivia: ${NFL_TRIVIA_QUESTIONS.length} questions`);
+                this.triviaQuestions[sportLower] = NFL_TRIVIA_QUESTIONS;
+                return NFL_TRIVIA_QUESTIONS;
+            } else if (sportLower === 'nba' && typeof NBA_TRIVIA_QUESTIONS !== 'undefined') {
+                console.log(`🏀 Using embedded NBA trivia: ${NBA_TRIVIA_QUESTIONS.length} questions`);
+                this.triviaQuestions[sportLower] = NBA_TRIVIA_QUESTIONS;
+                return NBA_TRIVIA_QUESTIONS;
+            } else {
+                console.warn(`⚠️ No embedded trivia found for ${sportLower}`);
+                return [];
+            }
+        } catch (error) {
+            console.error(`❌ Error loading ${sport} trivia questions:`, error);
+            return [];
+        }
+    }
+
+    /**
+     * Create a trivia question
+     * @param {string} sport - 'nfl', 'nba', or 'both'
+     */
+    async createTriviaQuestion(sport) {
+        let selectedSport = sport;
+        
+        // If "both" is selected, randomly pick NFL or NBA for this question
+        if (sport === 'both') {
+            selectedSport = Math.random() < 0.5 ? 'nfl' : 'nba';
+        }
+        
+        const questions = await this.loadTriviaQuestions(selectedSport);
+        
+        if (questions.length === 0) {
+            return null;
+        }
+
+        // Pick a random question
+        const triviaQ = questions[Math.floor(Math.random() * questions.length)];
+
+        // Convert to game question format
+        const options = triviaQ.choices.map(choice => choice.text);
+        const correctAnswer = triviaQ.choices.find(c => c.id === triviaQ.correctChoiceId)?.text;
+
+        if (!correctAnswer) {
+            console.error('Trivia question missing correct answer:', triviaQ);
+            return null;
+        }
+
+        return {
+            type: 'trivia',
+            question: triviaQ.question,
+            options: options,
+            correctAnswer: correctAnswer,
+            category: triviaQ.category || 'General',
+            difficulty: triviaQ.difficulty || 'medium',
+            league: selectedSport.toUpperCase()
+        };
     }
 
     /**

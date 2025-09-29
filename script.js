@@ -805,6 +805,33 @@ async function generateQuestions() {
         modeRotation = shuffleArray(modeRotation);
     }
     
+    // Pre-load trivia questions if needed
+    let triviaQuestions = [];
+    if (currentGame.mode === 'achievement-guesser' || 
+        (currentGame.mode === 'survival' && modeRotation.includes('achievement-guesser'))) {
+        console.log(`🎯 Loading trivia for mode: ${currentGame.mode}, sport: ${currentGame.sport}`);
+        
+        try {
+            triviaQuestions = await dataLoader.loadTriviaQuestions(currentGame.sport === 'both' ? 'nfl' : currentGame.sport);
+            console.log(`📚 Loaded primary trivia: ${triviaQuestions.length} questions`);
+            
+            // If "both" is selected, also load NBA questions
+            if (currentGame.sport === 'both') {
+                const nbaTriviaQuestions = await dataLoader.loadTriviaQuestions('nba');
+                console.log(`🏀 Loaded NBA trivia: ${nbaTriviaQuestions.length} questions`);
+                triviaQuestions = [...triviaQuestions, ...nbaTriviaQuestions];
+                console.log(`🔄 Combined trivia: ${triviaQuestions.length} total questions`);
+            }
+            // Shuffle trivia questions
+            triviaQuestions = shuffleArray(triviaQuestions);
+            console.log(`🎲 Shuffled ${triviaQuestions.length} trivia questions`);
+        } catch (error) {
+            console.error('❌ Error loading trivia questions:', error);
+        }
+    }
+    
+    let triviaIndex = 0;
+    
     for (let i = 0; i < questionCount; i++) {
         // Re-shuffle periodically to ensure variety across many questions
         const playerIndex = i % shuffledPlayers.length;
@@ -821,6 +848,24 @@ async function generateQuestions() {
             question = dataLoader.createCollegeQuestionWithPlayer(player, players);
         } else if (currentGame.mode === 'jersey-guesser') {
             question = dataLoader.createJerseyQuestionWithPlayer(player, players);
+        } else if (currentGame.mode === 'achievement-guesser') {
+            // General Trivia mode - use trivia questions
+            if (triviaQuestions.length > 0) {
+                const triviaQ = triviaQuestions[triviaIndex % triviaQuestions.length];
+                triviaIndex++;
+                
+                const options = triviaQ.choices.map(choice => choice.text);
+                const correctAnswer = triviaQ.choices.find(c => c.id === triviaQ.correctChoiceId)?.text;
+                
+                question = {
+                    type: 'trivia',
+                    question: triviaQ.question,
+                    options: options,
+                    correctAnswer: correctAnswer,
+                    category: triviaQ.category || 'General',
+                    difficulty: triviaQ.difficulty || 'medium'
+                };
+            }
         } else if (currentGame.mode === 'survival') {
             // Use the pre-shuffled, evenly distributed mode rotation
             const selectedMode = modeRotation[i];
@@ -830,8 +875,23 @@ async function generateQuestions() {
             } else if (selectedMode === 'jersey-guesser') {
                 question = dataLoader.createJerseyQuestionWithPlayer(player, players);
             } else if (selectedMode === 'achievement-guesser') {
-                // For now, use college questions as placeholder for achievement questions
-                question = dataLoader.createCollegeQuestionWithPlayer(player, players);
+                // General Trivia - use real trivia questions
+                if (triviaQuestions.length > 0) {
+                    const triviaQ = triviaQuestions[triviaIndex % triviaQuestions.length];
+                    triviaIndex++;
+                    
+                    const options = triviaQ.choices.map(choice => choice.text);
+                    const correctAnswer = triviaQ.choices.find(c => c.id === triviaQ.correctChoiceId)?.text;
+                    
+                    question = {
+                        type: 'trivia',
+                        question: triviaQ.question,
+                        options: options,
+                        correctAnswer: correctAnswer,
+                        category: triviaQ.category || 'General',
+                        difficulty: triviaQ.difficulty || 'medium'
+                    };
+                }
             }
         } else {
             // Default to college questions for now
@@ -2525,9 +2585,17 @@ function updateQuestionUI(question) {
             `Question ${currentGame.currentQuestion + 1} of ${currentGame.questionCount}`;
     }
     
-    // Show player info
-    document.getElementById('player-name').textContent = question.player.name;
-    document.getElementById('player-team').textContent = question.player.team;
+    // Show player info or hide player card for trivia
+    const playerCard = document.getElementById('player-card');
+    if (question.type === 'trivia') {
+        // Hide player card for trivia questions
+        playerCard.style.display = 'none';
+    } else {
+        // Show player card for player-based questions
+        playerCard.style.display = 'block';
+        document.getElementById('player-name').textContent = question.player.name;
+        document.getElementById('player-team').textContent = question.player.team;
+    }
     
     // Set question text
     document.getElementById('question-text').innerHTML = `<h2>${question.question}</h2>`;
