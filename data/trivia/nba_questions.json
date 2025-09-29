@@ -1016,5 +1016,3206 @@
     "contextNote": "",
     "isActive": true,
     "createdAt": "2025-09-29"
+  },
+  {
+    "number": 32,
+    "id": "moment-the-block-2016",
+    "question": "Who made 'The Block' in the 2016 Finals, chasing down Andre Iguodala?",
+    "choices": [
+      {
+        "id": "lebron_james",
+        "text": "LeBron James"
+      },
+      {
+        "id": "draymond_green",
+        "text": "Draymond Green"
+      },
+      {
+        "id": "kyrie_irving",
+        "text": "Kyrie Irving"
+      },
+      {
+        "id": "jr_smith",
+        "text": "J.R. Smith"
+      }
+    ],
+    "correctChoiceId": "lebron_james",
+    "category": "Moment",
+    "difficulty": "easy",
+    "tags": [
+      "finals",
+      "cavs_warriors"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 33,
+    "id": "moment-ray-allen-2013-corner3",
+    "question": "Which player hit the famous corner 3 to save Game 6 of the 2013 Finals?",
+    "choices": [
+      {
+        "id": "ray_allen",
+        "text": "Ray Allen"
+      },
+      {
+        "id": "lebron_james",
+        "text": "LeBron James"
+      },
+      {
+        "id": "shane_battier",
+        "text": "Shane Battier"
+      },
+      {
+        "id": "mike_miller",
+        "text": "Mike Miller"
+      }
+    ],
+    "correctChoiceId": "ray_allen",
+    "category": "Moment",
+    "difficulty": "easy",
+    "tags": [
+      "finals",
+      "clutch"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 34,
+    "id": "moment-kawhi-four-bounce-2019",
+    "question": "Who hit the four-bounce, Game 7 buzzer-beater vs the 76ers in 2019?",
+    "choices": [
+      {
+        "id": "kawhi_leonard",
+        "text": "Kawhi Leonard"
+      },
+      {
+        "id": "kyle_lowry",
+        "text": "Kyle Lowry"
+      },
+      {
+        "id": "jimmy_butler",
+        "text": "Jimmy Butler"
+      },
+      {
+        "id": "pascal_siakam",
+        "text": "Pascal Siakam"
+      }
+    ],
+    "correctChoiceId": "kawhi_leonard",
+    "category": "Moment",
+    "difficulty": "easy",
+    "tags": [
+      "playoffs",
+      "buzzer_beater"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 35,
+    "id": "moment-dame-wave-2019",
+    "question": "Who waved goodbye after a deep series-winning three over Paul George in 2019?",
+    "choices": [
+      {
+        "id": "damian_lillard",
+        "text": "Damian Lillard"
+      },
+      {
+        "id": "cj_mccollum",
+        "text": "C.J. McCollum"
+      },
+      {
+        "id": "russell_westbrook",
+        "text": "Russell Westbrook"
+      },
+      {
+        "id": "paul_george",
+        "text": "Paul George"
+      }
+    ],
+    "correctChoiceId": "damian_lillard",
+    "category": "Moment",
+    "difficulty": "easy",
+    "tags": [
+      "playoffs",
+      "buzzer_beater"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 36,
+    "id": "moment-klay-game6-2016",
+    "question": "Which player hit 11 threes in Game 6 vs OKC to save the Warriors' 2016 run?",
+    "choices": [
+      {
+        "id": "klay_thompson",
+        "text": "Klay Thompson"
+      },
+      {
+        "id": "stephen_curry",
+        "text": "Stephen Curry"
+      },
+      {
+        "id": "kevin_durant",
+        "text": "Kevin Durant"
+      },
+      {
+        "id": "andre_iguodala",
+        "text": "Andre Iguodala"
+      }
+    ],
+    "correctChoiceId": "klay_thompson",
+    "category": "Moment",
+    "difficulty": "medium",
+    "tags": [
+      "playoffs",
+      "threes"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 37,
+    "id": "moment-kobe-60-farewell",
+    "question": "Who scored 60 points in his final NBA game?",
+    "choices": [
+      {
+        "id": "kobe_bryant",
+        "text": "Kobe Bryant"
+      },
+      {
+        "id": "michael_jordan",
+        "text": "Michael Jordan"
+      },
+      {
+        "id": "dirk_nowitzki",
+        "text": "Dirk Nowitzki"
+      },
+      {
+        "id": "vince_carter",
+        "text": "Vince Carter"
+      }
+    ],
+    "correctChoiceId": "kobe_bryant",
+    "category": "Moment",
+    "difficulty": "easy",
+    "tags": [
+      "farewell",
+      "scoring"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 38,
+    "id": "moment-linsanity-38-lakers",
+    "question": "Which undrafted guard dropped 38 points on the Lakers during 'Linsanity'?",
+    "choices": [
+      {
+        "id": "jeremy_lin",
+        "text": "Jeremy Lin"
+      },
+      {
+        "id": "isaiah_thomas",
+        "text": "Isaiah Thomas"
+      },
+      {
+        "id": "fred_vanvleet",
+        "text": "Fred VanVleet"
+      },
+      {
+        "id": "patrick_beverley",
+        "text": "Patrick Beverley"
+      }
+    ],
+    "correctChoiceId": "jeremy_lin",
+    "category": "Moment",
+    "difficulty": "medium",
+    "tags": [
+      "viral",
+      "nyk"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 39,
+    "id": "moment-warriors-73-wins",
+    "question": "Which team set the regular-season wins record with 73 victories?",
+    "choices": [
+      {
+        "id": "golden_state_warriors",
+        "text": "Golden State Warriors"
+      },
+      {
+        "id": "chicago_bulls",
+        "text": "Chicago Bulls"
+      },
+      {
+        "id": "san_antonio_spurs",
+        "text": "San Antonio Spurs"
+      },
+      {
+        "id": "miami_heat",
+        "text": "Miami Heat"
+      }
+    ],
+    "correctChoiceId": "golden_state_warriors",
+    "category": "Team",
+    "difficulty": "easy",
+    "tags": [
+      "record",
+      "wins"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 40,
+    "id": "moment-last-dance-season",
+    "question": "'The Last Dance' focused on which Bulls season?",
+    "choices": [
+      {
+        "id": "1997_98",
+        "text": "1997–98"
+      },
+      {
+        "id": "1995_96",
+        "text": "1995–96"
+      },
+      {
+        "id": "1992_93",
+        "text": "1992–93"
+      },
+      {
+        "id": "1990_91",
+        "text": "1990–91"
+      }
+    ],
+    "correctChoiceId": "1997_98",
+    "category": "Moment",
+    "difficulty": "easy",
+    "tags": [
+      "doc",
+      "bulls"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 41,
+    "id": "moment-bubble-2020-lakers",
+    "question": "Which team won the 2020 title in the NBA bubble at Disney?",
+    "choices": [
+      {
+        "id": "los_angeles_lakers",
+        "text": "Los Angeles Lakers"
+      },
+      {
+        "id": "miami_heat",
+        "text": "Miami Heat"
+      },
+      {
+        "id": "milwaukee_bucks",
+        "text": "Milwaukee Bucks"
+      },
+      {
+        "id": "denver_nuggets",
+        "text": "Denver Nuggets"
+      }
+    ],
+    "correctChoiceId": "los_angeles_lakers",
+    "category": "Team",
+    "difficulty": "easy",
+    "tags": [
+      "finals",
+      "bubble"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 42,
+    "id": "moment-tmac-13-in-33",
+    "question": "Which player scored 13 points in the final 33 seconds to beat the Spurs in 2004?",
+    "choices": [
+      {
+        "id": "tracy_mcgrady",
+        "text": "Tracy McGrady"
+      },
+      {
+        "id": "reggie_miller",
+        "text": "Reggie Miller"
+      },
+      {
+        "id": "ray_allen",
+        "text": "Ray Allen"
+      },
+      {
+        "id": "kobe_bryant",
+        "text": "Kobe Bryant"
+      }
+    ],
+    "correctChoiceId": "tracy_mcgrady",
+    "category": "Moment",
+    "difficulty": "medium",
+    "tags": [
+      "comeback"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 43,
+    "id": "moment-reggie-8-in-9",
+    "question": "Who scored 8 points in 9 seconds vs the Knicks in the 1995 playoffs?",
+    "choices": [
+      {
+        "id": "reggie_miller",
+        "text": "Reggie Miller"
+      },
+      {
+        "id": "larry_bird",
+        "text": "Larry Bird"
+      },
+      {
+        "id": "allan_houston",
+        "text": "Allan Houston"
+      },
+      {
+        "id": "vince_carter",
+        "text": "Vince Carter"
+      }
+    ],
+    "correctChoiceId": "reggie_miller",
+    "category": "Moment",
+    "difficulty": "medium",
+    "tags": [
+      "comeback"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 44,
+    "id": "moment-flu-game-1997",
+    "question": "Michael Jordan's 'Flu Game' (38 points) was against which team in the 1997 Finals?",
+    "choices": [
+      {
+        "id": "seattle_supersonics",
+        "text": "Seattle SuperSonics"
+      },
+      {
+        "id": "phoenix_suns",
+        "text": "Phoenix Suns"
+      },
+      {
+        "id": "utah_jazz",
+        "text": "Utah Jazz"
+      },
+      {
+        "id": "portland_trail_blazers",
+        "text": "Portland Trail Blazers"
+      }
+    ],
+    "correctChoiceId": "utah_jazz",
+    "category": "Moment",
+    "difficulty": "medium",
+    "tags": [
+      "finals",
+      "legendary"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 45,
+    "id": "moment-2016-kyrie-shot",
+    "question": "Who hit the go-ahead three over Stephen Curry in Game 7 of the 2016 Finals?",
+    "choices": [
+      {
+        "id": "kyrie_irving",
+        "text": "Kyrie Irving"
+      },
+      {
+        "id": "jr_smith",
+        "text": "J.R. Smith"
+      },
+      {
+        "id": "kevin_love",
+        "text": "Kevin Love"
+      },
+      {
+        "id": "lebron_james",
+        "text": "LeBron James"
+      }
+    ],
+    "correctChoiceId": "kyrie_irving",
+    "category": "Moment",
+    "difficulty": "easy",
+    "tags": [
+      "finals",
+      "clutch"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 46,
+    "id": "draft-1984-ahead-of-jordan",
+    "question": "In 1984, which player was drafted one spot ahead of Michael Jordan at #2?",
+    "choices": [
+      {
+        "id": "hakeem_olajuwon",
+        "text": "Hakeem Olajuwon"
+      },
+      {
+        "id": "sam_bowie",
+        "text": "Sam Bowie"
+      },
+      {
+        "id": "charles_barkley",
+        "text": "Charles Barkley"
+      },
+      {
+        "id": "john_stockton",
+        "text": "John Stockton"
+      }
+    ],
+    "correctChoiceId": "sam_bowie",
+    "category": "Draft",
+    "difficulty": "medium",
+    "tags": [
+      "draft",
+      "1984"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 47,
+    "id": "draft-2003-2nd-pick-darko",
+    "question": "Who was selected #2 overall in 2003 after LeBron James?",
+    "choices": [
+      {
+        "id": "chris_kaman",
+        "text": "Chris Kaman"
+      },
+      {
+        "id": "dwyane_wade",
+        "text": "Dwyane Wade"
+      },
+      {
+        "id": "darko_milicic",
+        "text": "Darko Miličić"
+      },
+      {
+        "id": "t_j_ford",
+        "text": "T.J. Ford"
+      }
+    ],
+    "correctChoiceId": "darko_milicic",
+    "category": "Draft",
+    "difficulty": "easy",
+    "tags": [
+      "draft",
+      "2003"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 48,
+    "id": "draft-1996-kobe-original-hornets",
+    "question": "Which team originally drafted Kobe Bryant in 1996 before trading him?",
+    "choices": [
+      {
+        "id": "charlotte_hornets",
+        "text": "Charlotte Hornets"
+      },
+      {
+        "id": "los_angeles_clippers",
+        "text": "LA Clippers"
+      },
+      {
+        "id": "new_jersey_nets",
+        "text": "New Jersey Nets"
+      },
+      {
+        "id": "boston_celtics",
+        "text": "Boston Celtics"
+      }
+    ],
+    "correctChoiceId": "charlotte_hornets",
+    "category": "Draft",
+    "difficulty": "medium",
+    "tags": [
+      "draft",
+      "trade"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 49,
+    "id": "draft-1998-dirk-bucks",
+    "question": "Which team drafted Dirk Nowitzki in 1998 before a trade to Dallas?",
+    "choices": [
+      {
+        "id": "milwaukee_bucks",
+        "text": "Milwaukee Bucks"
+      },
+      {
+        "id": "phoenix_suns",
+        "text": "Phoenix Suns"
+      },
+      {
+        "id": "boston_celtics",
+        "text": "Boston Celtics"
+      },
+      {
+        "id": "san_antonio_spurs",
+        "text": "San Antonio Spurs"
+      }
+    ],
+    "correctChoiceId": "milwaukee_bucks",
+    "category": "Draft",
+    "difficulty": "medium",
+    "tags": [
+      "draft",
+      "trade"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 50,
+    "id": "draft-2013-1-overall-bennett",
+    "question": "Who was drafted #1 overall in 2013 ahead of Giannis?",
+    "choices": [
+      {
+        "id": "anthony_bennett",
+        "text": "Anthony Bennett"
+      },
+      {
+        "id": "victor_oladipo",
+        "text": "Victor Oladipo"
+      },
+      {
+        "id": "otto_porter_jr",
+        "text": "Otto Porter Jr."
+      },
+      {
+        "id": "nerlens_noel",
+        "text": "Nerlens Noel"
+      }
+    ],
+    "correctChoiceId": "anthony_bennett",
+    "category": "Draft",
+    "difficulty": "medium",
+    "tags": [
+      "draft",
+      "2013"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 51,
+    "id": "draft-2018-ahead-of-luka",
+    "question": "Which player was drafted directly ahead of Luka Dončić in 2018?",
+    "choices": [
+      {
+        "id": "marvin_bagley_iii",
+        "text": "Marvin Bagley III"
+      },
+      {
+        "id": "deandre_ayton",
+        "text": "Deandre Ayton"
+      },
+      {
+        "id": "trae_young",
+        "text": "Trae Young"
+      },
+      {
+        "id": "jaren_jackson_jr",
+        "text": "Jaren Jackson Jr."
+      }
+    ],
+    "correctChoiceId": "marvin_bagley_iii",
+    "category": "Draft",
+    "difficulty": "medium",
+    "tags": [
+      "draft",
+      "2018"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 52,
+    "id": "draft-2017-1-ahead-of-tatum",
+    "question": "Which guard went #1 in 2017 ahead of Jayson Tatum (#3)?",
+    "choices": [
+      {
+        "id": "markelle_fultz",
+        "text": "Markelle Fultz"
+      },
+      {
+        "id": "lonzo_ball",
+        "text": "Lonzo Ball"
+      },
+      {
+        "id": "deaaron_fox",
+        "text": "De'Aaron Fox"
+      },
+      {
+        "id": "dennis_smith_jr",
+        "text": "Dennis Smith Jr."
+      }
+    ],
+    "correctChoiceId": "markelle_fultz",
+    "category": "Draft",
+    "difficulty": "medium",
+    "tags": [
+      "draft",
+      "2017"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 53,
+    "id": "draft-2007-oden-over-durant",
+    "question": "Who was taken 1st overall ahead of Kevin Durant in 2007?",
+    "choices": [
+      {
+        "id": "greg_oden",
+        "text": "Greg Oden"
+      },
+      {
+        "id": "al_horford",
+        "text": "Al Horford"
+      },
+      {
+        "id": "mike_conley",
+        "text": "Mike Conley"
+      },
+      {
+        "id": "joakim_noah",
+        "text": "Joakim Noah"
+      }
+    ],
+    "correctChoiceId": "greg_oden",
+    "category": "Draft",
+    "difficulty": "easy",
+    "tags": [
+      "draft",
+      "2007"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 54,
+    "id": "draft-2018-luka-original-team",
+    "question": "Which team originally drafted Luka Dončić before trading his rights?",
+    "choices": [
+      {
+        "id": "atlanta_hawks",
+        "text": "Atlanta Hawks"
+      },
+      {
+        "id": "dallas_mavericks",
+        "text": "Dallas Mavericks"
+      },
+      {
+        "id": "phoenix_suns",
+        "text": "Phoenix Suns"
+      },
+      {
+        "id": "sacramento_kings",
+        "text": "Sacramento Kings"
+      }
+    ],
+    "correctChoiceId": "atlanta_hawks",
+    "category": "Draft",
+    "difficulty": "medium",
+    "tags": [
+      "draft",
+      "trade"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 55,
+    "id": "draft-2013-giannis-pick-15",
+    "question": "Giannis Antetokounmpo was selected with which pick in 2013?",
+    "choices": [
+      {
+        "id": "15",
+        "text": "15th"
+      },
+      {
+        "id": "13",
+        "text": "13th"
+      },
+      {
+        "id": "10",
+        "text": "10th"
+      },
+      {
+        "id": "8",
+        "text": "8th"
+      }
+    ],
+    "correctChoiceId": "15",
+    "category": "Draft",
+    "difficulty": "medium",
+    "tags": [
+      "draft",
+      "2013"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 56,
+    "id": "draft-2023-wemby-1-spurs",
+    "question": "Who was the #1 overall pick in 2023?",
+    "choices": [
+      {
+        "id": "victor_wembanyama",
+        "text": "Victor Wembanyama"
+      },
+      {
+        "id": "scoot_henderson",
+        "text": "Scoot Henderson"
+      },
+      {
+        "id": "brandon_miller",
+        "text": "Brandon Miller"
+      },
+      {
+        "id": "chet_holmgren",
+        "text": "Chet Holmgren"
+      }
+    ],
+    "correctChoiceId": "victor_wembanyama",
+    "category": "Draft",
+    "difficulty": "easy",
+    "tags": [
+      "draft",
+      "2023"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 57,
+    "id": "draft-2008-1-overall-rose",
+    "question": "Who was drafted #1 overall in 2008 ahead of Russell Westbrook?",
+    "choices": [
+      {
+        "id": "derrick_rose",
+        "text": "Derrick Rose"
+      },
+      {
+        "id": "michael_beasley",
+        "text": "Michael Beasley"
+      },
+      {
+        "id": "kevin_love",
+        "text": "Kevin Love"
+      },
+      {
+        "id": "oj_mayo",
+        "text": "O.J. Mayo"
+      }
+    ],
+    "correctChoiceId": "derrick_rose",
+    "category": "Draft",
+    "difficulty": "medium",
+    "tags": [
+      "draft",
+      "2008"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 58,
+    "id": "draft-2013-one-before-giannis",
+    "question": "Which player was drafted one pick before Giannis in 2013?",
+    "choices": [
+      {
+        "id": "shabazz_muhammad",
+        "text": "Shabazz Muhammad"
+      },
+      {
+        "id": "anthony_bennett",
+        "text": "Anthony Bennett"
+      },
+      {
+        "id": "cj_mccollum",
+        "text": "C.J. McCollum"
+      },
+      {
+        "id": "steven_adams",
+        "text": "Steven Adams"
+      }
+    ],
+    "correctChoiceId": "shabazz_muhammad",
+    "category": "Draft",
+    "difficulty": "hard",
+    "tags": [
+      "draft",
+      "2013"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 59,
+    "id": "draft-2017-one-before-tatum",
+    "question": "Who was drafted one pick before Jayson Tatum in 2017?",
+    "choices": [
+      {
+        "id": "lonzo_ball",
+        "text": "Lonzo Ball"
+      },
+      {
+        "id": "markelle_fultz",
+        "text": "Markelle Fultz"
+      },
+      {
+        "id": "deaaron_fox",
+        "text": "De'Aaron Fox"
+      },
+      {
+        "id": "josh_jackson",
+        "text": "Josh Jackson"
+      }
+    ],
+    "correctChoiceId": "lonzo_ball",
+    "category": "Draft",
+    "difficulty": "medium",
+    "tags": [
+      "draft",
+      "2017"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 60,
+    "id": "draft-2006-rondo-original-team",
+    "question": "Which team drafted Rajon Rondo before he was traded to Boston?",
+    "choices": [
+      {
+        "id": "phoenix_suns",
+        "text": "Phoenix Suns"
+      },
+      {
+        "id": "indiana_pacers",
+        "text": "Indiana Pacers"
+      },
+      {
+        "id": "atlanta_hawks",
+        "text": "Atlanta Hawks"
+      },
+      {
+        "id": "memphis_grizzlies",
+        "text": "Memphis Grizzlies"
+      }
+    ],
+    "correctChoiceId": "phoenix_suns",
+    "category": "Draft",
+    "difficulty": "medium",
+    "tags": [
+      "draft",
+      "trade"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 61,
+    "id": "coach-most-titles-phil",
+    "question": "Which head coach has the most NBA championships (11)?",
+    "choices": [
+      {
+        "id": "red_auerbach",
+        "text": "Red Auerbach"
+      },
+      {
+        "id": "phil_jackson",
+        "text": "Phil Jackson"
+      },
+      {
+        "id": "gregg_popovich",
+        "text": "Gregg Popovich"
+      },
+      {
+        "id": "pat_riley",
+        "text": "Pat Riley"
+      }
+    ],
+    "correctChoiceId": "phil_jackson",
+    "category": "Coach",
+    "difficulty": "easy",
+    "tags": [
+      "record",
+      "coach"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 62,
+    "id": "coach-most-wins-popovich",
+    "question": "Who is the all-time winningest head coach in regular-season wins?",
+    "choices": [
+      {
+        "id": "gregg_popovich",
+        "text": "Gregg Popovich"
+      },
+      {
+        "id": "don_nelson",
+        "text": "Don Nelson"
+      },
+      {
+        "id": "lenny_wilkins",
+        "text": "Lenny Wilkens"
+      },
+      {
+        "id": "doc_rivers",
+        "text": "Doc Rivers"
+      }
+    ],
+    "correctChoiceId": "gregg_popovich",
+    "category": "Coach",
+    "difficulty": "medium",
+    "tags": [
+      "record",
+      "coach"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 63,
+    "id": "coach-ncaa-nba-larry-brown",
+    "question": "Which coach is the only one to win both an NCAA title and an NBA title?",
+    "choices": [
+      {
+        "id": "larry_brown",
+        "text": "Larry Brown"
+      },
+      {
+        "id": "phil_jackson",
+        "text": "Phil Jackson"
+      },
+      {
+        "id": "rick_pitino",
+        "text": "Rick Pitino"
+      },
+      {
+        "id": "mike_krzyzewski",
+        "text": "Mike Krzyzewski"
+      }
+    ],
+    "correctChoiceId": "larry_brown",
+    "category": "Coach",
+    "difficulty": "medium",
+    "tags": [
+      "unique"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 64,
+    "id": "coach-zen-master",
+    "question": "Which coach was nicknamed the 'Zen Master' and wrote 'Sacred Hoops'?",
+    "choices": [
+      {
+        "id": "steve_kerr",
+        "text": "Steve Kerr"
+      },
+      {
+        "id": "phil_jackson",
+        "text": "Phil Jackson"
+      },
+      {
+        "id": "pat_riley",
+        "text": "Pat Riley"
+      },
+      {
+        "id": "gregg_popovich",
+        "text": "Gregg Popovich"
+      }
+    ],
+    "correctChoiceId": "phil_jackson",
+    "category": "Coach",
+    "difficulty": "easy",
+    "tags": [
+      "nickname",
+      "books"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 65,
+    "id": "coach-heat-spoelstra",
+    "question": "Which coach has led the Miami Heat since 2008?",
+    "choices": [
+      {
+        "id": "erik_spoelstra",
+        "text": "Erik Spoelstra"
+      },
+      {
+        "id": "pat_riley",
+        "text": "Pat Riley"
+      },
+      {
+        "id": "stan_van_gundy",
+        "text": "Stan Van Gundy"
+      },
+      {
+        "id": "nick_nurse",
+        "text": "Nick Nurse"
+      }
+    ],
+    "correctChoiceId": "erik_spoelstra",
+    "category": "Coach",
+    "difficulty": "easy",
+    "tags": [
+      "tenure"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 66,
+    "id": "coach-warriors-2015-kerr",
+    "question": "Who coached the Warriors to their 2015 championship?",
+    "choices": [
+      {
+        "id": "steve_kerr",
+        "text": "Steve Kerr"
+      },
+      {
+        "id": "mark_jackson",
+        "text": "Mark Jackson"
+      },
+      {
+        "id": "mike_brown",
+        "text": "Mike Brown"
+      },
+      {
+        "id": "steve_nash",
+        "text": "Steve Nash"
+      }
+    ],
+    "correctChoiceId": "steve_kerr",
+    "category": "Coach",
+    "difficulty": "easy",
+    "tags": [
+      "coach",
+      "warriors"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 67,
+    "id": "coach-raptors-2019-nurse",
+    "question": "Who coached the Raptors to their first title in 2019?",
+    "choices": [
+      {
+        "id": "nick_nurse",
+        "text": "Nick Nurse"
+      },
+      {
+        "id": "dwane_casey",
+        "text": "Dwane Casey"
+      },
+      {
+        "id": "doc_rivers",
+        "text": "Doc Rivers"
+      },
+      {
+        "id": "erik_spoelstra",
+        "text": "Erik Spoelstra"
+      }
+    ],
+    "correctChoiceId": "nick_nurse",
+    "category": "Coach",
+    "difficulty": "easy",
+    "tags": [
+      "coach",
+      "raptors"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 68,
+    "id": "coach-first-female-assistant",
+    "question": "Who became the first full-time female assistant coach in the NBA (Spurs, 2014)?",
+    "choices": [
+      {
+        "id": "nancy_lieberman",
+        "text": "Nancy Lieberman"
+      },
+      {
+        "id": "becky_hammon",
+        "text": "Becky Hammon"
+      },
+      {
+        "id": "teresa_weatherspoon",
+        "text": "Teresa Weatherspoon"
+      },
+      {
+        "id": "dawn_staley",
+        "text": "Dawn Staley"
+      }
+    ],
+    "correctChoiceId": "becky_hammon",
+    "category": "Coach",
+    "difficulty": "medium",
+    "tags": [
+      "milestone"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 69,
+    "id": "team-33-game-streak-lakers",
+    "question": "Which team holds the NBA's longest win streak (33 games)?",
+    "choices": [
+      {
+        "id": "los_angeles_lakers",
+        "text": "Los Angeles Lakers"
+      },
+      {
+        "id": "miami_heat",
+        "text": "Miami Heat"
+      },
+      {
+        "id": "golden_state_warriors",
+        "text": "Golden State Warriors"
+      },
+      {
+        "id": "houston_rockets",
+        "text": "Houston Rockets"
+      }
+    ],
+    "correctChoiceId": "los_angeles_lakers",
+    "category": "Team",
+    "difficulty": "medium",
+    "tags": [
+      "streaks",
+      "wins"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 70,
+    "id": "team-27-game-streak-heat",
+    "question": "Which team won 27 straight games in 2013 (2nd-longest ever)?",
+    "choices": [
+      {
+        "id": "miami_heat",
+        "text": "Miami Heat"
+      },
+      {
+        "id": "houston_rockets",
+        "text": "Houston Rockets"
+      },
+      {
+        "id": "san_antonio_spurs",
+        "text": "San Antonio Spurs"
+      },
+      {
+        "id": "boston_celtics",
+        "text": "Boston Celtics"
+      }
+    ],
+    "correctChoiceId": "miami_heat",
+    "category": "Team",
+    "difficulty": "easy",
+    "tags": [
+      "streaks",
+      "wins"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 71,
+    "id": "team-16-1-playoffs-warriors-2017",
+    "question": "Which team went 16–1 in the 2017 playoffs?",
+    "choices": [
+      {
+        "id": "golden_state_warriors",
+        "text": "Golden State Warriors"
+      },
+      {
+        "id": "san_antonio_spurs",
+        "text": "San Antonio Spurs"
+      },
+      {
+        "id": "miami_heat",
+        "text": "Miami Heat"
+      },
+      {
+        "id": "los_angeles_lakers",
+        "text": "Los Angeles Lakers"
+      }
+    ],
+    "correctChoiceId": "golden_state_warriors",
+    "category": "Team",
+    "difficulty": "medium",
+    "tags": [
+      "playoffs",
+      "dominance"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 72,
+    "id": "team-celtics-most-titles",
+    "question": "Which franchise has the most NBA championships?",
+    "choices": [
+      {
+        "id": "boston_celtics",
+        "text": "Boston Celtics"
+      },
+      {
+        "id": "los_angeles_lakers",
+        "text": "Los Angeles Lakers"
+      },
+      {
+        "id": "chicago_bulls",
+        "text": "Chicago Bulls"
+      },
+      {
+        "id": "golden_state_warriors",
+        "text": "Golden State Warriors"
+      }
+    ],
+    "correctChoiceId": "boston_celtics",
+    "category": "Team",
+    "difficulty": "easy",
+    "tags": [
+      "titles",
+      "record"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 73,
+    "id": "team-73-point-win-grizzlies",
+    "question": "Which team won by an NBA-record 73 points in 2021 (152–79)?",
+    "choices": [
+      {
+        "id": "memphis_grizzlies",
+        "text": "Memphis Grizzlies"
+      },
+      {
+        "id": "boston_celtics",
+        "text": "Boston Celtics"
+      },
+      {
+        "id": "los_angeles_lakers",
+        "text": "Los Angeles Lakers"
+      },
+      {
+        "id": "golden_state_warriors",
+        "text": "Golden State Warriors"
+      }
+    ],
+    "correctChoiceId": "memphis_grizzlies",
+    "category": "Team",
+    "difficulty": "medium",
+    "tags": [
+      "record",
+      "blowout"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 74,
+    "id": "team-22-straight-playoffs-spurs",
+    "question": "Which franchise made 22 straight playoff appearances (1998–2019)?",
+    "choices": [
+      {
+        "id": "san_antonio_spurs",
+        "text": "San Antonio Spurs"
+      },
+      {
+        "id": "los_angeles_lakers",
+        "text": "Los Angeles Lakers"
+      },
+      {
+        "id": "miami_heat",
+        "text": "Miami Heat"
+      },
+      {
+        "id": "indiana_pacers",
+        "text": "Indiana Pacers"
+      }
+    ],
+    "correctChoiceId": "san_antonio_spurs",
+    "category": "Team",
+    "difficulty": "medium",
+    "tags": [
+      "streaks",
+      "playoffs"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 75,
+    "id": "team-clippers-no-finals",
+    "question": "Which team has never reached the NBA Finals (as of 2025)?",
+    "choices": [
+      {
+        "id": "la_clippers",
+        "text": "LA Clippers"
+      },
+      {
+        "id": "phoenix_suns",
+        "text": "Phoenix Suns"
+      },
+      {
+        "id": "brooklyn_nets",
+        "text": "Brooklyn Nets"
+      },
+      {
+        "id": "miami_heat",
+        "text": "Miami Heat"
+      }
+    ],
+    "correctChoiceId": "la_clippers",
+    "category": "Team",
+    "difficulty": "easy",
+    "tags": [
+      "franchise",
+      "milestone"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 76,
+    "id": "team-first-title-raptors-2019",
+    "question": "Which franchise won its first NBA title in 2019?",
+    "choices": [
+      {
+        "id": "toronto_raptors",
+        "text": "Toronto Raptors"
+      },
+      {
+        "id": "milwaukee_bucks",
+        "text": "Milwaukee Bucks"
+      },
+      {
+        "id": "phoenix_suns",
+        "text": "Phoenix Suns"
+      },
+      {
+        "id": "denver_nuggets",
+        "text": "Denver Nuggets"
+      }
+    ],
+    "correctChoiceId": "toronto_raptors",
+    "category": "Team",
+    "difficulty": "easy",
+    "tags": [
+      "titles",
+      "first"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 77,
+    "id": "team-first-title-nuggets-2023",
+    "question": "Which franchise won its first NBA title in 2023?",
+    "choices": [
+      {
+        "id": "denver_nuggets",
+        "text": "Denver Nuggets"
+      },
+      {
+        "id": "phoenix_suns",
+        "text": "Phoenix Suns"
+      },
+      {
+        "id": "memphis_grizzlies",
+        "text": "Memphis Grizzlies"
+      },
+      {
+        "id": "la_clippers",
+        "text": "LA Clippers"
+      }
+    ],
+    "correctChoiceId": "denver_nuggets",
+    "category": "Team",
+    "difficulty": "easy",
+    "tags": [
+      "titles",
+      "first"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 78,
+    "id": "team-rivalry-lakers-celtics",
+    "question": "Which two franchises' rivalry is often dubbed the NBA's 'El Clásico'?",
+    "choices": [
+      {
+        "id": "lakers_celtics",
+        "text": "Lakers & Celtics"
+      },
+      {
+        "id": "bulls_pistons",
+        "text": "Bulls & Pistons"
+      },
+      {
+        "id": "spurs_mavericks",
+        "text": "Spurs & Mavericks"
+      },
+      {
+        "id": "warriors_cavaliers",
+        "text": "Warriors & Cavaliers"
+      }
+    ],
+    "correctChoiceId": "lakers_celtics",
+    "category": "Team",
+    "difficulty": "easy",
+    "tags": [
+      "rivalry"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 79,
+    "id": "arena-msg-knicks",
+    "question": "Which team plays home games at Madison Square Garden?",
+    "choices": [
+      {
+        "id": "new_york_knicks",
+        "text": "New York Knicks"
+      },
+      {
+        "id": "brooklyn_nets",
+        "text": "Brooklyn Nets"
+      },
+      {
+        "id": "philadelphia_76ers",
+        "text": "Philadelphia 76ers"
+      },
+      {
+        "id": "boston_celtics",
+        "text": "Boston Celtics"
+      }
+    ],
+    "correctChoiceId": "new_york_knicks",
+    "category": "Arena",
+    "difficulty": "easy",
+    "tags": [
+      "arena"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 80,
+    "id": "arena-chase-center-warriors",
+    "question": "Which team plays at Chase Center?",
+    "choices": [
+      {
+        "id": "golden_state_warriors",
+        "text": "Golden State Warriors"
+      },
+      {
+        "id": "los_angeles_lakers",
+        "text": "Los Angeles Lakers"
+      },
+      {
+        "id": "la_clippers",
+        "text": "LA Clippers"
+      },
+      {
+        "id": "sacramento_kings",
+        "text": "Sacramento Kings"
+      }
+    ],
+    "correctChoiceId": "golden_state_warriors",
+    "category": "Arena",
+    "difficulty": "easy",
+    "tags": [
+      "arena"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 81,
+    "id": "arena-crypto-lakers-clippers",
+    "question": "Crypto.com Arena (formerly Staples Center) has been home to which teams?",
+    "choices": [
+      {
+        "id": "lakers_clippers",
+        "text": "Lakers & Clippers"
+      },
+      {
+        "id": "lakers_kings",
+        "text": "Lakers & Kings"
+      },
+      {
+        "id": "clippers_kings",
+        "text": "Clippers & Kings"
+      },
+      {
+        "id": "lakers_warriors",
+        "text": "Lakers & Warriors"
+      }
+    ],
+    "correctChoiceId": "lakers_clippers",
+    "category": "Arena",
+    "difficulty": "medium",
+    "tags": [
+      "arena"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 82,
+    "id": "arena-td-garden-celtics",
+    "question": "Which team plays at TD Garden?",
+    "choices": [
+      {
+        "id": "boston_celtics",
+        "text": "Boston Celtics"
+      },
+      {
+        "id": "brooklyn_nets",
+        "text": "Brooklyn Nets"
+      },
+      {
+        "id": "toronto_raptors",
+        "text": "Toronto Raptors"
+      },
+      {
+        "id": "miami_heat",
+        "text": "Miami Heat"
+      }
+    ],
+    "correctChoiceId": "boston_celtics",
+    "category": "Arena",
+    "difficulty": "easy",
+    "tags": [
+      "arena"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 83,
+    "id": "arena-ball-arena-nuggets",
+    "question": "Ball Arena is home to which NBA team?",
+    "choices": [
+      {
+        "id": "denver_nuggets",
+        "text": "Denver Nuggets"
+      },
+      {
+        "id": "phoenix_suns",
+        "text": "Phoenix Suns"
+      },
+      {
+        "id": "utah_jazz",
+        "text": "Utah Jazz"
+      },
+      {
+        "id": "oklahoma_city_thunder",
+        "text": "Oklahoma City Thunder"
+      }
+    ],
+    "correctChoiceId": "denver_nuggets",
+    "category": "Arena",
+    "difficulty": "easy",
+    "tags": [
+      "arena"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 84,
+    "id": "arena-fiserv-bucks",
+    "question": "Fiserv Forum is home to which NBA team?",
+    "choices": [
+      {
+        "id": "milwaukee_bucks",
+        "text": "Milwaukee Bucks"
+      },
+      {
+        "id": "minnesota_timberwolves",
+        "text": "Minnesota Timberwolves"
+      },
+      {
+        "id": "detroit_pistons",
+        "text": "Detroit Pistons"
+      },
+      {
+        "id": "indiana_pacers",
+        "text": "Indiana Pacers"
+      }
+    ],
+    "correctChoiceId": "milwaukee_bucks",
+    "category": "Arena",
+    "difficulty": "easy",
+    "tags": [
+      "arena"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 85,
+    "id": "arena-footprint-suns",
+    "question": "Footprint Center is home to which NBA team?",
+    "choices": [
+      {
+        "id": "phoenix_suns",
+        "text": "Phoenix Suns"
+      },
+      {
+        "id": "utah_jazz",
+        "text": "Utah Jazz"
+      },
+      {
+        "id": "denver_nuggets",
+        "text": "Denver Nuggets"
+      },
+      {
+        "id": "sacramento_kings",
+        "text": "Sacramento Kings"
+      }
+    ],
+    "correctChoiceId": "phoenix_suns",
+    "category": "Arena",
+    "difficulty": "easy",
+    "tags": [
+      "arena"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 86,
+    "id": "arena-intuit-dome-clippers",
+    "question": "Which new arena is the LA Clippers' home starting in the mid-2020s?",
+    "choices": [
+      {
+        "id": "intuit_dome",
+        "text": "Intuit Dome"
+      },
+      {
+        "id": "crypto_com_arena",
+        "text": "Crypto.com Arena"
+      },
+      {
+        "id": "honda_center",
+        "text": "Honda Center"
+      },
+      {
+        "id": "the_forum",
+        "text": "The Forum"
+      }
+    ],
+    "correctChoiceId": "intuit_dome",
+    "category": "Arena",
+    "difficulty": "medium",
+    "tags": [
+      "arena",
+      "clippers"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 87,
+    "id": "arena-oldest-msg",
+    "question": "What is the oldest NBA arena still in use (opened 1968)?",
+    "choices": [
+      {
+        "id": "madison_square_garden",
+        "text": "Madison Square Garden"
+      },
+      {
+        "id": "td_garden",
+        "text": "TD Garden"
+      },
+      {
+        "id": "chase_center",
+        "text": "Chase Center"
+      },
+      {
+        "id": "united_center",
+        "text": "United Center"
+      }
+    ],
+    "correctChoiceId": "madison_square_garden",
+    "category": "Arena",
+    "difficulty": "medium",
+    "tags": [
+      "arena",
+      "history"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 88,
+    "id": "arena-largest-capacity-united-center",
+    "question": "Which NBA arena has the largest seating capacity (about 20,900)?",
+    "choices": [
+      {
+        "id": "united_center",
+        "text": "United Center (Bulls)"
+      },
+      {
+        "id": "madison_square_garden",
+        "text": "Madison Square Garden (Knicks)"
+      },
+      {
+        "id": "wells_fargo_center",
+        "text": "Wells Fargo Center (76ers)"
+      },
+      {
+        "id": "at_t_center",
+        "text": "AT&T Center (Spurs)"
+      }
+    ],
+    "correctChoiceId": "united_center",
+    "category": "Arena",
+    "difficulty": "medium",
+    "tags": [
+      "arena",
+      "capacity"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 89,
+    "id": "franchise-move-sonics-thunder",
+    "question": "Which franchise relocated from Seattle to become the Thunder in 2008?",
+    "choices": [
+      {
+        "id": "seattle_supersonics",
+        "text": "Seattle SuperSonics"
+      },
+      {
+        "id": "vancouver_grizzlies",
+        "text": "Vancouver Grizzlies"
+      },
+      {
+        "id": "new_orleans_hornets",
+        "text": "New Orleans Hornets"
+      },
+      {
+        "id": "san_diego_clippers",
+        "text": "San Diego Clippers"
+      }
+    ],
+    "correctChoiceId": "seattle_supersonics",
+    "category": "Team",
+    "difficulty": "easy",
+    "tags": [
+      "relocation"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 90,
+    "id": "franchise-move-vancouver-memphis",
+    "question": "Which team moved from Vancouver to Memphis in 2001?",
+    "choices": [
+      {
+        "id": "grizzlies",
+        "text": "Grizzlies"
+      },
+      {
+        "id": "kings",
+        "text": "Kings"
+      },
+      {
+        "id": "hornets",
+        "text": "Hornets"
+      },
+      {
+        "id": "nets",
+        "text": "Nets"
+      }
+    ],
+    "correctChoiceId": "grizzlies",
+    "category": "Team",
+    "difficulty": "easy",
+    "tags": [
+      "relocation"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 91,
+    "id": "franchise-move-nets-brooklyn",
+    "question": "Which team moved to Brooklyn in 2012?",
+    "choices": [
+      {
+        "id": "nets",
+        "text": "Nets"
+      },
+      {
+        "id": "knicks",
+        "text": "Knicks"
+      },
+      {
+        "id": "sixers",
+        "text": "76ers"
+      },
+      {
+        "id": "celtics",
+        "text": "Celtics"
+      }
+    ],
+    "correctChoiceId": "nets",
+    "category": "Team",
+    "difficulty": "easy",
+    "tags": [
+      "relocation"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 92,
+    "id": "franchise-name-bobcats-hornets",
+    "question": "The Charlotte Bobcats changed their name back to what in 2014?",
+    "choices": [
+      {
+        "id": "hornets",
+        "text": "Hornets"
+      },
+      {
+        "id": "bobcats",
+        "text": "Bobcats"
+      },
+      {
+        "id": "pelicans",
+        "text": "Pelicans"
+      },
+      {
+        "id": "bullets",
+        "text": "Bullets"
+      }
+    ],
+    "correctChoiceId": "hornets",
+    "category": "Team",
+    "difficulty": "easy",
+    "tags": [
+      "rebrand"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 93,
+    "id": "series-2016-finals-3-1-cavs",
+    "question": "Which team came back from a 3–1 deficit to win the 2016 NBA Finals?",
+    "choices": [
+      {
+        "id": "cleveland_cavaliers",
+        "text": "Cleveland Cavaliers"
+      },
+      {
+        "id": "golden_state_warriors",
+        "text": "Golden State Warriors"
+      },
+      {
+        "id": "san_antonio_spurs",
+        "text": "San Antonio Spurs"
+      },
+      {
+        "id": "miami_heat",
+        "text": "Miami Heat"
+      }
+    ],
+    "correctChoiceId": "cleveland_cavaliers",
+    "category": "Team",
+    "difficulty": "easy",
+    "tags": [
+      "finals",
+      "comeback"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 94,
+    "id": "series-2020-clippers-blew-3-1",
+    "question": "Which team blew a 3–1 series lead to the Nuggets in the 2020 bubble playoffs?",
+    "choices": [
+      {
+        "id": "la_clippers",
+        "text": "LA Clippers"
+      },
+      {
+        "id": "utah_jazz",
+        "text": "Utah Jazz"
+      },
+      {
+        "id": "houston_rockets",
+        "text": "Houston Rockets"
+      },
+      {
+        "id": "oklahoma_city_thunder",
+        "text": "Oklahoma City Thunder"
+      }
+    ],
+    "correctChoiceId": "la_clippers",
+    "category": "Team",
+    "difficulty": "medium",
+    "tags": [
+      "playoffs",
+      "bubble"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 95,
+    "id": "series-8-seed-finals-heat-2023",
+    "question": "Which 8-seed reached the NBA Finals in 2023, the second 8-seed ever to do so?",
+    "choices": [
+      {
+        "id": "miami_heat",
+        "text": "Miami Heat"
+      },
+      {
+        "id": "memphis_grizzlies",
+        "text": "Memphis Grizzlies"
+      },
+      {
+        "id": "detroit_pistons",
+        "text": "Detroit Pistons"
+      },
+      {
+        "id": "dallas_mavericks",
+        "text": "Dallas Mavericks"
+      }
+    ],
+    "correctChoiceId": "miami_heat",
+    "category": "Team",
+    "difficulty": "medium",
+    "tags": [
+      "playoffs",
+      "seed"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 96,
+    "id": "game-biggest-regular-comeback-36",
+    "question": "What is the largest regular-season comeback in NBA history and which team did it?",
+    "choices": [
+      {
+        "id": "jazz_36",
+        "text": "36 points – Utah Jazz"
+      },
+      {
+        "id": "lakers_29",
+        "text": "29 points – Los Angeles Lakers"
+      },
+      {
+        "id": "celtics_40",
+        "text": "40 points – Boston Celtics"
+      },
+      {
+        "id": "clippers_35",
+        "text": "35 points – LA Clippers"
+      }
+    ],
+    "correctChoiceId": "jazz_36",
+    "category": "Team",
+    "difficulty": "hard",
+    "tags": [
+      "record",
+      "comeback"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 97,
+    "id": "defense-dpoy-back-to-back-kawhi",
+    "question": "Which forward won back-to-back Defensive Player of the Year awards in 2015 & 2016?",
+    "choices": [
+      {
+        "id": "kawhi_leonard",
+        "text": "Kawhi Leonard"
+      },
+      {
+        "id": "draymond_green",
+        "text": "Draymond Green"
+      },
+      {
+        "id": "giannis_antetokounmpo",
+        "text": "Giannis Antetokounmpo"
+      },
+      {
+        "id": "anthony_davis",
+        "text": "Anthony Davis"
+      }
+    ],
+    "correctChoiceId": "kawhi_leonard",
+    "category": "Defense",
+    "difficulty": "medium",
+    "tags": [
+      "dpoy"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 98,
+    "id": "defense-most-dpoy-mutombo",
+    "question": "Who is tied for most Defensive Player of the Year awards with 4?",
+    "choices": [
+      {
+        "id": "dikembe_mutombo",
+        "text": "Dikembe Mutombo"
+      },
+      {
+        "id": "ben_wallace",
+        "text": "Ben Wallace"
+      },
+      {
+        "id": "rudy_gobert",
+        "text": "Rudy Gobert"
+      },
+      {
+        "id": "dwight_howard",
+        "text": "Dwight Howard"
+      }
+    ],
+    "correctChoiceId": "dikembe_mutombo",
+    "category": "Defense",
+    "difficulty": "medium",
+    "tags": [
+      "dpoy"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 99,
+    "id": "defense-most-dpoy-ben-wallace",
+    "question": "Who is tied with Mutombo for most DPOY awards (4)?",
+    "choices": [
+      {
+        "id": "ben_wallace",
+        "text": "Ben Wallace"
+      },
+      {
+        "id": "rudy_gobert",
+        "text": "Rudy Gobert"
+      },
+      {
+        "id": "dwight_howard",
+        "text": "Dwight Howard"
+      },
+      {
+        "id": "draymond_green",
+        "text": "Draymond Green"
+      }
+    ],
+    "correctChoiceId": "ben_wallace",
+    "category": "Defense",
+    "difficulty": "medium",
+    "tags": [
+      "dpoy"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 100,
+    "id": "olympics-dream-team-year",
+    "question": "In what year did Team USA first include active NBA players at the Olympics?",
+    "choices": [
+      {
+        "id": "1988",
+        "text": "1988"
+      },
+      {
+        "id": "1992",
+        "text": "1992"
+      },
+      {
+        "id": "1996",
+        "text": "1996"
+      },
+      {
+        "id": "2000",
+        "text": "2000"
+      }
+    ],
+    "correctChoiceId": "1992",
+    "category": "Team",
+    "difficulty": "easy",
+    "tags": [
+      "olympics",
+      "dream_team"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 101,
+    "id": "olympics-2004-argentina-gold",
+    "question": "Which country won men's basketball gold at the 2004 Olympics?",
+    "choices": [
+      {
+        "id": "spain",
+        "text": "Spain"
+      },
+      {
+        "id": "argentina",
+        "text": "Argentina"
+      },
+      {
+        "id": "greece",
+        "text": "Greece"
+      },
+      {
+        "id": "lithuania",
+        "text": "Lithuania"
+      }
+    ],
+    "correctChoiceId": "argentina",
+    "category": "Team",
+    "difficulty": "medium",
+    "tags": [
+      "olympics"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 102,
+    "id": "olympics-ussr-multiple-golds",
+    "question": "Besides the USA, which country has won multiple Olympic golds in men's basketball?",
+    "choices": [
+      {
+        "id": "spain",
+        "text": "Spain"
+      },
+      {
+        "id": "soviet_union",
+        "text": "Soviet Union"
+      },
+      {
+        "id": "yugoslavia",
+        "text": "Yugoslavia"
+      },
+      {
+        "id": "argentina",
+        "text": "Argentina"
+      }
+    ],
+    "correctChoiceId": "soviet_union",
+    "category": "Team",
+    "difficulty": "hard",
+    "tags": [
+      "olympics",
+      "history"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 103,
+    "id": "olympics-dream-team-top-scorer",
+    "question": "Who led the 1992 USA 'Dream Team' in scoring?",
+    "choices": [
+      {
+        "id": "michael_jordan",
+        "text": "Michael Jordan"
+      },
+      {
+        "id": "charles_barkley",
+        "text": "Charles Barkley"
+      },
+      {
+        "id": "karl_malone",
+        "text": "Karl Malone"
+      },
+      {
+        "id": "magic_johnson",
+        "text": "Magic Johnson"
+      }
+    ],
+    "correctChoiceId": "charles_barkley",
+    "category": "Player",
+    "difficulty": "medium",
+    "tags": [
+      "olympics"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 104,
+    "id": "olympics-only-college-player-1992",
+    "question": "Who was the only collegiate player on the 1992 Dream Team?",
+    "choices": [
+      {
+        "id": "grant_hill",
+        "text": "Grant Hill"
+      },
+      {
+        "id": "shaquille_oneal",
+        "text": "Shaquille O'Neal"
+      },
+      {
+        "id": "christian_laettner",
+        "text": "Christian Laettner"
+      },
+      {
+        "id": "tim_hardaway",
+        "text": "Tim Hardaway"
+      }
+    ],
+    "correctChoiceId": "christian_laettner",
+    "category": "Player",
+    "difficulty": "easy",
+    "tags": [
+      "olympics"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 105,
+    "id": "olympics-redeem-team-2008",
+    "question": "What nickname was given to the 2008 USA Olympic basketball team?",
+    "choices": [
+      {
+        "id": "redeem_team",
+        "text": "The Redeem Team"
+      },
+      {
+        "id": "dream_team_ii",
+        "text": "The Dream Team II"
+      },
+      {
+        "id": "gold_standard",
+        "text": "The Gold Standard"
+      },
+      {
+        "id": "avengers",
+        "text": "The Avengers"
+      }
+    ],
+    "correctChoiceId": "redeem_team",
+    "category": "Team",
+    "difficulty": "easy",
+    "tags": [
+      "olympics",
+      "nickname"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 106,
+    "id": "mvp-first-international-hakeem",
+    "question": "Who was the first international-born NBA MVP?",
+    "choices": [
+      {
+        "id": "dirk_nowitzki",
+        "text": "Dirk Nowitzki"
+      },
+      {
+        "id": "hakeem_olajuwon",
+        "text": "Hakeem Olajuwon"
+      },
+      {
+        "id": "steve_nash",
+        "text": "Steve Nash"
+      },
+      {
+        "id": "giannis_antetokounmpo",
+        "text": "Giannis Antetokounmpo"
+      }
+    ],
+    "correctChoiceId": "hakeem_olajuwon",
+    "category": "Player",
+    "difficulty": "medium",
+    "tags": [
+      "international",
+      "mvp"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 107,
+    "id": "scoring-first-international-embiid",
+    "question": "Why was Joel Embiid's 2022 scoring title historic?",
+    "choices": [
+      {
+        "id": "youngest",
+        "text": "Youngest scoring champ ever"
+      },
+      {
+        "id": "first_center_since_shaq",
+        "text": "First center to lead since Shaq"
+      },
+      {
+        "id": "first_international",
+        "text": "First international scoring champ"
+      },
+      {
+        "id": "avg_35",
+        "text": "Averaged over 35 PPG"
+      }
+    ],
+    "correctChoiceId": "first_international",
+    "category": "Player",
+    "difficulty": "medium",
+    "tags": [
+      "international",
+      "scoring"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 108,
+    "id": "mvp-first-european-dirk",
+    "question": "Who was the first European-born NBA MVP?",
+    "choices": [
+      {
+        "id": "tony_parker",
+        "text": "Tony Parker"
+      },
+      {
+        "id": "pau_gasol",
+        "text": "Pau Gasol"
+      },
+      {
+        "id": "dirk_nowitzki",
+        "text": "Dirk Nowitzki"
+      },
+      {
+        "id": "giannis_antetokounmpo",
+        "text": "Giannis Antetokounmpo"
+      }
+    ],
+    "correctChoiceId": "dirk_nowitzki",
+    "category": "Player",
+    "difficulty": "medium",
+    "tags": [
+      "international",
+      "mvp"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 109,
+    "id": "fiba-2023-winner-germany",
+    "question": "Which country won the 2023 FIBA Basketball World Cup?",
+    "choices": [
+      {
+        "id": "usa",
+        "text": "USA"
+      },
+      {
+        "id": "spain",
+        "text": "Spain"
+      },
+      {
+        "id": "serbia",
+        "text": "Serbia"
+      },
+      {
+        "id": "germany",
+        "text": "Germany"
+      }
+    ],
+    "correctChoiceId": "germany",
+    "category": "Team",
+    "difficulty": "medium",
+    "tags": [
+      "fiba",
+      "world_cup"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 110,
+    "id": "olympics-vince-over-weis",
+    "question": "Vince Carter's iconic dunk over a 7'2\" center happened against which country (2000 Olympics)?",
+    "choices": [
+      {
+        "id": "france",
+        "text": "France"
+      },
+      {
+        "id": "russia",
+        "text": "Russia"
+      },
+      {
+        "id": "australia",
+        "text": "Australia"
+      },
+      {
+        "id": "canada",
+        "text": "Canada"
+      }
+    ],
+    "correctChoiceId": "france",
+    "category": "Moment",
+    "difficulty": "medium",
+    "tags": [
+      "olympics",
+      "dunk"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 111,
+    "id": "international-most-players-canada",
+    "question": "As of mid-2020s, which country has the most NBA players outside the USA?",
+    "choices": [
+      {
+        "id": "france",
+        "text": "France"
+      },
+      {
+        "id": "canada",
+        "text": "Canada"
+      },
+      {
+        "id": "australia",
+        "text": "Australia"
+      },
+      {
+        "id": "spain",
+        "text": "Spain"
+      }
+    ],
+    "correctChoiceId": "canada",
+    "category": "Team",
+    "difficulty": "medium",
+    "tags": [
+      "international",
+      "nba_players"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 112,
+    "id": "culture-real-mvp-durant",
+    "question": "Which star's 2014 MVP speech ('You're the real MVP') became a meme?",
+    "choices": [
+      {
+        "id": "lebron_james",
+        "text": "LeBron James"
+      },
+      {
+        "id": "stephen_curry",
+        "text": "Stephen Curry"
+      },
+      {
+        "id": "kevin_durant",
+        "text": "Kevin Durant"
+      },
+      {
+        "id": "russell_westbrook",
+        "text": "Russell Westbrook"
+      }
+    ],
+    "correctChoiceId": "kevin_durant",
+    "category": "Moment",
+    "difficulty": "easy",
+    "tags": [
+      "meme",
+      "speech"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 113,
+    "id": "culture-crying-jordan-meme",
+    "question": "Whose Hall of Fame speech spawned the famous 'crying meme'?",
+    "choices": [
+      {
+        "id": "magic_johnson",
+        "text": "Magic Johnson"
+      },
+      {
+        "id": "kobe_bryant",
+        "text": "Kobe Bryant"
+      },
+      {
+        "id": "michael_jordan",
+        "text": "Michael Jordan"
+      },
+      {
+        "id": "shaquille_oneal",
+        "text": "Shaquille O'Neal"
+      }
+    ],
+    "correctChoiceId": "michael_jordan",
+    "category": "Moment",
+    "difficulty": "easy",
+    "tags": [
+      "meme"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 114,
+    "id": "culture-the-decision-lebron",
+    "question": "Which player announced his free-agency move on ESPN's 'The Decision' in 2010?",
+    "choices": [
+      {
+        "id": "kevin_durant",
+        "text": "Kevin Durant"
+      },
+      {
+        "id": "lebron_james",
+        "text": "LeBron James"
+      },
+      {
+        "id": "carmelo_anthony",
+        "text": "Carmelo Anthony"
+      },
+      {
+        "id": "chris_bosh",
+        "text": "Chris Bosh"
+      }
+    ],
+    "correctChoiceId": "lebron_james",
+    "category": "Moment",
+    "difficulty": "easy",
+    "tags": [
+      "tv",
+      "free_agency"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 115,
+    "id": "culture-uncut-gems-kg",
+    "question": "Which NBA legend played himself in *Uncut Gems* (2019)?",
+    "choices": [
+      {
+        "id": "kevin_garnett",
+        "text": "Kevin Garnett"
+      },
+      {
+        "id": "charles_barkley",
+        "text": "Charles Barkley"
+      },
+      {
+        "id": "dwyane_wade",
+        "text": "Dwyane Wade"
+      },
+      {
+        "id": "allen_iverson",
+        "text": "Allen Iverson"
+      }
+    ],
+    "correctChoiceId": "kevin_garnett",
+    "category": "Moment",
+    "difficulty": "easy",
+    "tags": [
+      "film"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 116,
+    "id": "culture-space-jam-jordan",
+    "question": "Who starred in the original *Space Jam* (1996) with Bugs Bunny?",
+    "choices": [
+      {
+        "id": "shaquille_oneal",
+        "text": "Shaquille O'Neal"
+      },
+      {
+        "id": "michael_jordan",
+        "text": "Michael Jordan"
+      },
+      {
+        "id": "charles_barkley",
+        "text": "Charles Barkley"
+      },
+      {
+        "id": "magic_johnson",
+        "text": "Magic Johnson"
+      }
+    ],
+    "correctChoiceId": "michael_jordan",
+    "category": "Moment",
+    "difficulty": "easy",
+    "tags": [
+      "film"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 117,
+    "id": "culture-trainwreck-lebron",
+    "question": "Which NBA player had a notable role playing himself in *Trainwreck* (2015)?",
+    "choices": [
+      {
+        "id": "kobe_bryant",
+        "text": "Kobe Bryant"
+      },
+      {
+        "id": "lebron_james",
+        "text": "LeBron James"
+      },
+      {
+        "id": "chris_paul",
+        "text": "Chris Paul"
+      },
+      {
+        "id": "dwight_howard",
+        "text": "Dwight Howard"
+      }
+    ],
+    "correctChoiceId": "lebron_james",
+    "category": "Moment",
+    "difficulty": "easy",
+    "tags": [
+      "film"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 118,
+    "id": "culture-spike-lee-knicks",
+    "question": "Spike Lee is famously the most die-hard celebrity fan of which NBA team?",
+    "choices": [
+      {
+        "id": "los_angeles_lakers",
+        "text": "Los Angeles Lakers"
+      },
+      {
+        "id": "new_york_knicks",
+        "text": "New York Knicks"
+      },
+      {
+        "id": "toronto_raptors",
+        "text": "Toronto Raptors"
+      },
+      {
+        "id": "chicago_bulls",
+        "text": "Chicago Bulls"
+      }
+    ],
+    "correctChoiceId": "new_york_knicks",
+    "category": "Moment",
+    "difficulty": "easy",
+    "tags": [
+      "fans",
+      "culture"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 119,
+    "id": "culture-uncle-drew-kyrie",
+    "question": "Uncle Drew is a character played by which current NBA star?",
+    "choices": [
+      {
+        "id": "kyrie_irving",
+        "text": "Kyrie Irving"
+      },
+      {
+        "id": "kevin_love",
+        "text": "Kevin Love"
+      },
+      {
+        "id": "chris_paul",
+        "text": "Chris Paul"
+      },
+      {
+        "id": "james_harden",
+        "text": "James Harden"
+      }
+    ],
+    "correctChoiceId": "kyrie_irving",
+    "category": "Moment",
+    "difficulty": "easy",
+    "tags": [
+      "ads",
+      "character"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 120,
+    "id": "culture-the-last-dance-title",
+    "question": "What is the title of the 10-part docuseries on MJ and the 1990s Bulls?",
+    "choices": [
+      {
+        "id": "beyond_the_hoop",
+        "text": "Beyond the Hoop"
+      },
+      {
+        "id": "the_last_dance",
+        "text": "The Last Dance"
+      },
+      {
+        "id": "23_and_me",
+        "text": "23 and Me"
+      },
+      {
+        "id": "bulls_dynasty",
+        "text": "Bulls Dynasty"
+      }
+    ],
+    "correctChoiceId": "the_last_dance",
+    "category": "Moment",
+    "difficulty": "easy",
+    "tags": [
+      "doc"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 121,
+    "id": "culture-trust-the-process",
+    "question": "Trust the Process is associated with which team's rebuild?",
+    "choices": [
+      {
+        "id": "philadelphia_76ers",
+        "text": "Philadelphia 76ers"
+      },
+      {
+        "id": "phoenix_suns",
+        "text": "Phoenix Suns"
+      },
+      {
+        "id": "milwaukee_bucks",
+        "text": "Milwaukee Bucks"
+      },
+      {
+        "id": "minnesota_timberwolves",
+        "text": "Minnesota Timberwolves"
+      }
+    ],
+    "correctChoiceId": "philadelphia_76ers",
+    "category": "Team",
+    "difficulty": "easy",
+    "tags": [
+      "meme",
+      "rebuild"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 122,
+    "id": "culture-kawhi-fun-guy",
+    "question": "Which player's awkward 'I'm a fun guy' laugh went viral in 2018?",
+    "choices": [
+      {
+        "id": "kawhi_leonard",
+        "text": "Kawhi Leonard"
+      },
+      {
+        "id": "giannis_antetokounmpo",
+        "text": "Giannis Antetokounmpo"
+      },
+      {
+        "id": "klay_thompson",
+        "text": "Klay Thompson"
+      },
+      {
+        "id": "james_harden",
+        "text": "James Harden"
+      }
+    ],
+    "correctChoiceId": "kawhi_leonard",
+    "category": "Moment",
+    "difficulty": "easy",
+    "tags": [
+      "meme",
+      "quote"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 123,
+    "id": "culture-mamba-mentality",
+    "question": "Mamba Mentality is inspired by which late NBA legend?",
+    "choices": [
+      {
+        "id": "kobe_bryant",
+        "text": "Kobe Bryant"
+      },
+      {
+        "id": "wilt_chamberlain",
+        "text": "Wilt Chamberlain"
+      },
+      {
+        "id": "allen_iverson",
+        "text": "Allen Iverson"
+      },
+      {
+        "id": "karl_malone",
+        "text": "Karl Malone"
+      }
+    ],
+    "correctChoiceId": "kobe_bryant",
+    "category": "Moment",
+    "difficulty": "easy",
+    "tags": [
+      "mindset"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 124,
+    "id": "culture-zoom-freak-giannis",
+    "question": "Zoom Freak is a Nike signature line for which superstar?",
+    "choices": [
+      {
+        "id": "zion_williamson",
+        "text": "Zion Williamson"
+      },
+      {
+        "id": "giannis_antetokounmpo",
+        "text": "Giannis Antetokounmpo"
+      },
+      {
+        "id": "luka_doncic",
+        "text": "Luka Dončić"
+      },
+      {
+        "id": "kevin_durant",
+        "text": "Kevin Durant"
+      }
+    ],
+    "correctChoiceId": "giannis_antetokounmpo",
+    "category": "Player",
+    "difficulty": "easy",
+    "tags": [
+      "shoes"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 125,
+    "id": "culture-banned-aj1",
+    "question": "Why were Michael Jordan's original Air Jordan I sneakers nicknamed 'Banned' in 1985?",
+    "choices": [
+      {
+        "id": "logo",
+        "text": "They featured a banned logo"
+      },
+      {
+        "id": "uniform_rule",
+        "text": "NBA banned them for violating uniform color rules"
+      },
+      {
+        "id": "material",
+        "text": "They used banned materials"
+      },
+      {
+        "id": "contract",
+        "text": "Jordan's contract forbade them"
+      }
+    ],
+    "correctChoiceId": "uniform_rule",
+    "category": "Player",
+    "difficulty": "medium",
+    "tags": [
+      "shoes",
+      "history"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 126,
+    "id": "culture-hack-a-shaq",
+    "question": "Hack-a-Shaq targeted which weakness of Shaquille O'Neal?",
+    "choices": [
+      {
+        "id": "three_point",
+        "text": "Three-point shooting"
+      },
+      {
+        "id": "free_throw",
+        "text": "Free-throw shooting"
+      },
+      {
+        "id": "post_moves",
+        "text": "Post moves"
+      },
+      {
+        "id": "paint_defense",
+        "text": "Paint defense"
+      }
+    ],
+    "correctChoiceId": "free_throw",
+    "category": "Player",
+    "difficulty": "easy",
+    "tags": [
+      "strategy"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 127,
+    "id": "culture-game6-klay",
+    "question": "Which player is nicknamed Game 6 ___ for big Game 6 performances?",
+    "choices": [
+      {
+        "id": "jordan",
+        "text": "Jordan"
+      },
+      {
+        "id": "lebron",
+        "text": "LeBron"
+      },
+      {
+        "id": "klay",
+        "text": "Klay"
+      },
+      {
+        "id": "dray",
+        "text": "Dray"
+      }
+    ],
+    "correctChoiceId": "klay",
+    "category": "Moment",
+    "difficulty": "easy",
+    "tags": [
+      "nickname"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 128,
+    "id": "culture-metta-world-peace",
+    "question": "Which former All-Star changed his name to Metta World Peace in 2011?",
+    "choices": [
+      {
+        "id": "ron_artest",
+        "text": "Ron Artest"
+      },
+      {
+        "id": "world_b_free",
+        "text": "World B. Free"
+      },
+      {
+        "id": "stephen_jackson",
+        "text": "Stephen Jackson"
+      },
+      {
+        "id": "gilbert_arenas",
+        "text": "Gilbert Arenas"
+      }
+    ],
+    "correctChoiceId": "ron_artest",
+    "category": "Player",
+    "difficulty": "easy",
+    "tags": [
+      "name_change"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
+  },
+  {
+    "number": 129,
+    "id": "logo-jerry-west-silhouette",
+    "question": "The NBA logo silhouette is widely believed to be based on which Hall of Famer?",
+    "choices": [
+      {
+        "id": "michael_jordan",
+        "text": "Michael Jordan"
+      },
+      {
+        "id": "julius_erving",
+        "text": "Julius Erving"
+      },
+      {
+        "id": "jerry_west",
+        "text": "Jerry West"
+      },
+      {
+        "id": "oscar_robertson",
+        "text": "Oscar Robertson"
+      }
+    ],
+    "correctChoiceId": "jerry_west",
+    "category": "Player",
+    "difficulty": "easy",
+    "tags": [
+      "logo",
+      "history"
+    ],
+    "contextNote": "",
+    "isActive": true,
+    "createdAt": "2025-09-29"
   }
 ]
