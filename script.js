@@ -518,7 +518,7 @@ function submitTextAnswer() {
         
         // Update UI immediately for survival mode
         if (currentGame.mode === 'survival') {
-            document.querySelector('.question-number').textContent = `Survival Streak: ${currentGame.streak}`;
+            document.getElementById('question-counter').textContent = `Survival Streak: ${currentGame.streak}`;
         }
     } else {
         currentGame.streak = 0;
@@ -2640,7 +2640,7 @@ function updateQuestionUI(question) {
         // Regular mode - show progress and question count
         const progress = ((currentGame.currentQuestion + 1) / currentGame.questionCount) * 100;
         document.querySelector('.progress-fill').style.width = `${progress}%`;
-        document.querySelector('.question-number').textContent = 
+        document.getElementById('question-counter').textContent = 
             `Question ${currentGame.currentQuestion + 1} of ${currentGame.questionCount}`;
     }
     
@@ -2859,7 +2859,7 @@ function selectAnswer(answerIndex) {
         
         // Update UI immediately for survival mode
         if (currentGame.mode === 'survival') {
-            document.querySelector('.question-number').textContent = `Survival Streak: ${currentGame.streak}`;
+            document.getElementById('question-counter').textContent = `Survival Streak: ${currentGame.streak}`;
             // Don't show score in survival mode - streak is more important
         }
     } else {

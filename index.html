@@ -323,20 +323,24 @@
 
         <!-- Game Screen -->
         <div id="game-screen" class="screen">
-            <div class="game-header compact-header">
-                <div class="header-item">
-                    <div class="game-sport-display compact-sport">
-                        <i class="fas fa-trophy"></i>
-                        <span id="current-sport-display">NFL</span>
+            <div class="game-header clean-header">
+                <div class="header-top">
+                    <div class="header-left">
+                        <div class="sport-badge">
+                            <i class="fas fa-trophy"></i>
+                            <span id="current-sport-display">NFL</span>
+                        </div>
                     </div>
-                </div>
-                <div class="header-item header-center">
-                    <span class="question-number compact-question" id="question-counter">Question 1 of 10</span>
-                </div>
-                <div class="header-item">
-                    <div class="game-timer compact-timer">
-                        <i class="fas fa-clock"></i>
-                        <span id="timer">2:00</span>
+                    <div class="header-center">
+                        <div class="timer-badge center-timer">
+                            <i class="fas fa-clock"></i>
+                            <span id="timer">2:00</span>
+                        </div>
+                    </div>
+                    <div class="header-right">
+                        <div class="question-counter">
+                            <span id="question-counter">Question 1 of 10</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -344,9 +348,6 @@
             <div class="game-content clean-layout">
                 <!-- Player Card -->
                 <div class="player-card-clean" id="player-card">
-                    <div class="player-avatar-simple">
-                        <i class="fas fa-user-circle"></i>
-                    </div>
                     <div class="player-info-clean">
                         <h3 id="player-name" class="player-name-clean">Michael Thomas</h3>
                         <p id="player-team" class="team-name-clean">New Orleans Saints</p>
@@ -459,7 +460,6 @@
                     <div class="leaderboard-item rank-1">
                         <div class="rank">1</div>
                         <div class="player-info">
-                            <div class="player-avatar">JD</div>
                             <div class="player-details">
                                 <span class="player-name">John Doe</span>
                                 <span class="player-stats">15 games • 85% avg</span>
@@ -471,7 +471,6 @@
                     <div class="leaderboard-item">
                         <div class="rank">2</div>
                         <div class="player-info">
-                            <div class="player-avatar">JS</div>
                             <div class="player-details">
                                 <span class="player-name">Jane Smith</span>
                                 <span class="player-stats">12 games • 82% avg</span>
@@ -483,7 +482,6 @@
                     <div class="leaderboard-item">
                         <div class="rank">3</div>
                         <div class="player-info">
-                            <div class="player-avatar">MJ</div>
                             <div class="player-details">
                                 <span class="player-name">Mike Johnson</span>
                                 <span class="player-stats">18 games • 78% avg</span>
@@ -500,7 +498,7 @@
             <div class="setup-container">
                 <h2>Multiplayer Setup</h2>
                 
-                <div class="multiplayer-options">
+                <div id="multiplayer-options" class="multiplayer-options">
                     <div class="option-card" onclick="createRoom()">
                         <div class="option-icon">
                             <i class="fas fa-plus-circle"></i>
@@ -661,9 +659,6 @@
         <div id="profile-screen" class="screen">
             <div class="profile-container">
                 <div class="profile-header">
-                    <div class="profile-avatar">
-                        <i class="fas fa-user-circle"></i>
-                    </div>
                     <div class="profile-info">
                         <h2>Player Name</h2>
                         <p>Member since January 2024</p>
