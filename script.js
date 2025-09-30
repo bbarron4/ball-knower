@@ -2973,11 +2973,74 @@ function showMultiplayerSetup() {
     showScreen('multiplayer-setup-screen');
 }
 
+// Multiplayer game state
+let multiplayerGame = {
+    roomCode: null,
+    isHost: false,
+    players: [],
+    gameSettings: {
+        sport: 'nfl',
+        mode: 'trivia',
+        inputType: 'multiple'
+    },
+    currentQuestion: null,
+    timeRemaining: 60,
+    gameTimer: null,
+    score: 0
+};
+
 function createRoom() {
-    const roomCode = generateRoomCode();
-    document.getElementById('display-room-code').textContent = roomCode;
-    document.getElementById('created-room').style.display = 'block';
+    document.getElementById('room-setup').style.display = 'block';
     document.getElementById('multiplayer-options').style.display = 'none';
+}
+
+function createRoomWithSettings() {
+    const roomCode = generateRoomCode();
+    multiplayerGame.roomCode = roomCode;
+    multiplayerGame.isHost = true;
+    multiplayerGame.players = [{ name: 'You (Host)', score: 0, isHost: true }];
+    
+    document.getElementById('display-room-code').textContent = roomCode;
+    document.getElementById('current-room-code').textContent = roomCode;
+    
+    // Display game settings
+    const settingsDisplay = document.getElementById('game-settings-display');
+    settingsDisplay.innerHTML = `
+        <div class="setting-item">
+            <span>Sport:</span>
+            <span>${multiplayerGame.gameSettings.sport.toUpperCase()}</span>
+        </div>
+        <div class="setting-item">
+            <span>Mode:</span>
+            <span>${multiplayerGame.gameSettings.mode}</span>
+        </div>
+        <div class="setting-item">
+            <span>Input:</span>
+            <span>${multiplayerGame.gameSettings.inputType}</span>
+        </div>
+    `;
+    
+    document.getElementById('created-room').style.display = 'block';
+    document.getElementById('room-setup').style.display = 'none';
+    updatePlayersList();
+}
+
+function selectSport(sport) {
+    multiplayerGame.gameSettings.sport = sport;
+    document.querySelectorAll('.sport-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelector(`[data-sport="${sport}"]`).classList.add('active');
+}
+
+function selectMode(mode) {
+    multiplayerGame.gameSettings.mode = mode;
+    document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelector(`[data-mode="${mode}"]`).classList.add('active');
+}
+
+function selectInput(inputType) {
+    multiplayerGame.gameSettings.inputType = inputType;
+    document.querySelectorAll('.input-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelector(`[data-input="${inputType}"]`).classList.add('active');
 }
 
 function showJoinRoom() {
@@ -2987,8 +3050,13 @@ function showJoinRoom() {
 function joinRoom() {
     const roomCode = document.getElementById('room-code').value.toUpperCase();
     if (roomCode.length === 6) {
+        multiplayerGame.roomCode = roomCode;
+        multiplayerGame.isHost = false;
+        multiplayerGame.players = [{ name: 'You', score: 0, isHost: false }];
+        
+        document.getElementById('current-room-code').textContent = roomCode;
         showMessage('Joining room...', 'success');
-    setTimeout(() => {
+        setTimeout(() => {
             startMultiplayerGame();
         }, 1000);
     } else {
@@ -2996,15 +3064,222 @@ function joinRoom() {
     }
 }
 
-function startMultiplayerGame() {
-    currentGame.mode = 'multiplayer';
-    currentGame.sport = 'nfl';
-    currentGame.inputMode = 'multiple-choice';
-    currentGame.playerCount = 1;
-    currentGame.questionCount = 10;
-    
-    startGameSession();
+function copyRoomCode() {
+    const roomCode = document.getElementById('display-room-code').textContent;
+    navigator.clipboard.writeText(roomCode).then(() => {
+        showMessage('Room code copied!', 'success');
+    });
 }
+
+function updatePlayersList() {
+    const playersList = document.getElementById('players-list');
+    playersList.innerHTML = '';
+    
+    multiplayerGame.players.forEach(player => {
+        const playerItem = document.createElement('div');
+        playerItem.className = 'player-item';
+        playerItem.innerHTML = `
+            <i class="fas fa-user"></i>
+            <span>${player.name} ${player.isHost ? '(Host)' : ''}</span>
+        `;
+        playersList.appendChild(playerItem);
+    });
+    
+    document.getElementById('player-count').textContent = multiplayerGame.players.length;
+}
+
+function startMultiplayerGame() {
+    showScreen('multiplayer-game-screen');
+    multiplayerGame.timeRemaining = 60;
+    multiplayerGame.score = 0;
+    
+    // Start the 1-minute timer
+    startMultiplayerTimer();
+    
+    // Load first question
+    loadMultiplayerQuestion();
+}
+
+function startMultiplayerTimer() {
+    multiplayerGame.gameTimer = setInterval(() => {
+        multiplayerGame.timeRemaining--;
+        document.getElementById('time-remaining').textContent = formatTime(multiplayerGame.timeRemaining);
+        
+        if (multiplayerGame.timeRemaining <= 0) {
+            endMultiplayerGame();
+        }
+    }, 1000);
+}
+
+function formatTime(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+}
+
+function loadMultiplayerQuestion() {
+    const { sport, mode, inputType } = multiplayerGame.gameSettings;
+    
+    // Generate question based on mode
+    if (mode === 'trivia') {
+        loadTriviaQuestion(sport);
+    } else if (mode === 'college') {
+        loadCollegeQuestion(sport);
+    } else if (mode === 'jersey') {
+        loadJerseyQuestion(sport);
+    }
+}
+
+function loadTriviaQuestion(sport) {
+    // Use the existing trivia system
+    dataLoader.createTriviaQuestion(sport).then(question => {
+        if (question) {
+            displayMultiplayerQuestion(question);
+        }
+    });
+}
+
+function loadCollegeQuestion(sport) {
+    dataLoader.loadPlayers(sport).then(players => {
+        if (players.length > 0) {
+            const question = dataLoader.createCollegeQuestion(players[0], players);
+            displayMultiplayerQuestion(question);
+        }
+    });
+}
+
+function loadJerseyQuestion(sport) {
+    dataLoader.loadPlayers(sport).then(players => {
+        if (players.length > 0) {
+            const question = dataLoader.createJerseyQuestion(players[0], players);
+            displayMultiplayerQuestion(question);
+        }
+    });
+}
+
+function displayMultiplayerQuestion(question) {
+    multiplayerGame.currentQuestion = question;
+    
+    document.getElementById('question-text').textContent = question.question;
+    
+    const optionsContainer = document.getElementById('question-options');
+    const textInputContainer = document.getElementById('text-input-container');
+    
+    if (multiplayerGame.gameSettings.inputType === 'multiple') {
+        optionsContainer.style.display = 'block';
+        textInputContainer.style.display = 'none';
+        
+        optionsContainer.innerHTML = '';
+        question.choices.forEach(choice => {
+            const button = document.createElement('button');
+            button.className = 'option-btn';
+            button.textContent = choice.text;
+            button.onclick = () => selectMultiplayerAnswer(choice.id);
+            optionsContainer.appendChild(button);
+        });
+    } else {
+        optionsContainer.style.display = 'none';
+        textInputContainer.style.display = 'block';
+        document.getElementById('text-answer').value = '';
+    }
+}
+
+function selectMultiplayerAnswer(choiceId) {
+    const isCorrect = choiceId === multiplayerGame.currentQuestion.correctChoiceId;
+    handleMultiplayerAnswer(isCorrect);
+}
+
+function submitTextAnswer() {
+    const userAnswer = document.getElementById('text-answer').value.trim().toLowerCase();
+    const correctAnswer = multiplayerGame.currentQuestion.correctAnswer.toLowerCase();
+    
+    // Simple answer matching (can be improved)
+    const isCorrect = userAnswer === correctAnswer || 
+                     userAnswer.includes(correctAnswer) || 
+                     correctAnswer.includes(userAnswer);
+    
+    handleMultiplayerAnswer(isCorrect);
+}
+
+function handleMultiplayerAnswer(isCorrect) {
+    if (isCorrect) {
+        multiplayerGame.score++;
+        showMessage('Correct! +1 point', 'success');
+    } else {
+        showMessage('Wrong answer', 'error');
+    }
+    
+    // Update leaderboard
+    updateLeaderboard();
+    
+    // Load next question after a short delay
+    setTimeout(() => {
+        loadMultiplayerQuestion();
+    }, 1000);
+}
+
+function updateLeaderboard() {
+    const leaderboardList = document.getElementById('leaderboard-list');
+    leaderboardList.innerHTML = '';
+    
+    // Sort players by score
+    const sortedPlayers = [...multiplayerGame.players].sort((a, b) => b.score - a.score);
+    
+    sortedPlayers.forEach((player, index) => {
+        const playerItem = document.createElement('div');
+        playerItem.className = 'leaderboard-item';
+        playerItem.innerHTML = `
+            <span class="rank">#${index + 1}</span>
+            <span class="player-name">${player.name}</span>
+            <span class="score">${player.score}</span>
+        `;
+        leaderboardList.appendChild(playerItem);
+    });
+}
+
+function endMultiplayerGame() {
+    clearInterval(multiplayerGame.gameTimer);
+    
+    // Show final results
+    showMessage(`Game Over! Your score: ${multiplayerGame.score}`, 'info');
+    
+    // Update final leaderboard
+    updateLeaderboard();
+    
+    // Show end game options
+    setTimeout(() => {
+        if (multiplayerGame.isHost) {
+            showMessage('Game ended. You can start a new game or leave.', 'info');
+        } else {
+            showMessage('Game ended. You can leave the room.', 'info');
+        }
+    }, 2000);
+}
+
+function leaveMultiplayerGame() {
+    if (multiplayerGame.gameTimer) {
+        clearInterval(multiplayerGame.gameTimer);
+    }
+    
+    // Reset multiplayer state
+    multiplayerGame = {
+        roomCode: null,
+        isHost: false,
+        players: [],
+        gameSettings: {
+            sport: 'nfl',
+            mode: 'trivia',
+            inputType: 'multiple'
+        },
+        currentQuestion: null,
+        timeRemaining: 60,
+        gameTimer: null,
+        score: 0
+    };
+    
+    showScreen('home-screen');
+}
+
 
 function generateRoomCode() {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';

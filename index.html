@@ -401,6 +401,43 @@
                     </div>
                 </div>
 
+                <!-- Room Creation Setup -->
+                <div class="room-setup" id="room-setup" style="display: none;">
+                    <h3>Game Setup</h3>
+                    <div class="setup-options">
+                        <div class="option-group">
+                            <label>Sport:</label>
+                            <div class="sport-buttons">
+                                <button class="sport-btn active" data-sport="nfl" onclick="selectSport('nfl')">NFL</button>
+                                <button class="sport-btn" data-sport="nba" onclick="selectSport('nba')">NBA</button>
+                                <button class="sport-btn" data-sport="both" onclick="selectSport('both')">Both</button>
+                            </div>
+                        </div>
+                        
+                        <div class="option-group">
+                            <label>Game Mode:</label>
+                            <div class="mode-buttons">
+                                <button class="mode-btn active" data-mode="trivia" onclick="selectMode('trivia')">Ball Trivia</button>
+                                <button class="mode-btn" data-mode="college" onclick="selectMode('college')">College Guesser</button>
+                                <button class="mode-btn" data-mode="jersey" onclick="selectMode('jersey')">Jersey Guesser</button>
+                            </div>
+                        </div>
+                        
+                        <div class="option-group">
+                            <label>Input Type:</label>
+                            <div class="input-buttons">
+                                <button class="input-btn active" data-input="multiple" onclick="selectInput('multiple')">Multiple Choice</button>
+                                <button class="input-btn" data-input="type" onclick="selectInput('type')">Type Answer</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-controls">
+                        <button class="btn-secondary" onclick="showMultiplayerSetup()">Cancel</button>
+                        <button class="btn-primary" onclick="createRoomWithSettings()">Create Room</button>
+                    </div>
+                </div>
+
                 <div class="room-code-input" id="room-code-input" style="display: none;">
                     <h3>Enter Room Code</h3>
                     <input type="text" id="room-code" placeholder="Enter 6-digit code" maxlength="6">
@@ -416,7 +453,11 @@
                         <div class="room-code-display">
                             <span>Room Code:</span>
                             <span id="display-room-code">ABC123</span>
+                            <button class="copy-btn" onclick="copyRoomCode()">
+                                <i class="fas fa-copy"></i>
+                            </button>
                         </div>
+                        <div class="game-settings-display" id="game-settings-display"></div>
                         <div class="players-list" id="players-list">
                             <div class="player-item">
                                 <i class="fas fa-user"></i>
@@ -432,6 +473,46 @@
 
                 <div class="game-controls">
                     <button class="btn-secondary" onclick="showHome()">Back to Home</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Multiplayer Game Screen -->
+        <div id="multiplayer-game-screen" class="screen">
+            <div class="game-container">
+                <div class="game-header">
+                    <div class="room-info">
+                        <span class="room-code">Room: <span id="current-room-code">ABC123</span></span>
+                        <span class="time-remaining" id="time-remaining">1:00</span>
+                    </div>
+                    <div class="player-count">
+                        <i class="fas fa-users"></i>
+                        <span id="player-count">1</span> players
+                    </div>
+                </div>
+
+                <div class="question-container" id="question-container">
+                    <div class="question-card">
+                        <div class="question-text" id="question-text">Loading question...</div>
+                        <div class="question-options" id="question-options">
+                            <!-- Options will be populated here -->
+                        </div>
+                        <div class="text-input-container" id="text-input-container" style="display: none;">
+                            <input type="text" id="text-answer" placeholder="Type your answer..." maxlength="50">
+                            <button class="submit-btn" onclick="submitTextAnswer()">Submit</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="live-leaderboard" id="live-leaderboard">
+                    <h3>Live Leaderboard</h3>
+                    <div class="leaderboard-list" id="leaderboard-list">
+                        <!-- Players will be populated here -->
+                    </div>
+                </div>
+
+                <div class="game-controls">
+                    <button class="btn-secondary" onclick="leaveMultiplayerGame()">Leave Game</button>
                 </div>
             </div>
         </div>
