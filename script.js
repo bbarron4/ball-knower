@@ -335,6 +335,9 @@ function showScreen(screenId) {
     // Show target screen
     document.getElementById(screenId).classList.add('active');
     currentScreen = screenId;
+    
+    // Scroll to top of page
+    window.scrollTo(0, 0);
 }
 
 // Navigation Functions
@@ -352,19 +355,29 @@ function showProfile() {
 
 // Game Functions
 function startGame(mode) {
+    console.log(`🎮 startGame called with mode: ${mode}`);
+    console.log(`🎮 Current sport BEFORE any changes: ${currentGame.sport}`);
+    
     currentGame.mode = mode;
     
     // Keep previous settings if they exist, otherwise use defaults
-    if (!currentGame.sport) currentGame.sport = 'nfl';
+    if (!currentGame.sport) {
+        console.log(`⚠️ No sport set, defaulting to NFL`);
+        currentGame.sport = 'nfl';
+    } else {
+        console.log(`✅ Sport already set to: ${currentGame.sport}`);
+    }
     if (!currentGame.inputMode) currentGame.inputMode = 'multiple-choice';
     if (!currentGame.playerCount) currentGame.playerCount = 1;
     if (!currentGame.questionCount) currentGame.questionCount = 10;
     
-    // Show setup screen
-    showScreen('setup-screen');
-    
+    console.log(`🎮 Sport BEFORE restoreSetupUI: ${currentGame.sport}`);
     // Restore UI to match current settings
     restoreSetupUI();
+    console.log(`🎮 Sport AFTER restoreSetupUI: ${currentGame.sport}`);
+    
+    // Show setup screen
+    showScreen('setup-screen');
     
     // Update setup title based on mode
     const titles = {
@@ -400,19 +413,22 @@ function startGame(mode) {
 
 // Setup Functions
 function restoreSetupUI() {
+    console.log(`🔄 restoreSetupUI called - currentGame.sport = ${currentGame.sport}`);
+    
     // Restore sport selection
     document.querySelectorAll('.sport-btn').forEach(btn => {
         btn.classList.remove('active');
-        const btnSport = btn.getAttribute('onclick').match(/selectSport\('(.+?)'\)/);
+        const btnSport = btn.getAttribute('onclick')?.match(/selectSport\('(.+?)'\)/);
         if (btnSport && btnSport[1] === currentGame.sport) {
             btn.classList.add('active');
+            console.log(`✅ restoreSetupUI: Activated ${btnSport[1]} button`);
         }
     });
     
     // Restore input type selection
     document.querySelectorAll('.input-type-btn').forEach(btn => {
         btn.classList.remove('active');
-        const btnInputType = btn.getAttribute('onclick').match(/selectInputType\('(.+?)'\)/);
+        const btnInputType = btn.getAttribute('onclick')?.match(/selectInputType\('(.+?)'\)/);
         if (btnInputType && btnInputType[1] === currentGame.inputMode) {
             btn.classList.add('active');
         }
@@ -426,13 +442,39 @@ function restoreSetupUI() {
 }
 
 function selectSport(sport) {
+    console.log(`🔵 selectSport called with: ${sport}`);
+    
+    // Update both currentGame and multiplayerGame
+    console.log(`🔵 Previous sport: ${currentGame.sport}`);
     currentGame.sport = sport;
+    multiplayerGame.gameSettings.sport = sport;
+    console.log(`🟢 New sport set to: ${currentGame.sport}`);
     
     // Update UI
-    document.querySelectorAll('.sport-btn').forEach(btn => {
+    const allButtons = document.querySelectorAll('.sport-btn');
+    console.log(`🔍 Found ${allButtons.length} sport buttons`);
+    
+    allButtons.forEach((btn, index) => {
         btn.classList.remove('active');
+        
+        // Check onclick attribute
+        const onclickAttr = btn.getAttribute('onclick');
+        const onclickSport = onclickAttr?.match(/selectSport\('(.+?)'\)/);
+        
+        if (onclickSport && onclickSport[1] === sport) {
+            btn.classList.add('active');
+            console.log(`✅ Button ${index}: Activated ${sport} button (onclick)`);
+        }
+        
+        // Check data-sport attribute
+        const dataSport = btn.getAttribute('data-sport');
+        if (dataSport === sport) {
+            btn.classList.add('active');
+            console.log(`✅ Button ${index}: Activated ${sport} button (data-sport)`);
+        }
     });
-    event.target.classList.add('active');
+    
+    console.log(`🎯 Final values - currentGame.sport: ${currentGame.sport}, multiplayerGame: ${multiplayerGame.gameSettings.sport}`);
 }
 
 // Difficulty selection removed - using single well-known players dataset
@@ -722,12 +764,14 @@ function changeQuestionCount(delta) {
 
 // Game Session
 async function startGameSession() {
+    console.log(`🎬 startGameSession called - Current sport: ${currentGame.sport}`);
+    
     // Validate survival mode setup
     if (currentGame.mode === 'survival' && !validateSurvivalSetup()) {
         return;
     }
     
-    // Reset game state
+    // Reset game state (but keep sport selection!)
     currentGame.currentQuestion = 0;
     currentGame.score = 0;
     currentGame.correctAnswers = 0;
@@ -735,10 +779,13 @@ async function startGameSession() {
     currentGame.maxStreak = 0;
     currentGame.gameStartTime = Date.now();
     
+    console.log(`📊 After reset - Current sport: ${currentGame.sport}`);
+    
 
     // Remove loading message - questions load quickly now
     
     try {
+        console.log(`🔄 About to generate questions - Current sport: ${currentGame.sport}`);
         // Generate questions (now async)
         currentGame.questions = await generateQuestions();
         
@@ -747,6 +794,12 @@ async function startGameSession() {
             showHome();
             return;
         }
+    
+    // Update sport display
+    const sportDisplay = document.getElementById('current-sport-display');
+    if (sportDisplay) {
+        sportDisplay.textContent = currentGame.sport.toUpperCase();
+    }
     
     // Show game screen
     showScreen('game-screen');
@@ -761,6 +814,8 @@ async function startGameSession() {
 }
 
 async function generateQuestions() {
+    console.log(`🎮 Generating questions for sport: ${currentGame.sport}`);
+    
     // Load well-known players from Excel file based on selected sport
     const players = await dataLoader.loadPlayers(currentGame.sport);
     
@@ -768,6 +823,8 @@ async function generateQuestions() {
         console.error('No well-known players loaded for sport:', currentGame.sport);
         return [];
     }
+    
+    console.log(`✅ Loaded ${players.length} players for ${currentGame.sport}`);
     
     const questions = [];
     
@@ -812,15 +869,17 @@ async function generateQuestions() {
         console.log(`🎯 Loading trivia for mode: ${currentGame.mode}, sport: ${currentGame.sport}`);
         
         try {
-            triviaQuestions = await dataLoader.loadTriviaQuestions(currentGame.sport === 'both' ? 'nfl' : currentGame.sport);
-            console.log(`📚 Loaded primary trivia: ${triviaQuestions.length} questions`);
-            
-            // If "both" is selected, also load NBA questions
+            // Load trivia questions based on selected sport
             if (currentGame.sport === 'both') {
+                // Load both NFL and NBA trivia
+                const nflTriviaQuestions = await dataLoader.loadTriviaQuestions('nfl');
                 const nbaTriviaQuestions = await dataLoader.loadTriviaQuestions('nba');
-                console.log(`🏀 Loaded NBA trivia: ${nbaTriviaQuestions.length} questions`);
-                triviaQuestions = [...triviaQuestions, ...nbaTriviaQuestions];
-                console.log(`🔄 Combined trivia: ${triviaQuestions.length} total questions`);
+                triviaQuestions = [...nflTriviaQuestions, ...nbaTriviaQuestions];
+                console.log(`📚 Loaded combined trivia: ${nflTriviaQuestions.length} NFL + ${nbaTriviaQuestions.length} NBA = ${triviaQuestions.length} total`);
+            } else {
+                // Load single sport trivia
+                triviaQuestions = await dataLoader.loadTriviaQuestions(currentGame.sport);
+                console.log(`📚 Loaded ${currentGame.sport.toUpperCase()} trivia: ${triviaQuestions.length} questions`);
             }
             // Shuffle trivia questions
             triviaQuestions = shuffleArray(triviaQuestions);
@@ -2981,20 +3040,49 @@ let multiplayerGame = {
     gameSettings: {
         sport: 'nfl',
         modes: ['trivia'], // Array to support multiple modes
-        inputType: 'multiple'
+        inputType: 'multiple',
+        duration: 60 // Game duration in seconds
     },
     currentQuestion: null,
     timeRemaining: 60,
     gameTimer: null,
-    score: 0
+    score: 0,
+    gameStarted: false,
+    realTimeUpdates: null
 };
 
 function createRoom() {
+    // Reset to default state when creating room
+    multiplayerGame.gameSettings = {
+        sport: 'nfl',
+        modes: ['trivia'],
+        inputType: 'multiple'
+    };
+    
+    // Reset UI to default state
+    document.querySelectorAll('.sport-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelector('[data-sport="nfl"]').classList.add('active');
+    
+    document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelector('[data-mode="trivia"]').classList.add('active');
+    
+    document.querySelectorAll('.input-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelector('[data-input="multiple"]').classList.add('active');
+    
     document.getElementById('room-setup').style.display = 'block';
     document.getElementById('multiplayer-options').style.display = 'none';
 }
 
 function createRoomWithSettings() {
+    // Get current selected modes from UI
+    const selectedModes = [];
+    document.querySelectorAll('.mode-btn.active').forEach(btn => {
+        selectedModes.push(btn.dataset.mode);
+    });
+    
+    // Update game settings with current selections
+    multiplayerGame.gameSettings.modes = selectedModes;
+    
     const roomCode = generateRoomCode();
     multiplayerGame.roomCode = roomCode;
     multiplayerGame.isHost = true;
@@ -3014,6 +3102,13 @@ function createRoomWithSettings() {
         return modeNames[mode];
     }).join(', ');
     
+    // Format input type display
+    const inputDisplay = multiplayerGame.gameSettings.inputType === 'multiple' ? 'Multiple Choice' : 'Type Answer';
+    
+    // Format duration display
+    const durationMinutes = Math.floor(multiplayerGame.gameSettings.duration / 60);
+    const durationDisplay = `${durationMinutes} minute${durationMinutes > 1 ? 's' : ''}`;
+    
     settingsDisplay.innerHTML = `
         <div class="setting-item">
             <span>Sport:</span>
@@ -3025,7 +3120,11 @@ function createRoomWithSettings() {
         </div>
         <div class="setting-item">
             <span>Input:</span>
-            <span>${multiplayerGame.gameSettings.inputType}</span>
+            <span>${inputDisplay}</span>
+        </div>
+        <div class="setting-item">
+            <span>Duration:</span>
+            <span>${durationDisplay}</span>
         </div>
     `;
     
@@ -3034,11 +3133,8 @@ function createRoomWithSettings() {
     updatePlayersList();
 }
 
-function selectSport(sport) {
-    multiplayerGame.gameSettings.sport = sport;
-    document.querySelectorAll('.sport-btn').forEach(btn => btn.classList.remove('active'));
-    document.querySelector(`[data-sport="${sport}"]`).classList.add('active');
-}
+// This function is now merged into the main selectSport function above
+// No separate multiplayer sport selection needed
 
 function toggleMode(mode) {
     const button = document.querySelector(`[data-mode="${mode}"]`);
@@ -3064,6 +3160,12 @@ function selectInput(inputType) {
     multiplayerGame.gameSettings.inputType = inputType;
     document.querySelectorAll('.input-btn').forEach(btn => btn.classList.remove('active'));
     document.querySelector(`[data-input="${inputType}"]`).classList.add('active');
+}
+
+function selectDuration(duration) {
+    multiplayerGame.gameSettings.duration = duration;
+    document.querySelectorAll('.duration-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelector(`[data-duration="${duration}"]`).classList.add('active');
 }
 
 function showJoinRoom() {
@@ -3103,7 +3205,7 @@ function updatePlayersList() {
         playerItem.className = 'player-item';
         playerItem.innerHTML = `
             <i class="fas fa-user"></i>
-            <span>${player.name} ${player.isHost ? '(Host)' : ''}</span>
+            <span>${player.name}</span>
         `;
         playersList.appendChild(playerItem);
     });
@@ -3112,15 +3214,46 @@ function updatePlayersList() {
 }
 
 function startMultiplayerGame() {
-    showScreen('multiplayer-game-screen');
-    multiplayerGame.timeRemaining = 60;
-    multiplayerGame.score = 0;
+    if (!multiplayerGame.isHost) {
+        showMessage('Only the host can start the game', 'warning');
+        return;
+    }
     
-    // Start the 1-minute timer
+    // Notify all players that game is starting
+    notifyGameStart();
+    
+    showScreen('multiplayer-game-screen');
+    multiplayerGame.timeRemaining = multiplayerGame.gameSettings.duration;
+    multiplayerGame.score = 0;
+    multiplayerGame.gameStarted = true;
+    
+    // Start the timer
     startMultiplayerTimer();
     
     // Load first question
     loadMultiplayerQuestion();
+}
+
+function notifyGameStart() {
+    // Simulate notifying other players
+    showMessage('Game starting for all players...', 'success');
+}
+
+function simulatePlayerJoin() {
+    // Simulate a player joining (for testing)
+    if (multiplayerGame.isHost && multiplayerGame.players.length < 4) {
+        const playerNames = ['Alice', 'Bob', 'Charlie', 'Diana'];
+        const newPlayerName = playerNames[multiplayerGame.players.length - 1];
+        
+        multiplayerGame.players.push({
+            name: newPlayerName,
+            score: 0,
+            isHost: false
+        });
+        
+        updatePlayersList();
+        showMessage(`${newPlayerName} joined the room!`, 'info');
+    }
 }
 
 function startMultiplayerTimer() {
@@ -3142,9 +3275,11 @@ function formatTime(seconds) {
 
 function loadMultiplayerQuestion() {
     const { sport, modes, inputType } = multiplayerGame.gameSettings;
+    console.log(`Loading question for sport: ${sport}, modes: ${modes.join(', ')}`);
     
     // Randomly select a mode from the available modes
     const randomMode = modes[Math.floor(Math.random() * modes.length)];
+    console.log(`Selected mode: ${randomMode}`);
     
     // Generate question based on randomly selected mode
     if (randomMode === 'trivia') {
@@ -3157,16 +3292,36 @@ function loadMultiplayerQuestion() {
 }
 
 function loadTriviaQuestion(sport) {
+    // Handle "both" sport option
+    let targetSport = sport;
+    if (sport === 'both') {
+        // Randomly choose between NFL and NBA for "both"
+        targetSport = Math.random() > 0.5 ? 'nfl' : 'nba';
+    }
+    
     // Use the existing trivia system
-    dataLoader.createTriviaQuestion(sport).then(question => {
+    dataLoader.createTriviaQuestion(targetSport).then(question => {
         if (question) {
             displayMultiplayerQuestion(question);
+        } else {
+            console.error('Failed to load trivia question');
+            showMessage('Failed to load question', 'error');
         }
+    }).catch(error => {
+        console.error('Error loading trivia question:', error);
+        showMessage('Error loading question', 'error');
     });
 }
 
 function loadCollegeQuestion(sport) {
-    dataLoader.loadPlayers(sport).then(players => {
+    // Handle "both" sport option
+    let targetSport = sport;
+    if (sport === 'both') {
+        // Randomly choose between NFL and NBA for "both"
+        targetSport = Math.random() > 0.5 ? 'nfl' : 'nba';
+    }
+    
+    dataLoader.loadPlayers(targetSport).then(players => {
         if (players.length > 0) {
             const question = dataLoader.createCollegeQuestion(players[0], players);
             displayMultiplayerQuestion(question);
@@ -3175,7 +3330,14 @@ function loadCollegeQuestion(sport) {
 }
 
 function loadJerseyQuestion(sport) {
-    dataLoader.loadPlayers(sport).then(players => {
+    // Handle "both" sport option
+    let targetSport = sport;
+    if (sport === 'both') {
+        // Randomly choose between NFL and NBA for "both"
+        targetSport = Math.random() > 0.5 ? 'nfl' : 'nba';
+    }
+    
+    dataLoader.loadPlayers(targetSport).then(players => {
         if (players.length > 0) {
             const question = dataLoader.createJerseyQuestion(players[0], players);
             displayMultiplayerQuestion(question);
@@ -3235,13 +3397,62 @@ function handleMultiplayerAnswer(isCorrect) {
         showMessage('Wrong answer', 'error');
     }
     
+    // Update player score in the players array
+    const currentPlayer = multiplayerGame.players.find(p => p.isHost === multiplayerGame.isHost);
+    if (currentPlayer) {
+        currentPlayer.score = multiplayerGame.score;
+    }
+    
+    // Simulate opponent answers (for testing)
+    simulateOpponentAnswers();
+    
     // Update leaderboard
     updateLeaderboard();
     
     // Load next question after a short delay
     setTimeout(() => {
         loadMultiplayerQuestion();
-    }, 1000);
+    }, 2000);
+}
+
+function simulateOpponentAnswers() {
+    // Simulate other players answering
+    const opponents = multiplayerGame.players.filter(p => p.isHost !== multiplayerGame.isHost);
+    opponents.forEach(opponent => {
+        // Randomly determine if opponent gets it right
+        const isCorrect = Math.random() > 0.3; // 70% chance of being correct
+        if (isCorrect) {
+            opponent.score++;
+        }
+        
+        // Show opponent answer
+        showOpponentAnswer(opponent.name, isCorrect);
+    });
+}
+
+function showOpponentAnswer(playerName, isCorrect) {
+    const opponentAnswers = document.getElementById('opponent-answers');
+    const opponentList = document.getElementById('opponent-list');
+    
+    opponentAnswers.style.display = 'block';
+    
+    const answerItem = document.createElement('div');
+    answerItem.className = 'opponent-answer-item';
+    answerItem.innerHTML = `
+        <span class="opponent-name">${playerName}:</span>
+        <span class="opponent-result ${isCorrect ? 'correct' : 'incorrect'}">
+            ${isCorrect ? '✓ Correct' : '✗ Wrong'}
+        </span>
+    `;
+    
+    opponentList.appendChild(answerItem);
+    
+    // Remove after 3 seconds
+    setTimeout(() => {
+        if (answerItem.parentNode) {
+            answerItem.parentNode.removeChild(answerItem);
+        }
+    }, 3000);
 }
 
 function updateLeaderboard() {
@@ -3362,3 +3573,43 @@ function updateLeaderboardContent(tab) {
         leaderboardList.appendChild(item);
     });
 }
+
+// Quick Play - Random Mode
+function quickPlay() {
+    const modes = ['college-guesser', 'jersey-guesser', 'achievement-guesser'];
+    const randomMode = modes[Math.floor(Math.random() * modes.length)];
+    const randomSport = Math.random() > 0.5 ? 'nfl' : 'nba';
+    
+    currentGame.sport = randomSport;
+    startGame(randomMode);
+}
+
+// Update Personal Stats on Homepage
+function updatePersonalStats() {
+    const gameResults = JSON.parse(localStorage.getItem('gameResults') || '[]');
+    
+    if (gameResults.length === 0) {
+        document.getElementById('best-streak').textContent = '0';
+        document.getElementById('accuracy').textContent = '0%';
+        document.getElementById('games-played').textContent = '0';
+        return;
+    }
+    
+    // Calculate best streak
+    const bestStreak = Math.max(...gameResults.map(r => r.streak || 0));
+    document.getElementById('best-streak').textContent = bestStreak;
+    
+    // Calculate accuracy
+    const totalCorrect = gameResults.reduce((sum, r) => sum + (r.correctAnswers || 0), 0);
+    const totalQuestions = gameResults.reduce((sum, r) => sum + (r.totalQuestions || r.questionCount || 0), 0);
+    const accuracy = totalQuestions > 0 ? Math.round((totalCorrect / totalQuestions) * 100) : 0;
+    document.getElementById('accuracy').textContent = accuracy + '%';
+    
+    // Games played
+    document.getElementById('games-played').textContent = gameResults.length;
+}
+
+// Initialize stats on page load
+document.addEventListener('DOMContentLoaded', () => {
+    updatePersonalStats();
+});
