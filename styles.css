@@ -2191,6 +2191,15 @@ body {
     font-size: 1.1em;
 }
 
+.mode-info {
+    margin-top: 0.5rem;
+}
+
+.mode-info small {
+    color: rgba(255, 255, 255, 0.7);
+    font-style: italic;
+}
+
 .sport-buttons, .mode-buttons, .input-buttons {
     display: flex;
     gap: 0.5rem;
@@ -2217,6 +2226,11 @@ body {
     border-color: #4CAF50;
     background: #4CAF50;
     color: #fff;
+}
+
+.mode-btn.active::after {
+    content: " ✓";
+    font-weight: bold;
 }
 
 .room-code-display {

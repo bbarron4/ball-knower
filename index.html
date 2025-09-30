@@ -415,11 +415,14 @@
                         </div>
                         
                         <div class="option-group">
-                            <label>Game Mode:</label>
+                            <label>Game Modes (Select Multiple):</label>
                             <div class="mode-buttons">
-                                <button class="mode-btn active" data-mode="trivia" onclick="selectMode('trivia')">Ball Trivia</button>
-                                <button class="mode-btn" data-mode="college" onclick="selectMode('college')">College Guesser</button>
-                                <button class="mode-btn" data-mode="jersey" onclick="selectMode('jersey')">Jersey Guesser</button>
+                                <button class="mode-btn active" data-mode="trivia" onclick="toggleMode('trivia')">Ball Trivia</button>
+                                <button class="mode-btn" data-mode="college" onclick="toggleMode('college')">College Guesser</button>
+                                <button class="mode-btn" data-mode="jersey" onclick="toggleMode('jersey')">Jersey Guesser</button>
+                            </div>
+                            <div class="mode-info">
+                                <small>Questions will be randomly selected from your chosen modes</small>
                             </div>
                         </div>
                         

@@ -2980,7 +2980,7 @@ let multiplayerGame = {
     players: [],
     gameSettings: {
         sport: 'nfl',
-        mode: 'trivia',
+        modes: ['trivia'], // Array to support multiple modes
         inputType: 'multiple'
     },
     currentQuestion: null,
@@ -3005,14 +3005,23 @@ function createRoomWithSettings() {
     
     // Display game settings
     const settingsDisplay = document.getElementById('game-settings-display');
+    const modesText = multiplayerGame.gameSettings.modes.map(mode => {
+        const modeNames = {
+            'trivia': 'Ball Trivia',
+            'college': 'College Guesser', 
+            'jersey': 'Jersey Guesser'
+        };
+        return modeNames[mode];
+    }).join(', ');
+    
     settingsDisplay.innerHTML = `
         <div class="setting-item">
             <span>Sport:</span>
             <span>${multiplayerGame.gameSettings.sport.toUpperCase()}</span>
         </div>
         <div class="setting-item">
-            <span>Mode:</span>
-            <span>${multiplayerGame.gameSettings.mode}</span>
+            <span>Modes:</span>
+            <span>${modesText}</span>
         </div>
         <div class="setting-item">
             <span>Input:</span>
@@ -3031,10 +3040,24 @@ function selectSport(sport) {
     document.querySelector(`[data-sport="${sport}"]`).classList.add('active');
 }
 
-function selectMode(mode) {
-    multiplayerGame.gameSettings.mode = mode;
-    document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
-    document.querySelector(`[data-mode="${mode}"]`).classList.add('active');
+function toggleMode(mode) {
+    const button = document.querySelector(`[data-mode="${mode}"]`);
+    const isActive = button.classList.contains('active');
+    
+    if (isActive) {
+        // Remove mode if it's the only one selected, otherwise remove it
+        if (multiplayerGame.gameSettings.modes.length > 1) {
+            multiplayerGame.gameSettings.modes = multiplayerGame.gameSettings.modes.filter(m => m !== mode);
+            button.classList.remove('active');
+        } else {
+            // Don't allow removing the last mode
+            showMessage('You must select at least one game mode', 'warning');
+        }
+    } else {
+        // Add mode
+        multiplayerGame.gameSettings.modes.push(mode);
+        button.classList.add('active');
+    }
 }
 
 function selectInput(inputType) {
@@ -3118,14 +3141,17 @@ function formatTime(seconds) {
 }
 
 function loadMultiplayerQuestion() {
-    const { sport, mode, inputType } = multiplayerGame.gameSettings;
+    const { sport, modes, inputType } = multiplayerGame.gameSettings;
     
-    // Generate question based on mode
-    if (mode === 'trivia') {
+    // Randomly select a mode from the available modes
+    const randomMode = modes[Math.floor(Math.random() * modes.length)];
+    
+    // Generate question based on randomly selected mode
+    if (randomMode === 'trivia') {
         loadTriviaQuestion(sport);
-    } else if (mode === 'college') {
+    } else if (randomMode === 'college') {
         loadCollegeQuestion(sport);
-    } else if (mode === 'jersey') {
+    } else if (randomMode === 'jersey') {
         loadJerseyQuestion(sport);
     }
 }
@@ -3268,7 +3294,7 @@ function leaveMultiplayerGame() {
         players: [],
         gameSettings: {
             sport: 'nfl',
-            mode: 'trivia',
+            modes: ['trivia'],
             inputType: 'multiple'
         },
         currentQuestion: null,
