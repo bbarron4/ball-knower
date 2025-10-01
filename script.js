@@ -2635,7 +2635,7 @@ function updateQuestionUI(question) {
     if (currentGame.mode === 'survival') {
         // For survival mode, show current streak instead of progress
         document.querySelector('.progress-fill').style.width = '100%'; // Always full for survival
-        document.querySelector('.question-number').textContent = `Survival Streak: ${currentGame.streak}`;
+        document.getElementById('question-counter').textContent = `Survival Streak: ${currentGame.streak}`;
     } else {
         // Regular mode - show progress and question count
         const progress = ((currentGame.currentQuestion + 1) / currentGame.questionCount) * 100;
