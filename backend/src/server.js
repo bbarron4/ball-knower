@@ -13,6 +13,7 @@ import triviaRoutes from './routes/trivia.js';
 import leaderboardRoutes from './routes/leaderboards.js';
 import groupRoutes from './routes/groups.js';
 import adminRoutes from './routes/admin.js';
+import testRoutes from './routes/test.js';
 
 // Import middleware
 import { errorHandler } from './middleware/errorHandler.js';
@@ -28,7 +29,12 @@ app.use(helmet());
 
 // CORS configuration
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5500',
+  origin: [
+    process.env.FRONTEND_URL || 'http://localhost:5500',
+    'http://localhost:8000',
+    'http://127.0.0.1:5500',
+    'http://127.0.0.1:8000'
+  ],
   credentials: true
 }));
 
@@ -63,6 +69,7 @@ app.use('/api/trivia', triviaRoutes);
 app.use('/api/leaderboards', leaderboardRoutes);
 app.use('/api/groups', groupRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api', testRoutes);
 
 // 404 handler
 app.use((req, res) => {

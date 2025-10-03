@@ -1,138 +1,139 @@
 import express from 'express';
-import { body, validationResult } from 'express-validator';
 import { query } from '../config/database.js';
 import { authenticate } from '../middleware/auth.js';
 
 const router = express.Router();
 
-router.post('/:challengeId/start', authenticate, async (req, res) => {
-  try {
-    const { challengeId } = req.params;
-
-    const challenge = await query(
-      'SELECT id, status FROM weekly_challenges WHERE id = $1',
-      [challengeId]
-    );
-
-    if (challenge.rows.length === 0) {
-      return res.status(404).json({ error: 'Challenge not found' });
+// Get random trivia questions
+router.get('/questions/random', authenticate, async (req, res) => {
+    try {
+        const { count = 5 } = req.query;
+        
+        // Get random questions from the database
+        const result = await query(
+            `SELECT id, prompt, choices, correct_index, difficulty, 
+                    CASE 
+                        WHEN RANDOM() < 0.5 THEN 'BALL_TRIVIA'
+                        ELSE 'COLLEGE_GUESSER'
+                    END as source_pool
+             FROM trivia_questions 
+             ORDER BY RANDOM() 
+             LIMIT $1`,
+            [parseInt(count)]
+        );
+        
+        const questions = result.rows.map(q => ({
+            id: q.id,
+            prompt: q.prompt,
+            choices: q.choices,
+            correct_index: q.correct_index,
+            difficulty: q.difficulty,
+            source_pool: q.source_pool
+        }));
+        
+        res.json({ questions });
+    } catch (error) {
+        console.error('Get random trivia error:', error);
+        res.status(500).json({ error: 'Failed to get trivia questions' });
     }
-
-    const existing = await query(
-      'SELECT COUNT(*) as count FROM trivia_attempts WHERE user_id = $1 AND challenge_id = $2',
-      [req.user.id, challengeId]
-    );
-
-    if (parseInt(existing.rows[0].count) >= 3) {
-      return res.status(400).json({ error: 'Trivia already completed for this challenge' });
-    }
-
-    const questions = await query(
-      `SELECT id, prompt, choices, difficulty
-       FROM trivia_questions
-       WHERE challenge_id = $1
-       AND active = true
-       AND id NOT IN (
-         SELECT question_id FROM trivia_attempts WHERE user_id = $2 AND challenge_id = $1
-       )
-       ORDER BY RANDOM()
-       LIMIT 3`,
-      [challengeId, req.user.id]
-    );
-
-    if (questions.rows.length < 3) {
-      return res.status(400).json({ error: 'Not enough questions available' });
-    }
-
-    await query(
-      'INSERT INTO events_analytics (user_id, event, properties) VALUES ($1, $2, $3)',
-      [req.user.id, 'TRIVIA_START', JSON.stringify({ challenge_id: challengeId })]
-    );
-
-    res.json({
-      message: 'Trivia session started',
-      questions: questions.rows.map(q => ({
-        id: q.id,
-        prompt: q.prompt,
-        choices: q.choices,
-        difficulty: q.difficulty
-      })),
-      timer_seconds: 15
-    });
-  } catch (error) {
-    console.error('Start trivia error:', error);
-    res.status(500).json({ error: 'Failed to start trivia' });
-  }
 });
 
-router.post('/answer', authenticate, [
-  body('question_id').isUUID(),
-  body('challenge_id').isUUID(),
-  body('answer_index').isInt({ min: 0, max: 3 }),
-  body('response_ms').isInt({ min: 0, max: 15000 })
+// Submit trivia answers
+router.post('/submit', authenticate, [
+    body('answers').isArray().withMessage('Answers must be an array'),
+    body('answers.*.questionId').isUUID().withMessage('Invalid question ID'),
+    body('answers.*.choiceIndex').isInt({ min: -1, max: 3 }).withMessage('Invalid choice index')
 ], async (req, res) => {
-  try {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+        
+        const { answers } = req.body;
+        const userId = req.user.id;
+        
+        // Get current challenge
+        const challengeResult = await query(
+            'SELECT id FROM weekly_challenges WHERE status = $1 ORDER BY opens_at DESC LIMIT 1',
+            ['open']
+        );
+        
+        if (challengeResult.rows.length === 0) {
+            return res.status(404).json({ error: 'No active challenge found' });
+        }
+        
+        const challengeId = challengeResult.rows[0].id;
+        
+        // Check if user already submitted trivia for this week
+        const existingTrivia = await query(
+            'SELECT id FROM weekly_trivia_answers WHERE user_id = $1 AND challenge_id = $2',
+            [userId, challengeId]
+        );
+        
+        if (existingTrivia.rows.length > 0) {
+            return res.status(400).json({ error: 'You have already submitted trivia for this week' });
+        }
+        
+        // Process answers and calculate score
+        let correctAnswers = 0;
+        const triviaAnswers = [];
+        
+        for (const answer of answers) {
+            // Get the correct answer
+            const questionResult = await query(
+                'SELECT correct_index FROM trivia_questions WHERE id = $1',
+                [answer.questionId]
+            );
+            
+            if (questionResult.rows.length === 0) {
+                continue; // Skip invalid questions
+            }
+            
+            const correctIndex = questionResult.rows[0].correct_index;
+            const isCorrect = answer.choiceIndex === correctIndex;
+            
+            if (isCorrect) {
+                correctAnswers++;
+            }
+            
+            triviaAnswers.push({
+                questionId: answer.questionId,
+                isCorrect: isCorrect,
+                sourcePool: 'BALL_TRIVIA' // Default for now
+            });
+        }
+        
+        // Insert trivia answers
+        for (const answer of triviaAnswers) {
+            await query(
+                `INSERT INTO weekly_trivia_answers (user_id, challenge_id, question_id, source_pool, is_correct)
+                 VALUES ($1, $2, $3, $4, $5)`,
+                [userId, challengeId, answer.questionId, answer.sourcePool, answer.isCorrect]
+            );
+        }
+        
+        // Update weekly results with trivia points
+        await query(
+            `INSERT INTO weekly_results (user_id, challenge_id, trivia_points, total_points)
+             VALUES ($1, $2, $3, $4)
+             ON CONFLICT (user_id, challenge_id) 
+             DO UPDATE SET 
+                 trivia_points = $3,
+                 total_points = weekly_results.pick_points + $3`,
+            [userId, challengeId, correctAnswers, correctAnswers]
+        );
+        
+        res.json({
+            message: 'Trivia answers submitted successfully',
+            correctAnswers: correctAnswers,
+            totalQuestions: answers.length
+        });
+        
+    } catch (error) {
+        console.error('Submit trivia error:', error);
+        res.status(500).json({ error: 'Failed to submit trivia answers' });
     }
-
-    const { question_id, challenge_id, answer_index, response_ms } = req.body;
-
-    const question = await query(
-      'SELECT correct_index FROM trivia_questions WHERE id = $1',
-      [question_id]
-    );
-
-    if (question.rows.length === 0) {
-      return res.status(404).json({ error: 'Question not found' });
-    }
-
-    const correct = question.rows[0].correct_index === answer_index;
-
-    let points = 0;
-    if (correct) {
-      points = 10;
-      if (response_ms < 5000) points += 5;
-      else if (response_ms < 10000) points += 3;
-      else if (response_ms <= 15000) points += 1;
-    }
-
-    await query(
-      `INSERT INTO trivia_attempts (user_id, challenge_id, question_id, answer_index, correct, response_ms, points_awarded, started_at, submitted_at)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, CURRENT_TIMESTAMP - ($6 || ' milliseconds')::interval, CURRENT_TIMESTAMP)`,
-      [req.user.id, challenge_id, question_id, answer_index, correct, response_ms, points]
-    );
-
-    await query(
-      'INSERT INTO events_analytics (user_id, event, properties) VALUES ($1, $2, $3)',
-      [req.user.id, 'TRIVIA_ANSWER', JSON.stringify({ question_id, correct, points })]
-    );
-
-    res.json({ message: 'Answer submitted', correct, points_awarded: points });
-  } catch (error) {
-    console.error('Submit answer error:', error);
-    res.status(500).json({ error: 'Failed to submit answer' });
-  }
-});
-
-router.get('/my-attempts/:challengeId', authenticate, async (req, res) => {
-  try {
-    const result = await query(
-      `SELECT ta.id, ta.question_id, ta.answer_index, ta.correct, ta.response_ms, ta.points_awarded, ta.submitted_at,
-              tq.prompt, tq.choices, tq.correct_index
-       FROM trivia_attempts ta
-       JOIN trivia_questions tq ON ta.question_id = tq.id
-       WHERE ta.user_id = $1 AND ta.challenge_id = $2
-       ORDER BY ta.submitted_at ASC`,
-      [req.user.id, req.params.challengeId]
-    );
-
-    res.json({ attempts: result.rows });
-  } catch (error) {
-    console.error('Get attempts error:', error);
-    res.status(500).json({ error: 'Failed to get attempts' });
-  }
 });
 
 export default router;

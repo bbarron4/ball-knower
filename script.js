@@ -347,10 +347,198 @@ function showHome() {
 
 function showLeaderboard() {
     showScreen('leaderboard-screen');
+    loadLeaderboard();
+}
+
+// Load leaderboard data
+async function loadLeaderboard() {
+    try {
+        // Get current challenge
+        const challengeResponse = await fetch('http://localhost:3001/api/challenges/current');
+        if (!challengeResponse.ok) {
+            document.getElementById('leaderboard-content').innerHTML = '<p>No active challenge found.</p>';
+            return;
+        }
+        
+        const challengeData = await challengeResponse.json();
+        const challengeId = challengeData.challenge.id;
+        
+        // Get leaderboard data
+        const leaderboardResponse = await fetch(`http://localhost:3001/api/leaderboards/${challengeId}/global?limit=50`);
+        if (!leaderboardResponse.ok) {
+            document.getElementById('leaderboard-content').innerHTML = '<p>Failed to load leaderboard.</p>';
+            return;
+        }
+        
+        const leaderboardData = await leaderboardResponse.json();
+        const leaderboard = leaderboardData.leaderboard;
+        
+        // Display leaderboard
+        displayLeaderboard(leaderboard);
+        
+    } catch (error) {
+        console.error('Error loading leaderboard:', error);
+        document.getElementById('leaderboard-content').innerHTML = '<p>Error loading leaderboard. Please try again.</p>';
+    }
+}
+
+// Display leaderboard HTML
+function displayLeaderboard(leaderboard) {
+    const content = document.getElementById('leaderboard-content');
+    
+    if (leaderboard.length === 0) {
+        content.innerHTML = '<p>No players yet. Be the first to make picks!</p>';
+        return;
+    }
+    
+    let html = `
+        <div class="leaderboard-header">
+            <h2>🏆 Weekly Leaderboard</h2>
+            <p>Week 5 Challenge - Top ${leaderboard.length} Players</p>
+        </div>
+        <div class="leaderboard-list">
+    `;
+    
+    leaderboard.forEach((entry, index) => {
+        const medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '';
+        const rankClass = index < 3 ? 'top-three' : '';
+        
+        html += `
+            <div class="leaderboard-entry ${rankClass}">
+                <div class="rank">${medal} #${entry.rank || index + 1}</div>
+                <div class="player-info">
+                    <div class="username">${entry.username}</div>
+                    <div class="team">${entry.favorite_team || 'No team'}</div>
+                </div>
+                <div class="stats">
+                    <div class="points">${entry.total_points || 0} pts</div>
+                    <div class="breakdown">
+                        <span class="picks">${entry.picks_points || 0} picks</span>
+                        <span class="trivia">${entry.trivia_points || 0} trivia</span>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+    
+    html += '</div>';
+    content.innerHTML = html;
 }
 
 function showProfile() {
     showScreen('profile-screen');
+    loadUserProfile();
+}
+
+// Load user profile data
+async function loadUserProfile() {
+    try {
+        // Check if user is logged in
+        const token = localStorage.getItem('ball_knower_token');
+        if (!token) {
+            document.getElementById('profile-content').innerHTML = `
+                <div class="profile-not-logged-in">
+                    <h2>👤 Profile</h2>
+                    <p>Please sign in to view your profile.</p>
+                    <button class="btn-primary" onclick="showWeeklyChallengeModal()">Sign In</button>
+                </div>
+            `;
+            return;
+        }
+
+        // Get user profile from backend
+        const response = await fetch('http://localhost:3001/api/users/me', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to load profile');
+        }
+
+        const data = await response.json();
+        const user = data.user;
+        const badges = data.badges || [];
+
+        // Display profile
+        displayUserProfile(user, badges);
+
+    } catch (error) {
+        console.error('Error loading profile:', error);
+        document.getElementById('profile-content').innerHTML = `
+            <div class="profile-error">
+                <h2>👤 Profile</h2>
+                <p>Error loading profile. Please try again.</p>
+                <button class="btn-primary" onclick="loadUserProfile()">Retry</button>
+            </div>
+        `;
+    }
+}
+
+// Display user profile HTML
+function displayUserProfile(user, badges) {
+    const content = document.getElementById('profile-content');
+    
+    const html = `
+        <div class="profile-container">
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="profile-info">
+                    <h2>${user.display_name || user.username}</h2>
+                    <p class="profile-email">${user.email}</p>
+                    <p class="profile-joined">Joined ${new Date(user.created_at).toLocaleDateString()}</p>
+                </div>
+            </div>
+
+            <div class="profile-details">
+                <div class="profile-section">
+                    <h3>🏈 Favorite Team</h3>
+                    <p class="profile-team">${user.favorite_team || 'Not set'}</p>
+                </div>
+
+                <div class="profile-section">
+                    <h3>📊 Stats</h3>
+                    <div class="profile-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Current Streak</span>
+                            <span class="stat-value">${user.current_pick_streak || 0}</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Best Streak</span>
+                            <span class="stat-value">${user.best_pick_streak || 0}</span>
+                        </div>
+                    </div>
+                </div>
+
+                ${badges.length > 0 ? `
+                <div class="profile-section">
+                    <h3>🏆 Badges</h3>
+                    <div class="profile-badges">
+                        ${badges.map(badge => `
+                            <div class="badge-item">
+                                <span class="badge-icon">${badge.icon}</span>
+                                <div class="badge-info">
+                                    <span class="badge-name">${badge.name}</span>
+                                    <span class="badge-description">${badge.description}</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                ` : ''}
+
+                <div class="profile-actions">
+                    <button class="btn-secondary" onclick="signOut()">Sign Out</button>
+                    <button class="btn-primary" onclick="showWeeklyChallengeModal()">Weekly Challenge</button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    content.innerHTML = html;
 }
 
 // Game Functions
