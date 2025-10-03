@@ -151,7 +151,7 @@ async function checkWeeklyChallengeStatus() {
             const challenge = data.challenge;
             
             if (challenge.user_progress) {
-                const picksComplete = challenge.user_progress.picks_complete >= 10;
+                const picksComplete = challenge.user_progress.picks_complete >= 20;
                 // Only check picks completion (no trivia)
                 return picksComplete;
             }
@@ -1040,14 +1040,7 @@ function renderPicksInterface(games) {
                         ${favorite}
                     </button>
                     
-                    <div class="confidence-section">
-                        <label>Confidence:</label>
-                        <div class="confidence-controls">
-                            <button class="confidence-btn minus" data-game-id="${gameId}">-</button>
-                            <span class="confidence-display" id="confidence-${gameId}" aria-live="polite">0</span>
-                            <button class="confidence-btn plus" data-game-id="${gameId}">+</button>
-                        </div>
-                    </div>
+                    <!-- Confidence section removed completely -->
                     
                     <button class="team-btn underdog-btn" 
                             data-game-id="${gameId}"
@@ -1068,25 +1061,22 @@ function renderPicksInterface(games) {
     // Add confidence summary and submit button
     html += `
         <div class="picks-summary">
-            <div class="confidence-total">
-                <strong>Total Confidence: <span id="total-confidence">0</span> / 10</strong>
+            <div class="picks-count">
+                <strong>Games Picked: <span id="picks-count">0</span> / 20</strong>
             </div>
             <div class="picks-validation" id="picks-validation">
-                Select all 5 games and use exactly 10 confidence points
+                Select all 20 games to submit your picks
             </div>
             <button class="auth-btn-primary" id="submit-picks-btn" 
                     onclick="submitPicks()" disabled>
-                Continue to Trivia
+                Submit Picks
             </button>
         </div>
     `;
     
     picksForm.innerHTML = html;
     
-    // Initialize confidence values
-    games.forEach(game => {
-        window.confidenceValues[game.id] = 0;
-    });
+    // No confidence values needed - removed completely
     
     // Add event listeners with a small delay to ensure DOM is ready
     setTimeout(() => {
@@ -1106,9 +1096,7 @@ function addPicksEventListeners() {
         button.replaceWith(button.cloneNode(true));
     });
     
-    document.querySelectorAll('.confidence-btn').forEach(button => {
-        button.replaceWith(button.cloneNode(true));
-    });
+    // Confidence buttons removed - no longer needed
     
     // Team button listeners
     const teamButtons = document.querySelectorAll('.team-btn');
@@ -1129,36 +1117,7 @@ function addPicksEventListeners() {
         });
     });
     
-    // Confidence button listeners
-    const minusButtons = document.querySelectorAll('.confidence-btn.minus');
-    console.log(`Found ${minusButtons.length} minus buttons`);
-    
-    minusButtons.forEach((button, index) => {
-        console.log(`Minus button ${index}:`, button.dataset);
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            const gameId = this.dataset.gameId; // Keep as string (UUID)
-            console.log(`Minus button clicked for game ${gameId}`);
-            adjustConfidence(gameId, -1);
-        });
-    });
-    
-    const plusButtons = document.querySelectorAll('.confidence-btn.plus');
-    console.log(`Found ${plusButtons.length} plus buttons`);
-    
-    plusButtons.forEach((button, index) => {
-        console.log(`Plus button ${index}:`, button.dataset);
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            const gameId = this.dataset.gameId; // Keep as string (UUID)
-            console.log(`Plus button clicked for game ${gameId}`);
-            adjustConfidence(gameId, 1);
-        });
-    });
+    // Confidence button listeners removed - no longer needed
     
     console.log('✅ Event listeners added');
 }
@@ -1262,90 +1221,20 @@ function updateTeamSelectionUI(gameId, selection) {
 }
 
 // Adjust confidence for a game
-function adjustConfidence(gameId, change) {
-    console.log(`🎯 Adjusting confidence for game ${gameId} by ${change}`);
-    
-    // Ensure confidenceValues exists
-    if (!window.confidenceValues) {
-        window.confidenceValues = {};
-    }
-    
-    // Get current value as number
-    const currentValue = Number(window.confidenceValues[gameId]) || 0;
-    const newValue = Math.max(0, Math.min(10, currentValue + change));
-    
-    console.log(`Current: ${currentValue}, New: ${newValue}`);
-    
-    // Check if this would exceed total confidence of 10
-    const totalConfidence = Object.values(window.confidenceValues).reduce((sum, val) => sum + (Number(val) || 0), 0);
-    const newTotal = totalConfidence - currentValue + newValue;
-    
-    if (newTotal > 10) {
-        console.log('⚠️ Cannot exceed total confidence of 10');
-        return;
-    }
-    
-    // Update the value immutably
-    window.confidenceValues = {
-        ...window.confidenceValues,
-        [gameId]: newValue
-    };
-    
-    // Update display immediately
-    const display = document.getElementById(`confidence-${gameId}`);
-    if (display) {
-        display.textContent = newValue;
-        console.log(`✅ Updated display to ${newValue}`);
-    } else {
-        console.error(`❌ Display element not found: confidence-${gameId}`);
-        console.log('Available confidence displays:', document.querySelectorAll('.confidence-display'));
-        console.log('Looking for ID:', `confidence-${gameId}`);
-        
-        // Fallback: try to find by class and data attribute
-        const gameCard = document.querySelector(`[data-game-id="${gameId}"]`);
-        if (gameCard) {
-            const fallbackDisplay = gameCard.querySelector('.confidence-display');
-            if (fallbackDisplay) {
-                fallbackDisplay.textContent = newValue;
-                console.log(`✅ Updated fallback display to ${newValue}`);
-            } else {
-                console.error(`❌ No confidence display found in game card for ${gameId}`);
-            }
-        } else {
-            console.error(`❌ Game card not found for fallback: ${gameId}`);
-        }
-    }
-    
-    updateConfidenceTotal();
-    validatePicks();
-    
-    console.log(`🎯 Confidence for game ${gameId}: ${newValue}`);
-    console.log('Current confidenceValues:', window.confidenceValues);
-}
+// adjustConfidence function removed - no longer needed
 
-// Update total confidence display
-function updateConfidenceTotal() {
-    const total = Object.values(window.confidenceValues || {}).reduce((sum, val) => sum + (Number(val) || 0), 0);
-    const totalDisplay = document.getElementById('total-confidence');
-    if (totalDisplay) {
-        totalDisplay.textContent = total;
-        
-        // Color coding
-        if (total === 10) {
-            totalDisplay.style.color = '#4CAF50'; // Green
-        } else if (total > 10) {
-            totalDisplay.style.color = '#f44336'; // Red
-        } else {
-            totalDisplay.style.color = '#fff'; // White
-        }
-    }
-}
+// updateConfidenceTotal function removed - no longer needed
 
 // Validate picks and enable/disable submit button
 function validatePicks() {
-    const totalGames = Object.keys(window.confidenceValues || {}).length;
-    const pickedGames = Object.keys(window.userPicks || {}).length;
-    const totalConfidence = Object.values(window.confidenceValues || {}).reduce((sum, val) => sum + (Number(val) || 0), 0);
+    const totalGames = Object.keys(window.userPicks || {}).length;
+    const pickedGames = Object.values(window.userPicks || {}).filter(pick => pick).length;
+    
+    // Update picks count display
+    const picksCountEl = document.getElementById('picks-count');
+    if (picksCountEl) {
+        picksCountEl.textContent = pickedGames;
+    }
     
     const submitBtn = document.getElementById('submit-picks-btn');
     const validation = document.getElementById('picks-validation');
@@ -1355,8 +1244,6 @@ function validatePicks() {
     
     if (pickedGames < totalGames) {
         message = `Select all ${totalGames} games (${pickedGames}/${totalGames} selected)`;
-    } else if (totalConfidence !== 10) {
-        message = `Use exactly 10 confidence points (currently ${totalConfidence})`;
     } else {
         message = 'Ready to submit!';
         isValid = true;
@@ -1370,6 +1257,8 @@ function validatePicks() {
     if (submitBtn) {
         submitBtn.disabled = !isValid;
     }
+    
+    return isValid;
 }
 
 // Submit picks and move to trivia
@@ -1386,30 +1275,23 @@ async function submitPicks() {
         return;
     }
     
-    // Validate we have exactly 10 games
-    if (totalGames !== 10) {
-        console.error(`❌ Expected 10 games, got: ${totalGames}`);
+    // Validate we have exactly 20 games (10 NFL + 10 College)
+    if (totalGames !== 20) {
+        console.error(`❌ Expected 20 games, got: ${totalGames}`);
         showNotification('Please wait for all games to load', 'error');
         return;
     }
     
-    // Validate that total confidence is 10
-    const totalConfidence = Object.values(window.confidenceValues || {}).reduce((sum, val) => sum + (Number(val) || 0), 0);
-    if (totalConfidence !== 10) {
-        console.error(`❌ Total confidence must be 10, got: ${totalConfidence}`);
-        showNotification('Total confidence must be exactly 10 points', 'error');
-        return;
-    }
+    // No confidence validation needed - removed completely
     
     try {
         const picks = Object.keys(window.userPicks).map(gameId => {
-            const confidence = window.confidenceValues[gameId] || 0;
-            console.log(`Game ${gameId}: selection=${window.userPicks[gameId]}, confidence=${confidence}`);
+            console.log(`Game ${gameId}: selection=${window.userPicks[gameId]}`);
             
             return {
                 gameId: gameId, // Keep as string (UUID)
-                selection: window.userPicks[gameId] === 'favorite' ? 'FAV' : 'DOG', // Convert to backend format
-                confidence: Math.max(1, confidence) // Ensure minimum confidence of 1
+                selection: window.userPicks[gameId] === 'favorite' ? 'FAV' : 'DOG' // Convert to backend format
+                // No confidence field needed
             };
         });
         
