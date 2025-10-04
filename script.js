@@ -353,6 +353,11 @@ function showLeaderboard() {
 // Load leaderboard data
 async function loadLeaderboard() {
     try {
+        // Load weekly leaderboard
+        if (typeof loadWeeklyLeaderboard === 'function') {
+            loadWeeklyLeaderboard();
+        }
+        
         // Get current challenge
         const challengeResponse = await fetch('http://localhost:3001/api/challenges/current');
         if (!challengeResponse.ok) {
@@ -3721,6 +3726,23 @@ function showLeaderboardTab(tab) {
         btn.classList.remove('active');
     });
     event.target.classList.add('active');
+    
+    // Show/hide leaderboard sections
+    document.querySelectorAll('.leaderboard-section').forEach(section => {
+        section.classList.remove('active');
+    });
+    
+    if (tab === 'weekly') {
+        document.getElementById('weekly-leaderboard').classList.add('active');
+        // Load weekly leaderboard if not already loaded
+        if (typeof loadWeeklyLeaderboard === 'function') {
+            loadWeeklyLeaderboard();
+        }
+    } else if (tab === 'monthly') {
+        document.getElementById('monthly-leaderboard').classList.add('active');
+    } else if (tab === 'all-time') {
+        document.getElementById('all-time-leaderboard').classList.add('active');
+    }
     
     updateLeaderboardContent(tab);
 }

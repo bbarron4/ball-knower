@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ball Knower - Sports Trivia Game</title>
-    <link rel="stylesheet" href="styles.css?v=16">
+    <link rel="stylesheet" href="styles.css?v=20">
     <link rel="stylesheet" href="auth-modal-styles.css?v=7">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
@@ -53,10 +53,6 @@
                             <i class="fas fa-play"></i>
                             Play Now
                         </button>
-                        <button class="cta-button" onclick="showWeeklyChallengeModal()" style="background: red; margin-top: 10px;">
-                            <i class="fas fa-bug"></i>
-                            TEST MODAL
-                        </button>
                     </div>
                 </div>
             </div>
@@ -86,27 +82,39 @@
                 </div>
             </div>
 
-            <!-- Top 3 Today Preview -->
-            <div class="leaderboard-preview">
-                <h3><i class="fas fa-crown"></i> Top Ballers Today</h3>
-                <div class="top-players">
-                    <div class="top-player">
-                        <span class="rank gold">1</span>
-                        <span class="player-name">Josh23</span>
-                        <span class="player-score">42 <i class="fas fa-fire"></i></span>
+            <!-- Leaderboards Row -->
+            <div class="leaderboards-row">
+                <!-- Top 3 Today Preview -->
+                <div class="leaderboard-preview">
+                    <h3><i class="fas fa-crown"></i> Top Ballers Today</h3>
+                    <div class="top-players">
+                        <div class="top-player">
+                            <span class="rank gold">1</span>
+                            <span class="player-name">Josh23</span>
+                            <span class="player-score">42 <i class="fas fa-fire"></i></span>
+                        </div>
+                        <div class="top-player">
+                            <span class="rank silver">2</span>
+                            <span class="player-name">CourtVision</span>
+                            <span class="player-score">38 <i class="fas fa-fire"></i></span>
+                        </div>
+                        <div class="top-player">
+                            <span class="rank bronze">3</span>
+                            <span class="player-name">HoopMaster</span>
+                            <span class="player-score">35 <i class="fas fa-fire"></i></span>
+                        </div>
                     </div>
-                    <div class="top-player">
-                        <span class="rank silver">2</span>
-                        <span class="player-name">CourtVision</span>
-                        <span class="player-score">38 <i class="fas fa-fire"></i></span>
-                    </div>
-                    <div class="top-player">
-                        <span class="rank bronze">3</span>
-                        <span class="player-name">HoopMaster</span>
-                        <span class="player-score">35 <i class="fas fa-fire"></i></span>
-                    </div>
+                    <p class="challenge-text">Think you can beat Josh23's 42-streak? 🔥</p>
                 </div>
-                <p class="challenge-text">Think you can beat Josh23's 42-streak? 🔥</p>
+
+                <!-- Weekly Challenge Leaders Preview -->
+                <div class="weekly-leaderboard-preview">
+                    <h3><i class="fas fa-trophy"></i> Weekly Challenge Leaders</h3>
+                    <div class="top-players" id="weekly-leaderboard-preview">
+                        <div class="loading-message">Loading weekly standings...</div>
+                    </div>
+                    <p class="challenge-text">Who will finish #1 this week? 🏆</p>
+                </div>
             </div>
 
 
@@ -456,43 +464,103 @@
                 <h2>Leaderboard</h2>
                 
                 <div class="leaderboard-tabs">
-                    <button class="tab-btn active" onclick="showLeaderboardTab('weekly')">This Week</button>
+                    <button class="tab-btn active" onclick="showLeaderboardTab('weekly')">Weekly Challenge</button>
                     <button class="tab-btn" onclick="showLeaderboardTab('monthly')">This Month</button>
                     <button class="tab-btn" onclick="showLeaderboardTab('all-time')">All Time</button>
                 </div>
 
-                <div class="leaderboard-list" id="leaderboard-list">
-                    <div class="leaderboard-item rank-1">
-                        <div class="rank">1</div>
-                        <div class="player-info">
-                            <div class="player-details">
-                                <span class="player-name">John Doe</span>
-                                <span class="player-stats">15 games • 85% avg</span>
-                            </div>
-                        </div>
-                        <div class="score">1,250</div>
+                <!-- Weekly Challenge Leaderboard -->
+                <div id="weekly-leaderboard" class="leaderboard-section active">
+                    <div class="leaderboard-header">
+                        <h3><i class="fas fa-trophy"></i> Weekly Challenge Standings</h3>
+                        <p class="leaderboard-subtitle">Current week's picks leaderboard</p>
                     </div>
-                    
-                    <div class="leaderboard-item">
-                        <div class="rank">2</div>
-                        <div class="player-info">
-                            <div class="player-details">
-                                <span class="player-name">Jane Smith</span>
-                                <span class="player-stats">12 games • 82% avg</span>
-                            </div>
-                        </div>
-                        <div class="score">1,180</div>
+                    <div class="leaderboard-list" id="weekly-leaderboard-list">
+                        <div class="loading-message">Loading weekly standings...</div>
                     </div>
+                </div>
 
-                    <div class="leaderboard-item">
-                        <div class="rank">3</div>
-                        <div class="player-info">
-                            <div class="player-details">
-                                <span class="player-name">Mike Johnson</span>
-                                <span class="player-stats">18 games • 78% avg</span>
+                <!-- Monthly Leaderboard -->
+                <div id="monthly-leaderboard" class="leaderboard-section">
+                    <div class="leaderboard-header">
+                        <h3><i class="fas fa-calendar-alt"></i> Monthly Standings</h3>
+                        <p class="leaderboard-subtitle">This month's top performers</p>
+                    </div>
+                    <div class="leaderboard-list" id="monthly-leaderboard-list">
+                        <div class="leaderboard-item rank-1">
+                            <div class="rank">1</div>
+                            <div class="player-info">
+                                <div class="player-details">
+                                    <span class="player-name">John Doe</span>
+                                    <span class="player-stats">15 games • 85% avg</span>
+                                </div>
                             </div>
+                            <div class="score">1,250</div>
                         </div>
-                        <div class="score">1,120</div>
+                        
+                        <div class="leaderboard-item">
+                            <div class="rank">2</div>
+                            <div class="player-info">
+                                <div class="player-details">
+                                    <span class="player-name">Jane Smith</span>
+                                    <span class="player-stats">12 games • 82% avg</span>
+                                </div>
+                            </div>
+                            <div class="score">1,180</div>
+                        </div>
+
+                        <div class="leaderboard-item">
+                            <div class="rank">3</div>
+                            <div class="player-info">
+                                <div class="player-details">
+                                    <span class="player-name">Mike Johnson</span>
+                                    <span class="player-stats">18 games • 78% avg</span>
+                                </div>
+                            </div>
+                            <div class="score">1,120</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- All Time Leaderboard -->
+                <div id="all-time-leaderboard" class="leaderboard-section">
+                    <div class="leaderboard-header">
+                        <h3><i class="fas fa-crown"></i> All Time Standings</h3>
+                        <p class="leaderboard-subtitle">The greatest ball knowers of all time</p>
+                    </div>
+                    <div class="leaderboard-list" id="all-time-leaderboard-list">
+                        <div class="leaderboard-item rank-1">
+                            <div class="rank">1</div>
+                            <div class="player-info">
+                                <div class="player-details">
+                                    <span class="player-name">John Doe</span>
+                                    <span class="player-stats">15 games • 85% avg</span>
+                                </div>
+                            </div>
+                            <div class="score">1,250</div>
+                        </div>
+                        
+                        <div class="leaderboard-item">
+                            <div class="rank">2</div>
+                            <div class="player-info">
+                                <div class="player-details">
+                                    <span class="player-name">Jane Smith</span>
+                                    <span class="player-stats">12 games • 82% avg</span>
+                                </div>
+                            </div>
+                            <div class="score">1,180</div>
+                        </div>
+
+                        <div class="leaderboard-item">
+                            <div class="rank">3</div>
+                            <div class="player-info">
+                                <div class="player-details">
+                                    <span class="player-name">Mike Johnson</span>
+                                    <span class="player-stats">18 games • 78% avg</span>
+                                </div>
+                            </div>
+                            <div class="score">1,120</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -929,6 +997,6 @@
 </div>
 
     <script src="auth-functions.js?v=4"></script>
-    <script src="weekly-challenge.js?v=33"></script>
+    <script src="weekly-challenge.js?v=35"></script>
 </body>
 </html>

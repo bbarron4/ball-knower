@@ -16,6 +16,9 @@ window.addEventListener('DOMContentLoaded', () => {
     console.log('Modal element found:', modal);
     
     checkAuthAndShowModal();
+    
+    // Load weekly leaderboard
+    loadWeeklyLeaderboard();
 });
 
 // ENTRY GUARD LOGIC - Determines which state to show based on user status
@@ -943,7 +946,120 @@ async function submitTriviaAnswers() {
 // View leaderboard
 function viewLeaderboard() {
   closeWeeklyChallengeModal();
-    showLeaderboard();
+    // Navigate to leaderboard page
+    window.location.href = '#leaderboard';
+    loadLeaderboard();
+}
+
+// Load weekly leaderboard data
+async function loadWeeklyLeaderboard() {
+    console.log('🏆 Loading weekly leaderboard...');
+    
+    try {
+        // Get current challenge ID
+        const challengeResponse = await fetch(`${API_URL}/challenges/current`, {
+            headers: authToken ? {
+                'Authorization': `Bearer ${authToken}`
+            } : {}
+        });
+        
+        if (!challengeResponse.ok) {
+            throw new Error('Failed to get current challenge');
+        }
+        
+        const challengeData = await challengeResponse.json();
+        const challengeId = challengeData.challenge.id;
+        
+        // Get leaderboard for this challenge
+        const leaderboardResponse = await fetch(`${API_URL}/leaderboards/${challengeId}/global?limit=10`, {
+            headers: authToken ? {
+                'Authorization': `Bearer ${authToken}`
+            } : {}
+        });
+        
+        if (!leaderboardResponse.ok) {
+            throw new Error('Failed to load leaderboard');
+        }
+        
+        const leaderboardData = await leaderboardResponse.json();
+        const leaderboard = leaderboardData.leaderboard || [];
+        
+        console.log('✅ Weekly leaderboard loaded:', leaderboard);
+        
+        // Update both home page preview and leaderboard page
+        updateWeeklyLeaderboardPreview(leaderboard);
+        updateWeeklyLeaderboardFull(leaderboard);
+        
+    } catch (error) {
+        console.error('❌ Failed to load weekly leaderboard:', error);
+        
+        // Show error message
+        const errorMessage = 'Failed to load weekly leaderboard. Check back later!';
+        updateWeeklyLeaderboardPreview([]);
+        updateWeeklyLeaderboardFull([]);
+    }
+}
+
+// Update weekly leaderboard preview on home page
+function updateWeeklyLeaderboardPreview(leaderboard) {
+    const previewContainer = document.getElementById('weekly-leaderboard-preview');
+    if (!previewContainer) return;
+    
+    if (leaderboard.length === 0) {
+        previewContainer.innerHTML = `
+            <div class="loading-message">No weekly challenge data yet</div>
+        `;
+        return;
+    }
+    
+    const top3 = leaderboard.slice(0, 3);
+    const html = top3.map((entry, index) => {
+        const rankClass = index === 0 ? 'gold' : index === 1 ? 'silver' : 'bronze';
+        const rankNumber = entry.rank || index + 1;
+        const playerName = entry.display_name || entry.username || 'Anonymous';
+        const playerScore = entry.total_points || 0;
+        
+        return `
+            <div class="top-player">
+                <span class="rank ${rankClass}">${rankNumber}</span>
+                <span class="player-name">${playerName}</span>
+                <span class="player-score">${playerScore} <i class="fas fa-fire"></i></span>
+            </div>
+        `;
+    }).join('');
+    
+    previewContainer.innerHTML = html;
+}
+
+// Update full weekly leaderboard on leaderboard page
+function updateWeeklyLeaderboardFull(leaderboard) {
+    const fullContainer = document.getElementById('weekly-leaderboard-list');
+    if (!fullContainer) return;
+    
+    if (leaderboard.length === 0) {
+        fullContainer.innerHTML = `
+            <div class="no-data-message">
+                <p>No weekly challenge data yet</p>
+                <p class="subtitle">Be the first to make picks!</p>
+            </div>
+        `;
+        return;
+    }
+    
+    const html = leaderboard.map((entry, index) => `
+        <div class="leaderboard-item ${index < 3 ? `rank-${index + 1}` : ''}">
+            <div class="rank">${entry.rank || index + 1}</div>
+            <div class="player-info">
+                <div class="player-details">
+                    <span class="player-name">${entry.display_name || entry.username || 'Anonymous'}</span>
+                    <span class="player-stats">${entry.picks_points || 0} picks • ${entry.total_points || 0} total pts</span>
+                </div>
+            </div>
+            <div class="score">${entry.total_points || 0}</div>
+        </div>
+    `).join('');
+    
+    fullContainer.innerHTML = html;
 }
 
 // Load weekly games for picks
@@ -1005,9 +1121,23 @@ function renderPicksInterface(games) {
     console.log('Initialized userPicks:', window.userPicks);
     console.log('Initialized confidenceValues:', window.confidenceValues);
     
+    // Separate games into NFL and College
+    const nflGames = games.slice(0, 10); // First 10 games are NFL
+    const collegeGames = games.slice(10, 20); // Next 10 games are College
+    
     let html = '<div class="games-list">';
     
-    games.forEach((game, index) => {
+    // NFL Games Section
+    html += `
+        <div class="games-section">
+            <div class="section-header">
+                <h3>🏈 NFL Games</h3>
+                <span class="section-count">${nflGames.length} games</span>
+            </div>
+            <div class="games-grid">
+    `;
+    
+    nflGames.forEach((game, index) => {
         const gameId = game.id; // This is already a UUID string
         const homeTeam = game.home_team || 'Home';
         const awayTeam = game.away_team || 'Away';
@@ -1015,7 +1145,7 @@ function renderPicksInterface(games) {
         const favorite = game.home_team_favorite ? homeTeam : awayTeam;
         const underdog = game.home_team_favorite ? awayTeam : homeTeam;
         
-        console.log(`Game ${index}: ID="${gameId}", Teams="${awayTeam} @ ${homeTeam}"`);
+        console.log(`NFL Game ${index}: ID="${gameId}", Teams="${awayTeam} @ ${homeTeam}"`);
         
         html += `
             <div class="game-card" data-game-id="${gameId}">
@@ -1040,7 +1170,67 @@ function renderPicksInterface(games) {
                         ${favorite}
                     </button>
                     
-                    <!-- Confidence section removed completely -->
+                    <button class="team-btn underdog-btn" 
+                            data-game-id="${gameId}"
+                            data-team="underdog"
+                            data-team-name="${underdog}"
+                            aria-pressed="false"
+                            aria-label="Select ${underdog} as underdog"
+                            tabindex="0">
+                        ${underdog}
+                    </button>
+                </div>
+            </div>
+        `;
+    });
+    
+    html += `
+            </div>
+        </div>
+    `;
+    
+    // College Games Section
+    html += `
+        <div class="games-section">
+            <div class="section-header">
+                <h3>🎓 College Football Games</h3>
+                <span class="section-count">${collegeGames.length} games</span>
+            </div>
+            <div class="games-grid">
+    `;
+    
+    collegeGames.forEach((game, index) => {
+        const gameId = game.id; // This is already a UUID string
+        const homeTeam = game.home_team || 'Home';
+        const awayTeam = game.away_team || 'Away';
+        const spread = game.spread || 0;
+        const favorite = game.home_team_favorite ? homeTeam : awayTeam;
+        const underdog = game.home_team_favorite ? awayTeam : homeTeam;
+        
+        console.log(`College Game ${index}: ID="${gameId}", Teams="${awayTeam} @ ${homeTeam}"`);
+        
+        html += `
+            <div class="game-card" data-game-id="${gameId}">
+                <div class="game-header">
+                    <h4>${awayTeam} @ ${homeTeam}</h4>
+                    <span class="spread">Spread: ${spread > 0 ? '+' : ''}${spread}</span>
+                </div>
+                
+                <div class="game-meta">
+                    <span class="meta-item">Favorite: ${favorite}</span>
+                    <span class="meta-item">Underdog: ${underdog}</span>
+                </div>
+                
+                <div class="pick-section">
+                    <button class="team-btn favorite-btn" 
+                            data-game-id="${gameId}"
+                            data-team="favorite"
+                            data-team-name="${favorite}"
+                            aria-pressed="false"
+                            aria-label="Select ${favorite} as favorite"
+                            tabindex="0">
+                        ${favorite}
+                    </button>
                     
                     <button class="team-btn underdog-btn" 
                             data-game-id="${gameId}"
@@ -1056,7 +1246,11 @@ function renderPicksInterface(games) {
         `;
     });
     
-    html += '</div>';
+    html += `
+            </div>
+        </div>
+    </div>
+    `;
     
     // Add confidence summary and submit button
     html += `
@@ -1147,7 +1341,7 @@ function restoreSelections() {
                 }
             }
         });
-        updateConfidenceTotal();
+        // updateConfidenceTotal removed - no longer needed
     }
     
     console.log('✅ Selections restored');

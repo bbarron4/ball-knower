@@ -5,8 +5,8 @@ import { authenticate } from '../middleware/auth.js';
 
 const router = express.Router();
 
-// Get current week's games with spreads
-router.get('/games/current', authenticate, async (req, res) => {
+// Get current week's games with spreads (no auth for testing)
+router.get('/games/current', async (req, res) => {
     try {
         // Get current challenge
         const challengeResult = await query(
@@ -60,19 +60,21 @@ router.post('/submit', authenticate, [
     body('picks').isArray().withMessage('Picks must be an array'),
     body('picks.*.gameId').isUUID().withMessage('Invalid game ID'),
     body('picks.*.selection').isIn(['FAV', 'DOG']).withMessage('Selection must be FAV or DOG'),
-    body('picks.*.confidence').isInt({ min: 1, max: 10 }).withMessage('Confidence must be between 1 and 10'),
-    body('triviaAnswers').isArray().withMessage('Trivia answers must be an array'),
-    body('triviaAnswers.*.questionId').isUUID().withMessage('Invalid question ID'),
-    body('triviaAnswers.*.isCorrect').isBoolean().withMessage('isCorrect must be boolean')
+    body('triviaAnswers').isArray().withMessage('Trivia answers must be an array')
 ], async (req, res) => {
-    try {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
-        }
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
 
         const { picks, triviaAnswers } = req.body;
         const userId = req.user.id;
+
+        // Validate we have exactly 20 picks
+        if (picks.length !== 20) {
+            return res.status(400).json({ error: `Expected 20 picks, got ${picks.length}` });
+        }
 
         // Get current challenge
         const challengeResult = await query(
@@ -124,7 +126,7 @@ router.post('/submit', authenticate, [
                 await query(
                     `INSERT INTO weekly_picks (user_id, challenge_id, game_id, selection, line_shown, confidence)
                      VALUES ($1, $2, $3, $4, $5, $6)`,
-                    [userId, challenge.id, pick.gameId, pick.selection, spread, pick.confidence]
+                    [userId, challenge.id, pick.gameId, pick.selection, spread, 1] // Default confidence of 1 (not used in scoring)
                 );
             }
 
@@ -148,7 +150,7 @@ router.post('/submit', authenticate, [
             await query('ROLLBACK');
             throw error;
         }
-    } catch (error) {
+  } catch (error) {
         console.error('Submit picks error:', error);
         res.status(500).json({ error: 'Failed to submit picks' });
     }
@@ -198,10 +200,10 @@ router.get('/my-picks', authenticate, async (req, res) => {
             picks: picksResult.rows,
             triviaAnswers: triviaResult.rows
         });
-    } catch (error) {
+  } catch (error) {
         console.error('Get my picks error:', error);
-        res.status(500).json({ error: 'Failed to get picks' });
-    }
+    res.status(500).json({ error: 'Failed to get picks' });
+  }
 });
 
 // Get weekly results
@@ -227,10 +229,10 @@ router.get('/results/:challengeId', authenticate, async (req, res) => {
             results: resultsResult.rows,
             userResult
         });
-    } catch (error) {
+  } catch (error) {
         console.error('Get results error:', error);
         res.status(500).json({ error: 'Failed to get results' });
-    }
+  }
 });
 
 export default router;
