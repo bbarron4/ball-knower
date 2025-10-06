@@ -5,8 +5,14 @@ const API_URL = 'http://localhost:3001/api';
 let authToken = localStorage.getItem('ball_knower_token');
 let currentUser = null;
 
+// Define adjustConfidence function early to prevent errors
+window.adjustConfidence = function() { 
+    console.log('adjustConfidence called but not needed for weekly challenge'); 
+};
+
 // Initialize on page load
 window.addEventListener('DOMContentLoaded', () => {
+    console.log('🏀 WEEKLY-CHALLENGE.JS VERSION 36 LOADED - CACHE BUSTED!');
     console.log('🏀 Ball Knower Weekly Challenge loaded');
     console.log('Auth token:', authToken);
     console.log('Current user:', currentUser);
@@ -154,9 +160,10 @@ async function checkWeeklyChallengeStatus() {
             const challenge = data.challenge;
             
             if (challenge.user_progress) {
-                const picksComplete = challenge.user_progress.picks_complete >= 20;
-                // Only check picks completion (no trivia)
-                return picksComplete;
+                // Check if user has already submitted (has an entry for this week)
+                const hasSubmitted = challenge.user_progress.has_submitted;
+                console.log('User has submitted this week:', hasSubmitted);
+                return hasSubmitted;
             }
         }
         return false;
@@ -164,6 +171,42 @@ async function checkWeeklyChallengeStatus() {
     console.error('Failed to check challenge status:', error);
         return false;
   }
+}
+
+// Fallback function for updating modal title (when auth-functions.js isn't loaded yet)
+function updateModalTitleFallback() {
+    console.log('🔄 updateModalTitleFallback called');
+    const modalTitle = document.getElementById('modal-title');
+    if (!modalTitle) {
+        console.log('❌ Modal title element not found in fallback');
+        return;
+    }
+    
+    const authToken = localStorage.getItem('ball_knower_token');
+    if (!authToken) {
+        console.log('❌ No auth token found in fallback');
+        modalTitle.textContent = 'Ball Knower Weekly Challenge';
+        return;
+    }
+    
+    // Try to get user data from localStorage
+    const userData = localStorage.getItem('ball_knower_user');
+    if (userData) {
+        try {
+            const cached = JSON.parse(userData);
+            if (cached.user) {
+                const displayName = cached.user.display_name || cached.user.username;
+                console.log('✅ Fallback - using cached user:', displayName);
+                modalTitle.textContent = `Hi ${displayName}! 👋`;
+                return;
+            }
+        } catch (error) {
+            console.error('Error parsing cached user data in fallback:', error);
+        }
+    }
+    
+    console.log('❌ No valid user data found in fallback');
+    modalTitle.textContent = 'Ball Knower Weekly Challenge';
 }
 
 // Show the weekly challenge modal
@@ -176,6 +219,17 @@ function showWeeklyChallengeModal() {
         console.log('✅ Modal found, displaying');
         modal.classList.add('show');
         document.body.classList.add('modal-open');
+        
+        // Update modal title with personalized greeting (with delay to ensure modal is loaded)
+        setTimeout(() => {
+            if (typeof updateModalTitle === 'function') {
+                console.log('🔄 Updating modal title...');
+                updateModalTitle();
+            } else {
+                console.log('❌ updateModalTitle function not found - using fallback');
+                updateModalTitleFallback();
+            }
+        }, 100);
         
         // Default to AUTH state (entry guard logic will determine correct state)
         showState('auth');
@@ -191,8 +245,13 @@ function closeWeeklyChallengeModal() {
   if (modal) {
         modal.classList.remove('show');
         document.body.classList.remove('modal-open');
-        // Reset to auth step for next time
-        showAuthStep();
+        // Reset to auth step for next time - only if elements exist
+        const authStep = document.getElementById('challenge-auth-step');
+        if (authStep) {
+            showAuthStep();
+        } else {
+            console.log('⚠️ Skipping showAuthStep - auth elements not found');
+        }
     }
 }
 
@@ -207,8 +266,20 @@ function handleModalClick(event) {
 
 // Show authentication step
 function showAuthStep() {
-    document.getElementById('challenge-auth-step').classList.add('active');
-    document.getElementById('challenge-overview-step').classList.remove('active');
+    const authStep = document.getElementById('challenge-auth-step');
+    const overviewStep = document.getElementById('challenge-overview-step');
+    
+    if (authStep) {
+        authStep.classList.add('active');
+    } else {
+        console.log('❌ challenge-auth-step element not found');
+    }
+    
+    if (overviewStep) {
+        overviewStep.classList.remove('active');
+    } else {
+        console.log('❌ challenge-overview-step element not found');
+    }
 }
 
 // Show challenge overview step
@@ -663,14 +734,7 @@ async function loadChallengeGames(challengeId) {
                         </button>
                     </div>
                     
-                    <div class="confidence-section">
-                        <label class="confidence-label">Confidence: <span id="conf_${game.id}">5</span></label>
-                        <div class="confidence-controls">
-                            <button type="button" class="confidence-minus" onclick="adjustConfidence('${game.id}', -1)">-</button>
-                            <span class="confidence-display" id="conf_display_${game.id}">5</span>
-                            <button type="button" class="confidence-plus" onclick="adjustConfidence('${game.id}', 1)">+</button>
-                        </div>
-                    </div>
+                    <!-- Confidence controls removed - no longer needed for weekly challenge -->
                 </div>
             `).join('');
         }
@@ -1558,7 +1622,7 @@ window.startTrivia = startTrivia;
 window.continueToChallenge = continueToChallenge;
 window.startWeeklyChallenge = startWeeklyChallenge;
 window.selectTeam = selectTeam;
-window.adjustConfidence = adjustConfidence;
+// adjustConfidence function defined at top of file to prevent errors
 window.submitWeeklyPicks = submitWeeklyPicks;
 window.selectTriviaAnswer = selectTriviaAnswer;
 window.viewLeaderboard = viewLeaderboard;

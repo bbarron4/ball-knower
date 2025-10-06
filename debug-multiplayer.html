@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Multiplayer Buttons</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; }
+        .mode-btn { 
+            padding: 10px 15px; 
+            margin: 5px; 
+            cursor: pointer; 
+            border: 1px solid #ccc;
+            background: #f0f0f0;
+        }
+        .mode-btn.active { 
+            background: #4CAF50; 
+            color: white; 
+        }
+        .result { margin: 10px 0; padding: 10px; background: #f0f0f0; }
+    </style>
+</head>
+<body>
+    <h1>Debug Multiplayer Game Mode Buttons</h1>
+    
+    <div class="test-section">
+        <h3>Test Game Mode Buttons</h3>
+        <div class="mode-buttons">
+            <button class="mode-btn active" data-mode="trivia" onclick="testToggleMode('trivia')">Ball Trivia</button>
+            <button class="mode-btn" data-mode="college" onclick="testToggleMode('college')">College Guesser</button>
+            <button class="mode-btn" data-mode="jersey" onclick="testToggleMode('jersey')">Jersey Guesser</button>
+        </div>
+        <div id="test-result" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>Current Game State</h3>
+        <div id="game-state" class="result"></div>
+    </div>
+
+    <script>
+        // Simulate the multiplayer game state
+        let multiplayerGame = {
+            gameSettings: {
+                sport: 'nfl',
+                modes: ['trivia'],
+                inputType: 'multiple',
+                duration: 60
+            }
+        };
+        
+        function testToggleMode(mode) {
+            console.log(`🎮 testToggleMode called with: ${mode}`);
+            console.log(`Current modes:`, multiplayerGame.gameSettings.modes);
+            
+            const button = document.querySelector(`[data-mode="${mode}"]`);
+            const isInGameState = multiplayerGame.gameSettings.modes.includes(mode);
+            
+            console.log(`Button found:`, button);
+            console.log(`Is in game state:`, isInGameState);
+            
+            if (isInGameState) {
+                // Mode is currently selected - check if we can remove it
+                if (multiplayerGame.gameSettings.modes.length > 1) {
+                    // Remove mode
+                    multiplayerGame.gameSettings.modes = multiplayerGame.gameSettings.modes.filter(m => m !== mode);
+                    button.classList.remove('active');
+                    console.log(`✅ Removed mode: ${mode}`);
+                } else {
+                    // Don't allow removing the last mode
+                    console.log(`❌ Cannot remove last mode: ${mode}`);
+                    alert('You must select at least one game mode');
+                }
+            } else {
+                // Mode is not selected - add it
+                multiplayerGame.gameSettings.modes.push(mode);
+                button.classList.add('active');
+                console.log(`✅ Added mode: ${mode}`);
+            }
+            
+            console.log(`Updated modes:`, multiplayerGame.gameSettings.modes);
+            updateDisplay();
+        }
+        
+        function updateDisplay() {
+            document.getElementById('test-result').innerHTML = `
+                <strong>Last Action:</strong> Button clicked<br>
+                <strong>Current Modes:</strong> ${multiplayerGame.gameSettings.modes.join(', ')}<br>
+                <strong>Button States:</strong> 
+                <span style="color: ${document.querySelector('[data-mode="trivia"]').classList.contains('active') ? 'green' : 'grey'}">Trivia</span>, 
+                <span style="color: ${document.querySelector('[data-mode="college"]').classList.contains('active') ? 'green' : 'grey'}">College</span>, 
+                <span style="color: ${document.querySelector('[data-mode="jersey"]').classList.contains('active') ? 'green' : 'grey'}">Jersey</span>
+            `;
+            
+            document.getElementById('game-state').innerHTML = `
+                <strong>Game Settings:</strong><br>
+                Sport: ${multiplayerGame.gameSettings.sport}<br>
+                Modes: [${multiplayerGame.gameSettings.modes.join(', ')}]<br>
+                Input Type: ${multiplayerGame.gameSettings.inputType}<br>
+                Duration: ${multiplayerGame.gameSettings.duration}
+            `;
+        }
+        
+        // Initialize display
+        updateDisplay();
+    </script>
+</body>
+</html>

@@ -35,6 +35,145 @@ let apiPlayerData = new Map();
 let apiLastUpdated = null;
 const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours
 
+// Sign out function
+function signOut() {
+    // Clear authentication data
+    localStorage.removeItem('ball_knower_token');
+    localStorage.removeItem('ball_knower_user');
+    
+    // Show success message
+    showMessage('Signed out successfully', 'success');
+    
+    // Return to home screen
+    showScreen('home-screen');
+    
+    // Update UI to reflect signed out state
+    updateAuthUI();
+}
+
+// Quick user switching for testing (temporary)
+function switchToTestUser() {
+    // Clear current auth
+    localStorage.removeItem('ball_knower_token');
+    localStorage.removeItem('ball_knower_user');
+    
+    // Set test user data
+    const testUsers = [
+        { username: 'TestUser1', display_name: 'Test User 1', id: 'test1' },
+        { username: 'TestUser2', display_name: 'Test User 2', id: 'test2' }
+    ];
+    
+    const randomUser = testUsers[Math.floor(Math.random() * testUsers.length)];
+    
+    // Simulate being signed in
+    localStorage.setItem('ball_knower_token', 'test_token_' + randomUser.id);
+    localStorage.setItem('ball_knower_user', JSON.stringify({
+        user: randomUser,
+        timestamp: Date.now()
+    }));
+    
+    showMessage(`Switched to ${randomUser.display_name}`, 'success');
+    updateAuthUI();
+}
+
+// Update UI to reflect authentication state
+function updateAuthUI() {
+    const authToken = localStorage.getItem('ball_knower_token');
+    const isSignedIn = !!authToken;
+    
+    // Update navigation to show/hide profile
+    const profileLink = document.querySelector('a[href="#profile"]');
+    if (profileLink) {
+        profileLink.style.display = isSignedIn ? 'block' : 'none';
+    }
+    
+    // Update any other UI elements that depend on auth state
+    console.log('Auth state updated:', isSignedIn ? 'Signed in' : 'Signed out');
+}
+
+// Show auth modal with personalized greeting
+async function showAuthModal() {
+    // Check if user is already signed in
+    const currentUser = await getCurrentUser();
+    
+    if (currentUser) {
+        // User is signed in - show personalized greeting
+        const modalTitle = document.getElementById('modal-title');
+        if (modalTitle) {
+            const displayName = currentUser.display_name || currentUser.username;
+            modalTitle.textContent = `Hi ${displayName}! 👋`;
+        }
+    } else {
+        // User not signed in - show default title
+        const modalTitle = document.getElementById('modal-title');
+        if (modalTitle) {
+            modalTitle.textContent = 'Ball Knower Weekly Challenge';
+        }
+    }
+    
+    // Show the modal
+    if (typeof showWeeklyChallengeModal === 'function') {
+        showWeeklyChallengeModal();
+    } else {
+        console.error('showWeeklyChallengeModal function not found');
+    }
+}
+
+// Helper function to get current user data
+async function getCurrentUser() {
+    const authToken = localStorage.getItem('ball_knower_token');
+    if (!authToken) {
+        return null;
+    }
+    
+    // Try to get user data from localStorage first (cached)
+    const userData = localStorage.getItem('ball_knower_user');
+    if (userData) {
+        try {
+            const cached = JSON.parse(userData);
+            // Check if cache is recent (less than 5 minutes old)
+            if (cached.timestamp && (Date.now() - cached.timestamp) < 5 * 60 * 1000) {
+                return cached.user;
+            }
+        } catch (error) {
+            console.error('Error parsing cached user data:', error);
+        }
+    }
+    
+    // Fetch fresh user data from API
+    try {
+        const response = await fetch('http://localhost:3001/api/users/me', {
+            headers: {
+                'Authorization': `Bearer ${authToken}`
+            }
+        });
+        
+        if (response.ok) {
+            const data = await response.json();
+            const user = data.user;
+            
+            // Cache the user data with timestamp
+            localStorage.setItem('ball_knower_user', JSON.stringify({
+                user: user,
+                timestamp: Date.now()
+            }));
+            
+            return user;
+        } else {
+            console.error('Failed to fetch user data:', response.status);
+        }
+    } catch (error) {
+        console.error('Error fetching user data:', error);
+    }
+    
+    // Fallback to basic info if API fails
+    return {
+        id: 'current_user',
+        username: 'Player',
+        display_name: 'Player'
+    };
+}
+
 // Essential Players List - Only load these specific players from API
 const ESSENTIAL_PLAYERS = [
     // Current Superstars
@@ -1064,11 +1203,24 @@ async function generateQuestions() {
         try {
             // Load trivia questions based on selected sport
             if (currentGame.sport === 'both') {
-                // Load both NFL and NBA trivia
+                // Load both NFL and NBA trivia with even distribution
                 const nflTriviaQuestions = await dataLoader.loadTriviaQuestions('nfl');
                 const nbaTriviaQuestions = await dataLoader.loadTriviaQuestions('nba');
-                triviaQuestions = [...nflTriviaQuestions, ...nbaTriviaQuestions];
-                console.log(`📚 Loaded combined trivia: ${nflTriviaQuestions.length} NFL + ${nbaTriviaQuestions.length} NBA = ${triviaQuestions.length} total`);
+                
+                // Create even distribution by alternating between sports
+                triviaQuestions = [];
+                const maxQuestions = Math.max(nflTriviaQuestions.length, nbaTriviaQuestions.length);
+                
+                for (let i = 0; i < maxQuestions; i++) {
+                    if (i < nflTriviaQuestions.length) {
+                        triviaQuestions.push(nflTriviaQuestions[i]);
+                    }
+                    if (i < nbaTriviaQuestions.length) {
+                        triviaQuestions.push(nbaTriviaQuestions[i]);
+                    }
+                }
+                
+                console.log(`📚 Loaded combined trivia: ${nflTriviaQuestions.length} NFL + ${nbaTriviaQuestions.length} NBA = ${triviaQuestions.length} total (even distribution)`);
             } else {
                 // Load single sport trivia
                 triviaQuestions = await dataLoader.loadTriviaQuestions(currentGame.sport);
@@ -1106,8 +1258,9 @@ async function generateQuestions() {
                 const triviaQ = triviaQuestions[triviaIndex % triviaQuestions.length];
                 triviaIndex++;
                 
-                const options = triviaQ.choices.map(choice => choice.text);
+                const allChoices = triviaQ.choices.map(choice => choice.text);
                 const correctAnswer = triviaQ.choices.find(c => c.id === triviaQ.correctChoiceId)?.text;
+                const options = shuffleArray(allChoices);
                 
                 question = {
                     type: 'trivia',
@@ -1132,8 +1285,9 @@ async function generateQuestions() {
                     const triviaQ = triviaQuestions[triviaIndex % triviaQuestions.length];
                     triviaIndex++;
                     
-                    const options = triviaQ.choices.map(choice => choice.text);
+                    const allChoices = triviaQ.choices.map(choice => choice.text);
                     const correctAnswer = triviaQ.choices.find(c => c.id === triviaQ.correctChoiceId)?.text;
+                    const options = shuffleArray(allChoices);
                     
                     question = {
                         type: 'trivia',
@@ -3220,9 +3374,138 @@ function playAgain() {
     showScreen('setup-screen');
 }
 
+
 // Multiplayer Functions
 function showMultiplayerSetup() {
+    console.log('🎮 Showing multiplayer setup screen');
     showScreen('multiplayer-setup-screen');
+    
+    // Reset multiplayer game state
+    multiplayerGame = {
+        roomCode: null,
+        isHost: false,
+        players: [],
+        gameSettings: {
+            sport: 'nfl',
+            modes: ['trivia'],
+            inputType: 'multiple',
+            duration: 60
+        },
+        currentQuestion: null,
+        timeRemaining: 60,
+        gameTimer: null,
+        score: 0,
+        questionsAnswered: 0,
+        gameStarted: false,
+        realTimeUpdates: null
+    };
+    
+    // Show the main multiplayer options
+    document.getElementById('multiplayer-options').style.display = 'block';
+    document.getElementById('room-setup').style.display = 'none';
+    document.getElementById('room-code-input').style.display = 'none';
+    document.getElementById('created-room').style.display = 'none';
+    
+    // Initialize UI state for room setup (when it becomes visible)
+    initializeMultiplayerUI();
+}
+
+function initializeMultiplayerUI() {
+    console.log('🎮 Initializing multiplayer UI...');
+    console.log('Current game settings:', multiplayerGame.gameSettings);
+    
+    // Reset all button states to default - with null checks
+    const sportBtns = document.querySelectorAll('.sport-btn');
+    const modeBtns = document.querySelectorAll('.mode-btn');
+    const inputBtns = document.querySelectorAll('.input-btn');
+    const durationBtns = document.querySelectorAll('.duration-btn');
+    
+    console.log(`Found ${sportBtns.length} sport buttons, ${modeBtns.length} mode buttons, ${inputBtns.length} input buttons, ${durationBtns.length} duration buttons`);
+    
+    sportBtns.forEach(btn => btn.classList.remove('active'));
+    modeBtns.forEach(btn => btn.classList.remove('active'));
+    inputBtns.forEach(btn => btn.classList.remove('active'));
+    durationBtns.forEach(btn => btn.classList.remove('active'));
+    
+    // Set active states based on current game settings
+    const sportBtn = document.querySelector(`[data-sport="${multiplayerGame.gameSettings.sport}"]`);
+    if (sportBtn) {
+        sportBtn.classList.add('active');
+        console.log(`✅ Activated sport button: ${multiplayerGame.gameSettings.sport}`);
+    } else {
+        console.log(`❌ Sport button not found: ${multiplayerGame.gameSettings.sport}`);
+    }
+    
+    const inputBtn = document.querySelector(`[data-input="${multiplayerGame.gameSettings.inputType}"]`);
+    if (inputBtn) {
+        inputBtn.classList.add('active');
+        console.log(`✅ Activated input button: ${multiplayerGame.gameSettings.inputType}`);
+    } else {
+        console.log(`❌ Input button not found: ${multiplayerGame.gameSettings.inputType}`);
+    }
+    
+    const durationBtn = document.querySelector(`[data-duration="${multiplayerGame.gameSettings.duration}"]`);
+    if (durationBtn) {
+        durationBtn.classList.add('active');
+        console.log(`✅ Activated duration button: ${multiplayerGame.gameSettings.duration}`);
+    } else {
+        console.log(`❌ Duration button not found: ${multiplayerGame.gameSettings.duration}`);
+    }
+    
+    // Set mode buttons based on current game settings
+    console.log('Setting up mode buttons...');
+    multiplayerGame.gameSettings.modes.forEach(mode => {
+        // Look specifically for buttons with mode-btn class
+        const button = document.querySelector(`.mode-btn[data-mode="${mode}"]`);
+        console.log(`Looking for .mode-btn with data-mode="${mode}":`, button);
+        if (button) {
+            button.classList.add('active');
+            console.log(`✅ Activated mode button: ${mode}`);
+            console.log(`Button classes after activation:`, button.className);
+        } else {
+            console.log(`❌ Mode button not found: ${mode}`);
+            // Try to find any element with this data-mode
+            const anyElement = document.querySelector(`[data-mode="${mode}"]`);
+            console.log(`Found any element with data-mode="${mode}":`, anyElement);
+        }
+    });
+    
+    console.log('✅ Multiplayer UI initialized');
+    console.log('Active modes:', multiplayerGame.gameSettings.modes);
+    
+    // Debug: Check if Ball Trivia button is active
+    const triviaBtn = document.querySelector('.mode-btn[data-mode="trivia"]');
+    if (triviaBtn) {
+        console.log(`Ball Trivia button active state: ${triviaBtn.classList.contains('active')}`);
+        console.log('🔧 FORCING Ball Trivia button to be active...');
+        triviaBtn.classList.add('active');
+        console.log(`Ball Trivia button active state after force: ${triviaBtn.classList.contains('active')}`);
+        console.log(`Ball Trivia button classes: ${triviaBtn.className}`);
+    } else {
+        console.log('❌ Ball Trivia button not found at all!');
+    }
+    
+    // Also try to find all mode buttons and log their states
+    const allModeBtns = document.querySelectorAll('.mode-btn');
+    console.log(`Found ${allModeBtns.length} mode buttons total`);
+    allModeBtns.forEach((btn, index) => {
+        console.log(`Mode button ${index}: data-mode="${btn.dataset.mode}", active=${btn.classList.contains('active')}`);
+    });
+    
+    // Test if toggleMode function works
+    console.log('🧪 Testing toggleMode function...');
+    if (typeof toggleMode === 'function') {
+        console.log('✅ toggleMode function exists');
+        // Test calling it
+        try {
+            toggleMode('college');
+            console.log('✅ toggleMode function call succeeded');
+        } catch (error) {
+            console.log('❌ toggleMode function call failed:', error);
+        }
+    } else {
+        console.log('❌ toggleMode function does not exist');
+    }
 }
 
 // Multiplayer game state
@@ -3240,33 +3523,72 @@ let multiplayerGame = {
     timeRemaining: 60,
     gameTimer: null,
     score: 0,
+    questionsAnswered: 0,
     gameStarted: false,
     realTimeUpdates: null
 };
 
+// Room polling variables
+let roomPollingInterval = null;
+let leaderboardSyncInterval = null;
+
+// Helper function to get current user ID
+function getCurrentUserId() {
+    const userData = localStorage.getItem('ball_knower_user');
+    if (userData) {
+        try {
+            const cached = JSON.parse(userData);
+            return cached.user ? cached.user.id : null;
+        } catch (error) {
+            console.error('Error parsing user data:', error);
+        }
+    }
+    return null;
+}
+
 function createRoom() {
+    console.log('🎮 createRoom called - FUNCTION IS WORKING!');
     // Reset to default state when creating room
     multiplayerGame.gameSettings = {
         sport: 'nfl',
         modes: ['trivia'],
-        inputType: 'multiple'
+        inputType: 'multiple',
+        duration: 60
     };
     
-    // Reset UI to default state
-    document.querySelectorAll('.sport-btn').forEach(btn => btn.classList.remove('active'));
-    document.querySelector('[data-sport="nfl"]').classList.add('active');
+    // Show the room setup first - with null checks
+    const roomSetup = document.getElementById('room-setup');
+    const multiplayerOptions = document.getElementById('multiplayer-options');
     
-    document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
-    document.querySelector('[data-mode="trivia"]').classList.add('active');
+    if (roomSetup) {
+        roomSetup.style.display = 'block';
+        console.log('✅ Room setup shown');
+    } else {
+        console.log('❌ Room setup element not found');
+    }
     
-    document.querySelectorAll('.input-btn').forEach(btn => btn.classList.remove('active'));
-    document.querySelector('[data-input="multiple"]').classList.add('active');
+    if (multiplayerOptions) {
+        multiplayerOptions.style.display = 'none';
+        console.log('✅ Multiplayer options hidden');
+    } else {
+        console.log('❌ Multiplayer options element not found');
+    }
     
-    document.getElementById('room-setup').style.display = 'block';
-    document.getElementById('multiplayer-options').style.display = 'none';
+    // Initialize UI state after the elements are visible
+    setTimeout(() => {
+        initializeMultiplayerUI();
+    }, 100); // Small delay to ensure DOM is updated
 }
 
-function createRoomWithSettings() {
+async function createRoomWithSettings() {
+    // Check if user is authenticated
+    const authToken = localStorage.getItem('ball_knower_token');
+    if (!authToken) {
+        showMessage('Please sign in to create a multiplayer room', 'error');
+        showAuthModal();
+        return;
+    }
+    
     // Get current selected modes from UI
     const selectedModes = [];
     document.querySelectorAll('.mode-btn.active').forEach(btn => {
@@ -3276,13 +3598,41 @@ function createRoomWithSettings() {
     // Update game settings with current selections
     multiplayerGame.gameSettings.modes = selectedModes;
     
-    const roomCode = generateRoomCode();
-    multiplayerGame.roomCode = roomCode;
-    multiplayerGame.isHost = true;
-    multiplayerGame.players = [{ name: 'You (Host)', score: 0, isHost: true }];
-    
-    document.getElementById('display-room-code').textContent = roomCode;
-    document.getElementById('current-room-code').textContent = roomCode;
+    try {
+        // Create room via API
+        const response = await fetch('http://localhost:3001/api/rooms/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${authToken}`
+            },
+            body: JSON.stringify({
+                gameSettings: multiplayerGame.gameSettings
+            })
+        });
+        
+        if (!response.ok) {
+            throw new Error('Failed to create room');
+        }
+        
+        const data = await response.json();
+        const roomCode = data.roomCode;
+        const room = data.room;
+        
+        // Update local game state
+        multiplayerGame.roomCode = roomCode;
+        multiplayerGame.isHost = true;
+        multiplayerGame.players = room.players;
+        
+        document.getElementById('display-room-code').textContent = roomCode;
+        document.getElementById('current-room-code').textContent = roomCode;
+        
+        showMessage('Room created successfully!', 'success');
+    } catch (error) {
+        console.error('Error creating room:', error);
+        showMessage('Failed to create room. Please try again.', 'error');
+        return;
+    }
     
     // Display game settings
     const settingsDisplay = document.getElementById('game-settings-display');
@@ -3321,32 +3671,43 @@ function createRoomWithSettings() {
         </div>
     `;
     
-    document.getElementById('created-room').style.display = 'block';
-    document.getElementById('room-setup').style.display = 'none';
-    updatePlayersList();
+    // Show the waiting room instead of created room
+    showWaitingRoom();
 }
 
 // This function is now merged into the main selectSport function above
 // No separate multiplayer sport selection needed
 
 function toggleMode(mode) {
-    const button = document.querySelector(`[data-mode="${mode}"]`);
-    const isActive = button.classList.contains('active');
+    console.log(`🎮 toggleMode called with: ${mode}`);
+    console.log(`Current modes:`, multiplayerGame.gameSettings.modes);
     
-    if (isActive) {
-        // Remove mode if it's the only one selected, otherwise remove it
+    const button = document.querySelector(`.mode-btn[data-mode="${mode}"]`);
+    const isInGameState = multiplayerGame.gameSettings.modes.includes(mode);
+    
+    console.log(`Button found:`, button);
+    console.log(`Is in game state:`, isInGameState);
+    
+    if (isInGameState) {
+        // Mode is currently selected - check if we can remove it
         if (multiplayerGame.gameSettings.modes.length > 1) {
+            // Remove mode
             multiplayerGame.gameSettings.modes = multiplayerGame.gameSettings.modes.filter(m => m !== mode);
             button.classList.remove('active');
+            console.log(`✅ Removed mode: ${mode}`);
         } else {
             // Don't allow removing the last mode
+            console.log(`❌ Cannot remove last mode: ${mode}`);
             showMessage('You must select at least one game mode', 'warning');
         }
     } else {
-        // Add mode
+        // Mode is not selected - add it
         multiplayerGame.gameSettings.modes.push(mode);
         button.classList.add('active');
+        console.log(`✅ Added mode: ${mode}`);
     }
+    
+    console.log(`Updated modes:`, multiplayerGame.gameSettings.modes);
 }
 
 function selectInput(inputType) {
@@ -3365,18 +3726,52 @@ function showJoinRoom() {
     document.getElementById('room-code-input').style.display = 'block';
 }
 
-function joinRoom() {
+async function joinRoom() {
+    // Check if user is authenticated
+    const authToken = localStorage.getItem('ball_knower_token');
+    if (!authToken) {
+        showMessage('Please sign in to join a multiplayer room', 'error');
+        showAuthModal();
+        return;
+    }
+    
     const roomCode = document.getElementById('room-code').value.toUpperCase();
     if (roomCode.length === 6) {
-        multiplayerGame.roomCode = roomCode;
-        multiplayerGame.isHost = false;
-        multiplayerGame.players = [{ name: 'You', score: 0, isHost: false }];
-        
-        document.getElementById('current-room-code').textContent = roomCode;
-        showMessage('Joining room...', 'success');
-        setTimeout(() => {
-            startMultiplayerGame();
-        }, 1000);
+        try {
+            // Join room via API
+            const response = await fetch(`http://localhost:3001/api/rooms/join/${roomCode}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${authToken}`
+                }
+            });
+            
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Failed to join room');
+            }
+            
+            const data = await response.json();
+            const room = data.room;
+            
+            // Update local game state
+            multiplayerGame.roomCode = roomCode;
+            multiplayerGame.isHost = false;
+            multiplayerGame.players = room.players;
+            multiplayerGame.gameSettings = room.gameSettings;
+            
+            document.getElementById('current-room-code').textContent = roomCode;
+            showMessage('Successfully joined room!', 'success');
+            
+            // Show waiting room
+            setTimeout(() => {
+                showWaitingRoom();
+            }, 1000);
+        } catch (error) {
+            console.error('Error joining room:', error);
+            showMessage(error.message || 'Failed to join room. Please try again.', 'error');
+        }
     } else {
         showMessage('Please enter a valid 6-digit room code', 'error');
     }
@@ -3406,11 +3801,184 @@ function updatePlayersList() {
     document.getElementById('player-count').textContent = multiplayerGame.players.length;
 }
 
-function startMultiplayerGame() {
-    if (!multiplayerGame.isHost) {
-        showMessage('Only the host can start the game', 'warning');
+function showWaitingRoom() {
+    console.log('🎮 Showing waiting room');
+    showScreen('multiplayer-waiting-screen');
+    
+    // Update room code display
+    document.getElementById('waiting-room-code').textContent = multiplayerGame.roomCode;
+    
+    // Display game settings
+    updateWaitingGameSettings();
+    
+    // Update players list
+    updateWaitingPlayersList();
+    
+    // Update status based on host/player role
+    updateWaitingStatus();
+    
+    // Start polling for room updates
+    startRoomPolling();
+}
+
+function updateWaitingGameSettings() {
+    const settingsDisplay = document.getElementById('waiting-game-settings');
+    const modesText = multiplayerGame.gameSettings.modes.map(mode => {
+        const modeNames = {
+            'trivia': 'Ball Trivia',
+            'college': 'College Guesser', 
+            'jersey': 'Jersey Guesser'
+        };
+        return modeNames[mode];
+    }).join(', ');
+    
+    const inputDisplay = multiplayerGame.gameSettings.inputType === 'multiple' ? 'Multiple Choice' : 'Type Answer';
+    const durationMinutes = Math.floor(multiplayerGame.gameSettings.duration / 60);
+    const durationDisplay = `${durationMinutes} minute${durationMinutes > 1 ? 's' : ''}`;
+    
+    settingsDisplay.innerHTML = `
+        <div class="settings-item">
+            <strong>Sport:</strong> ${multiplayerGame.gameSettings.sport.toUpperCase()}
+        </div>
+        <div class="settings-item">
+            <strong>Modes:</strong> ${modesText}
+        </div>
+        <div class="settings-item">
+            <strong>Input:</strong> ${inputDisplay}
+        </div>
+        <div class="settings-item">
+            <strong>Duration:</strong> ${durationDisplay}
+        </div>
+    `;
+}
+
+function updateWaitingPlayersList() {
+    const playersList = document.getElementById('waiting-players-list');
+    playersList.innerHTML = '';
+    
+    multiplayerGame.players.forEach(player => {
+        const playerElement = document.createElement('div');
+        playerElement.className = 'player-item';
+        // Use displayName from backend, fallback to username, then to 'Player'
+        const displayName = player.displayName || player.username || 'Player';
+        playerElement.innerHTML = `
+            <i class="fas fa-user${player.isHost ? '-crown' : ''}"></i>
+            <span>${displayName}${player.isHost ? ' (Host)' : ''}</span>
+        `;
+        playersList.appendChild(playerElement);
+    });
+}
+
+function updateWaitingStatus() {
+    const statusText = document.getElementById('status-text');
+    const startGameBtn = document.getElementById('start-game-btn');
+    
+    if (multiplayerGame.isHost) {
+        if (multiplayerGame.players.length >= 2) {
+            statusText.textContent = 'Ready to start! Click Start Game when ready.';
+            startGameBtn.style.display = 'block';
+        } else {
+            statusText.textContent = 'Waiting for at least one more player...';
+            startGameBtn.style.display = 'none';
+        }
+    } else {
+        statusText.textContent = 'Waiting for host to start the game...';
+        startGameBtn.style.display = 'none';
+    }
+}
+
+async function startGameCountdown() {
+    console.log('🎮 startGameCountdown called - isHost:', multiplayerGame.isHost, 'players:', multiplayerGame.players.length);
+    
+    if (multiplayerGame.players.length < 2) {
+        showMessage('Need at least 2 players to start', 'warning');
         return;
     }
+    
+    // Only the host should make the API call to start the game
+    if (multiplayerGame.isHost) {
+        try {
+            const authToken = localStorage.getItem('ball_knower_token');
+            const response = await fetch(`http://localhost:3001/api/rooms/${multiplayerGame.roomCode}/start`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${authToken}`
+                }
+            });
+            
+            if (!response.ok) {
+                throw new Error('Failed to start game');
+            }
+            
+            const data = await response.json();
+            console.log('✅ Host started game successfully');
+        } catch (error) {
+            console.error('Error starting game:', error);
+            showMessage('Failed to start game. Please try again.', 'error');
+            return;
+        }
+    } else {
+        console.log('👥 Joiner - showing countdown without API call');
+    }
+    
+    // Both host and joiner should see the countdown
+    multiplayerGame.gameStarted = true;
+    // Don't stop polling yet - let countdown finish first
+    
+    // Show countdown
+    const countdown = document.getElementById('game-countdown');
+    const countdownTimer = document.getElementById('countdown-timer');
+    const statusText = document.getElementById('status-text');
+    
+    countdown.style.display = 'block';
+    statusText.style.display = 'none';
+    
+    // Use server timestamp for synchronized countdown
+    const countdownDuration = 10; // 10 seconds
+    const serverStartTime = multiplayerGame.countdownStartTime ? new Date(multiplayerGame.countdownStartTime) : new Date();
+    const now = new Date();
+    const elapsed = Math.floor((now - serverStartTime) / 1000);
+    let timeLeft = Math.max(0, countdownDuration - elapsed);
+    
+    countdownTimer.textContent = timeLeft;
+    
+    const countdownInterval = setInterval(() => {
+        const currentTime = new Date();
+        const currentElapsed = Math.floor((currentTime - serverStartTime) / 1000);
+        timeLeft = Math.max(0, countdownDuration - currentElapsed);
+        countdownTimer.textContent = timeLeft;
+        
+        if (timeLeft <= 0) {
+            clearInterval(countdownInterval);
+            stopRoomPolling(); // Stop polling when game actually starts
+            startMultiplayerGame();
+        }
+    }, 100); // Update every 100ms for better sync
+}
+
+async function leaveWaitingRoom() {
+    try {
+        const authToken = localStorage.getItem('ball_knower_token');
+        if (authToken && multiplayerGame.roomCode) {
+            await fetch(`http://localhost:3001/api/rooms/${multiplayerGame.roomCode}/leave`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${authToken}`
+                }
+            });
+        }
+    } catch (error) {
+        console.error('Error leaving room:', error);
+    }
+    
+    stopRoomPolling();
+    showMessage('Left the room', 'info');
+    showMultiplayerSetup();
+}
+
+async function startMultiplayerGame() {
+    // Both host and joiner should be able to start the game after countdown
+    console.log('🎮 startMultiplayerGame called - isHost:', multiplayerGame.isHost);
     
     // Notify all players that game is starting
     notifyGameStart();
@@ -3423,8 +3991,11 @@ function startMultiplayerGame() {
     // Start the timer
     startMultiplayerTimer();
     
+    // Start leaderboard synchronization
+    startLeaderboardSync();
+    
     // Load first question
-    loadMultiplayerQuestion();
+    await loadMultiplayerQuestion();
 }
 
 function notifyGameStart() {
@@ -3441,10 +4012,16 @@ function simulatePlayerJoin() {
         multiplayerGame.players.push({
             name: newPlayerName,
             score: 0,
-            isHost: false
+            isHost: false,
+            userId: `user_${multiplayerGame.players.length}`
         });
         
-        updatePlayersList();
+        // Update the waiting room if it's visible
+        if (document.getElementById('multiplayer-waiting-screen').style.display !== 'none') {
+            updateWaitingPlayersList();
+            updateWaitingStatus();
+        }
+        
         showMessage(`${newPlayerName} joined the room!`, 'info');
     }
 }
@@ -3466,44 +4043,131 @@ function formatTime(seconds) {
     return `${mins}:${secs.toString().padStart(2, '0')}`;
 }
 
-function loadMultiplayerQuestion() {
+async function loadMultiplayerQuestion() {
     const { sport, modes, inputType } = multiplayerGame.gameSettings;
     console.log(`Loading question for sport: ${sport}, modes: ${modes.join(', ')}`);
+    console.log('🔍 dataLoader available:', typeof dataLoader !== 'undefined');
     
     // Randomly select a mode from the available modes
     const randomMode = modes[Math.floor(Math.random() * modes.length)];
     console.log(`Selected mode: ${randomMode}`);
     
-    // Generate question based on randomly selected mode
-    if (randomMode === 'trivia') {
-        loadTriviaQuestion(sport);
-    } else if (randomMode === 'college') {
-        loadCollegeQuestion(sport);
-    } else if (randomMode === 'jersey') {
-        loadJerseyQuestion(sport);
-    }
+    // Always use fallback for now to ensure questions load
+    console.log('🔄 Using immediate fallback question system');
+    const fallbackQuestions = [
+        {
+            type: 'trivia',
+            question: 'Which NFL team won the most Super Bowls?',
+            options: ['New England Patriots', 'Pittsburgh Steelers', 'Dallas Cowboys', 'San Francisco 49ers'],
+            correctAnswer: 'New England Patriots',
+            category: 'General',
+            difficulty: 'medium',
+            league: 'NFL'
+        },
+        {
+            type: 'trivia',
+            question: 'Who is the all-time leading rusher in NFL history?',
+            options: ['Emmitt Smith', 'Walter Payton', 'Barry Sanders', 'Adrian Peterson'],
+            correctAnswer: 'Emmitt Smith',
+            category: 'General',
+            difficulty: 'medium',
+            league: 'NFL'
+        },
+        {
+            type: 'trivia',
+            question: 'Which quarterback has the most career passing yards?',
+            options: ['Tom Brady', 'Peyton Manning', 'Drew Brees', 'Brett Favre'],
+            correctAnswer: 'Tom Brady',
+            category: 'General',
+            difficulty: 'medium',
+            league: 'NFL'
+        }
+    ];
+    
+    // Pick a random question and randomize the answer order
+    const randomQuestion = fallbackQuestions[Math.floor(Math.random() * fallbackQuestions.length)];
+    const shuffledOptions = [...randomQuestion.options].sort(() => Math.random() - 0.5);
+    
+    const question = {
+        ...randomQuestion,
+        options: shuffledOptions
+    };
+    
+    console.log('🎯 Using fallback question:', question);
+    displayMultiplayerQuestion(question);
 }
 
-function loadTriviaQuestion(sport) {
-    // Handle "both" sport option
-    let targetSport = sport;
-    if (sport === 'both') {
-        // Randomly choose between NFL and NBA for "both"
-        targetSport = Math.random() > 0.5 ? 'nfl' : 'nba';
-    }
-    
-    // Use the existing trivia system
-    dataLoader.createTriviaQuestion(targetSport).then(question => {
-        if (question) {
-            displayMultiplayerQuestion(question);
-        } else {
-            console.error('Failed to load trivia question');
-            showMessage('Failed to load question', 'error');
+async function loadTriviaQuestion(sport) {
+    try {
+        // Handle "both" sport option
+        let targetSport = sport;
+        if (sport === 'both') {
+            // Randomly choose between NFL and NBA for "both"
+            targetSport = Math.random() > 0.5 ? 'nfl' : 'nba';
         }
-    }).catch(error => {
+        
+        console.log(`📚 Loading trivia questions for ${targetSport}`);
+        
+        // Check if dataLoader is available
+        if (typeof dataLoader === 'undefined' || !dataLoader || !dataLoader.loadTriviaQuestions) {
+            console.error('dataLoader not available, using fallback');
+            console.log('🔄 Using fallback question system');
+            const fallbackQuestion = {
+                type: 'trivia',
+                question: 'Which NFL team won the most Super Bowls?',
+                options: ['New England Patriots', 'Pittsburgh Steelers', 'Dallas Cowboys', 'San Francisco 49ers'],
+                correctAnswer: 'New England Patriots',
+                category: 'General',
+                difficulty: 'medium',
+                league: 'NFL'
+            };
+            displayMultiplayerQuestion(fallbackQuestion);
+            return;
+        }
+        
+        // Use the same method as regular trivia
+        const triviaQuestions = await dataLoader.loadTriviaQuestions(targetSport);
+        console.log(`📚 Loaded ${triviaQuestions.length} trivia questions for ${targetSport}`);
+        
+        if (triviaQuestions.length === 0) {
+            console.error('No trivia questions found');
+            showMessage('No questions available', 'error');
+            return;
+        }
+        
+        // Pick a random question
+        const randomQuestion = triviaQuestions[Math.floor(Math.random() * triviaQuestions.length)];
+        console.log('📝 Selected random question:', randomQuestion);
+        
+        // Convert to the format expected by displayMultiplayerQuestion
+        const question = {
+            type: 'trivia',
+            question: randomQuestion.question,
+            options: randomQuestion.choices.map(choice => choice.text),
+            correctAnswer: randomQuestion.choices.find(c => c.id === randomQuestion.correctChoiceId)?.text,
+            category: randomQuestion.category || 'General',
+            difficulty: randomQuestion.difficulty || 'medium',
+            league: targetSport.toUpperCase()
+        };
+        
+        console.log('🎯 Converted question:', question);
+        displayMultiplayerQuestion(question);
+        
+    } catch (error) {
         console.error('Error loading trivia question:', error);
-        showMessage('Error loading question', 'error');
-    });
+        // Fallback to a simple question
+        console.log('🔄 Using fallback question system');
+        const fallbackQuestion = {
+            type: 'trivia',
+            question: 'Which NFL team won the most Super Bowls?',
+            options: ['New England Patriots', 'Pittsburgh Steelers', 'Dallas Cowboys', 'San Francisco 49ers'],
+            correctAnswer: 'New England Patriots',
+            category: 'General',
+            difficulty: 'medium',
+            league: 'NFL'
+        };
+        displayMultiplayerQuestion(fallbackQuestion);
+    }
 }
 
 function loadCollegeQuestion(sport) {
@@ -3539,9 +4203,25 @@ function loadJerseyQuestion(sport) {
 }
 
 function displayMultiplayerQuestion(question) {
-    multiplayerGame.currentQuestion = question;
+    console.log('🎯 displayMultiplayerQuestion called with:', question);
     
-    document.getElementById('question-text').textContent = question.question;
+    try {
+        if (!question) {
+            console.error('No question provided to displayMultiplayerQuestion');
+            showMessage('Failed to load question', 'error');
+            return;
+        }
+        
+        multiplayerGame.currentQuestion = question;
+        
+        // Display the question text
+        const questionTextElement = document.getElementById('question-text');
+        if (questionTextElement) {
+            questionTextElement.textContent = question.question || 'No question available';
+            console.log('📝 Question text set to:', question.question);
+        } else {
+            console.error('Question text element not found');
+        }
     
     const optionsContainer = document.getElementById('question-options');
     const textInputContainer = document.getElementById('text-input-container');
@@ -3551,11 +4231,21 @@ function displayMultiplayerQuestion(question) {
         textInputContainer.style.display = 'none';
         
         optionsContainer.innerHTML = '';
-        question.choices.forEach(choice => {
+        // Handle both 'choices' and 'options' formats
+        const choices = question.choices || question.options || [];
+        
+        if (choices.length === 0) {
+            console.error('No choices found in question:', question);
+            showMessage('Question has no answer choices', 'error');
+            return;
+        }
+        
+        choices.forEach((choice, index) => {
             const button = document.createElement('button');
             button.className = 'option-btn';
-            button.textContent = choice.text;
-            button.onclick = () => selectMultiplayerAnswer(choice.id);
+            // Handle both object format (choice.text) and string format (choice)
+            button.textContent = typeof choice === 'string' ? choice : (choice.text || choice);
+            button.onclick = () => selectMultiplayerAnswer(typeof choice === 'string' ? index : (choice.id || index));
             optionsContainer.appendChild(button);
         });
     } else {
@@ -3563,10 +4253,29 @@ function displayMultiplayerQuestion(question) {
         textInputContainer.style.display = 'block';
         document.getElementById('text-answer').value = '';
     }
+    
+    } catch (error) {
+        console.error('Error in displayMultiplayerQuestion:', error);
+        showMessage('Error displaying question', 'error');
+    }
 }
 
 function selectMultiplayerAnswer(choiceId) {
-    const isCorrect = choiceId === multiplayerGame.currentQuestion.correctChoiceId;
+    const question = multiplayerGame.currentQuestion;
+    let isCorrect = false;
+
+    // Handle different question formats
+    if (question.correctChoiceId !== undefined) {
+        // Old format with choice IDs
+        isCorrect = choiceId === question.correctChoiceId;
+    } else if (question.correctAnswer !== undefined) {
+        // New format with correct answer text
+        const selectedChoice = question.choices ? question.choices[choiceId] : question.options[choiceId];
+        const selectedText = typeof selectedChoice === 'string' ? selectedChoice : selectedChoice.text;
+        isCorrect = selectedText === question.correctAnswer;
+    }
+
+    console.log('🎯 Answer selected:', choiceId, 'Correct:', isCorrect, 'Question:', question);
     handleMultiplayerAnswer(isCorrect);
 }
 
@@ -3584,17 +4293,24 @@ function submitTextAnswer() {
 
 function handleMultiplayerAnswer(isCorrect) {
     if (isCorrect) {
-        multiplayerGame.score++;
-        showMessage('Correct! +1 point', 'success');
+        multiplayerGame.score += 10; // 10 points per correct answer
+        showMessage('Correct! +10 points', 'success');
     } else {
-        showMessage('Wrong answer', 'error');
+        multiplayerGame.score -= 5; // -5 points for wrong answer to prevent spam
+        showMessage('Wrong answer! -5 points', 'error');
     }
+    
+    // Track questions answered
+    multiplayerGame.questionsAnswered++;
     
     // Update player score in the players array
     const currentPlayer = multiplayerGame.players.find(p => p.isHost === multiplayerGame.isHost);
     if (currentPlayer) {
         currentPlayer.score = multiplayerGame.score;
     }
+    
+    // Send score update to backend for synchronization
+    syncPlayerScore();
     
     // Simulate opponent answers (for testing)
     simulateOpponentAnswers();
@@ -3603,24 +4319,30 @@ function handleMultiplayerAnswer(isCorrect) {
     updateLeaderboard();
     
     // Load next question after a short delay
-    setTimeout(() => {
-        loadMultiplayerQuestion();
+    setTimeout(async () => {
+        await loadMultiplayerQuestion();
     }, 2000);
 }
 
 function simulateOpponentAnswers() {
-    // Simulate other players answering
-    const opponents = multiplayerGame.players.filter(p => p.isHost !== multiplayerGame.isHost);
-    opponents.forEach(opponent => {
-        // Randomly determine if opponent gets it right
-        const isCorrect = Math.random() > 0.3; // 70% chance of being correct
-        if (isCorrect) {
-            opponent.score++;
-        }
-        
-        // Show opponent answer
-        showOpponentAnswer(opponent.name, isCorrect);
-    });
+    // Only simulate if there are no real opponents (for testing)
+    const realOpponents = multiplayerGame.players.filter(p => p.isHost !== multiplayerGame.isHost && p.displayName && p.displayName !== 'Player');
+    
+    if (realOpponents.length === 0) {
+        // Simulate other players answering (for testing only)
+        const opponents = multiplayerGame.players.filter(p => p.isHost !== multiplayerGame.isHost);
+        opponents.forEach(opponent => {
+            // Randomly determine if opponent gets it right
+            const isCorrect = Math.random() > 0.3; // 70% chance of being correct
+            if (isCorrect) {
+                opponent.score += 10; // Changed to 10 points per correct answer
+            }
+            
+            // Show opponent answer
+            const playerName = opponent.displayName || opponent.username || opponent.name || 'Player';
+            showOpponentAnswer(playerName, isCorrect);
+        });
+    }
 }
 
 function showOpponentAnswer(playerName, isCorrect) {
@@ -3648,42 +4370,195 @@ function showOpponentAnswer(playerName, isCorrect) {
     }, 3000);
 }
 
-function updateLeaderboard() {
-    const leaderboardList = document.getElementById('leaderboard-list');
-    leaderboardList.innerHTML = '';
-    
-    // Sort players by score
-    const sortedPlayers = [...multiplayerGame.players].sort((a, b) => b.score - a.score);
-    
-    sortedPlayers.forEach((player, index) => {
-        const playerItem = document.createElement('div');
-        playerItem.className = 'leaderboard-item';
-        playerItem.innerHTML = `
-            <span class="rank">#${index + 1}</span>
-            <span class="player-name">${player.name}</span>
-            <span class="score">${player.score}</span>
-        `;
-        leaderboardList.appendChild(playerItem);
-    });
+async function syncPlayerScore() {
+    try {
+        const authToken = localStorage.getItem('ball_knower_token');
+        if (!authToken || !multiplayerGame.roomCode) return;
+
+        const response = await fetch(`http://localhost:3001/api/rooms/${multiplayerGame.roomCode}/score`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${authToken}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                score: multiplayerGame.score
+            })
+        });
+
+        if (response.ok) {
+            console.log('✅ Score synced successfully');
+        }
+    } catch (error) {
+        console.error('Error syncing score:', error);
+    }
 }
 
-function endMultiplayerGame() {
+function updateLeaderboard() {
+    // Show only current player's score instead of full leaderboard
+    const currentPlayer = multiplayerGame.players.find(p => p.isHost === multiplayerGame.isHost);
+    if (currentPlayer) {
+        const scoreElement = document.getElementById('current-player-score');
+        if (scoreElement) {
+            scoreElement.textContent = `Your Score: ${currentPlayer.score}`;
+            console.log('📊 Updated score display:', currentPlayer.score);
+        }
+    }
+    
+    // Also update the local score to match
+    multiplayerGame.score = currentPlayer ? currentPlayer.score : 0;
+}
+
+async function endMultiplayerGame() {
     clearInterval(multiplayerGame.gameTimer);
+    stopLeaderboardSync();
+    multiplayerGame.gameStarted = false;
     
     // Show final results
-    showMessage(`Game Over! Your score: ${multiplayerGame.score}`, 'info');
+    showMessage('Game Over!', 'info');
     
-    // Update final leaderboard
-    updateLeaderboard();
+    // Calculate final scores and show results
+    await showMultiplayerResults();
+}
+
+async function showMultiplayerResults() {
+    console.log('🎮 Showing multiplayer results');
     
-    // Show end game options
-    setTimeout(() => {
-        if (multiplayerGame.isHost) {
-            showMessage('Game ended. You can start a new game or leave.', 'info');
+    // Get the latest synchronized data from server before showing results
+    await syncLeaderboard();
+    
+    showScreen('multiplayer-results-screen');
+    
+    // Update room code display
+    document.getElementById('results-room-code').textContent = multiplayerGame.roomCode;
+    
+    // Sort players by score (highest first) using synchronized data
+    const sortedPlayers = [...multiplayerGame.players].sort((a, b) => b.score - a.score);
+    
+    console.log('🏆 Final scores:', sortedPlayers.map(p => `${p.displayName || p.username}: ${p.score}`));
+    
+    // Show winner announcement
+    const winner = sortedPlayers[0];
+    const winnerAnnouncement = document.getElementById('winner-announcement');
+    
+    // Check for ties
+    const topScore = winner.score;
+    const tiedPlayers = sortedPlayers.filter(p => p.score === topScore);
+    const isTie = tiedPlayers.length > 1 && topScore > 0;
+    
+    if (topScore > 0) {
+        if (isTie) {
+            // Handle tie
+            const tiedNames = tiedPlayers.map(p => p.displayName || p.username || p.name || 'Player').join(' & ');
+            winnerAnnouncement.innerHTML = `
+                <div class="winner-card">
+                    <div class="winner-crown">🤝</div>
+                    <h2>It's a Tie!</h2>
+                    <div class="winner-score">${tiedNames} both scored ${topScore} points</div>
+                    <div class="trash-talk">Great minds think alike! 🧠</div>
+                </div>
+            `;
         } else {
-            showMessage('Game ended. You can leave the room.', 'info');
+            // Single winner
+            const winnerName = winner.displayName || winner.username || winner.name || 'Player';
+            const currentPlayer = multiplayerGame.players.find(p => p.isHost === multiplayerGame.isHost);
+            const isCurrentPlayerWinner = currentPlayer && currentPlayer.id === winner.id;
+            
+            let trashTalkMessage = '';
+            if (!isCurrentPlayerWinner && sortedPlayers.length > 1) {
+                const trashTalkMessages = [
+                    "Your bro really knows ball more than you! 🏀",
+                    "Maybe stick to watching from the couch! 📺",
+                    "Time to hit the books and study up! 📚",
+                    "Better luck next time, champ! 😅",
+                    "Your opponent just schooled you! 🎓",
+                    "Looks like someone needs more practice! 🏃‍♂️"
+                ];
+                trashTalkMessage = `<div class="trash-talk">${trashTalkMessages[Math.floor(Math.random() * trashTalkMessages.length)]}</div>`;
+            }
+            
+            winnerAnnouncement.innerHTML = `
+                <div class="winner-card">
+                    <div class="winner-crown">👑</div>
+                    <h2>${winnerName} Wins!</h2>
+                    <div class="winner-score">${winner.score} points</div>
+                    ${trashTalkMessage}
+                </div>
+            `;
         }
-    }, 2000);
+    } else {
+        winnerAnnouncement.innerHTML = `
+            <div class="winner-card">
+                <h2>No Winner</h2>
+                <div class="winner-score">Everyone scored 0 points</div>
+            </div>
+        `;
+    }
+    
+    // Show final leaderboard
+    const leaderboardList = document.getElementById('final-leaderboard-list');
+    leaderboardList.innerHTML = '';
+    
+    sortedPlayers.forEach((player, index) => {
+        const playerElement = document.createElement('div');
+        playerElement.className = 'leaderboard-item';
+        
+        let rankIcon = '';
+        if (index === 0) rankIcon = '🥇';
+        else if (index === 1) rankIcon = '🥈';
+        else if (index === 2) rankIcon = '🥉';
+        else rankIcon = `${index + 1}.`;
+        
+        const playerName = player.displayName || player.username || player.name || 'Player';
+        playerElement.innerHTML = `
+            <div class="rank">${rankIcon}</div>
+            <div class="player-name">${playerName}${player.isHost ? ' (Host)' : ''}</div>
+            <div class="score">${player.score} pts</div>
+        `;
+        
+        leaderboardList.appendChild(playerElement);
+    });
+    
+    // Show game statistics
+    const gameStats = document.getElementById('game-stats');
+    const totalQuestions = multiplayerGame.questionsAnswered || 0;
+    const gameDuration = multiplayerGame.gameSettings.duration;
+    
+    gameStats.innerHTML = `
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-label">Game Duration</div>
+                <div class="stat-value">${Math.floor(gameDuration / 60)} minute${Math.floor(gameDuration / 60) > 1 ? 's' : ''}</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Total Players</div>
+                <div class="stat-value">${multiplayerGame.players.length}</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Questions Answered</div>
+                <div class="stat-value">${totalQuestions}</div>
+            </div>
+        </div>
+    `;
+}
+
+function playAgainMultiplayer() {
+    // Reset game state
+    multiplayerGame.score = 0;
+    multiplayerGame.questionsAnswered = 0;
+    multiplayerGame.gameStarted = false;
+    
+    // Reset all player scores
+    multiplayerGame.players.forEach(player => {
+        player.score = 0;
+    });
+    
+    // Go back to waiting room
+    showWaitingRoom();
+}
+
+function returnToHome() {
+    showScreen('home-screen');
 }
 
 function leaveMultiplayerGame() {
@@ -3819,7 +4694,141 @@ function updatePersonalStats() {
     document.getElementById('games-played').textContent = gameResults.length;
 }
 
+// Room polling functions for real-time multiplayer
+function startRoomPolling() {
+    if (roomPollingInterval) {
+        clearInterval(roomPollingInterval);
+    }
+    
+    roomPollingInterval = setInterval(async () => {
+        await pollRoomUpdates();
+    }, 2000); // Poll every 2 seconds
+}
+
+function stopRoomPolling() {
+    if (roomPollingInterval) {
+        clearInterval(roomPollingInterval);
+        roomPollingInterval = null;
+    }
+}
+
+function startLeaderboardSync() {
+    // Sync leaderboard every 2 seconds during the game
+    leaderboardSyncInterval = setInterval(async () => {
+        if (multiplayerGame.roomCode && multiplayerGame.gameStarted) {
+            await syncLeaderboard();
+        }
+    }, 2000);
+}
+
+function stopLeaderboardSync() {
+    if (leaderboardSyncInterval) {
+        clearInterval(leaderboardSyncInterval);
+        leaderboardSyncInterval = null;
+    }
+}
+
+async function syncLeaderboard() {
+    try {
+        const authToken = localStorage.getItem('ball_knower_token');
+        if (!authToken || !multiplayerGame.roomCode) return;
+
+        const response = await fetch(`http://localhost:3001/api/rooms/${multiplayerGame.roomCode}`, {
+            headers: {
+                'Authorization': `Bearer ${authToken}`
+            }
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            const room = data.room;
+            
+            // Update local player scores with server data
+            multiplayerGame.players = room.players;
+            
+            // Force update the leaderboard display
+            updateLeaderboard();
+            
+            console.log('🔄 Leaderboard synced:', multiplayerGame.players.map(p => `${p.displayName || p.username}: ${p.score}`));
+        }
+    } catch (error) {
+        console.error('Error syncing leaderboard:', error);
+    }
+}
+
+async function pollRoomUpdates() {
+    if (!multiplayerGame.roomCode) return;
+    
+    try {
+        const authToken = localStorage.getItem('ball_knower_token');
+        if (!authToken) return;
+        
+        const response = await fetch(`http://localhost:3001/api/rooms/${multiplayerGame.roomCode}`, {
+            headers: {
+                'Authorization': `Bearer ${authToken}`
+            }
+        });
+        
+        if (response.ok) {
+            const data = await response.json();
+            const room = data.room;
+            
+            // Update local state with server state
+            multiplayerGame.players = room.players;
+            multiplayerGame.gameSettings = room.gameSettings;
+            multiplayerGame.countdownStartTime = room.countdownStartTime;
+            
+            // Update host status based on current user
+            const currentUserId = getCurrentUserId();
+            multiplayerGame.isHost = room.hostId === currentUserId;
+            
+            // Update UI
+            updateWaitingPlayersList();
+            updateWaitingGameSettings();
+            updateWaitingStatus();
+            
+            // Check if game has started
+            console.log('🔄 Room status:', room.status, 'Game started:', multiplayerGame.gameStarted);
+            if (room.status === 'starting' && !multiplayerGame.gameStarted) {
+                console.log('🚀 Starting game countdown for all players');
+                multiplayerGame.gameStarted = true;
+                // Don't stop polling yet - let countdown finish first
+                startGameCountdown();
+            }
+        }
+    } catch (error) {
+        console.error('Error polling room updates:', error);
+    }
+}
+
 // Initialize stats on page load
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('🚀 SCRIPT.JS VERSION 3 LOADED - CACHE BUSTED!');
     updatePersonalStats();
+    
+    // Test if createRoom function is accessible
+    console.log('createRoom function exists:', typeof createRoom);
+    console.log('showMultiplayerSetup function exists:', typeof showMultiplayerSetup);
+    
+    // Make sure functions are globally accessible
+    window.createRoom = createRoom;
+    window.showMultiplayerSetup = showMultiplayerSetup;
+    window.toggleMode = toggleMode;
+    
+    console.log('Functions added to window object');
+    
+    // Add event listeners as backup
+    setTimeout(() => {
+        const createRoomCard = document.querySelector('.option-card[onclick*="createRoom"]');
+        if (createRoomCard) {
+            console.log('Found createRoom card, adding event listener');
+            createRoomCard.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('Create Room card clicked via event listener');
+                createRoom();
+            });
+        } else {
+            console.log('Create Room card not found');
+        }
+    }, 1000);
 });

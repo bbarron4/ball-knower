@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplayer Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; }
+        button { padding: 10px 15px; margin: 5px; cursor: pointer; }
+        .result { margin: 10px 0; padding: 10px; background: #f0f0f0; }
+    </style>
+</head>
+<body>
+    <h1>Multiplayer Mode Test</h1>
+    
+    <div class="test-section">
+        <h3>Test 1: showMultiplayerSetup()</h3>
+        <button onclick="testShowMultiplayerSetup()">Test showMultiplayerSetup</button>
+        <div id="test1-result" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>Test 2: createRoom()</h3>
+        <button onclick="testCreateRoom()">Test createRoom</button>
+        <div id="test2-result" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>Test 3: generateRoomCode()</h3>
+        <button onclick="testGenerateRoomCode()">Test generateRoomCode</button>
+        <div id="test3-result" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>Test 4: getPlayersForSport()</h3>
+        <button onclick="testGetPlayersForSport()">Test getPlayersForSport</button>
+        <div id="test4-result" class="result"></div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        function testShowMultiplayerSetup() {
+            try {
+                console.log('Testing showMultiplayerSetup...');
+                // This will fail because we don't have the HTML elements, but we can test the function exists
+                if (typeof showMultiplayerSetup === 'function') {
+                    document.getElementById('test1-result').innerHTML = '✅ showMultiplayerSetup function exists';
+                } else {
+                    document.getElementById('test1-result').innerHTML = '❌ showMultiplayerSetup function not found';
+                }
+            } catch (error) {
+                document.getElementById('test1-result').innerHTML = '❌ Error: ' + error.message;
+            }
+        }
+        
+        function testCreateRoom() {
+            try {
+                console.log('Testing createRoom...');
+                if (typeof createRoom === 'function') {
+                    document.getElementById('test2-result').innerHTML = '✅ createRoom function exists';
+                } else {
+                    document.getElementById('test2-result').innerHTML = '❌ createRoom function not found';
+                }
+            } catch (error) {
+                document.getElementById('test2-result').innerHTML = '❌ Error: ' + error.message;
+            }
+        }
+        
+        function testGenerateRoomCode() {
+            try {
+                console.log('Testing generateRoomCode...');
+                if (typeof generateRoomCode === 'function') {
+                    const code = generateRoomCode();
+                    document.getElementById('test3-result').innerHTML = '✅ generateRoomCode works: ' + code;
+                } else {
+                    document.getElementById('test3-result').innerHTML = '❌ generateRoomCode function not found';
+                }
+            } catch (error) {
+                document.getElementById('test3-result').innerHTML = '❌ Error: ' + error.message;
+            }
+        }
+        
+        function testGetPlayersForSport() {
+            try {
+                console.log('Testing getPlayersForSport...');
+                if (typeof getPlayersForSport === 'function') {
+                    const players = getPlayersForSport();
+                    document.getElementById('test4-result').innerHTML = '✅ getPlayersForSport works: ' + players.length + ' players loaded';
+                } else {
+                    document.getElementById('test4-result').innerHTML = '❌ getPlayersForSport function not found';
+                }
+            } catch (error) {
+                document.getElementById('test4-result').innerHTML = '❌ Error: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>

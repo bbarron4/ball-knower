@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Button Functionality</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        button { padding: 10px 20px; margin: 10px; font-size: 16px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+    <h1>Test Button Functionality</h1>
+    
+    <div class="test-section">
+        <h3>Test 1: Direct Function Call</h3>
+        <button onclick="testDirectCall()">Test Direct Call</button>
+        <div id="test1-result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>Test 2: Simulate createRoom</h3>
+        <button onclick="testCreateRoom()">Test createRoom</button>
+        <div id="test2-result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>Test 3: Check Function Existence</h3>
+        <button onclick="checkFunctions()">Check Functions</button>
+        <div id="test3-result"></div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        function testDirectCall() {
+            document.getElementById('test1-result').innerHTML = '✅ Direct call works!';
+        }
+        
+        function testCreateRoom() {
+            try {
+                if (typeof createRoom === 'function') {
+                    createRoom();
+                    document.getElementById('test2-result').innerHTML = '✅ createRoom function called successfully!';
+                } else {
+                    document.getElementById('test2-result').innerHTML = '❌ createRoom function not found';
+                }
+            } catch (error) {
+                document.getElementById('test2-result').innerHTML = '❌ Error: ' + error.message;
+            }
+        }
+        
+        function checkFunctions() {
+            const functions = ['createRoom', 'showMultiplayerSetup', 'toggleMode'];
+            let result = '';
+            
+            functions.forEach(funcName => {
+                const exists = typeof window[funcName] === 'function';
+                result += `${funcName}: ${exists ? '✅' : '❌'}<br>`;
+            });
+            
+            document.getElementById('test3-result').innerHTML = result;
+        }
+    </script>
+</body>
+</html>

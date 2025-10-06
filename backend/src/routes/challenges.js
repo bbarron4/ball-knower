@@ -31,9 +31,16 @@ router.get('/current', optionalAuth, async (req, res) => {
         [req.user.id, challenge.id]
       );
 
+      // Check if user has already submitted (has a weekly entry)
+      const hasSubmitted = await query(
+        'SELECT COUNT(*) as count FROM weekly_entries WHERE user_id = $1 AND challenge_id = $2',
+        [req.user.id, challenge.id]
+      );
+
       challenge.user_progress = {
         picks_complete: parseInt(picks.rows[0].count),
-        trivia_complete: parseInt(trivia.rows[0].count)
+        trivia_complete: parseInt(trivia.rows[0].count),
+        has_submitted: parseInt(hasSubmitted.rows[0].count) > 0
       };
     }
 

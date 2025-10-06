@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Ball Knower - Sports Trivia Game</title>
     <link rel="stylesheet" href="styles.css?v=20">
     <link rel="stylesheet" href="auth-modal-styles.css?v=7">
@@ -682,6 +685,46 @@
         </div>
 
         <!-- Multiplayer Game Screen -->
+        <div id="multiplayer-waiting-screen" class="screen">
+            <div class="waiting-container">
+                <div class="waiting-header">
+                    <h2>Waiting for Players</h2>
+                    <div class="room-info">
+                        <span class="room-code">Room: <span id="waiting-room-code">ABC123</span></span>
+                    </div>
+                </div>
+                
+                <div class="waiting-content">
+                    <div class="game-settings-summary" id="waiting-game-settings">
+                        <!-- Game settings will be displayed here -->
+                    </div>
+                    
+                    <div class="players-waiting" id="players-waiting">
+                        <h3>Players in Room</h3>
+                        <div class="players-list" id="waiting-players-list">
+                            <!-- Players will be populated here -->
+                        </div>
+                    </div>
+                    
+                    <div class="waiting-status" id="waiting-status">
+                        <div class="status-message">
+                            <i class="fas fa-clock"></i>
+                            <span id="status-text">Waiting for more players...</span>
+                        </div>
+                        <div class="countdown" id="game-countdown" style="display: none;">
+                            <span>Game starting in: </span>
+                            <span id="countdown-timer">10</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="waiting-controls">
+                    <button class="btn-secondary" onclick="leaveWaitingRoom()">Leave Room</button>
+                    <button class="btn-primary" id="start-game-btn" onclick="startGameCountdown()" style="display: none;">Start Game</button>
+                </div>
+            </div>
+        </div>
+
         <div id="multiplayer-game-screen" class="screen">
             <div class="game-container">
                 <div class="game-header">
@@ -708,11 +751,9 @@
                     </div>
                 </div>
 
-                <div class="live-leaderboard" id="live-leaderboard">
-                    <h3>Live Leaderboard</h3>
-                    <div class="leaderboard-list" id="leaderboard-list">
-                        <!-- Players will be populated here -->
-                    </div>
+                <div class="current-score" id="current-score">
+                    <h3>Your Score</h3>
+                    <div class="score-display" id="current-player-score">0</div>
                 </div>
                 
                 <div class="opponent-answers" id="opponent-answers" style="display: none;">
@@ -724,6 +765,40 @@
 
                 <div class="game-controls">
                     <button class="btn-secondary" onclick="leaveMultiplayerGame()">Leave Game</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Multiplayer Results Screen -->
+        <div id="multiplayer-results-screen" class="screen">
+            <div class="results-container">
+                <div class="results-header">
+                    <h2>Game Results</h2>
+                    <div class="room-info">
+                        <span class="room-code">Room: <span id="results-room-code">ABC123</span></span>
+                    </div>
+                </div>
+                
+                <div class="results-content">
+                    <div class="winner-announcement" id="winner-announcement">
+                        <!-- Winner will be displayed here -->
+                    </div>
+                    
+                    <div class="final-leaderboard" id="final-leaderboard">
+                        <h3>Final Scores</h3>
+                        <div class="leaderboard-list" id="final-leaderboard-list">
+                            <!-- Final scores will be populated here -->
+                        </div>
+                    </div>
+                    
+                    <div class="game-stats" id="game-stats">
+                        <!-- Game statistics will be displayed here -->
+                    </div>
+                </div>
+                
+                <div class="results-controls">
+                    <button class="btn-secondary" onclick="playAgainMultiplayer()">Play Again</button>
+                    <button class="btn-primary" onclick="returnToHome()">Return to Home</button>
                 </div>
             </div>
         </div>
@@ -763,6 +838,11 @@
                         <!-- Achievements will be populated by JavaScript -->
                     </div>
                 </div>
+
+                <div class="profile-actions">
+                    <button class="btn-secondary" onclick="signOut()">Sign Out</button>
+                    <button class="btn-primary" onclick="switchToTestUser()" style="margin-left: 1rem;">Switch Test User</button>
+                </div>
             </div>
         </div>
     </div>
@@ -785,8 +865,8 @@
             console.log('✅ Fallback data loaded: 5 players');
         }
     </script>
-    <script src="utils/dataLoader.js"></script>
-    <script src="script.js"></script>
+    <script src="utils/dataLoader.js?v=1"></script>
+    <script src="script.js?v=3"></script>
 </div>
 
 <!-- Weekly Challenge Modal -->
@@ -997,6 +1077,10 @@
 </div>
 
     <script src="auth-functions.js?v=4"></script>
-    <script src="weekly-challenge.js?v=35"></script>
+    <script src="weekly-challenge.js?v=36"></script>
+    <script>
+        console.log('🏠 HTML VERSION 2 LOADED - CACHE BUSTED!');
+        console.log('HTML has correct onclick handlers:', document.querySelector('[data-mode="trivia"]').onclick.toString().includes('toggleMode'));
+    </script>
 </body>
 </html>

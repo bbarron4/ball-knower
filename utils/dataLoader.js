@@ -11,6 +11,16 @@ class DataLoader {
         };
     }
 
+    // Proper Fisher-Yates shuffle algorithm
+    shuffleArray(array) {
+        const shuffled = [...array];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+    }
+
     // Helper to resolve absolute base path for GitHub Pages
     resolveBase() {
         return `${location.origin}/ball-knower/`;
@@ -154,9 +164,10 @@ class DataLoader {
         // Pick a random question
         const triviaQ = questions[Math.floor(Math.random() * questions.length)];
 
-        // Convert to game question format
-        const options = triviaQ.choices.map(choice => choice.text);
+        // Convert to game question format and shuffle options
+        const allChoices = triviaQ.choices.map(choice => choice.text);
         const correctAnswer = triviaQ.choices.find(c => c.id === triviaQ.correctChoiceId)?.text;
+        const options = this.shuffleArray(allChoices);
 
         if (!correctAnswer) {
             console.error('Trivia question missing correct answer:', triviaQ);
@@ -197,7 +208,7 @@ class DataLoader {
 
         if (wrongColleges.length < 3) return null;
 
-        const options = [correctCollege, ...wrongColleges].sort(() => Math.random() - 0.5);
+        const options = this.shuffleArray([correctCollege, ...wrongColleges]);
 
         // Use different wording for NBA players (could be college or origin)
         const questionText = correctPlayer.league === 'NBA' 
@@ -239,7 +250,7 @@ class DataLoader {
 
         if (wrongColleges.length < 3) return null;
 
-        const options = [correctCollege, ...wrongColleges].sort(() => Math.random() - 0.5);
+        const options = this.shuffleArray([correctCollege, ...wrongColleges]);
 
         // Use different wording for NBA players (could be college or origin)
         const questionText = correctPlayer.league === 'NBA' 
@@ -278,7 +289,7 @@ class DataLoader {
 
         if (wrongJerseys.length < 3) return null;
 
-        const options = [correctJersey, ...wrongJerseys].sort(() => Math.random() - 0.5);
+        const options = this.shuffleArray([correctJersey, ...wrongJerseys]);
 
         // Use present/past tense appropriately
         const verb = correctPlayer.league === 'NBA' ? 'wore' : 'wear';
@@ -320,7 +331,7 @@ class DataLoader {
 
         if (wrongJerseys.length < 3) return null;
 
-        const options = [correctJersey, ...wrongJerseys].sort(() => Math.random() - 0.5);
+        const options = this.shuffleArray([correctJersey, ...wrongJerseys]);
 
         // Use present/past tense appropriately
         const verb = correctPlayer.league === 'NBA' ? 'wore' : 'wear';
