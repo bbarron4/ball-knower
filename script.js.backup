@@ -4043,30 +4043,58 @@ function formatTime(seconds) {
     return `${mins}:${secs.toString().padStart(2, '0')}`;
 }
 
-
 async function loadMultiplayerQuestion() {
     const { sport, modes, inputType } = multiplayerGame.gameSettings;
-    console.log(`🎮 Loading question for sport: ${sport}, modes: ${modes.join(', ')}`);
-    console.log('dataLoader available:', typeof dataLoader !== 'undefined');
+    console.log(`Loading question for sport: ${sport}, modes: ${modes.join(', ')}`);
+    console.log('🔍 dataLoader available:', typeof dataLoader !== 'undefined');
     
     // Randomly select a mode from the available modes
     const randomMode = modes[Math.floor(Math.random() * modes.length)];
     console.log(`Selected mode: ${randomMode}`);
     
-    // Use the EXACT same system as the main game
-    if (randomMode === 'trivia') {
-        console.log('Loading trivia question using main game system');
-        await loadTriviaQuestion(sport);
-    } else if (randomMode === 'college') {
-        console.log('Loading college question using main game system');
-        await loadCollegeQuestion(sport);
-    } else if (randomMode === 'jersey') {
-        console.log('Loading jersey question using main game system');
-        await loadJerseyQuestion(sport);
-    } else {
-        console.log('â“ Unknown mode, defaulting to trivia');
-        await loadTriviaQuestion(sport);
-    }
+    // Always use fallback for now to ensure questions load
+    console.log('🔄 Using immediate fallback question system');
+    const fallbackQuestions = [
+        {
+            type: 'trivia',
+            question: 'Which NFL team won the most Super Bowls?',
+            options: ['New England Patriots', 'Pittsburgh Steelers', 'Dallas Cowboys', 'San Francisco 49ers'],
+            correctAnswer: 'New England Patriots',
+            category: 'General',
+            difficulty: 'medium',
+            league: 'NFL'
+        },
+        {
+            type: 'trivia',
+            question: 'Who is the all-time leading rusher in NFL history?',
+            options: ['Emmitt Smith', 'Walter Payton', 'Barry Sanders', 'Adrian Peterson'],
+            correctAnswer: 'Emmitt Smith',
+            category: 'General',
+            difficulty: 'medium',
+            league: 'NFL'
+        },
+        {
+            type: 'trivia',
+            question: 'Which quarterback has the most career passing yards?',
+            options: ['Tom Brady', 'Peyton Manning', 'Drew Brees', 'Brett Favre'],
+            correctAnswer: 'Tom Brady',
+            category: 'General',
+            difficulty: 'medium',
+            league: 'NFL'
+        }
+    ];
+    
+    // Pick a random question and randomize the answer order
+    const randomQuestion = fallbackQuestions[Math.floor(Math.random() * fallbackQuestions.length)];
+    const shuffledOptions = [...randomQuestion.options].sort(() => Math.random() - 0.5);
+    
+    const question = {
+        ...randomQuestion,
+        options: shuffledOptions
+    };
+    
+    console.log('🎯 Using fallback question:', question);
+    displayMultiplayerQuestion(question);
 }
 
 async function loadTriviaQuestion(sport) {
@@ -4080,39 +4108,25 @@ async function loadTriviaQuestion(sport) {
         
         console.log(`📚 Loading trivia questions for ${targetSport}`);
         
-        // Check if dataLoader is available and wait for it to be ready
-        console.log('🔍 Checking dataLoader availability...');
-        console.log('dataLoader type:', typeof dataLoader);
-        console.log('dataLoader object:', dataLoader);
-        console.log('dataLoader.loadTriviaQuestions:', dataLoader?.loadTriviaQuestions);
-        
+        // Check if dataLoader is available
         if (typeof dataLoader === 'undefined' || !dataLoader || !dataLoader.loadTriviaQuestions) {
-            console.error('dataLoader not available, waiting for initialization...');
-            
-            // Wait a bit for dataLoader to be initialized
-            await new Promise(resolve => setTimeout(resolve, 500));
-            
-            console.log('🔍 After wait - dataLoader type:', typeof dataLoader);
-            console.log('🔍 After wait - dataLoader object:', dataLoader);
-            
-            if (typeof dataLoader === 'undefined' || !dataLoader || !dataLoader.loadTriviaQuestions) {
-                console.error('dataLoader still not available after wait, using fallback');
-                const fallbackQuestion = {
-                    type: 'trivia',
-                    question: 'Which NFL team won the most Super Bowls?',
-                    options: ['New England Patriots', 'Pittsburgh Steelers', 'Dallas Cowboys', 'San Francisco 49ers'],
-                    correctAnswer: 'New England Patriots',
-                    category: 'General',
-                    difficulty: 'medium',
-                    league: 'NFL'
-                };
-                displayMultiplayerQuestion(fallbackQuestion);
-                return;
-            }
+            console.error('dataLoader not available, using fallback');
+            console.log('🔄 Using fallback question system');
+            const fallbackQuestion = {
+                type: 'trivia',
+                question: 'Which NFL team won the most Super Bowls?',
+                options: ['New England Patriots', 'Pittsburgh Steelers', 'Dallas Cowboys', 'San Francisco 49ers'],
+                correctAnswer: 'New England Patriots',
+                category: 'General',
+                difficulty: 'medium',
+                league: 'NFL'
+            };
+            displayMultiplayerQuestion(fallbackQuestion);
+            return;
         }
         
         // Use the same method as regular trivia
-        let triviaQuestions = await dataLoader.loadTriviaQuestions(targetSport);
+        const triviaQuestions = await dataLoader.loadTriviaQuestions(targetSport);
         console.log(`📚 Loaded ${triviaQuestions.length} trivia questions for ${targetSport}`);
         
         if (triviaQuestions.length === 0) {
@@ -4120,10 +4134,6 @@ async function loadTriviaQuestion(sport) {
             showMessage('No questions available', 'error');
             return;
         }
-        
-        // Shuffle the questions array for better randomization
-        triviaQuestions = shuffleArray([...triviaQuestions]);
-        console.log('🔀 Shuffled trivia questions array');
         
         // Pick a random question
         const randomQuestion = triviaQuestions[Math.floor(Math.random() * triviaQuestions.length)];
@@ -4160,125 +4170,36 @@ async function loadTriviaQuestion(sport) {
     }
 }
 
-async function loadCollegeQuestion(sport) {
-    try {
-        // Handle "both" sport option
-        let targetSport = sport;
-        if (sport === 'both') {
-            // Randomly choose between NFL and NBA for "both"
-            targetSport = Math.random() > 0.5 ? 'nfl' : 'nba';
-        }
-        
-        console.log(`🎓 Loading college questions for ${targetSport}`);
-        
-        // Check if dataLoader is available
-        if (typeof dataLoader === 'undefined' || !dataLoader || !dataLoader.loadPlayers) {
-            console.error('dataLoader not available for college questions, using fallback');
-            const fallbackQuestion = {
-                type: 'college',
-                question: 'Which college did this player attend?',
-                options: ['University of Alabama', 'Ohio State University', 'University of Georgia', 'Clemson University'],
-                correctAnswer: 'University of Alabama',
-                category: 'College',
-                difficulty: 'medium'
-            };
-            displayMultiplayerQuestion(fallbackQuestion);
-            return;
-        }
-        
-        const players = await dataLoader.loadPlayers(targetSport);
-        if (players.length > 0) {
-            const question = dataLoader.createCollegeQuestionWithPlayer(players[0], players);
-            if (question) {
-                displayMultiplayerQuestion(question);
-            } else {
-                console.error('Failed to create college question, using fallback');
-                displayMultiplayerQuestion(createFallbackTriviaQuestion(targetSport));
-            }
-        } else {
-            console.error('No players loaded for college question, using fallback');
-            displayMultiplayerQuestion(createFallbackTriviaQuestion(targetSport));
-        }
-    } catch (error) {
-        console.error('Error loading college question:', error);
-        displayMultiplayerQuestion(createFallbackTriviaQuestion(sport));
+function loadCollegeQuestion(sport) {
+    // Handle "both" sport option
+    let targetSport = sport;
+    if (sport === 'both') {
+        // Randomly choose between NFL and NBA for "both"
+        targetSport = Math.random() > 0.5 ? 'nfl' : 'nba';
     }
-}
-
-async function loadJerseyQuestion(sport) {
-    try {
-        // Handle "both" sport option
-        let targetSport = sport;
-        if (sport === 'both') {
-            // Randomly choose between NFL and NBA for "both"
-            targetSport = Math.random() > 0.5 ? 'nfl' : 'nba';
-        }
-        
-        console.log(`👕 Loading jersey questions for ${targetSport}`);
-        
-        // Check if dataLoader is available
-        if (typeof dataLoader === 'undefined' || !dataLoader || !dataLoader.loadPlayers) {
-            console.error('dataLoader not available for jersey questions, using fallback');
-            const fallbackQuestion = {
-                type: 'jersey',
-                question: 'What jersey number does this player wear?',
-                options: ['12', '7', '3', '9'],
-                correctAnswer: '12',
-                category: 'Jersey',
-                difficulty: 'medium'
-            };
-            displayMultiplayerQuestion(fallbackQuestion);
-            return;
-        }
-        
-        const players = await dataLoader.loadPlayers(targetSport);
-        if (players.length > 0) {
-            const playersWithJerseys = players.filter(p => p.jersey && p.jersey > 0);
-            if (playersWithJerseys.length > 0) {
-                const question = dataLoader.createJerseyQuestionWithPlayer(playersWithJerseys[0], playersWithJerseys);
-                if (question) {
-                    displayMultiplayerQuestion(question);
-                } else {
-                    console.error('Failed to create jersey question, using fallback');
-                    displayMultiplayerQuestion(createFallbackTriviaQuestion(targetSport));
-                }
-            } else {
-                console.error('No players with jerseys found, using fallback');
-                displayMultiplayerQuestion(createFallbackTriviaQuestion(targetSport));
-            }
-        } else {
-            console.error('No players loaded for jersey question, using fallback');
-            displayMultiplayerQuestion(createFallbackTriviaQuestion(targetSport));
-        }
-    } catch (error) {
-        console.error('Error loading jersey question:', error);
-        displayMultiplayerQuestion(createFallbackTriviaQuestion(sport));
-    }
-}
-
-function createFallbackTriviaQuestion(sport) {
-    const fallbackQuestions = {
-        nfl: {
-            type: 'trivia',
-            question: 'Which NFL team won the most Super Bowls?',
-            options: ['New England Patriots', 'Pittsburgh Steelers', 'Dallas Cowboys', 'San Francisco 49ers'],
-            correctAnswer: 'New England Patriots',
-            category: 'General',
-            difficulty: 'medium',
-            league: 'NFL'
-        },
-        nba: {
-            type: 'trivia',
-            question: 'Which NBA team has won the most championships?',
-            options: ['Boston Celtics', 'Los Angeles Lakers', 'Chicago Bulls', 'Golden State Warriors'],
-            correctAnswer: 'Boston Celtics',
-            category: 'General',
-            difficulty: 'medium',
-            league: 'NBA'
-        }
-    };
     
-    return fallbackQuestions[sport] || fallbackQuestions.nfl;
+    dataLoader.loadPlayers(targetSport).then(players => {
+        if (players.length > 0) {
+            const question = dataLoader.createCollegeQuestion(players[0], players);
+            displayMultiplayerQuestion(question);
+        }
+    });
+}
+
+function loadJerseyQuestion(sport) {
+    // Handle "both" sport option
+    let targetSport = sport;
+    if (sport === 'both') {
+        // Randomly choose between NFL and NBA for "both"
+        targetSport = Math.random() > 0.5 ? 'nfl' : 'nba';
+    }
+    
+    dataLoader.loadPlayers(targetSport).then(players => {
+        if (players.length > 0) {
+            const question = dataLoader.createJerseyQuestion(players[0], players);
+            displayMultiplayerQuestion(question);
+        }
+    });
 }
 
 function displayMultiplayerQuestion(question) {
@@ -4293,22 +4214,13 @@ function displayMultiplayerQuestion(question) {
         
         multiplayerGame.currentQuestion = question;
         
-        // Display the question text - use the correct multiplayer element ID
-        const questionTextElement = document.getElementById('multiplayer-question-text');
-        console.log('🔍 Looking for multiplayer-question-text element...');
-        console.log('🔍 Found element:', questionTextElement);
-        console.log('🔍 Current screen:', currentScreen);
-        
+        // Display the question text
+        const questionTextElement = document.getElementById('question-text');
         if (questionTextElement) {
-            const oldText = questionTextElement.textContent;
             questionTextElement.textContent = question.question || 'No question available';
-            console.log('📝 Question text updated from:', oldText, 'to:', question.question);
-            console.log('📝 Element after update:', questionTextElement.textContent);
+            console.log('📝 Question text set to:', question.question);
         } else {
-            console.error('❌ Multiplayer question text element not found!');
-            console.log('🔍 Available elements with "question" in ID:');
-            const allElements = document.querySelectorAll('[id*="question"]');
-            allElements.forEach(el => console.log('  -', el.id, el));
+            console.error('Question text element not found');
         }
     
     const optionsContainer = document.getElementById('question-options');
@@ -4320,7 +4232,7 @@ function displayMultiplayerQuestion(question) {
         
         optionsContainer.innerHTML = '';
         // Handle both 'choices' and 'options' formats
-        let choices = question.choices || question.options || [];
+        const choices = question.choices || question.options || [];
         
         if (choices.length === 0) {
             console.error('No choices found in question:', question);
@@ -4328,26 +4240,12 @@ function displayMultiplayerQuestion(question) {
             return;
         }
         
-        // Shuffle the choices to randomize the order
-        console.log('🔀 Original choices order:', choices);
-        choices = shuffleArray([...choices]); // Create a copy and shuffle it
-        console.log('🔀 Shuffled choices order:', choices);
-        
         choices.forEach((choice, index) => {
             const button = document.createElement('button');
             button.className = 'option-btn';
             // Handle both object format (choice.text) and string format (choice)
-            const choiceText = typeof choice === 'string' ? choice : (choice.text || choice);
-            button.textContent = choiceText;
-            
-            // Check if this is the correct answer
-            const isCorrect = choiceText === question.correctAnswer;
-            if (isCorrect) {
-                button.setAttribute('data-correct', 'true');
-                console.log('✅ Correct answer is at position:', index, 'Text:', choiceText);
-            }
-            
-            button.onclick = () => selectMultiplayerAnswer(choiceText);
+            button.textContent = typeof choice === 'string' ? choice : (choice.text || choice);
+            button.onclick = () => selectMultiplayerAnswer(typeof choice === 'string' ? index : (choice.id || index));
             optionsContainer.appendChild(button);
         });
     } else {
@@ -4362,21 +4260,22 @@ function displayMultiplayerQuestion(question) {
     }
 }
 
-function selectMultiplayerAnswer(selectedText) {
+function selectMultiplayerAnswer(choiceId) {
     const question = multiplayerGame.currentQuestion;
     let isCorrect = false;
 
-    // Check if the selected text matches the correct answer
-    if (question.correctAnswer !== undefined) {
+    // Handle different question formats
+    if (question.correctChoiceId !== undefined) {
+        // Old format with choice IDs
+        isCorrect = choiceId === question.correctChoiceId;
+    } else if (question.correctAnswer !== undefined) {
+        // New format with correct answer text
+        const selectedChoice = question.choices ? question.choices[choiceId] : question.options[choiceId];
+        const selectedText = typeof selectedChoice === 'string' ? selectedChoice : selectedChoice.text;
         isCorrect = selectedText === question.correctAnswer;
-    } else if (question.correctChoiceId !== undefined) {
-        // Fallback for old format
-        const selectedChoice = question.choices ? question.choices[selectedText] : question.options[selectedText];
-        const choiceText = typeof selectedChoice === 'string' ? selectedChoice : selectedChoice.text;
-        isCorrect = choiceText === question.correctAnswer;
     }
 
-    console.log('🎯 Answer selected:', selectedText, 'Correct:', isCorrect, 'Expected:', question.correctAnswer);
+    console.log('🎯 Answer selected:', choiceId, 'Correct:', isCorrect, 'Question:', question);
     handleMultiplayerAnswer(isCorrect);
 }
 
