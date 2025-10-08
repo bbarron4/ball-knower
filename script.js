@@ -457,6 +457,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set hero banner background
     setHeroBanner();
     
+    // Clean up multiplayer game if user closes browser or navigates away
+    window.addEventListener('beforeunload', function() {
+        if (currentScreen === 'multiplayer-game-screen' || currentScreen === 'multiplayer-waiting-screen') {
+            console.log('🚪 Browser closing/navigating away from multiplayer, cleaning up...');
+            // Note: We can't use async functions in beforeunload, so we just clear the timer
+            if (multiplayerGame.gameTimer) {
+                clearInterval(multiplayerGame.gameTimer);
+            }
+        }
+    });
+    
     // Initialize SportsDataIO API data asynchronously (don't block page load)
     // Only load if user wants API data (can be disabled for even faster loading)
     setTimeout(() => {
@@ -466,6 +477,34 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Screen Management
 function showScreen(screenId) {
+    // Check if we're leaving a multiplayer game or waiting room
+    if ((currentScreen === 'multiplayer-game-screen' || currentScreen === 'multiplayer-waiting-screen') && 
+        screenId !== 'multiplayer-game-screen' && screenId !== 'multiplayer-waiting-screen') {
+        console.log('🚪 Leaving multiplayer session, cleaning up...');
+        // Clean up multiplayer state without calling showScreen to avoid recursion
+        if (multiplayerGame.gameTimer) {
+            clearInterval(multiplayerGame.gameTimer);
+        }
+        
+        // Reset multiplayer state
+        multiplayerGame = {
+            roomCode: null,
+            isHost: false,
+            players: [],
+            gameSettings: {
+                sport: 'nfl',
+                modes: ['trivia'],
+                inputType: 'multiple'
+            },
+            currentQuestion: null,
+            timeRemaining: 60,
+            gameTimer: null,
+            score: 0
+        };
+        
+        // Now proceed with normal screen change
+    }
+    
     // Hide all screens
     document.querySelectorAll('.screen').forEach(screen => {
         screen.classList.remove('active');
@@ -571,7 +610,10 @@ function displayLeaderboard(leaderboard) {
 
 function showProfile() {
     showScreen('profile-screen');
-    loadUserProfile();
+    // Wait a moment for the screen to be visible before loading profile
+    setTimeout(() => {
+        loadUserProfile();
+    }, 100);
 }
 
 // Load user profile data
@@ -580,17 +622,24 @@ async function loadUserProfile() {
         // Check if user is logged in
         const token = localStorage.getItem('ball_knower_token');
         if (!token) {
-            document.getElementById('profile-content').innerHTML = `
-                <div class="profile-not-logged-in">
-                    <h2>👤 Profile</h2>
-                    <p>Please sign in to view your profile.</p>
-                    <button class="btn-primary" onclick="showWeeklyChallengeModal()">Sign In</button>
-                </div>
-            `;
+            // Update the existing profile elements to show not logged in message
+            const playerNameElement = document.querySelector('#profile-screen h2');
+            const memberSinceElement = document.querySelector('#profile-screen .profile-info p');
+            
+            if (playerNameElement) {
+                playerNameElement.textContent = 'Not Signed In';
+            }
+            
+            if (memberSinceElement) {
+                memberSinceElement.textContent = 'Please sign in to view your profile';
+            }
+            
+            console.log('❌ No auth token found, showing sign-in prompt');
             return;
         }
 
         // Get user profile from backend
+        console.log('🔍 Fetching user profile from backend...');
         const response = await fetch('http://localhost:3001/api/users/me', {
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -605,84 +654,266 @@ async function loadUserProfile() {
         const user = data.user;
         const badges = data.badges || [];
 
+        console.log('✅ Received user data:', user);
+        console.log('✅ Received badges:', badges);
+
+        // Load user statistics
+        await loadUserStats();
+        
         // Display profile
         displayUserProfile(user, badges);
 
     } catch (error) {
         console.error('Error loading profile:', error);
-        document.getElementById('profile-content').innerHTML = `
-            <div class="profile-error">
-                <h2>👤 Profile</h2>
-                <p>Error loading profile. Please try again.</p>
-                <button class="btn-primary" onclick="loadUserProfile()">Retry</button>
-            </div>
-        `;
+        
+        // Update the existing profile elements to show error message
+        const playerNameElement = document.querySelector('#profile-screen h2');
+        const memberSinceElement = document.querySelector('#profile-screen .profile-info p');
+        
+        if (playerNameElement) {
+            playerNameElement.textContent = 'Error Loading Profile';
+        }
+        
+        if (memberSinceElement) {
+            memberSinceElement.textContent = 'Please try again or sign in';
+        }
+    }
+}
+
+// Load user statistics
+async function loadUserStats() {
+    try {
+        const token = localStorage.getItem('ball_knower_token');
+        console.log('🔍 DEBUG: loadUserStats called, token exists:', !!token);
+        if (!token) {
+            console.log('No token found, skipping stats load');
+            return;
+        }
+
+        const response = await fetch('/api/stats/me', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Stats API error: ${response.status}`);
+        }
+
+        const stats = await response.json();
+        console.log('✅ Received user stats:', stats);
+        console.log('🔍 DEBUG: Stats data:', {
+            total_games: stats.total_games,
+            best_streak: stats.best_streak,
+            accuracy: stats.accuracy
+        });
+        
+        // Update the stats display elements
+        updateStatsDisplay(stats);
+        
+    } catch (error) {
+        console.error('Error loading user stats:', error);
+        // Set default values on error
+        updateStatsDisplay({
+            total_games: 0,
+            best_streak: 0,
+            accuracy: 0
+        });
+    }
+}
+
+// Update stats display elements
+function updateStatsDisplay(stats) {
+    const bestStreakElement = document.getElementById('best-streak');
+    const accuracyElement = document.getElementById('accuracy');
+    const gamesPlayedElement = document.getElementById('games-played');
+    
+    if (bestStreakElement) {
+        bestStreakElement.textContent = stats.best_streak || 0;
+    }
+    
+    if (accuracyElement) {
+        accuracyElement.textContent = `${stats.accuracy || 0}%`;
+    }
+    
+    if (gamesPlayedElement) {
+        gamesPlayedElement.textContent = stats.total_games || 0;
+    }
+    
+    console.log('✅ Updated stats display:', {
+        best_streak: stats.best_streak || 0,
+        accuracy: stats.accuracy || 0,
+        total_games: stats.total_games || 0
+    });
+}
+
+// Start game session tracking
+async function startGameSessionTracking() {
+    try {
+        const token = localStorage.getItem('ball_knower_token');
+        if (!token) {
+            console.log('No token found, skipping session tracking');
+            return;
+        }
+
+        // Determine game mode for tracking
+        let gameMode = 'trivia'; // default
+        if (currentGame.mode === 'college') {
+            gameMode = 'college';
+        } else if (currentGame.mode === 'jersey') {
+            gameMode = 'jersey';
+        }
+
+        const response = await fetch('/api/stats/sessions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                game_mode: gameMode,
+                sport: currentGame.sport
+            })
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            currentGame.sessionId = data.session_id;
+            console.log('✅ Started game session:', currentGame.sessionId);
+        } else {
+            console.warn('Failed to start game session tracking');
+        }
+    } catch (error) {
+        console.error('Error starting game session tracking:', error);
+    }
+}
+
+// Update game session progress
+async function updateGameSessionProgress() {
+    if (!currentGame.sessionId) return;
+
+    try {
+        const token = localStorage.getItem('ball_knower_token');
+        if (!token) return;
+
+        await fetch(`/api/stats/sessions/${currentGame.sessionId}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                questions_answered: currentGame.currentQuestion,
+                correct_answers: currentGame.correctAnswers,
+                current_score: currentGame.score,
+                current_streak: currentGame.streak
+            })
+        });
+    } catch (error) {
+        console.error('Error updating game session:', error);
+    }
+}
+
+// Complete game session
+async function completeGameSession() {
+    if (!currentGame.sessionId) return;
+
+    try {
+        const token = localStorage.getItem('ball_knower_token');
+        if (!token) return;
+
+        // First update the session with final data
+        await fetch(`/api/stats/sessions/${currentGame.sessionId}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                questions_answered: currentGame.currentQuestion,
+                correct_answers: currentGame.correctAnswers,
+                current_score: currentGame.score,
+                current_streak: currentGame.streak
+            })
+        });
+
+        // Then complete the session
+        await fetch(`/api/stats/sessions/${currentGame.sessionId}/complete`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                final_score: currentGame.score,
+                final_streak: currentGame.maxStreak
+            })
+        });
+
+        console.log('✅ Completed game session with data:', {
+            questions: currentGame.currentQuestion,
+            correct: currentGame.correctAnswers,
+            score: currentGame.score,
+            streak: currentGame.maxStreak
+        });
+        
+        // Refresh user stats after completing a game
+        await loadUserStats();
+    } catch (error) {
+        console.error('Error completing game session:', error);
     }
 }
 
 // Display user profile HTML
 function displayUserProfile(user, badges) {
-    const content = document.getElementById('profile-content');
+    console.log('🎯 displayUserProfile called with user:', user);
     
-    const html = `
-        <div class="profile-container">
-            <div class="profile-header">
-                <div class="profile-avatar">
-                    <i class="fas fa-user-circle"></i>
-                </div>
-                <div class="profile-info">
-                    <h2>${user.display_name || user.username}</h2>
-                    <p class="profile-email">${user.email}</p>
-                    <p class="profile-joined">Joined ${new Date(user.created_at).toLocaleDateString()}</p>
-                </div>
-            </div>
-
-            <div class="profile-details">
-                <div class="profile-section">
-                    <h3>🏈 Favorite Team</h3>
-                    <p class="profile-team">${user.favorite_team || 'Not set'}</p>
-                </div>
-
-                <div class="profile-section">
-                    <h3>📊 Stats</h3>
-                    <div class="profile-stats">
-                        <div class="stat-item">
-                            <span class="stat-label">Current Streak</span>
-                            <span class="stat-value">${user.current_pick_streak || 0}</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Best Streak</span>
-                            <span class="stat-value">${user.best_pick_streak || 0}</span>
-                        </div>
-                    </div>
-                </div>
-
-                ${badges.length > 0 ? `
-                <div class="profile-section">
-                    <h3>🏆 Badges</h3>
-                    <div class="profile-badges">
-                        ${badges.map(badge => `
-                            <div class="badge-item">
-                                <span class="badge-icon">${badge.icon}</span>
-                                <div class="badge-info">
-                                    <span class="badge-name">${badge.name}</span>
-                                    <span class="badge-description">${badge.description}</span>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-                ` : ''}
-
-                <div class="profile-actions">
-                    <button class="btn-secondary" onclick="signOut()">Sign Out</button>
-                    <button class="btn-primary" onclick="showWeeklyChallengeModal()">Weekly Challenge</button>
-                </div>
-            </div>
-        </div>
-    `;
+    // Update the existing profile elements with user data
+    const playerNameElement = document.querySelector('#profile-screen h2');
+    const memberSinceElement = document.querySelector('#profile-screen .profile-info p');
     
-    content.innerHTML = html;
+    console.log('🔍 Found playerNameElement:', playerNameElement);
+    console.log('🔍 Found memberSinceElement:', memberSinceElement);
+    
+    if (playerNameElement) {
+        const displayName = user.display_name || user.username;
+        playerNameElement.textContent = displayName;
+        console.log('✅ Updated player name to:', displayName);
+    } else {
+        console.error('❌ Could not find player name element');
+    }
+    
+    if (memberSinceElement) {
+        const joinDate = user.created_at ? new Date(user.created_at).toLocaleDateString() : 'January 2024';
+        memberSinceElement.textContent = `Member since ${joinDate}`;
+        console.log('✅ Updated member since to:', joinDate);
+    } else {
+        console.error('❌ Could not find member since element');
+    }
+    
+    // Update stats if they exist
+    const totalGamesElement = document.getElementById('total-games');
+    const averageScoreElement = document.getElementById('average-score');
+    const bestStreakElement = document.getElementById('best-streak');
+    const achievementsElement = document.getElementById('achievements');
+    
+    if (totalGamesElement) {
+        totalGamesElement.textContent = user.total_games || 0;
+    }
+    
+    if (averageScoreElement) {
+        averageScoreElement.textContent = `${user.average_score || 0}%`;
+    }
+    
+    if (bestStreakElement) {
+        bestStreakElement.textContent = user.best_streak || 0;
+    }
+    
+    if (achievementsElement) {
+        achievementsElement.textContent = badges.length || 0;
+    }
+    
+    console.log('✅ Profile updated for user:', user.username);
 }
 
 // Game Functions
@@ -1110,6 +1341,9 @@ async function startGameSession() {
     currentGame.streak = 0;
     currentGame.maxStreak = 0;
     currentGame.gameStartTime = Date.now();
+    
+    // Start game session tracking
+    await startGameSessionTracking();
     
     console.log(`📊 After reset - Current sport: ${currentGame.sport}`);
     
@@ -3204,6 +3438,9 @@ function selectAnswer(answerIndex) {
         currentGame.maxStreak = Math.max(currentGame.maxStreak, currentGame.streak);
         showMessage('Correct!', 'success');
         
+        // Update session progress
+        updateGameSessionProgress();
+        
         // Update UI immediately for survival mode
         if (currentGame.mode === 'survival') {
             document.getElementById('question-counter').textContent = `Survival Streak: ${currentGame.streak}`;
@@ -3304,6 +3541,9 @@ function nextQuestion() {
 
 function endGame() {
     showScreen('results-screen');
+    
+    // Complete game session tracking
+    completeGameSession();
     
     const finalScore = currentGame.score;
     const totalQuestions = currentGame.questionCount;
@@ -3980,6 +4220,12 @@ async function startMultiplayerGame() {
     // Both host and joiner should be able to start the game after countdown
     console.log('🎮 startMultiplayerGame called - isHost:', multiplayerGame.isHost);
     
+    // Reset questions for new game
+    resetMultiplayerQuestions();
+    
+    // Preload questions for all selected modes in the background
+    preloadMultiplayerQuestions();
+    
     // Notify all players that game is starting
     notifyGameStart();
     
@@ -3995,7 +4241,7 @@ async function startMultiplayerGame() {
     startLeaderboardSync();
     
     // Load first question
-    await loadMultiplayerQuestion();
+    await loadMultiplayerQuestionEnhanced();
 }
 
 function notifyGameStart() {
@@ -4066,6 +4312,357 @@ async function loadMultiplayerQuestion() {
     } else {
         console.log('â“ Unknown mode, defaulting to trivia');
         await loadTriviaQuestion(sport);
+    }
+}
+
+// Load multiple questions for a specific mode in multiplayer
+async function loadMultiplayerQuestionsForMode(mode, sport) {
+    try {
+        console.log(`📚 loadMultiplayerQuestionsForMode called for ${mode} questions for ${sport}`);
+        console.log(`🔍 DEBUG: About to call generateMultiplayerQuestions(${mode}, ${sport})`);
+        
+        // Use the same question generation system as the main game
+        const questions = await generateMultiplayerQuestions(mode, sport);
+        console.log(`🔍 DEBUG: generateMultiplayerQuestions returned ${questions.length} questions`);
+        multiplayerGame.questions[mode] = questions;
+        
+        console.log(`✅ Loaded ${questions.length} ${mode} questions using main game system`);
+        
+        // Debug: Verify questions were stored correctly
+        console.log(`🔍 DEBUG: Stored ${multiplayerGame.questions[mode].length} questions in multiplayerGame.questions[${mode}]`);
+        if (multiplayerGame.questions[mode].length > 0) {
+            console.log(`🔍 DEBUG: First stored question: ${multiplayerGame.questions[mode][0].question}`);
+            console.log(`🔍 DEBUG: First stored question player: ${multiplayerGame.questions[mode][0].player?.name || 'N/A'}`);
+        }
+        
+    } catch (error) {
+        console.error(`❌ Error loading ${mode} questions:`, error);
+        multiplayerGame.questions[mode] = [];
+    }
+}
+
+// Generate questions for multiplayer with enhanced variety
+async function generateMultiplayerQuestions(mode, sport) {
+    console.log(`🔍 DEBUG: generateMultiplayerQuestions called for ${mode} questions for sport: ${sport}`);
+    console.log(`🎮 Generating ${mode} questions for sport: ${sport} with enhanced variety`);
+    
+    // Load well-known players from Excel file based on selected sport
+    const players = await dataLoader.loadPlayers(sport);
+    
+    if (players.length === 0) {
+        console.error('No well-known players loaded for sport:', sport);
+        return [];
+    }
+    
+    console.log(`✅ Loaded ${players.length} players for ${sport}`);
+    
+    // Debug: Show first 10 players to verify database content
+    console.log(`🔍 DEBUG: First 10 players in database:`);
+    for (let i = 0; i < Math.min(10, players.length); i++) {
+        console.log(`  ${i + 1}. ${players[i].name} (College: ${players[i].college}, Jersey: ${players[i].jersey})`);
+    }
+    
+    const questions = [];
+    
+    // Fisher-Yates shuffle for better randomization
+    function shuffleArray(array) {
+        const shuffled = [...array];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+    }
+    
+    // Shuffle players to ensure good randomization
+    const shuffledPlayers = shuffleArray(players);
+    
+    // Generate one question per player (like the main game does)
+    console.log(`🎯 Generating one question per player (${shuffledPlayers.length} total)`);
+    
+    // Generate questions for ALL players to ensure variety
+    console.log(`🔍 DEBUG: Generating questions for ALL ${shuffledPlayers.length} players`);
+    
+    for (let i = 0; i < shuffledPlayers.length; i++) {
+        const player = shuffledPlayers[i];
+        let question = null;
+        
+        // Debug: Show which player we're processing
+        if (i < 5) {
+            console.log(`🔍 DEBUG: Processing player ${i + 1}: ${player.name} (College: ${player.college}, Jersey: ${player.jersey})`);
+        }
+        
+        // Generate question based on mode (same logic as main game)
+        if (mode === 'college') {
+            question = dataLoader.createCollegeQuestionWithPlayer(player, players);
+        } else if (mode === 'jersey') {
+            question = dataLoader.createJerseyQuestionWithPlayer(player, players);
+        } else if (mode === 'trivia') {
+            // Load trivia questions from database (same as main game)
+            const triviaQuestions = await dataLoader.loadTriviaQuestions(sport);
+            if (triviaQuestions.length > 0) {
+                const triviaQ = triviaQuestions[i % triviaQuestions.length];
+                const allChoices = triviaQ.choices.map(choice => choice.text);
+                const correctAnswer = triviaQ.choices.find(c => c.id === triviaQ.correctChoiceId)?.text;
+                const options = shuffleArray(allChoices);
+                
+                question = {
+                    type: 'trivia',
+                    question: triviaQ.question,
+                    options: options,
+                    correctAnswer: correctAnswer,
+                    category: triviaQ.category || 'General',
+                    difficulty: triviaQ.difficulty || 'medium'
+                };
+            }
+        }
+        
+        if (question) {
+            questions.push(question);
+            // Debug: Show first few questions being generated
+            if (questions.length <= 5) {
+                console.log(`🔍 DEBUG: Generated question ${questions.length}: ${question.question} (Player: ${question.player?.name || 'N/A'})`);
+            }
+        } else {
+            // Debug: Show when question generation fails
+            if (i < 5) {
+                console.log(`🔍 DEBUG: Failed to generate question for player: ${player.name}`);
+            }
+        }
+        
+        // Debug: Show progress every 50 players
+        if ((i + 1) % 50 === 0) {
+            console.log(`🔍 DEBUG: Processed ${i + 1}/${shuffledPlayers.length} players, generated ${questions.length} questions`);
+        }
+    }
+    
+    // Shuffle the final questions for variety
+    const finalQuestions = shuffleArray(questions);
+    
+    console.log(`✅ Generated ${finalQuestions.length} ${mode} questions with enhanced variety`);
+    
+    // Debug: Show all generated questions to verify variety
+    console.log(`🔍 DEBUG: All generated questions:`);
+    finalQuestions.forEach((q, index) => {
+        console.log(`  ${index + 1}. ${q.question} (Player: ${q.player?.name || 'N/A'})`);
+    });
+    
+    // Debug: Show first few questions to verify variety
+    if (finalQuestions.length > 0) {
+        console.log(`🔍 DEBUG: First 10 generated questions:`);
+        for (let i = 0; i < Math.min(10, finalQuestions.length); i++) {
+            console.log(`  ${i + 1}. ${finalQuestions[i].question} (Player: ${finalQuestions[i].player?.name || 'N/A'})`);
+        }
+        
+        // Count unique players
+        const uniquePlayers = new Set();
+        finalQuestions.forEach(q => {
+            if (q.player?.name) {
+                uniquePlayers.add(q.player.name);
+            }
+        });
+        console.log(`🔍 DEBUG: Questions generated for ${uniquePlayers.size} unique players`);
+        console.log(`🔍 DEBUG: Unique players: ${Array.from(uniquePlayers).slice(0, 10).join(', ')}${uniquePlayers.size > 10 ? '...' : ''}`);
+    }
+    
+    return finalQuestions;
+}
+
+// Load fallback question for a mode
+async function loadFallbackQuestion(mode, sport) {
+    const fallbackQuestion = createFallbackTriviaQuestion(sport);
+    fallbackQuestion.type = mode;
+    displayMultiplayerQuestion(fallbackQuestion);
+}
+
+// NEW: Enhanced multiplayer question loading with multiple questions per mode
+async function loadMultiplayerQuestionEnhanced() {
+    try {
+        console.log(`🔍 DEBUG: loadMultiplayerQuestionEnhanced function started`);
+        const { sport, modes, inputType } = multiplayerGame.gameSettings;
+    console.log(`🎮 loadMultiplayerQuestionEnhanced called for sport: ${sport}, modes: ${modes.join(', ')}`);
+    console.log('dataLoader available:', typeof dataLoader !== 'undefined');
+
+    // Cycle through modes systematically instead of random selection
+    let selectedMode;
+    if (!multiplayerGame.currentModeIndex) {
+        multiplayerGame.currentModeIndex = 0;
+    }
+    
+    // Get the next mode in the cycle
+    selectedMode = modes[multiplayerGame.currentModeIndex % modes.length];
+    multiplayerGame.currentModeIndex++;
+    
+    console.log(`Selected mode: ${selectedMode} (cycle index: ${multiplayerGame.currentModeIndex - 1})`);
+    
+    // Handle sport cycling for "both" sports
+    let selectedSport = sport;
+    if (sport === 'both') {
+        if (!multiplayerGame.currentSportIndex) {
+            multiplayerGame.currentSportIndex = 0;
+        }
+        const sports = ['nfl', 'nba'];
+        selectedSport = sports[multiplayerGame.currentSportIndex % sports.length];
+        multiplayerGame.currentSportIndex++;
+        console.log(`Selected sport: ${selectedSport} (cycle index: ${multiplayerGame.currentSportIndex - 1})`);
+    }
+    
+    // Initialize multiplayer question arrays if they don't exist
+    if (!multiplayerGame.questions) {
+        multiplayerGame.questions = {
+            trivia: [],
+            college: [],
+            jersey: []
+        };
+        multiplayerGame.questionIndex = {
+            trivia: 0,
+            college: 0,
+            jersey: 0
+        };
+    }
+    
+    // Load questions for this mode if not already loaded
+    if (multiplayerGame.questions[selectedMode].length === 0) {
+        console.log(`📚 Loading ${selectedMode} questions for multiplayer...`);
+        console.log(`🔍 DEBUG: About to call loadMultiplayerQuestionsForMode(${selectedMode}, ${selectedSport})`);
+        // Show loading message
+        const questionTextElement = document.getElementById('multiplayer-question-text');
+        if (questionTextElement) {
+            questionTextElement.textContent = `Loading ${selectedMode} questions...`;
+        }
+        
+        await loadMultiplayerQuestionsForMode(selectedMode, selectedSport);
+        console.log(`🔍 DEBUG: Finished calling loadMultiplayerQuestionsForMode`);
+        
+        // Clear loading message
+        if (questionTextElement) {
+            questionTextElement.textContent = 'Loading question...';
+        }
+        
+        // Debug: Verify questions were loaded
+        console.log(`🔍 DEBUG: After loading, ${selectedMode} questions count: ${multiplayerGame.questions[selectedMode].length}`);
+        if (multiplayerGame.questions[selectedMode].length > 0) {
+            console.log(`🔍 DEBUG: First question after loading: ${multiplayerGame.questions[selectedMode][0].question}`);
+            console.log(`🔍 DEBUG: First question player: ${multiplayerGame.questions[selectedMode][0].player?.name || 'N/A'}`);
+        }
+    }
+    
+    // Get the next question for this mode
+    const questions = multiplayerGame.questions[selectedMode];
+    let currentIndex = multiplayerGame.questionIndex[selectedMode];
+    
+    if (questions.length === 0) {
+        console.error(`No ${selectedMode} questions available, using fallback`);
+        await loadFallbackQuestion(selectedMode, selectedSport);
+        return;
+    }
+    
+    console.log(`🔍 DEBUG: ${selectedMode} questions available: ${questions.length}`);
+    console.log(`🔍 DEBUG: Current index: ${currentIndex}`);
+    
+    // Show first few questions for debugging
+    if (questions.length > 0) {
+        console.log(`🔍 DEBUG: First 3 questions:`);
+        for (let i = 0; i < Math.min(3, questions.length); i++) {
+            console.log(`  ${i + 1}. ${questions[i].question} (Player: ${questions[i].player?.name || 'N/A'})`);
+        }
+    }
+    
+    // Simple cycling - just move to next question
+    console.log(`🔍 DEBUG: Current index before cycling: ${currentIndex}`);
+    console.log(`🔍 DEBUG: Total questions available: ${questions.length}`);
+    
+    // Get the current question and move to next
+    const question = questions[currentIndex];
+    multiplayerGame.questionIndex[randomMode] = (currentIndex + 1) % questions.length;
+    
+    console.log(`📝 Using ${randomMode} question ${currentIndex + 1}/${questions.length}`);
+    console.log(`📝 Question: ${question.question}`);
+    console.log(`📝 Player: ${question.player?.name || 'N/A'}`);
+    console.log(`📝 Next index will be: ${multiplayerGame.questionIndex[randomMode]}`);
+    
+    // Debug: Show all questions in the array to verify variety
+    console.log(`🔍 DEBUG: All questions in ${randomMode} array:`);
+    questions.forEach((q, index) => {
+        if (index < 10) { // Show first 10 questions
+            console.log(`  ${index + 1}. ${q.question} (Player: ${q.player?.name || 'N/A'})`);
+        }
+    });
+    if (questions.length > 10) {
+        console.log(`  ... and ${questions.length - 10} more questions`);
+    }
+    
+    displayMultiplayerQuestion(question);
+    
+    } catch (error) {
+        console.error(`❌ Error in loadMultiplayerQuestionEnhanced:`, error);
+        console.log(`🔄 Falling back to old system due to error`);
+        // Fall back to the old system
+        const { sport, modes } = multiplayerGame.gameSettings;
+        const randomMode = modes[Math.floor(Math.random() * modes.length)];
+        if (randomMode === 'college') {
+            await loadCollegeQuestion(sport);
+        } else if (randomMode === 'jersey') {
+            await loadJerseyQuestion(sport);
+        } else {
+            await loadTriviaQuestion(sport);
+        }
+    }
+}
+
+// Reset multiplayer questions for a new game
+function resetMultiplayerQuestions() {
+    if (multiplayerGame.questions) {
+        multiplayerGame.questions = {
+            trivia: [],
+            college: [],
+            jersey: []
+        };
+        multiplayerGame.questionIndex = {
+            trivia: 0,
+            college: 0,
+            jersey: 0
+        };
+        console.log('🔄 Reset multiplayer questions for new game');
+    }
+    // Reset cycling indices for systematic mode and sport selection
+    multiplayerGame.currentModeIndex = 0;
+    multiplayerGame.currentSportIndex = 0;
+}
+
+// Preload questions for all selected modes in the background
+async function preloadMultiplayerQuestions() {
+    const { sport, modes } = multiplayerGame.gameSettings;
+    console.log('🚀 Preloading questions for modes:', modes);
+    
+    // Initialize question arrays
+    if (!multiplayerGame.questions) {
+        multiplayerGame.questions = {
+            trivia: [],
+            college: [],
+            jersey: []
+        };
+        multiplayerGame.questionIndex = {
+            trivia: 0,
+            college: 0,
+            jersey: 0
+        };
+    }
+    
+    // Load questions for each mode in parallel
+    const loadPromises = modes.map(mode => {
+        if (multiplayerGame.questions[mode].length === 0) {
+            console.log(`📚 Preloading ${mode} questions...`);
+            return loadMultiplayerQuestionsForMode(mode, sport);
+        }
+        return Promise.resolve();
+    });
+    
+    try {
+        await Promise.all(loadPromises);
+        console.log('✅ All questions preloaded successfully');
+    } catch (error) {
+        console.error('❌ Error preloading questions:', error);
     }
 }
 
@@ -4169,7 +4766,7 @@ async function loadCollegeQuestion(sport) {
             targetSport = Math.random() > 0.5 ? 'nfl' : 'nba';
         }
         
-        console.log(`🎓 Loading college questions for ${targetSport}`);
+        console.log(`🎓 Loading college questions for ${targetSport} using SAME SYSTEM AS TRIVIA`);
         
         // Check if dataLoader is available
         if (typeof dataLoader === 'undefined' || !dataLoader || !dataLoader.loadPlayers) {
@@ -4186,17 +4783,31 @@ async function loadCollegeQuestion(sport) {
             return;
         }
         
+        // Load ALL players (same as trivia loads ALL questions)
         const players = await dataLoader.loadPlayers(targetSport);
-        if (players.length > 0) {
-            const question = dataLoader.createCollegeQuestionWithPlayer(players[0], players);
-            if (question) {
-                displayMultiplayerQuestion(question);
-            } else {
-                console.error('Failed to create college question, using fallback');
-                displayMultiplayerQuestion(createFallbackTriviaQuestion(targetSport));
-            }
-        } else {
+        console.log(`📚 Loaded ${players.length} players for ${targetSport}`);
+        
+        if (players.length === 0) {
             console.error('No players loaded for college question, using fallback');
+            displayMultiplayerQuestion(createFallbackTriviaQuestion(targetSport));
+            return;
+        }
+        
+        // Shuffle players for variety (same as trivia shuffles questions)
+        const shuffledPlayers = shuffleArray([...players]);
+        console.log('🔀 Shuffled players array for variety');
+        
+        // Pick a random player (same as trivia picks random question)
+        const randomPlayer = shuffledPlayers[Math.floor(Math.random() * shuffledPlayers.length)];
+        console.log(`📝 Selected random player: ${randomPlayer.name}`);
+        
+        // Create question for this random player
+        const question = dataLoader.createCollegeQuestionWithPlayer(randomPlayer, players);
+        if (question) {
+            console.log(`✅ Created college question for ${randomPlayer.name}`);
+            displayMultiplayerQuestion(question);
+        } else {
+            console.error('Failed to create college question, using fallback');
             displayMultiplayerQuestion(createFallbackTriviaQuestion(targetSport));
         }
     } catch (error) {
@@ -4214,7 +4825,7 @@ async function loadJerseyQuestion(sport) {
             targetSport = Math.random() > 0.5 ? 'nfl' : 'nba';
         }
         
-        console.log(`👕 Loading jersey questions for ${targetSport}`);
+        console.log(`👕 Loading jersey questions for ${targetSport} using SAME SYSTEM AS TRIVIA`);
         
         // Check if dataLoader is available
         if (typeof dataLoader === 'undefined' || !dataLoader || !dataLoader.loadPlayers) {
@@ -4231,23 +4842,35 @@ async function loadJerseyQuestion(sport) {
             return;
         }
         
+        // Load ALL players (same as trivia loads ALL questions)
         const players = await dataLoader.loadPlayers(targetSport);
-        if (players.length > 0) {
-            const playersWithJerseys = players.filter(p => p.jersey && p.jersey > 0);
-            if (playersWithJerseys.length > 0) {
-                const question = dataLoader.createJerseyQuestionWithPlayer(playersWithJerseys[0], playersWithJerseys);
-                if (question) {
-                    displayMultiplayerQuestion(question);
-                } else {
-                    console.error('Failed to create jersey question, using fallback');
-                    displayMultiplayerQuestion(createFallbackTriviaQuestion(targetSport));
-                }
-            } else {
-                console.error('No players with jerseys found, using fallback');
-                displayMultiplayerQuestion(createFallbackTriviaQuestion(targetSport));
-            }
+        console.log(`📚 Loaded ${players.length} players for ${targetSport}`);
+        
+        // Filter players with jerseys
+        const playersWithJerseys = players.filter(p => p.jersey && p.jersey > 0);
+        console.log(`📚 Found ${playersWithJerseys.length} players with jerseys`);
+        
+        if (playersWithJerseys.length === 0) {
+            console.error('No players with jerseys found, using fallback');
+            displayMultiplayerQuestion(createFallbackTriviaQuestion(targetSport));
+            return;
+        }
+        
+        // Shuffle players for variety (same as trivia shuffles questions)
+        const shuffledPlayers = shuffleArray([...playersWithJerseys]);
+        console.log('🔀 Shuffled players with jerseys array for variety');
+        
+        // Pick a random player (same as trivia picks random question)
+        const randomPlayer = shuffledPlayers[Math.floor(Math.random() * shuffledPlayers.length)];
+        console.log(`📝 Selected random player: ${randomPlayer.name} (Jersey: ${randomPlayer.jersey})`);
+        
+        // Create question for this random player
+        const question = dataLoader.createJerseyQuestionWithPlayer(randomPlayer, playersWithJerseys);
+        if (question) {
+            console.log(`✅ Created jersey question for ${randomPlayer.name}`);
+            displayMultiplayerQuestion(question);
         } else {
-            console.error('No players loaded for jersey question, using fallback');
+            console.error('Failed to create jersey question, using fallback');
             displayMultiplayerQuestion(createFallbackTriviaQuestion(targetSport));
         }
     } catch (error) {
@@ -4421,7 +5044,7 @@ function handleMultiplayerAnswer(isCorrect) {
     
     // Load next question after a short delay
     setTimeout(async () => {
-        await loadMultiplayerQuestion();
+        await loadMultiplayerQuestionEnhanced();
     }, 2000);
 }
 

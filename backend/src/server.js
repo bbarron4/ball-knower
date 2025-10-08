@@ -15,6 +15,7 @@ import groupRoutes from './routes/groups.js';
 import adminRoutes from './routes/admin.js';
 import testRoutes from './routes/test.js';
 import roomRoutes from './routes/rooms.js';
+import statsRoutes from './routes/stats.js';
 
 // Import middleware
 import { errorHandler } from './middleware/errorHandler.js';
@@ -74,6 +75,7 @@ app.use('/api/leaderboards', leaderboardRoutes);
 app.use('/api/groups', groupRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/rooms', roomRoutes);
+app.use('/api/stats', statsRoutes);
 app.use('/api', testRoutes);
 
 // 404 handler
