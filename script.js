@@ -1,5 +1,11 @@
 // Ball Knower - Clean Script
 
+// API Helper Function
+function getApiUrl(endpoint) {
+    const baseUrl = window.BallKnowerConfig ? window.BallKnowerConfig.API_BASE_URL : 'getApiUrl('')';
+    return `${baseUrl}${endpoint}`;
+}
+
 // Force hide scrollbars with JavaScript as backup
 (function() {
     // Hide scrollbars immediately
@@ -203,7 +209,7 @@ async function getCurrentUser() {
     
     // Fetch fresh user data from API
     try {
-        const response = await fetch('http://localhost:3001/api/users/me', {
+        const response = await fetch('getApiUrl('/api/')users/me', {
             headers: {
                 'Authorization': `Bearer ${authToken}`
             }
@@ -598,7 +604,7 @@ async function loadLeaderboard() {
         }
         
         // Get current challenge
-        const challengeResponse = await fetch('http://localhost:3001/api/challenges/current');
+        const challengeResponse = await fetch('getApiUrl('/api/')challenges/current');
         if (!challengeResponse.ok) {
             document.getElementById('leaderboard-content').innerHTML = '<p>No active challenge found.</p>';
             return;
@@ -608,7 +614,7 @@ async function loadLeaderboard() {
         const challengeId = challengeData.challenge.id;
         
         // Get leaderboard data
-        const leaderboardResponse = await fetch(`http://localhost:3001/api/leaderboards/${challengeId}/global?limit=50`);
+        const leaderboardResponse = await fetch(`getApiUrl('/api/')leaderboards/${challengeId}/global?limit=50`);
         if (!leaderboardResponse.ok) {
             document.getElementById('leaderboard-content').innerHTML = '<p>Failed to load leaderboard.</p>';
             return;
@@ -701,7 +707,7 @@ async function loadUserProfile() {
 
         // Get user profile from backend
         console.log('🔍 Fetching user profile from backend...');
-        const response = await fetch('http://localhost:3001/api/users/me', {
+        const response = await fetch('getApiUrl('/api/')users/me', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -3901,7 +3907,7 @@ async function createRoomWithSettings() {
     
     try {
         // Create room via API
-        const response = await fetch('http://localhost:3001/api/rooms/create', {
+        const response = await fetch('getApiUrl('/api/')rooms/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -4040,7 +4046,7 @@ async function joinRoom() {
     if (roomCode.length === 6) {
         try {
             // Join room via API
-            const response = await fetch(`http://localhost:3001/api/rooms/join/${roomCode}`, {
+            const response = await fetch(`getApiUrl('/api/')rooms/join/${roomCode}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -4200,7 +4206,7 @@ async function startGameCountdown() {
     if (multiplayerGame.isHost) {
         try {
             const authToken = localStorage.getItem('ball_knower_token');
-            const response = await fetch(`http://localhost:3001/api/rooms/${multiplayerGame.roomCode}/start`, {
+            const response = await fetch(`getApiUrl('/api/')rooms/${multiplayerGame.roomCode}/start`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${authToken}`
@@ -4261,7 +4267,7 @@ async function leaveWaitingRoom() {
     try {
         const authToken = localStorage.getItem('ball_knower_token');
         if (authToken && multiplayerGame.roomCode) {
-            await fetch(`http://localhost:3001/api/rooms/${multiplayerGame.roomCode}/leave`, {
+            await fetch(`getApiUrl('/api/')rooms/${multiplayerGame.roomCode}/leave`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${authToken}`
@@ -5160,7 +5166,7 @@ async function syncPlayerScore() {
         const authToken = localStorage.getItem('ball_knower_token');
         if (!authToken || !multiplayerGame.roomCode) return;
 
-        const response = await fetch(`http://localhost:3001/api/rooms/${multiplayerGame.roomCode}/score`, {
+        const response = await fetch(`getApiUrl('/api/')rooms/${multiplayerGame.roomCode}/score`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${authToken}`,
@@ -5518,7 +5524,7 @@ async function syncLeaderboard() {
         const authToken = localStorage.getItem('ball_knower_token');
         if (!authToken || !multiplayerGame.roomCode) return;
 
-        const response = await fetch(`http://localhost:3001/api/rooms/${multiplayerGame.roomCode}`, {
+        const response = await fetch(`getApiUrl('/api/')rooms/${multiplayerGame.roomCode}`, {
             headers: {
                 'Authorization': `Bearer ${authToken}`
             }
@@ -5548,7 +5554,7 @@ async function pollRoomUpdates() {
         const authToken = localStorage.getItem('ball_knower_token');
         if (!authToken) return;
         
-        const response = await fetch(`http://localhost:3001/api/rooms/${multiplayerGame.roomCode}`, {
+        const response = await fetch(`getApiUrl('/api/')rooms/${multiplayerGame.roomCode}`, {
             headers: {
                 'Authorization': `Bearer ${authToken}`
             }
