@@ -3381,6 +3381,12 @@ body::-webkit-scrollbar,
     color: #4CAF50;
 }
 
+.logo-image {
+    height: 2rem;
+    width: auto;
+    object-fit: contain;
+}
+
 .nav-menu {
     display: flex;
     gap: 0.5rem;
