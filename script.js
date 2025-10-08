@@ -1,4 +1,65 @@
 // Ball Knower - Clean Script
+
+// Force hide scrollbars with JavaScript as backup
+(function() {
+    // Hide scrollbars immediately
+    const style = document.createElement('style');
+    style.textContent = `
+        html, body, * {
+            scrollbar-width: none !important;
+            -ms-overflow-style: none !important;
+            scrollbar-color: transparent transparent !important;
+        }
+        html::-webkit-scrollbar,
+        body::-webkit-scrollbar,
+        *::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+            background: transparent !important;
+            -webkit-appearance: none !important;
+            appearance: none !important;
+        }
+        html::-webkit-scrollbar-track,
+        body::-webkit-scrollbar-track,
+        *::-webkit-scrollbar-track {
+            display: none !important;
+            background: transparent !important;
+            -webkit-appearance: none !important;
+            appearance: none !important;
+        }
+        html::-webkit-scrollbar-thumb,
+        body::-webkit-scrollbar-thumb,
+        *::-webkit-scrollbar-thumb {
+            display: none !important;
+            background: transparent !important;
+            -webkit-appearance: none !important;
+            appearance: none !important;
+        }
+        html::-webkit-scrollbar-corner,
+        body::-webkit-scrollbar-corner,
+        *::-webkit-scrollbar-corner {
+            display: none !important;
+            background: transparent !important;
+            -webkit-appearance: none !important;
+            appearance: none !important;
+        }
+    `;
+    document.head.appendChild(style);
+    
+    // Also try to hide scrollbars on the document element
+    if (document.documentElement) {
+        document.documentElement.style.scrollbarWidth = 'none';
+        document.documentElement.style.msOverflowStyle = 'none';
+    }
+    
+    // Hide scrollbars on body
+    if (document.body) {
+        document.body.style.scrollbarWidth = 'none';
+        document.body.style.msOverflowStyle = 'none';
+    }
+})();
+
 // Global Variables
 let currentScreen = 'home-screen';
 let currentGame = {

@@ -22,7 +22,7 @@ router.get('/games/current', async (req, res) => {
 
         // Get games for this challenge
         const gamesResult = await query(
-            `SELECT id, home_team, away_team, kickoff_at, spread, home_team_favorite, is_marquee
+            `SELECT id, home_team, away_team, kickoff_at, spread, home_team_favorite, is_marquee, type
              FROM games 
              WHERE challenge_id = $1 
              ORDER BY kickoff_at ASC`,
@@ -37,6 +37,7 @@ router.get('/games/current', async (req, res) => {
             spread: game.spread,
             home_team_favorite: game.home_team_favorite,
             is_marquee: game.is_marquee,
+            type: game.type,
             favorite: game.home_team_favorite ? game.home_team : game.away_team,
             underdog: game.home_team_favorite ? game.away_team : game.home_team
         }));
@@ -71,12 +72,7 @@ router.post('/submit', authenticate, [
         const { picks, triviaAnswers } = req.body;
         const userId = req.user.id;
 
-        // Validate we have exactly 20 picks
-        if (picks.length !== 20) {
-            return res.status(400).json({ error: `Expected 20 picks, got ${picks.length}` });
-        }
-
-        // Get current challenge
+        // Get current challenge first
         const challengeResult = await query(
             'SELECT id, week_number, season FROM weekly_challenges WHERE status = $1 ORDER BY opens_at DESC LIMIT 1',
             ['open']
@@ -87,6 +83,18 @@ router.post('/submit', authenticate, [
         }
 
         const challenge = challengeResult.rows[0];
+
+        // Get the actual number of games for this challenge
+        const gamesCountResult = await query(
+            'SELECT COUNT(*) as count FROM games WHERE challenge_id = $1',
+            [challenge.id]
+        );
+        const expectedPicks = parseInt(gamesCountResult.rows[0].count);
+
+        // Validate we have the correct number of picks
+        if (picks.length !== expectedPicks) {
+            return res.status(400).json({ error: `Expected ${expectedPicks} picks, got ${picks.length}` });
+        }
         const weekId = `${challenge.season}-W${challenge.week_number}`;
 
         // Check if user already submitted for this week

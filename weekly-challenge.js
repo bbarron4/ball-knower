@@ -5,14 +5,70 @@ const API_URL = 'http://localhost:3001/api';
 let authToken = localStorage.getItem('ball_knower_token');
 let currentUser = null;
 
+// Weekly challenge games data will be loaded from weekly_challenge_games.js
+
 // Define adjustConfidence function early to prevent errors
 window.adjustConfidence = function() { 
     console.log('adjustConfidence called but not needed for weekly challenge'); 
 };
 
+// Check weekly challenge games data
+function checkWeeklyChallengeGames() {
+    if (typeof WEEKLY_CHALLENGE_GAMES !== 'undefined' && WEEKLY_CHALLENGE_GAMES.length > 0) {
+        console.log('✅ Weekly challenge games loaded:', WEEKLY_CHALLENGE_GAMES.length, 'games');
+        console.log('NFL games:', NFL_WEEKLY_GAMES.length);
+        console.log('College games:', COLLEGE_WEEKLY_GAMES.length);
+        return true;
+    } else {
+        console.warn('⚠️ Weekly challenge games not loaded yet');
+        return false;
+    }
+}
+
+// Show different states of the modal
+function showState(state) {
+    console.log('🔄 Switching to state:', state);
+    
+    const modal = document.getElementById('weekly-challenge-modal');
+    if (!modal) {
+        console.error('❌ Modal not found');
+        return;
+    }
+    
+    // Hide all modal states
+    const states = modal.querySelectorAll('.modal-state');
+    console.log('Found modal states:', states.length);
+    states.forEach(stateEl => {
+        stateEl.classList.remove('active');
+        console.log('Removed active from:', stateEl.id);
+    });
+    
+    // Show the appropriate state
+    const targetState = modal.querySelector(`#state-${state}`);
+    console.log('Looking for state:', `#state-${state}`);
+    console.log('Target state found:', targetState);
+    
+    if (targetState) {
+        targetState.classList.add('active');
+        console.log('✅ Switched to', state, 'state');
+        console.log('Target state classes after:', targetState.className);
+        console.log('Target state display style:', window.getComputedStyle(targetState).display);
+    } else {
+        console.error('❌ State not found:', `#state-${state}`);
+        // List all available states for debugging
+        const allStates = modal.querySelectorAll('[id*="state-"]');
+        console.log('Available states:', Array.from(allStates).map(stateEl => stateEl.id));
+    }
+    
+    // Load content based on state
+    if (state === 'picks') {
+        loadChallengeGames('current');
+    }
+}
+
 // Initialize on page load
 window.addEventListener('DOMContentLoaded', () => {
-    console.log('🏀 WEEKLY-CHALLENGE.JS VERSION 36 LOADED - CACHE BUSTED!');
+    console.log('🏀 WEEKLY-CHALLENGE.JS VERSION 37 LOADED - CACHE BUSTED!');
     console.log('🏀 Ball Knower Weekly Challenge loaded');
     console.log('Auth token:', authToken);
     console.log('Current user:', currentUser);
@@ -20,6 +76,9 @@ window.addEventListener('DOMContentLoaded', () => {
     // Test if modal element exists
     const modal = document.getElementById('weekly-challenge-modal');
     console.log('Modal element found:', modal);
+    
+    // Check if games data is loaded
+    checkWeeklyChallengeGames();
     
     checkAuthAndShowModal();
     
@@ -50,16 +109,24 @@ async function checkAuthAndShowModal() {
                 const completed = await checkWeeklyChallengeStatus();
                 console.log('Challenge completed:', completed);
                 
-                if (completed) {
+                // Also check local storage as fallback
+                const currentWeek = getCurrentWeek();
+                const localCompletion = localStorage.getItem(`challenge_week_${currentWeek}`);
+                const hasLocalCompletion = !!localCompletion;
+                console.log('Local completion found:', hasLocalCompletion);
+                
+                const isCompleted = completed || hasLocalCompletion;
+                
+                if (isCompleted) {
                     // SIGNED IN + COMPLETED → Show Thanks Card + Exit
                     console.log('🎉 User completed challenge - showing thanks card');
                     showThankYouCard();
                 } else {
-                    // SIGNED IN + NOT COMPLETED → Show Start Screen
-                    console.log('🚀 User not completed - showing start screen');
+                    // SIGNED IN + NOT COMPLETED → Show Challenge Picks
+                    console.log('🚀 User not completed - showing challenge picks');
                     setTimeout(() => {
                         showWeeklyChallengeModal();
-                        showState('start');
+                        showState('picks');
                     }, 2000);
                 }
             } else {
@@ -212,13 +279,27 @@ function updateModalTitleFallback() {
 // Show the weekly challenge modal
 function showWeeklyChallengeModal() {
     console.log('🔍 Attempting to show modal...');
-  const modal = document.getElementById('weekly-challenge-modal');
+    const modal = document.getElementById('weekly-challenge-modal');
     console.log('Modal element:', modal);
+    console.log('Modal classes before:', modal ? modal.className : 'No modal found');
     
-  if (modal) {
+    if (modal) {
         console.log('✅ Modal found, displaying');
         modal.classList.add('show');
         document.body.classList.add('modal-open');
+        console.log('Modal classes after:', modal.className);
+        
+        // Debug computed styles
+        const computedStyle = window.getComputedStyle(modal);
+        console.log('Modal display style:', computedStyle.display);
+        console.log('Modal visibility:', computedStyle.visibility);
+        console.log('Modal opacity:', computedStyle.opacity);
+        console.log('Modal z-index:', computedStyle.zIndex);
+        console.log('Modal position:', computedStyle.position);
+        console.log('Modal top:', computedStyle.top);
+        console.log('Modal left:', computedStyle.left);
+        console.log('Modal width:', computedStyle.width);
+        console.log('Modal height:', computedStyle.height);
         
         // Update modal title with personalized greeting (with delay to ensure modal is loaded)
         setTimeout(() => {
@@ -507,8 +588,9 @@ async function loadUserRank(challengeId) {
 
 // Start picks (placeholder - you can integrate with your existing game)
 function startPicks() {
-    showNotification('Picks feature coming soon! 🏈', 'info');
-  closeWeeklyChallengeModal();
+    console.log('🎯 Starting picks with your games data...');
+    showState('picks');
+    loadChallengeGames('current');
 }
 
 // Start trivia (placeholder - you can integrate with your existing trivia)
@@ -689,6 +771,9 @@ async function loadChallengeData() {
 // Load challenge games with picks interface
 async function loadChallengeGames(challengeId) {
     try {
+        console.log('🎮 Loading weekly challenge games from database...');
+        
+        // Fetch games from the backend API
         const response = await fetch(`${API_URL}/picks/games/current`, {
             headers: {
                 'Authorization': `Bearer ${authToken}`
@@ -699,48 +784,34 @@ async function loadChallengeGames(challengeId) {
             const data = await response.json();
             const games = data.games || [];
             
-            const picksForm = document.getElementById('picks-form');
-            picksForm.innerHTML = games.map((game, index) => `
-                <div class="game-pick-card" data-game-id="${game.id}">
-                    <div class="game-header">
-                        <div class="game-teams">
-                            <span class="away-team">${game.away_team}</span>
-                            <span class="vs">@</span>
-                            <span class="home-team">${game.home_team}</span>
-                        </div>
-                        <div class="game-time">${new Date(game.kickoff_at).toLocaleString()}</div>
-                    </div>
-                    
-                    <div class="spread-info">
-                        <span class="favorite">${game.favorite}</span>
-                        <span class="spread">${game.spread > 0 ? '+' : ''}${game.spread}</span>
-                        <span class="underdog">${game.underdog}</span>
-                    </div>
-                    
-                    <div class="pick-options">
-                        <button type="button" class="team-pick-btn" 
-                                data-game-id="${game.id}" 
-                                data-selection="FAV" 
-                                data-team="${game.favorite}"
-                                onclick="selectTeam('${game.id}', 'FAV', '${game.favorite}')">
-                            ${game.favorite}
-                        </button>
-                        <button type="button" class="team-pick-btn" 
-                                data-game-id="${game.id}" 
-                                data-selection="DOG" 
-                                data-team="${game.underdog}"
-                                onclick="selectTeam('${game.id}', 'DOG', '${game.underdog}')">
-                            ${game.underdog}
-                        </button>
-                    </div>
-                    
-                    <!-- Confidence controls removed - no longer needed for weekly challenge -->
-                </div>
-            `).join('');
+            console.log('✅ Loaded games from database:', games.length, 'games');
+            
+            // Use the renderPicksInterface function to display games properly
+            renderPicksInterface(games);
+            
+            console.log('✅ Weekly challenge games rendered successfully');
+        } else {
+            console.error('Failed to fetch games from API:', response.status);
+            // Fallback to local games if API fails
+            const localGames = typeof WEEKLY_CHALLENGE_GAMES !== 'undefined' ? WEEKLY_CHALLENGE_GAMES : [];
+            if (localGames.length > 0) {
+                console.log('🔄 Using local games as fallback:', localGames.length, 'games');
+                renderPicksInterface(localGames);
+            } else {
+                document.getElementById('picks-form').innerHTML = '<div class="error">Failed to load games</div>';
+            }
         }
+        
     } catch (error) {
         console.error('Failed to load games:', error);
-        document.getElementById('picks-form').innerHTML = '<div class="error">Failed to load games</div>';
+        // Fallback to local games if API fails
+        const localGames = typeof WEEKLY_CHALLENGE_GAMES !== 'undefined' ? WEEKLY_CHALLENGE_GAMES : [];
+        if (localGames.length > 0) {
+            console.log('🔄 Using local games as fallback:', localGames.length, 'games');
+            renderPicksInterface(localGames);
+        } else {
+            document.getElementById('picks-form').innerHTML = '<div class="error">Failed to load games</div>';
+        }
     }
 }
 
@@ -1185,9 +1256,14 @@ function renderPicksInterface(games) {
     console.log('Initialized userPicks:', window.userPicks);
     console.log('Initialized confidenceValues:', window.confidenceValues);
     
-    // Separate games into NFL and College
-    const nflGames = games.slice(0, 10); // First 10 games are NFL
-    const collegeGames = games.slice(10, 20); // Next 10 games are College
+    // Separate games into NFL and College based on actual data
+    const nflGames = games.filter(game => game.type === 'NFL');
+    const collegeGames = games.filter(game => game.type === 'COLLEGE');
+    
+    console.log('🔍 Debug - Total games:', games.length);
+    console.log('🔍 Debug - NFL games:', nflGames.length, nflGames);
+    console.log('🔍 Debug - College games:', collegeGames.length, collegeGames);
+    console.log('🔍 Debug - Sample game structure:', games[0]);
     
     let html = '<div class="games-list">';
     
@@ -1320,10 +1396,10 @@ function renderPicksInterface(games) {
     html += `
         <div class="picks-summary">
             <div class="picks-count">
-                <strong>Games Picked: <span id="picks-count">0</span> / 20</strong>
+                <strong>Games Picked: <span id="picks-count">0</span> / ${games.length}</strong>
             </div>
             <div class="picks-validation" id="picks-validation">
-                Select all 20 games to submit your picks
+                Select all ${games.length} games to submit your picks
             </div>
             <button class="auth-btn-primary" id="submit-picks-btn" 
                     onclick="submitPicks()" disabled>
@@ -1331,6 +1407,9 @@ function renderPicksInterface(games) {
             </button>
         </div>
     `;
+    
+    console.log('🔍 Debug - Generated HTML length:', html.length);
+    console.log('🔍 Debug - Generated HTML preview:', html.substring(0, 500));
     
     picksForm.innerHTML = html;
     
@@ -1533,9 +1612,10 @@ async function submitPicks() {
         return;
     }
     
-    // Validate we have exactly 20 games (10 NFL + 10 College)
-    if (totalGames !== 20) {
-        console.error(`❌ Expected 20 games, got: ${totalGames}`);
+    // Validate we have the expected number of games
+    const expectedGames = typeof WEEKLY_CHALLENGE_GAMES !== 'undefined' ? WEEKLY_CHALLENGE_GAMES.length : 9;
+    if (totalGames !== expectedGames) {
+        console.error(`❌ Expected ${expectedGames} games, got: ${totalGames}`);
         showNotification('Please wait for all games to load', 'error');
         return;
     }
@@ -1610,6 +1690,7 @@ async function submitPicks() {
 }
 
 // Export functions for global access
+// Global functions for testing
 window.showWeeklyChallengeModal = showWeeklyChallengeModal;
 window.closeWeeklyChallengeModal = closeWeeklyChallengeModal;
 window.handleModalClick = handleModalClick;
@@ -1621,6 +1702,14 @@ window.startPicks = startPicks;
 window.startTrivia = startTrivia;
 window.continueToChallenge = continueToChallenge;
 window.startWeeklyChallenge = startWeeklyChallenge;
+window.showState = showState;
+
+// Test function to manually show modal
+window.testWeeklyChallenge = function() {
+    console.log('🧪 Testing weekly challenge modal...');
+    showWeeklyChallengeModal();
+    showState('auth');
+};
 window.selectTeam = selectTeam;
 // adjustConfidence function defined at top of file to prevent errors
 window.submitWeeklyPicks = submitWeeklyPicks;

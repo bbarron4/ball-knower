@@ -9,9 +9,277 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #415a77 100%);
     color: #ffffff;
-    min-height: 100vh;
-    overflow-x: hidden;
+    min-height: 100vh; /* Allow content to extend beyond viewport */
     line-height: 1.6;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Hide scrollbars while keeping functionality */
+html {
+    scrollbar-width: none !important; /* Firefox */
+    -ms-overflow-style: none !important; /* Internet Explorer 10+ */
+    overflow-x: hidden !important; /* Hide horizontal scrollbar */
+}
+
+html::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+}
+
+body {
+    scrollbar-width: none !important; /* Firefox */
+    -ms-overflow-style: none !important; /* Internet Explorer 10+ */
+    overflow-x: hidden !important; /* Hide horizontal scrollbar */
+    min-height: 100vh; /* Allow content to extend beyond viewport */
+}
+
+body::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+}
+
+/* Target the main document scrollbar specifically */
+html, body {
+    scrollbar-width: none !important; /* Firefox */
+    -ms-overflow-style: none !important; /* Internet Explorer 10+ */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+    -webkit-appearance: none !important;
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+    display: none !important;
+    background: transparent !important;
+    -webkit-appearance: none !important;
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+    display: none !important;
+    background: transparent !important;
+    -webkit-appearance: none !important;
+}
+
+html::-webkit-scrollbar-corner,
+body::-webkit-scrollbar-corner {
+    display: none !important;
+    background: transparent !important;
+    -webkit-appearance: none !important;
+}
+
+/* Force hide scrollbar on the viewport */
+:root {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+/* Ultra-aggressive scrollbar hiding for all browsers */
+html, body, document, window {
+    scrollbar-width: none !important; /* Firefox */
+    -ms-overflow-style: none !important; /* Internet Explorer 10+ */
+    scrollbar-color: transparent transparent !important; /* Firefox */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+document::-webkit-scrollbar,
+window::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track,
+document::-webkit-scrollbar-track,
+window::-webkit-scrollbar-track {
+    display: none !important;
+    background: transparent !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb,
+document::-webkit-scrollbar-thumb,
+window::-webkit-scrollbar-thumb {
+    display: none !important;
+    background: transparent !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+}
+
+html::-webkit-scrollbar-corner,
+body::-webkit-scrollbar-corner,
+document::-webkit-scrollbar-corner,
+window::-webkit-scrollbar-corner {
+    display: none !important;
+    background: transparent !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+}
+
+/* Main app container - allow natural height */
+#app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+:root::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+}
+
+/* Hide scrollbars for all elements */
+* {
+    scrollbar-width: none !important; /* Firefox */
+    -ms-overflow-style: none !important; /* Internet Explorer 10+ */
+}
+
+*::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+*::-webkit-scrollbar-track {
+    display: none !important;
+}
+
+*::-webkit-scrollbar-thumb {
+    display: none !important;
+}
+
+*::-webkit-scrollbar-corner {
+    display: none !important;
+}
+
+/* Additional scrollbar hiding for document and window */
+document, window {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+document::-webkit-scrollbar,
+window::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+/* Target any remaining scrollable elements */
+div, section, article, main, aside, nav, header, footer {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+div::-webkit-scrollbar,
+section::-webkit-scrollbar,
+article::-webkit-scrollbar,
+main::-webkit-scrollbar,
+aside::-webkit-scrollbar,
+nav::-webkit-scrollbar,
+header::-webkit-scrollbar,
+footer::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+/* Ultra-aggressive scrollbar hiding for stubborn browsers */
+::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+    -webkit-appearance: none !important;
+}
+
+::-webkit-scrollbar-track {
+    display: none !important;
+    background: transparent !important;
+    -webkit-appearance: none !important;
+}
+
+::-webkit-scrollbar-thumb {
+    display: none !important;
+    background: transparent !important;
+    -webkit-appearance: none !important;
+}
+
+::-webkit-scrollbar-corner {
+    display: none !important;
+    background: transparent !important;
+    -webkit-appearance: none !important;
+}
+
+/* Final comprehensive scrollbar hiding - target everything */
+*, *::before, *::after {
+    scrollbar-width: none !important; /* Firefox */
+    -ms-overflow-style: none !important; /* Internet Explorer 10+ */
+}
+
+*::-webkit-scrollbar,
+*::before::-webkit-scrollbar,
+*::after::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+    -webkit-appearance: none !important;
+}
+
+*::-webkit-scrollbar-track,
+*::before::-webkit-scrollbar-track,
+*::after::-webkit-scrollbar-track {
+    display: none !important;
+    background: transparent !important;
+    -webkit-appearance: none !important;
+}
+
+*::-webkit-scrollbar-thumb,
+*::before::-webkit-scrollbar-thumb,
+*::after::-webkit-scrollbar-thumb {
+    display: none !important;
+    background: transparent !important;
+    -webkit-appearance: none !important;
+}
+
+*::-webkit-scrollbar-corner,
+*::before::-webkit-scrollbar-corner,
+*::after::-webkit-scrollbar-corner {
+    display: none !important;
+    background: transparent !important;
+    -webkit-appearance: none !important;
+}
+
+/* Target the browser's main scrollbar specifically */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+    -webkit-appearance: none !important;
 }
 
 /* Navigation */
@@ -86,7 +354,28 @@ body {
 .screen {
     display: none;
     padding-top: 70px;
-    min-height: 100vh;
+    flex: 1;
+    /* Hide scrollbar while keeping scroll functionality */
+    scrollbar-width: none !important; /* Firefox */
+    -ms-overflow-style: none !important; /* Internet Explorer 10+ */
+}
+
+.screen::-webkit-scrollbar {
+    display: none !important; /* Hide scrollbar for webkit browsers */
+    width: 0 !important;
+    height: 0 !important;
+}
+
+.screen::-webkit-scrollbar-track {
+    display: none !important;
+}
+
+.screen::-webkit-scrollbar-thumb {
+    display: none !important;
+}
+
+.screen::-webkit-scrollbar-corner {
+    display: none !important;
 }
 
 .screen.active {
