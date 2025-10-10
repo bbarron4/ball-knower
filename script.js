@@ -2,7 +2,7 @@
 
 // API Helper Function
 function getApiUrl(endpoint) {
-    const baseUrl = window.BallKnowerConfig ? window.BallKnowerConfig.API_BASE_URL : 'getApiUrl('')';
+    const baseUrl = window.BallKnowerConfig ? window.BallKnowerConfig.API_BASE_URL : '';
     return `${baseUrl}${endpoint}`;
 }
 
@@ -103,7 +103,7 @@ let apiLastUpdated = null;
 const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours
 
 // Sign out function
-function signOut() {
+window.signOut = function signOut() {
     // Clear authentication data
     localStorage.removeItem('ball_knower_token');
     localStorage.removeItem('ball_knower_user');
@@ -586,11 +586,11 @@ function showScreen(screenId) {
 }
 
 // Navigation Functions
-function showHome() {
+window.showHome = function showHome() {
     showScreen('home-screen');
 }
 
-function showLeaderboard() {
+window.showLeaderboard = function showLeaderboard() {
     showScreen('leaderboard-screen');
     loadLeaderboard();
 }
@@ -675,7 +675,7 @@ function displayLeaderboard(leaderboard) {
     content.innerHTML = html;
 }
 
-function showProfile() {
+window.showProfile = function showProfile() {
     showScreen('profile-screen');
     // Wait a moment for the screen to be visible before loading profile
     setTimeout(() => {
@@ -984,7 +984,7 @@ function displayUserProfile(user, badges) {
 }
 
 // Game Functions
-function startGame(mode) {
+window.startGame = function startGame(mode) {
     console.log(`🎮 startGame called with mode: ${mode}`);
     console.log(`🎮 Current sport BEFORE any changes: ${currentGame.sport}`);
     
@@ -1071,7 +1071,7 @@ function restoreSetupUI() {
     }
 }
 
-function selectSport(sport) {
+window.selectSport = function selectSport(sport) {
     console.log(`🔵 selectSport called with: ${sport}`);
     
     // Update both currentGame and multiplayerGame
@@ -1109,7 +1109,7 @@ function selectSport(sport) {
 
 // Difficulty selection removed - using single well-known players dataset
 
-function selectInputType(inputType) {
+window.selectInputType = function selectInputType(inputType) {
     currentGame.inputMode = inputType;
     
     // Update UI
@@ -1119,7 +1119,7 @@ function selectInputType(inputType) {
     event.target.classList.add('active');
 }
 
-function submitTextAnswer() {
+window.submitTextAnswer = function submitTextAnswer() {
     const textInput = document.getElementById('text-answer-input');
     const userAnswer = textInput.value.trim();
     
@@ -1385,7 +1385,7 @@ function validateSurvivalSetup() {
     return true;
 }
 
-function changeQuestionCount(delta) {
+window.changeQuestionCount = function changeQuestionCount(delta) {
     const currentCount = parseInt(document.getElementById('question-count').textContent);
     const newCount = Math.max(5, Math.min(50, currentCount + delta));
     document.getElementById('question-count').textContent = newCount;
@@ -1393,7 +1393,7 @@ function changeQuestionCount(delta) {
 }
 
 // Game Session
-async function startGameSession() {
+window.startGameSession = async function startGameSession() {
     console.log(`🎬 startGameSession called - Current sport: ${currentGame.sport}`);
     
     // Validate survival mode setup
@@ -3488,7 +3488,7 @@ function timeUp() {
     }
 }
 
-function selectAnswer(answerIndex) {
+window.selectAnswer = function selectAnswer(answerIndex) {
     if (currentGame.timer) {
         clearInterval(currentGame.timer);
         currentGame.timer = null;
@@ -3673,7 +3673,7 @@ function endGame() {
     statItems[2].querySelector('.stat-value').textContent = currentGame.maxStreak;
 }
 
-function playAgain() {
+window.playAgain = function playAgain() {
     currentGame.currentQuestion = 0;
     currentGame.score = 0;
     currentGame.questions = [];
@@ -3683,7 +3683,7 @@ function playAgain() {
 
 
 // Multiplayer Functions
-function showMultiplayerSetup() {
+window.showMultiplayerSetup = function showMultiplayerSetup() {
     console.log('🎮 Showing multiplayer setup screen');
     showScreen('multiplayer-setup-screen');
     
@@ -3853,7 +3853,7 @@ function getCurrentUserId() {
     return null;
 }
 
-function createRoom() {
+window.createRoom = function createRoom() {
     console.log('🎮 createRoom called - FUNCTION IS WORKING!');
     // Reset to default state when creating room
     multiplayerGame.gameSettings = {
@@ -3887,7 +3887,7 @@ function createRoom() {
     }, 100); // Small delay to ensure DOM is updated
 }
 
-async function createRoomWithSettings() {
+window.createRoomWithSettings = async function createRoomWithSettings() {
     // Check if user is authenticated
     const authToken = localStorage.getItem('ball_knower_token');
     if (!authToken) {
@@ -3985,7 +3985,7 @@ async function createRoomWithSettings() {
 // This function is now merged into the main selectSport function above
 // No separate multiplayer sport selection needed
 
-function toggleMode(mode) {
+window.toggleMode = function toggleMode(mode) {
     console.log(`🎮 toggleMode called with: ${mode}`);
     console.log(`Current modes:`, multiplayerGame.gameSettings.modes);
     
@@ -4017,23 +4017,23 @@ function toggleMode(mode) {
     console.log(`Updated modes:`, multiplayerGame.gameSettings.modes);
 }
 
-function selectInput(inputType) {
+window.selectInput = function selectInput(inputType) {
     multiplayerGame.gameSettings.inputType = inputType;
     document.querySelectorAll('.input-btn').forEach(btn => btn.classList.remove('active'));
     document.querySelector(`[data-input="${inputType}"]`).classList.add('active');
 }
 
-function selectDuration(duration) {
+window.selectDuration = function selectDuration(duration) {
     multiplayerGame.gameSettings.duration = duration;
     document.querySelectorAll('.duration-btn').forEach(btn => btn.classList.remove('active'));
     document.querySelector(`[data-duration="${duration}"]`).classList.add('active');
 }
 
-function showJoinRoom() {
+window.showJoinRoom = function showJoinRoom() {
     document.getElementById('room-code-input').style.display = 'block';
 }
 
-async function joinRoom() {
+window.joinRoom = async function joinRoom() {
     // Check if user is authenticated
     const authToken = localStorage.getItem('ball_knower_token');
     if (!authToken) {
@@ -4084,7 +4084,7 @@ async function joinRoom() {
     }
 }
 
-function copyRoomCode() {
+window.copyRoomCode = function copyRoomCode() {
     const roomCode = document.getElementById('display-room-code').textContent;
     navigator.clipboard.writeText(roomCode).then(() => {
         showMessage('Room code copied!', 'success');
@@ -4194,7 +4194,7 @@ function updateWaitingStatus() {
     }
 }
 
-async function startGameCountdown() {
+window.startGameCountdown = async function startGameCountdown() {
     console.log('🎮 startGameCountdown called - isHost:', multiplayerGame.isHost, 'players:', multiplayerGame.players.length);
     
     if (multiplayerGame.players.length < 2) {
@@ -4263,7 +4263,7 @@ async function startGameCountdown() {
     }, 100); // Update every 100ms for better sync
 }
 
-async function leaveWaitingRoom() {
+window.leaveWaitingRoom = async function leaveWaitingRoom() {
     try {
         const authToken = localStorage.getItem('ball_knower_token');
         if (authToken && multiplayerGame.roomCode) {
@@ -4316,7 +4316,7 @@ function notifyGameStart() {
     showMessage('Game starting for all players...', 'success');
 }
 
-function simulatePlayerJoin() {
+window.simulatePlayerJoin = function simulatePlayerJoin() {
     // Simulate a player joining (for testing)
     if (multiplayerGame.isHost && multiplayerGame.players.length < 4) {
         const playerNames = ['Alice', 'Bob', 'Charlie', 'Diana'];
@@ -5387,7 +5387,7 @@ function generateRoomCode() {
 }
 
 // Leaderboard Functions
-function showLeaderboardTab(tab) {
+window.showLeaderboardTab = function showLeaderboardTab(tab) {
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.classList.remove('active');
     });

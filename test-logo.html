@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logo Test - Ball Knower</title>
+    <style>
+        body {
+            background: #0d1b2a;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .logo-test {
+            background: rgba(13, 27, 42, 0.9);
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .logo-image {
+            height: 3rem;
+            width: auto;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto 10px auto;
+            filter: drop-shadow(0 2px 4px rgba(76, 175, 80, 0.3));
+        }
+        .status {
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .success {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid #4CAF50;
+            color: #4CAF50;
+        }
+        .error {
+            background: rgba(244, 67, 54, 0.2);
+            border: 1px solid #f44336;
+            color: #f44336;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Ball Knower Logo Test</h1>
+        
+        <div class="logo-test">
+            <h2>Logo File Test</h2>
+            <img src="ballknowerlogo.png" alt="Ball Knower Logo" class="logo-image" 
+                 onload="document.getElementById('logo-status').innerHTML='✅ Logo loaded successfully!'; document.getElementById('logo-status').className='status success';"
+                 onerror="document.getElementById('logo-status').innerHTML='❌ Logo failed to load. Check if ballknowerlogo.png exists in the same directory.'; document.getElementById('logo-status').className='status error';">
+            <div id="logo-status" class="status">Loading...</div>
+        </div>
+        
+        <div class="logo-test">
+            <h2>CSS Test</h2>
+            <div id="css-status" class="status">Checking CSS...</div>
+        </div>
+        
+        <div class="logo-test">
+            <h2>File System Test</h2>
+            <div id="file-status" class="status">Checking files...</div>
+        </div>
+        
+        <div class="logo-test">
+            <h2>Navigation Test</h2>
+            <nav style="background: rgba(13, 27, 42, 0.9); padding: 1rem; border-radius: 8px; margin: 10px 0;">
+                <div style="display: flex; align-items: center; gap: 0.6rem; font-size: 1.4rem; font-weight: 700; color: #4CAF50;">
+                    <img src="ballknowerlogo.png" alt="Ball Knower Logo" style="height: 2.5rem; width: auto; object-fit: contain; display: block; filter: drop-shadow(0 2px 4px rgba(76, 175, 80, 0.3));">
+                    <span>Ball Knower</span>
+                </div>
+            </nav>
+        </div>
+    </div>
+    
+    <script>
+        // Test CSS loading
+        function testCSS() {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'styles.css?v=' + Date.now();
+            link.onload = function() {
+                document.getElementById('css-status').innerHTML = '✅ CSS loaded successfully!';
+                document.getElementById('css-status').className = 'status success';
+            };
+            link.onerror = function() {
+                document.getElementById('css-status').innerHTML = '❌ CSS failed to load.';
+                document.getElementById('css-status').className = 'status error';
+            };
+            document.head.appendChild(link);
+        }
+        
+        // Test file existence
+        function testFiles() {
+            fetch('ballknowerlogo.png')
+                .then(response => {
+                    if (response.ok) {
+                        document.getElementById('file-status').innerHTML = '✅ ballknowerlogo.png exists and is accessible!';
+                        document.getElementById('file-status').className = 'status success';
+                    } else {
+                        document.getElementById('file-status').innerHTML = '❌ ballknowerlogo.png not found or not accessible.';
+                        document.getElementById('file-status').className = 'status error';
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('file-status').innerHTML = '❌ Error accessing ballknowerlogo.png: ' + error.message;
+                    document.getElementById('file-status').className = 'status error';
+                });
+        }
+        
+        // Run tests
+        testCSS();
+        testFiles();
+        
+        // Log current URL
+        console.log('Current URL:', window.location.href);
+        console.log('Current directory:', window.location.pathname);
+    </script>
+</body>
+</html>

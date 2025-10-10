@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #1a1a1a;
+            color: white;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .status {
+            margin: 20px 0;
+            padding: 10px;
+            background: #333;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Navigation Button Test</h1>
+    
+    <div class="status">
+        <h3>Function Availability Status:</h3>
+        <div id="status-output"></div>
+    </div>
+    
+    <div>
+        <button onclick="testShowHome()">Test showHome()</button>
+        <button onclick="testShowLeaderboard()">Test showLeaderboard()</button>
+        <button onclick="testShowProfile()">Test showProfile()</button>
+    </div>
+    
+    <div id="test-results" style="margin-top: 20px;"></div>
+    
+    <script>
+        function checkFunctionAvailability() {
+            const output = document.getElementById('status-output');
+            const checks = [
+                { name: 'showHome', func: window.showHome },
+                { name: 'showHomeReal', func: window.showHomeReal },
+                { name: 'realShowHome', func: window.realShowHome },
+                { name: 'showLeaderboard', func: window.showLeaderboard },
+                { name: 'showLeaderboardReal', func: window.showLeaderboardReal },
+                { name: 'realShowLeaderboard', func: window.realShowLeaderboard },
+                { name: 'showProfile', func: window.showProfile },
+                { name: 'showProfileReal', func: window.showProfileReal },
+                { name: 'realShowProfile', func: window.realShowProfile }
+            ];
+            
+            let html = '<ul style="margin: 0; padding-left: 20px;">';
+            checks.forEach(check => {
+                const exists = typeof check.func === 'function';
+                const status = exists ? '✅' : '❌';
+                html += `<li>${status} ${check.name}: ${typeof check.func}</li>`;
+            });
+            html += '</ul>';
+            output.innerHTML = html;
+        }
+        
+        function testShowHome() {
+            const results = document.getElementById('test-results');
+            try {
+                console.log('Calling showHome()...');
+                if (typeof window.showHome === 'function') {
+                    window.showHome();
+                    results.innerHTML = '<p style="color: green;">✅ showHome() called successfully</p>';
+                } else {
+                    results.innerHTML = '<p style="color: red;">❌ showHome() is not a function</p>';
+                }
+            } catch (error) {
+                results.innerHTML = `<p style="color: red;">❌ Error: ${error.message}</p>`;
+            }
+        }
+        
+        function testShowLeaderboard() {
+            const results = document.getElementById('test-results');
+            try {
+                console.log('Calling showLeaderboard()...');
+                if (typeof window.showLeaderboard === 'function') {
+                    window.showLeaderboard();
+                    results.innerHTML = '<p style="color: green;">✅ showLeaderboard() called successfully</p>';
+                } else {
+                    results.innerHTML = '<p style="color: red;">❌ showLeaderboard() is not a function</p>';
+                }
+            } catch (error) {
+                results.innerHTML = `<p style="color: red;">❌ Error: ${error.message}</p>`;
+            }
+        }
+        
+        function testShowProfile() {
+            const results = document.getElementById('test-results');
+            try {
+                console.log('Calling showProfile()...');
+                if (typeof window.showProfile === 'function') {
+                    window.showProfile();
+                    results.innerHTML = '<p style="color: green;">✅ showProfile() called successfully</p>';
+                } else {
+                    results.innerHTML = '<p style="color: red;">❌ showProfile() is not a function</p>';
+                }
+            } catch (error) {
+                results.innerHTML = `<p style="color: red;">❌ Error: ${error.message}</p>`;
+            }
+        }
+        
+        // Check initially
+        checkFunctionAvailability();
+        
+        // Check again after script loads
+        setTimeout(checkFunctionAvailability, 1000);
+        setTimeout(checkFunctionAvailability, 3000);
+    </script>
+    
+    <!-- Load the main script -->
+    <script src="script.js"></script>
+</body>
+</html>
+

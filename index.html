@@ -6,32 +6,338 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    
+    <!-- Mobile Navigation Fix -->
+    <script>
+        function fixMobileNavigation() {
+            if (window.innerWidth <= 500) {
+                const navBrand = document.querySelector('.nav-brand');
+                const navContainer = document.querySelector('.nav-container');
+                if (navBrand) {
+                    // Show logo but hide text on mobile
+                    navBrand.style.display = 'flex';
+                    navBrand.style.visibility = 'visible';
+                    navBrand.style.opacity = '1';
+                    navBrand.style.width = 'auto';
+                    navBrand.style.height = 'auto';
+                    navBrand.style.overflow = 'visible';
+                }
+                if (navContainer) {
+                    navContainer.style.justifyContent = 'space-between';
+                    navContainer.style.padding = '0 0.5rem';
+                    navContainer.style.gap = '0.5rem';
+                }
+            }
+        }
+        
+        // Run on load and resize
+        window.addEventListener('load', fixMobileNavigation);
+        window.addEventListener('resize', fixMobileNavigation);
+        
+        // Force remove background images
+        function removeBackgroundImages() {
+            const heroBanner = document.querySelector('.hero-banner');
+            if (heroBanner) {
+                heroBanner.style.background = 'linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #415a77 100%)';
+                heroBanner.style.backgroundImage = 'none';
+            }
+        }
+        
+        // Run immediately and on load
+        removeBackgroundImages();
+        window.addEventListener('load', removeBackgroundImages);
+        
+        // Force stats cards to be minimal on mobile
+        function forceMinimalStats() {
+            if (window.innerWidth <= 375) {
+                const statsPreview = document.querySelector('.stats-preview');
+                const statCards = document.querySelectorAll('.stat-card');
+                
+                if (statsPreview) {
+                    statsPreview.style.display = 'grid';
+                    statsPreview.style.gridTemplateColumns = 'repeat(3, 1fr)';
+                    statsPreview.style.gap = '0.25rem';
+                    statsPreview.style.padding = '0 0.5rem';
+                    statsPreview.style.margin = '0.5rem auto 0.25rem auto';
+                    statsPreview.style.maxWidth = '100%';
+                    statsPreview.style.width = '100%';
+                }
+                
+                statCards.forEach(card => {
+                    card.style.padding = '0.9rem 0.5rem';
+                    card.style.gap = '0.35rem';
+                    card.style.flexDirection = 'column';
+                    card.style.textAlign = 'center';
+                    card.style.minHeight = '65px';
+                    card.style.height = '65px';
+                    card.style.display = 'flex';
+                    card.style.alignItems = 'center';
+                    card.style.justifyContent = 'center';
+                    card.style.maxWidth = '100%';
+                    card.style.width = '100%';
+                    
+                    const icon = card.querySelector('i');
+                    if (icon) {
+                        icon.style.fontSize = '1.3rem';
+                        icon.style.margin = '0';
+                        icon.style.padding = '0';
+                    }
+                    
+                    const statInfo = card.querySelector('.stat-info');
+                    if (statInfo) {
+                        statInfo.style.display = 'flex';
+                        statInfo.style.flexDirection = 'column';
+                        statInfo.style.alignItems = 'center';
+                        statInfo.style.gap = '0.1rem';
+                        statInfo.style.margin = '0';
+                        statInfo.style.padding = '0';
+                    }
+                    
+                    const statValue = card.querySelector('.stat-value');
+                    if (statValue) {
+                        statValue.style.fontSize = '1.2rem';
+                        statValue.style.lineHeight = '1';
+                        statValue.style.fontWeight = '700';
+                        statValue.style.margin = '0';
+                        statValue.style.padding = '0';
+                    }
+                    
+                    const statLabel = card.querySelector('.stat-label');
+                    if (statLabel) {
+                        statLabel.style.fontSize = '0.85rem';
+                        statLabel.style.lineHeight = '1';
+                        statLabel.style.textTransform = 'uppercase';
+                        statLabel.style.letterSpacing = '0';
+                        statLabel.style.opacity = '0.7';
+                        statLabel.style.margin = '0';
+                        statLabel.style.padding = '0';
+                    }
+                });
+            }
+        }
+        
+        // Run immediately and on load/resize
+        forceMinimalStats();
+        window.addEventListener('load', forceMinimalStats);
+        window.addEventListener('resize', forceMinimalStats);
+        
+        // Force weekly leaderboard fake data
+        function forceWeeklyLeaderboard() {
+            const container = document.getElementById('weekly-leaderboard-preview');
+            if (container) {
+                container.innerHTML = `
+                    <div class="top-player">
+                        <span class="rank gold">1</span>
+                        <span class="player-name">BallKnowerPro</span>
+                        <span class="player-score">127 <i class="fas fa-fire"></i></span>
+                    </div>
+                    <div class="top-player">
+                        <span class="rank silver">2</span>
+                        <span class="player-name">TriviaKing</span>
+                        <span class="player-score">115 <i class="fas fa-fire"></i></span>
+                    </div>
+                    <div class="top-player">
+                        <span class="rank bronze">3</span>
+                        <span class="player-name">SportsGuru</span>
+                        <span class="player-score">108 <i class="fas fa-fire"></i></span>
+                    </div>
+                `;
+            }
+        }
+        
+        // Run immediately and repeatedly
+        forceWeeklyLeaderboard();
+        window.addEventListener('load', forceWeeklyLeaderboard);
+        setTimeout(forceWeeklyLeaderboard, 100);
+        setTimeout(forceWeeklyLeaderboard, 500);
+        setTimeout(forceWeeklyLeaderboard, 1000);
+        setTimeout(forceWeeklyLeaderboard, 2000);
+        setTimeout(forceWeeklyLeaderboard, 3000);
+        
+        // Force cache clear and refresh
+        function forceRefresh() {
+            if (performance.navigation.type === 1) {
+                // Page was refreshed, clear cache
+                if ('caches' in window) {
+                    caches.keys().then(function(names) {
+                        for (let name of names) {
+                            caches.delete(name);
+                        }
+                    });
+                }
+            }
+        }
+        
+        // Run on page load
+        window.addEventListener('load', forceRefresh);
+        
+        // Debug logging
+        console.log('🔍 Debug Info:');
+        console.log('Current URL:', window.location.href);
+        console.log('CSS version:', 'v25');
+        console.log('Logo path:', 'ballknowerlogo.png');
+        
+        // Test logo loading
+        window.addEventListener('load', function() {
+            const logo = document.querySelector('.nav-brand img');
+            if (logo) {
+                console.log('✅ Logo element found:', logo);
+                console.log('Logo src:', logo.src);
+                console.log('Logo complete:', logo.complete);
+                console.log('Logo naturalWidth:', logo.naturalWidth);
+                console.log('Logo naturalHeight:', logo.naturalHeight);
+                
+                // Force logo to show even if it fails to load
+                setTimeout(() => {
+                    if (logo.naturalWidth === 0) {
+                        console.log('🔄 Logo failed to load, showing fallback');
+                        logo.style.display = 'none';
+                        const fallback = logo.nextElementSibling;
+                        if (fallback) {
+                            fallback.style.display = 'inline';
+                            fallback.style.fontSize = '2rem';
+                            fallback.style.color = '#4CAF50';
+                        }
+                    }
+                }, 2000);
+            } else {
+                console.log('❌ Logo element not found');
+            }
+        });
+    </script>
     <title>Ball Knower - Sports Trivia Game</title>
-    <link rel="stylesheet" href="styles.css?v=20">
-    <link rel="stylesheet" href="auth-modal-styles.css?v=7">
+    <link rel="stylesheet" href="styles.css?v=29">
+    <link rel="stylesheet" href="auth-modal-styles.css?v=11">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"> 
+    
+    <!-- IMMEDIATE PLACEHOLDER FUNCTIONS - Must be defined before any onclick attributes -->
+    <script>
+        console.log('🚀 Defining placeholder functions immediately in HTML...');
+        
+        // Store reference to real function when it loads
+        window.realStartGame = null;
+        
+        // Placeholder functions that will be replaced by the real ones
+        window.startGame = function(mode) {
+            console.log('🎮 startGame called (HTML placeholder):', mode);
+            
+            // Check if real function is available
+            if (window.realStartGame && typeof window.realStartGame === 'function') {
+                console.log('✅ Real startGame function detected, calling it...');
+                // Call the real function
+                return window.realStartGame(mode);
+            }
+            
+            // Show a simple message until the real function loads
+            alert('Game starting: ' + mode + ' (placeholder function - real function will load soon)');
+            // Don't try to do anything else - just show the alert
+            return false;
+        };
+        
+        // Add a flag to track when real functions are loaded
+        window.realFunctionsLoaded = false;
+        
+        // Set a flag to indicate placeholder functions are active
+        window.placeholderFunctionsActive = true;
+        
+        // Store references to real functions
+        window.realShowMultiplayerSetup = null;
+        window.realShowHome = null;
+        window.realShowLeaderboard = null;
+        window.realShowProfile = null;
+        window.realShowState = null;
+        window.realSignOut = null;
+        window.realHandleModalClick = null;
+        
+        window.showMultiplayerSetup = function() {
+            console.log('🎮 showMultiplayerSetup called (HTML placeholder)');
+            if (window.realShowMultiplayerSetup && typeof window.realShowMultiplayerSetup === 'function') {
+                console.log('✅ Real showMultiplayerSetup function detected, calling it...');
+                return window.realShowMultiplayerSetup();
+            }
+            alert('Multiplayer setup (placeholder function)');
+        };
+        
+        window.showHome = function() {
+            console.log('🏠 showHome called (HTML placeholder)');
+            if (window.realShowHome && typeof window.realShowHome === 'function') {
+                console.log('✅ Real showHome function detected, calling it...');
+                return window.realShowHome();
+            }
+            alert('Showing home (placeholder function)');
+        };
+        
+        window.showLeaderboard = function() {
+            console.log('🏆 showLeaderboard called (HTML placeholder)');
+            if (window.realShowLeaderboard && typeof window.realShowLeaderboard === 'function') {
+                console.log('✅ Real showLeaderboard function detected, calling it...');
+                return window.realShowLeaderboard();
+            }
+            alert('Showing leaderboard (placeholder function)');
+        };
+        
+        window.showProfile = function() {
+            console.log('👤 showProfile called (HTML placeholder)');
+            if (window.realShowProfile && typeof window.realShowProfile === 'function') {
+                console.log('✅ Real showProfile function detected, calling it...');
+                return window.realShowProfile();
+            }
+            alert('Showing profile (placeholder function)');
+        };
+        
+        window.showState = function(state) {
+            console.log('🔄 showState called (HTML placeholder):', state);
+            if (window.realShowState && typeof window.realShowState === 'function') {
+                console.log('✅ Real showState function detected, calling it...');
+                return window.realShowState(state);
+            }
+            alert('Weekly challenge: ' + state + ' (placeholder function)');
+        };
+        
+        window.signOut = function() {
+            console.log('🚪 signOut called (HTML placeholder)');
+            if (window.realSignOut && typeof window.realSignOut === 'function') {
+                console.log('✅ Real signOut function detected, calling it...');
+                return window.realSignOut();
+            }
+            alert('Signing out (placeholder function)');
+        };
+        
+        window.handleModalClick = function(event) {
+            console.log('🖱️ handleModalClick called (HTML placeholder):', event);
+            if (window.realHandleModalClick && typeof window.realHandleModalClick === 'function') {
+                console.log('✅ Real handleModalClick function detected, calling it...');
+                return window.realHandleModalClick(event);
+            }
+            // Don't show alert for modal clicks as they happen frequently
+        };
+        
+        console.log('✅ HTML placeholder functions defined immediately');
+    </script>
 </head>
 <body>
     <div id="app">
         <!-- Navigation Header -->
         <nav class="navbar">
             <div class="nav-container">
-                <div class="nav-logo">
-                    <img src="ballknowerlogo.png" alt="Ball Knower Logo" class="logo-image">
+                <div class="nav-brand">
+                    <img src="./ballknowerlogo.png" alt="Ball Knower Logo" class="logo-image" onerror="console.log('Logo failed to load:', this.src); this.style.display='none'; this.nextElementSibling.style.display='inline';" onload="console.log('Logo loaded successfully:', this.src);">
+                    <span style="display: none;">🏀</span>
                     <span>Ball Knower</span>
                 </div>
                 <div class="nav-menu">
-                    <button class="nav-btn active" onclick="showHome()">
+                    <button id="nav-home-btn" class="nav-btn" onclick="showHome()">
                         <i class="fas fa-home"></i>
                         <span>Home</span>
                     </button>
-                    <button class="nav-btn" onclick="showLeaderboard()">
+                    <button id="nav-leaderboard-btn" class="nav-btn" onclick="showLeaderboard()">
                         <i class="fas fa-trophy"></i>
                         <span>Leaderboard</span>
                     </button>
-                    <button class="nav-btn" onclick="showProfile()">
+                    <button id="nav-profile-btn" class="nav-btn" onclick="showProfile()">
                         <i class="fas fa-user"></i>
                         <span>Profile</span>
                     </button>
@@ -46,7 +352,7 @@
                     <div class="hero-content">
                         <h1 class="main-title">Do you know ball?</h1>
                         <p class="hero-tagline">Compete with friends. Prove you really know ball.</p>
-                        <button class="cta-button" onclick="quickPlay()">
+                        <button class="cta-button" onclick="document.querySelector('.game-modes').scrollIntoView({ behavior: 'smooth', block: 'start' })">
                             <i class="fas fa-play"></i>
                             Play Now
                         </button>
@@ -108,8 +414,49 @@
                 <div class="weekly-leaderboard-preview">
                     <h3><i class="fas fa-trophy"></i> Weekly Challenge Leaders</h3>
                     <div class="top-players" id="weekly-leaderboard-preview">
-                        <div class="loading-message">Loading weekly standings...</div>
+                        <div class="top-player">
+                            <span class="rank gold">1</span>
+                            <span class="player-name">BallKnowerPro</span>
+                            <span class="player-score">127 <i class="fas fa-fire"></i></span>
+                        </div>
+                        <div class="top-player">
+                            <span class="rank silver">2</span>
+                            <span class="player-name">TriviaKing</span>
+                            <span class="player-score">115 <i class="fas fa-fire"></i></span>
+                        </div>
+                        <div class="top-player">
+                            <span class="rank bronze">3</span>
+                            <span class="player-name">SportsGuru</span>
+                            <span class="player-score">108 <i class="fas fa-fire"></i></span>
+                        </div>
                     </div>
+                    
+                    <!-- Force fake data with inline script -->
+                    <script>
+                        // Force fake data immediately when this element loads
+                        (function() {
+                            const container = document.getElementById('weekly-leaderboard-preview');
+                            if (container) {
+                                container.innerHTML = `
+                                    <div class="top-player">
+                                        <span class="rank gold">1</span>
+                                        <span class="player-name">BallKnowerPro</span>
+                                        <span class="player-score">127 <i class="fas fa-fire"></i></span>
+                                    </div>
+                                    <div class="top-player">
+                                        <span class="rank silver">2</span>
+                                        <span class="player-name">TriviaKing</span>
+                                        <span class="player-score">115 <i class="fas fa-fire"></i></span>
+                                    </div>
+                                    <div class="top-player">
+                                        <span class="rank bronze">3</span>
+                                        <span class="player-name">SportsGuru</span>
+                                        <span class="player-score">108 <i class="fas fa-fire"></i></span>
+                                    </div>
+                                `;
+                            }
+                        })();
+                    </script>
                     <p class="challenge-text">Who will finish #1 this week? 🏆</p>
                 </div>
             </div>
@@ -157,7 +504,7 @@
                     <p class="mode-tagline">📚 Only true ball knowers survive this one</p>
                 </div>
 
-                <div class="mode-card multiplayer-mode" onclick="showMultiplayerSetup()" data-mode="multiplayer">
+                <div class="mode-card multiplayer-mode" onclick="console.log('🎮 Multiplayer button clicked!'); showMultiplayerSetup();" data-mode="multiplayer">
                     <div class="mode-glow"></div>
                     <div class="mode-icon">
                         <i class="fas fa-users"></i>
@@ -198,7 +545,6 @@
                 <div class="setup-section sport-selection">
                     <div class="section-header">
                         <h3><i class="fas fa-trophy"></i> Choose Your League</h3>
-                        <p class="section-description">Which sport will test your knowledge?</p>
                     </div>
                     <div class="sport-options enhanced-options">
                         <button class="sport-btn enhanced-btn" onclick="selectSport('nfl')">
@@ -231,11 +577,9 @@
                     </div>
                 </div>
 
-
                 <div class="setup-section input-type-selection">
                     <div class="section-header">
                         <h3><i class="fas fa-gamepad"></i> Answer Style</h3>
-                        <p class="section-description">How do you want to answer questions?</p>
                     </div>
                     <div class="input-type-options enhanced-options">
                         <button class="input-type-btn enhanced-btn active" onclick="selectInputType('multiple-choice')">
@@ -244,7 +588,6 @@
                             </div>
                             <div class="btn-content">
                                 <span class="btn-title">Multiple Choice</span>
-                                <span class="btn-subtitle">Pick from 4 options • 10s</span>
                             </div>
                         </button>
                         <button class="input-type-btn enhanced-btn" onclick="selectInputType('text-input')">
@@ -253,39 +596,8 @@
                             </div>
                             <div class="btn-content">
                                 <span class="btn-title">Type Answer</span>
-                                <span class="btn-subtitle">Show your knowledge • 20s</span>
                             </div>
                         </button>
-                    </div>
-                </div>
-
-
-                <!-- Game Mode Selection (for Survival Mode) -->
-                <div id="game-mode-selection" class="game-mode-selection" style="display: none;">
-                    <h3>Choose Game Modes</h3>
-                    <p><strong>Select one or more game modes</strong> - You can choose any combination of the three modes below:</p>
-                    <div class="mode-options">
-                        <label class="mode-option">
-                            <input type="checkbox" id="college-mode">
-                            <span class="checkmark"></span>
-                            <i class="fas fa-graduation-cap"></i>
-                            College Guesser
-                        </label>
-                        <label class="mode-option">
-                            <input type="checkbox" id="jersey-mode">
-                            <span class="checkmark"></span>
-                            <i class="fas fa-tshirt"></i>
-                            Jersey Number Guesser
-                        </label>
-                        <label class="mode-option">
-                            <input type="checkbox" id="trivia-mode" checked>
-                            <span class="checkmark"></span>
-                            <i class="fas fa-trophy"></i>
-                            Ball Trivia
-                        </label>
-                    </div>
-                    <div class="mode-selection-info">
-                        <p><i class="fas fa-info-circle"></i> <strong>Tip:</strong> You can select 1, 2, or all 3 modes. Questions will be randomly chosen from your selected modes.</p>
                     </div>
                 </div>
 
@@ -293,7 +605,6 @@
                 <div id="question-count-section" class="setup-section question-count">
                     <div class="section-header">
                         <h3><i class="fas fa-hashtag"></i> Question Count</h3>
-                        <p class="section-description">How many questions can you handle?</p>
                     </div>
                     <div class="count-selector enhanced-counter">
                         <button class="counter-btn" onclick="changeQuestionCount(-1)">
@@ -309,21 +620,6 @@
                     </div>
                 </div>
 
-                <!-- High Score Display -->
-                <div id="high-score-display" class="high-score-display" style="display: none;">
-                    <h3>🏆 High Score</h3>
-                    <div class="high-score-info">
-                        <div class="score-item">
-                            <span class="score-label">Best Streak:</span>
-                            <span id="best-streak" class="score-value">0</span>
-                        </div>
-                        <div class="score-item">
-                            <span class="score-label">Game Mode:</span>
-                            <span id="best-mode" class="score-value">-</span>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="game-controls">
                     <button class="btn-secondary" onclick="showHome()">Back</button>
                     <button class="btn-primary" onclick="startGameSession()">Start Game</button>
@@ -333,52 +629,45 @@
 
         <!-- Game Screen -->
         <div id="game-screen" class="screen">
-            <div class="game-header clean-header">
-                <div class="header-top">
-                    <div class="header-left">
-                        <div class="sport-badge">
-                            <i class="fas fa-trophy"></i>
-                            <span id="current-sport-display">NFL</span>
-                        </div>
+            <main class="trivia-layout" role="main">
+                <section class="timer-row">
+                    <div class="timer-chip" aria-live="polite">
+                        <i class="fas fa-clock"></i>
+                        <span id="timer">2:00</span>
                     </div>
-                    <div class="header-center">
-                        <div class="timer-badge center-timer">
-                            <i class="fas fa-clock"></i>
-                            <span id="timer">2:00</span>
-                        </div>
-                    </div>
-                    <div class="header-right">
-                        <div class="question-counter">
-                            <span id="question-counter">Question 1 of 10</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                </section>
 
-            <div class="game-content clean-layout">
-                <!-- Player Card -->
-                <div class="player-card-clean" id="player-card">
-                    <div class="player-info-clean">
-                        <h3 id="player-name" class="player-name-clean">Michael Thomas</h3>
-                        <p id="player-team" class="team-name-clean">New Orleans Saints</p>
+                <section class="progress-row" aria-label="question progress">
+                    <div class="progress-chip">
+                        <i class="fas fa-trophy"></i>
+                        <span id="current-sport-display">NFL</span>
+                        <span> • </span>
+                        <span id="question-progress">Question 1 of 10</span>
                     </div>
-                </div>
+                </section>
 
-                <!-- Question Section -->
-                <div class="question-section-clean">
-                    <div class="question-icon-clean">
-                        <i class="fas fa-question-circle"></i>
+                <section class="player-row">
+                    <div class="player-card" id="player-card">
+                        <h3 id="player-name" class="player-name">Michael Thomas</h3>
+                        <p id="player-team" class="player-team">New Orleans Saints</p>
                     </div>
-                    <h2 id="question-text" class="question-text-clean">Which college did Michael Thomas attend?</h2>
-                </div>
+                </section>
 
-                <!-- Answer Options -->
-                <div class="answer-options-clean" id="answer-options">
-                    <button class="answer-btn-clean" onclick="selectAnswer(0)">East Carolina</button>
-                    <button class="answer-btn-clean" onclick="selectAnswer(1)">USC</button>
-                    <button class="answer-btn-clean" onclick="selectAnswer(2)">Ohio State</button>
-                    <button class="answer-btn-clean" onclick="selectAnswer(3)">Alabama</button>
-                </div>
+                <section class="question-row">
+                    <div class="question-card">
+                        <div class="question-icon-clean">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <h2 id="question-text" class="question-text-clean">Which college did Michael Thomas attend?</h2>
+                    </div>
+                </section>
+
+                <section class="answers-grid" id="answer-options" role="group" aria-label="answer choices">
+                    <button class="answer" onclick="selectAnswer(0)">East Carolina</button>
+                    <button class="answer" onclick="selectAnswer(1)">USC</button>
+                    <button class="answer" onclick="selectAnswer(2)">Ohio State</button>
+                    <button class="answer" onclick="selectAnswer(3)">Alabama</button>
+                </section>
                 
                 <div class="text-input-container-clean" id="text-input-container" style="display: none;">
                     <input type="text" id="text-answer-input" placeholder="Type your answer here..." autocomplete="off">
@@ -867,7 +1156,7 @@
 <div id="weekly-challenge-modal" class="challenge-modal" onclick="handleModalClick(event)">
     <div class="challenge-modal-content" onclick="event.stopPropagation()">
         <div class="challenge-modal-header">
-            <h2 class="challenge-modal-title" id="modal-title">Ball Knower Weekly Challenge</h2>
+            <h2 class="challenge-modal-title" id="modal-title">Sign In</h2>
             <button class="challenge-modal-close" onclick="closeWeeklyChallengeModal()">&times;</button>
         </div>
         
@@ -1065,14 +1354,14 @@
         </div>
         
         <div class="challenge-modal-footer">
-            <p>🔒 No betting. No payments. Just friendly competition.</p>
+            <p style="font-size: 0.75rem; opacity: 0.7;">🔒 No betting. No payments. Just friendly competition.</p>
         </div>
     </div>
 </div>
 
     <script src="auth-functions.js?v=4"></script>
     <script src="weekly_challenge_games.js"></script>
-    <script src="weekly-challenge.js?v=37"></script>
+    <script src="weekly-challenge.js?v=41"></script>
     <script>
         console.log('🏠 HTML VERSION 2 LOADED - CACHE BUSTED!');
         console.log('HTML has correct onclick handlers:', document.querySelector('[data-mode="trivia"]').onclick.toString().includes('toggleMode'));

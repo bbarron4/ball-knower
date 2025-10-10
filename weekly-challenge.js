@@ -35,6 +35,22 @@ function showState(state) {
         return;
     }
     
+    // Update modal title based on state
+    const modalTitle = document.getElementById('modal-title');
+    if (modalTitle) {
+        if (state === 'auth') {
+            modalTitle.textContent = 'Sign In';
+        } else if (state === 'start') {
+            modalTitle.textContent = `Hi ${currentUser?.user?.username || 'there'}! 👋`;
+        } else if (state === 'picks') {
+            modalTitle.textContent = `Hi ${currentUser?.user?.username || 'there'}! 👋`;
+        } else if (state === 'thank-you') {
+            modalTitle.textContent = 'Weekly Challenge';
+        } else {
+            modalTitle.textContent = 'Ball Knower Weekly Challenge';
+        }
+    }
+    
     // Hide all modal states
     const states = modal.querySelectorAll('.modal-state');
     console.log('Found modal states:', states.length);
@@ -68,7 +84,7 @@ function showState(state) {
 
 // Initialize on page load
 window.addEventListener('DOMContentLoaded', () => {
-    console.log('🏀 WEEKLY-CHALLENGE.JS VERSION 37 LOADED - CACHE BUSTED!');
+    console.log('🏀 WEEKLY-CHALLENGE.JS VERSION 41 LOADED - ULTRA COMPACT + FULL BORDERS!');
     console.log('🏀 Ball Knower Weekly Challenge loaded');
     console.log('Auth token:', authToken);
     console.log('Current user:', currentUser);
@@ -80,10 +96,28 @@ window.addEventListener('DOMContentLoaded', () => {
     // Check if games data is loaded
     checkWeeklyChallengeGames();
     
+    // Show modal on page load based on auth status
     checkAuthAndShowModal();
+    console.log('✅ Weekly challenge modal auto-show enabled');
     
-    // Load weekly leaderboard
-    loadWeeklyLeaderboard();
+    // Add manual trigger for weekly challenge (can be called from UI)
+    window.showWeeklyChallenge = function() {
+        console.log('🎯 Manual weekly challenge trigger');
+        checkAuthAndShowModal();
+    };
+    
+    // Force show fake data immediately and repeatedly
+    updateWeeklyLeaderboardPreview([]);
+    
+    // Force it again after a short delay to override any other calls
+    setTimeout(() => updateWeeklyLeaderboardPreview([]), 100);
+    setTimeout(() => updateWeeklyLeaderboardPreview([]), 500);
+    setTimeout(() => updateWeeklyLeaderboardPreview([]), 1000);
+    setTimeout(() => updateWeeklyLeaderboardPreview([]), 2000);
+    setTimeout(() => updateWeeklyLeaderboardPreview([]), 3000);
+    
+    // DISABLED: Load weekly leaderboard (but fake data will override it)
+    // loadWeeklyLeaderboard();
 });
 
 // ENTRY GUARD LOGIC - Determines which state to show based on user status
@@ -122,11 +156,11 @@ async function checkAuthAndShowModal() {
                     console.log('🎉 User completed challenge - showing thanks card');
                     showThankYouCard();
                 } else {
-                    // SIGNED IN + NOT COMPLETED → Show Challenge Picks
-                    console.log('🚀 User not completed - showing challenge picks');
+                    // SIGNED IN + NOT COMPLETED → Show Start Screen
+                    console.log('🚀 User not completed - showing start screen');
                     setTimeout(() => {
                         showWeeklyChallengeModal();
-                        showState('picks');
+                        showState('start');
                     }, 2000);
                 }
             } else {
@@ -1122,7 +1156,7 @@ async function loadWeeklyLeaderboard() {
         console.log('✅ Weekly leaderboard loaded:', leaderboard);
         
         // Update both home page preview and leaderboard page
-        updateWeeklyLeaderboardPreview(leaderboard);
+        updateWeeklyLeaderboardPreview([]); // Force fake data instead of real data
         updateWeeklyLeaderboardFull(leaderboard);
         
     } catch (error) {
@@ -1140,12 +1174,50 @@ function updateWeeklyLeaderboardPreview(leaderboard) {
     const previewContainer = document.getElementById('weekly-leaderboard-preview');
     if (!previewContainer) return;
     
+    // Always show fake data for now (comment out when real data is available)
+    previewContainer.innerHTML = `
+        <div class="top-player">
+            <span class="rank gold">1</span>
+            <span class="player-name">BallKnowerPro</span>
+            <span class="player-score">127 <i class="fas fa-fire"></i></span>
+        </div>
+        <div class="top-player">
+            <span class="rank silver">2</span>
+            <span class="player-name">TriviaKing</span>
+            <span class="player-score">115 <i class="fas fa-fire"></i></span>
+        </div>
+        <div class="top-player">
+            <span class="rank bronze">3</span>
+            <span class="player-name">SportsGuru</span>
+            <span class="player-score">108 <i class="fas fa-fire"></i></span>
+        </div>
+    `;
+    return;
+    
+    // Original logic (commented out for now)
+    /*
     if (leaderboard.length === 0) {
+        // Show fake leaderboard data when no real data is available
         previewContainer.innerHTML = `
-            <div class="loading-message">No weekly challenge data yet</div>
+            <div class="top-player">
+                <span class="rank gold">1</span>
+                <span class="player-name">BallKnowerPro</span>
+                <span class="player-score">127 <i class="fas fa-fire"></i></span>
+            </div>
+            <div class="top-player">
+                <span class="rank silver">2</span>
+                <span class="player-name">TriviaKing</span>
+                <span class="player-score">115 <i class="fas fa-fire"></i></span>
+            </div>
+            <div class="top-player">
+                <span class="rank bronze">3</span>
+                <span class="player-name">SportsGuru</span>
+                <span class="player-score">108 <i class="fas fa-fire"></i></span>
+            </div>
         `;
         return;
     }
+    */
     
     const top3 = leaderboard.slice(0, 3);
     const html = top3.map((entry, index) => {
@@ -1288,15 +1360,22 @@ function renderPicksInterface(games) {
         console.log(`NFL Game ${index}: ID="${gameId}", Teams="${awayTeam} @ ${homeTeam}"`);
         
         html += `
-            <div class="game-card" data-game-id="${gameId}">
-                <div class="game-header">
-                    <h4>${awayTeam} @ ${homeTeam}</h4>
-                    <span class="spread">Spread: ${spread > 0 ? '+' : ''}${spread}</span>
-                </div>
+            <article class="wc-card" data-game-id="${gameId}">
+                <h3 class="wc-matchup" data-testid="matchup">${awayTeam} @ ${homeTeam}</h3>
                 
-                <div class="game-meta">
-                    <span class="meta-item">Favorite: ${favorite}</span>
-                    <span class="meta-item">Underdog: ${underdog}</span>
+                <div class="wc-row" aria-label="game meta">
+                    <div class="wc-box">
+                        <span class="wc-label">Spread</span>
+                        <span class="wc-value">${spread > 0 ? '+' : ''}${spread}</span>
+                    </div>
+                    <div class="wc-box">
+                        <span class="wc-label">Favorite</span>
+                        <span class="wc-value">${favorite}</span>
+                    </div>
+                    <div class="wc-box">
+                        <span class="wc-label">Underdog</span>
+                        <span class="wc-value">${underdog}</span>
+                    </div>
                 </div>
                 
                 <div class="pick-section">
@@ -1320,7 +1399,7 @@ function renderPicksInterface(games) {
                         ${underdog}
                     </button>
                 </div>
-            </div>
+            </article>
         `;
     });
     
@@ -1350,15 +1429,22 @@ function renderPicksInterface(games) {
         console.log(`College Game ${index}: ID="${gameId}", Teams="${awayTeam} @ ${homeTeam}"`);
         
         html += `
-            <div class="game-card" data-game-id="${gameId}">
-                <div class="game-header">
-                    <h4>${awayTeam} @ ${homeTeam}</h4>
-                    <span class="spread">Spread: ${spread > 0 ? '+' : ''}${spread}</span>
-                </div>
+            <article class="wc-card" data-game-id="${gameId}">
+                <h3 class="wc-matchup" data-testid="matchup">${awayTeam} @ ${homeTeam}</h3>
                 
-                <div class="game-meta">
-                    <span class="meta-item">Favorite: ${favorite}</span>
-                    <span class="meta-item">Underdog: ${underdog}</span>
+                <div class="wc-row" aria-label="game meta">
+                    <div class="wc-box">
+                        <span class="wc-label">Spread</span>
+                        <span class="wc-value">${spread > 0 ? '+' : ''}${spread}</span>
+                    </div>
+                    <div class="wc-box">
+                        <span class="wc-label">Favorite</span>
+                        <span class="wc-value">${favorite}</span>
+                    </div>
+                    <div class="wc-box">
+                        <span class="wc-label">Underdog</span>
+                        <span class="wc-value">${underdog}</span>
+                    </div>
                 </div>
                 
                 <div class="pick-section">
@@ -1382,7 +1468,7 @@ function renderPicksInterface(games) {
                         ${underdog}
                     </button>
                 </div>
-            </div>
+            </article>
         `;
     });
     

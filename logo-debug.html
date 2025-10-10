@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logo Debug Test</title>
+    <style>
+        body {
+            background: #0d1b2a;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .test-box {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .logo-test {
+            height: 3rem;
+            width: auto;
+            border: 2px solid #4CAF50;
+            background: rgba(76, 175, 80, 0.1);
+            padding: 5px;
+            border-radius: 5px;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .success { background: rgba(76, 175, 80, 0.2); border: 1px solid #4CAF50; color: #4CAF50; }
+        .error { background: rgba(244, 67, 54, 0.2); border: 1px solid #f44336; color: #f44336; }
+        .info { background: rgba(33, 150, 243, 0.2); border: 1px solid #2196F3; color: #2196F3; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Logo Debug Test</h1>
+    
+    <div class="test-box">
+        <h2>Test 1: Direct Image</h2>
+        <img src="ballknowerlogo.png" alt="Logo Test" class="logo-test" 
+             onload="document.getElementById('test1').innerHTML='✅ Logo loaded successfully!'; document.getElementById('test1').className='status success';"
+             onerror="document.getElementById('test1').innerHTML='❌ Logo failed to load'; document.getElementById('test1').className='status error';">
+        <div id="test1" class="status info">Loading...</div>
+    </div>
+    
+    <div class="test-box">
+        <h2>Test 2: With ./ prefix</h2>
+        <img src="./ballknowerlogo.png" alt="Logo Test" class="logo-test"
+             onload="document.getElementById('test2').innerHTML='✅ Logo loaded successfully!'; document.getElementById('test2').className='status success';"
+             onerror="document.getElementById('test2').innerHTML='❌ Logo failed to load'; document.getElementById('test2').className='status error';">
+        <div id="test2" class="status info">Loading...</div>
+    </div>
+    
+    <div class="test-box">
+        <h2>Test 3: File URL</h2>
+        <img id="test3-img" alt="Logo Test" class="logo-test">
+        <div id="test3" class="status info">Loading...</div>
+    </div>
+    
+    <div class="test-box">
+        <h2>Debug Information</h2>
+        <div id="debug-info" class="status info">Loading debug info...</div>
+    </div>
+    
+    <div class="test-box">
+        <h2>Navigation Test</h2>
+        <nav style="background: rgba(13, 27, 42, 0.9); padding: 1rem; border-radius: 8px; display: flex; align-items: center; gap: 0.6rem;">
+            <img src="ballknowerlogo.png" alt="Ball Knower Logo" style="height: 2.5rem; width: auto; object-fit: contain; display: block; filter: drop-shadow(0 2px 4px rgba(76, 175, 80, 0.3)); background: rgba(76, 175, 80, 0.1); border: 1px solid rgba(76, 175, 80, 0.3); border-radius: 4px; padding: 2px;"
+                 onload="document.getElementById('nav-test').innerHTML='✅ Navigation logo loaded!'; document.getElementById('nav-test').className='status success';"
+                 onerror="document.getElementById('nav-test').innerHTML='❌ Navigation logo failed'; document.getElementById('nav-test').className='status error';">
+            <span style="color: #4CAF50; font-size: 1.4rem; font-weight: 700;">Ball Knower</span>
+        </nav>
+        <div id="nav-test" class="status info">Loading navigation test...</div>
+    </div>
+    
+    <script>
+        // Debug information
+        function showDebugInfo() {
+            const debugDiv = document.getElementById('debug-info');
+            const currentUrl = window.location.href;
+            const currentPath = window.location.pathname;
+            const currentDir = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
+            
+            debugDiv.innerHTML = `
+                <strong>Current URL:</strong> ${currentUrl}<br>
+                <strong>Current Path:</strong> ${currentPath}<br>
+                <strong>Current Directory:</strong> ${currentDir}<br>
+                <strong>Logo should be at:</strong> ${currentDir}ballknowerlogo.png<br>
+                <strong>Protocol:</strong> ${window.location.protocol}<br>
+                <strong>Host:</strong> ${window.location.host}
+            `;
+        }
+        
+        // Test 3: Try file URL
+        function testFileURL() {
+            const img = document.getElementById('test3-img');
+            const test3Div = document.getElementById('test3');
+            
+            // Try different URL formats
+            const urls = [
+                'ballknowerlogo.png',
+                './ballknowerlogo.png',
+                window.location.href.replace('logo-debug.html', 'ballknowerlogo.png')
+            ];
+            
+            let currentIndex = 0;
+            
+            function tryNextUrl() {
+                if (currentIndex >= urls.length) {
+                    test3Div.innerHTML = '❌ All URL formats failed';
+                    test3Div.className = 'status error';
+                    return;
+                }
+                
+                const url = urls[currentIndex];
+                img.src = url;
+                img.onload = function() {
+                    test3Div.innerHTML = `✅ Logo loaded with: ${url}`;
+                    test3Div.className = 'status success';
+                };
+                img.onerror = function() {
+                    currentIndex++;
+                    tryNextUrl();
+                };
+            }
+            
+            tryNextUrl();
+        }
+        
+        // Run tests
+        showDebugInfo();
+        testFileURL();
+        
+        // Log to console
+        console.log('🔍 Logo Debug Test');
+        console.log('Current URL:', window.location.href);
+        console.log('Current directory:', window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1));
+    </script>
+</body>
+</html>

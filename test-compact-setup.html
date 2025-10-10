@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Setup Test</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #415a77 100%);
+            min-height: 100vh;
+        }
+        
+        .test-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+        
+        .test-title {
+            color: #E9F5EC;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1 class="test-title">Enhanced Setup Test</h1>
+        
+        <!-- Game Setup Screen -->
+        <div id="setup-screen" class="screen active">
+            <div class="setup-container enhanced-setup">
+                <div class="setup-header">
+                    <h2 id="setup-title" class="setup-title-enhanced">🎮 Game Setup</h2>
+                    <p class="setup-subtitle">Configure your perfect Ball Knower experience</p>
+                </div>
+                
+                <div class="setup-section sport-selection">
+                    <div class="section-header">
+                        <h3><i class="fas fa-trophy"></i> Choose Your League</h3>
+                    </div>
+                    <div class="sport-options enhanced-options">
+                        <button class="sport-btn enhanced-btn">
+                            <div class="btn-icon">
+                                <i class="fas fa-football-ball"></i>
+                            </div>
+                            <div class="btn-content">
+                                <span class="btn-title">NFL</span>
+                                <span class="btn-subtitle">National Football League</span>
+                            </div>
+                        </button>
+                        <button class="sport-btn enhanced-btn">
+                            <div class="btn-icon">
+                                <i class="fas fa-basketball-ball"></i>
+                            </div>
+                            <div class="btn-content">
+                                <span class="btn-title">NBA</span>
+                                <span class="btn-subtitle">National Basketball Assoc.</span>
+                            </div>
+                        </button>
+                        <button class="sport-btn enhanced-btn">
+                            <div class="btn-icon">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <div class="btn-content">
+                                <span class="btn-title">Both</span>
+                                <span class="btn-subtitle">Ultimate Challenge</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="setup-section input-type-selection">
+                    <div class="section-header">
+                        <h3><i class="fas fa-gamepad"></i> Answer Style</h3>
+                    </div>
+                    <div class="input-type-options enhanced-options">
+                        <button class="input-type-btn enhanced-btn active">
+                            <div class="btn-icon">
+                                <i class="fas fa-list"></i>
+                            </div>
+                            <div class="btn-content">
+                                <span class="btn-title">Multiple Choice</span>
+                            </div>
+                        </button>
+                        <button class="input-type-btn enhanced-btn">
+                            <div class="btn-icon">
+                                <i class="fas fa-keyboard"></i>
+                            </div>
+                            <div class="btn-content">
+                                <span class="btn-title">Type Answer</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Question Count -->
+                <div id="question-count-section" class="setup-section question-count">
+                    <div class="section-header">
+                        <h3><i class="fas fa-hashtag"></i> Question Count</h3>
+                    </div>
+                    <div class="count-selector enhanced-counter">
+                        <button class="counter-btn">−</button>
+                        <div class="counter-display">
+                            <span id="question-count" class="counter-value">10</span>
+                            <span class="counter-label">Questions</span>
+                        </div>
+                        <button class="counter-btn">+</button>
+                    </div>
+                </div>
+
+                <div class="game-controls">
+                    <button class="btn-secondary">Back</button>
+                    <button class="btn-primary">Start Game</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Test the enhanced setup functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize counter buttons
+            const counterValue = document.getElementById('question-count');
+            const counterBtns = document.querySelectorAll('.counter-btn');
+            
+            let count = parseInt(counterValue.textContent, 10) || 10;
+            const clamp = (n) => Math.max(5, Math.min(50, n));
+            
+            counterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (this.textContent === '−') {
+                        count = clamp(count - 1);
+                    } else {
+                        count = clamp(count + 1);
+                    }
+                    counterValue.textContent = count;
+                });
+            });
+            
+            // Initialize sport selection
+            document.querySelectorAll('.sport-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.sport-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Initialize input type selection
+            document.querySelectorAll('.input-type-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.input-type-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            console.log('✅ Enhanced setup test initialized');
+        });
+    </script>
+</body>
+</html>

@@ -796,3 +796,296 @@
     }
 }
 
+/* Optimized for mobile 375x850 */
+@media (max-width: 400px) {
+    /* Auth Tabs - More compact */
+    .auth-tabs {
+        margin-bottom: 0.4rem;
+        gap: 0.15rem;
+        border-bottom-width: 1px;
+    }
+    
+    .auth-tab {
+        padding: 0.35rem 0.55rem;
+        font-size: 0.8rem;
+        margin-bottom: -1px;
+        border-bottom-width: 2px;
+    }
+    
+    /* Auth Form - Compact spacing */
+    .auth-form {
+        max-width: 100%;
+        padding: 0 0.4rem;
+    }
+    
+    .form-group {
+        margin-bottom: 0.3rem;
+    }
+    
+    .form-group label {
+        font-size: 0.65rem;
+        margin-bottom: 0.15rem;
+        font-weight: 600;
+    }
+    
+    .form-group input {
+        padding: 0.4rem 0.55rem;
+        font-size: 0.8rem;
+        border-radius: 0.3rem;
+    }
+    
+    .form-row {
+        gap: 0.3rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    /* Auth Buttons - More compact */
+    .auth-btn-primary {
+        padding: 0.45rem 0.8rem;
+        font-size: 0.8rem;
+        margin-top: 0.3rem;
+        border-radius: 0.35rem;
+    }
+    
+    .auth-btn-secondary {
+        padding: 0.45rem 0.8rem;
+        font-size: 0.8rem;
+        margin-top: 0.2rem;
+        border-radius: 0.35rem;
+    }
+    
+    /* Start Content */
+    .start-content {
+        margin: 1rem auto;
+        padding: 0 0.5rem;
+    }
+    
+    .start-content h3 {
+        font-size: 1.4rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .start-content p {
+        font-size: 0.9rem;
+        margin-bottom: 1.25rem;
+    }
+    
+    /* Picks Content */
+    .picks-content {
+        padding: 0.25rem;
+    }
+    
+    .picks-content h3 {
+        font-size: 1.05rem;
+        margin-bottom: 0.25rem;
+        text-align: center;
+        line-height: 1.2;
+    }
+    
+    .picks-content > p {
+        font-size: 0.7rem;
+        margin-bottom: 0.25rem;
+        line-height: 1.2;
+        text-align: center;
+        padding: 0 0.25rem;
+    }
+    
+    .picks-content > p:last-of-type {
+        margin-bottom: 0.35rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.85);
+    }
+    
+    /* Thank You Card */
+    .thank-you-card {
+        margin: 1rem auto;
+        padding: 0 0.5rem;
+    }
+    
+    .thank-you-card h3 {
+        font-size: 1.4rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .thank-you-card p {
+        font-size: 0.9rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .thank-you-actions {
+        gap: 0.75rem;
+        margin-top: 1.25rem;
+    }
+    
+    /* Trivia Intro Card */
+    .trivia-intro-card {
+        margin: 1rem auto;
+        padding: 0 0.5rem;
+    }
+    
+    .trivia-intro-card h3 {
+        font-size: 1.4rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .trivia-intro-card p {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+    
+    .trivia-intro-card li {
+        font-size: 0.85rem;
+        margin-bottom: 0.35rem;
+    }
+    
+    /* Profile View */
+    .profile-avatar {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .profile-header {
+        margin-bottom: 1.25rem;
+        padding-bottom: 1.25rem;
+    }
+    
+    .profile-header h3 {
+        font-size: 1.3rem;
+    }
+    
+    .profile-header p {
+        font-size: 0.85rem;
+    }
+    
+    /* Game Cards - More compact on mobile */
+    .game-card {
+        padding: 0.6rem;
+        margin-bottom: 0.6rem;
+        gap: 0.4rem;
+        row-gap: 0.6rem;
+        border-radius: 6px;
+    }
+    
+    .game-header {
+        gap: 0.3rem;
+        margin-bottom: 0.2rem;
+    }
+    
+    .game-header h4 {
+        font-size: 0.85rem;
+        line-height: 1.2;
+    }
+    
+    .spread {
+        font-size: 0.65rem;
+        padding: 0.1rem 0.4rem;
+        border-radius: 10px;
+    }
+    
+    .game-meta {
+        font-size: 0.65rem;
+        min-height: auto;
+        padding: 0.3rem 0;
+        gap: 0.25rem;
+    }
+    
+    .meta-item {
+        padding: 0.1rem 0.3rem;
+        font-size: 0.65rem;
+    }
+    
+    .team-btn {
+        padding: 0.45rem 0.6rem;
+        font-size: 0.75rem;
+        min-height: 36px;
+    }
+    
+    .confidence-section {
+        padding: 0.55rem;
+        min-width: 80px;
+    }
+    
+    .confidence-section label {
+        font-size: 0.7rem;
+    }
+    
+    .confidence-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 0.9rem;
+    }
+    
+    .confidence-display {
+        font-size: 0.9rem;
+        min-width: 16px;
+    }
+    
+    /* Section Headers */
+    .section-header {
+        margin-bottom: 0.5rem;
+        padding-bottom: 0.3rem;
+    }
+    
+    .section-header h3 {
+        font-size: 1rem;
+        gap: 0.25rem;
+    }
+    
+    .section-count {
+        font-size: 0.65rem;
+        padding: 0.1rem 0.4rem;
+    }
+    
+    /* Picks Summary */
+    .picks-summary {
+        padding: 0.6rem;
+    }
+    
+    .confidence-total strong {
+        font-size: 0.9rem;
+    }
+    
+    .picks-validation {
+        font-size: 0.75rem;
+    }
+    
+    /* Games List - Reduce spacing between cards */
+    .games-list {
+        gap: 0.6rem;
+        margin-bottom: 0.6rem;
+    }
+    
+    /* Games Section */
+    .games-section {
+        margin-bottom: 0.6rem;
+    }
+    
+    /* Games Grid - Single column on mobile */
+    .games-grid {
+        grid-template-columns: 1fr;
+        gap: 0.6rem;
+    }
+    
+    /* Pick Section - Stack vertically more efficiently */
+    .pick-section {
+        gap: 0.6rem;
+    }
+    
+    /* Modal States - Remove extra padding on mobile */
+    .modal-state {
+        padding: 0;
+    }
+    
+    /* Auth state specifically */
+    #state-auth {
+        padding: 0;
+    }
+    
+    /* Picks state specifically */
+    #state-picks {
+        padding: 0;
+    }
+}
+

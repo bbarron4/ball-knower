@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ball Knower - OPEN THIS FILE</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #415a77 100%);
+            color: white;
+            font-family: 'Inter', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            text-align: center;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid rgba(76, 175, 80, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        .logo {
+            height: 4rem;
+            width: auto;
+            margin: 20px auto;
+            display: block;
+            filter: drop-shadow(0 4px 8px rgba(76, 175, 80, 0.4));
+        }
+        h1 {
+            color: #4CAF50;
+            font-size: 2.5rem;
+            margin: 20px 0;
+            text-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+        }
+        .status {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid #4CAF50;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .button {
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+        .instructions {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        .instructions ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .instructions li {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="ballknowerlogo.png" alt="Ball Knower Logo" class="logo" 
+             onload="document.getElementById('logo-status').innerHTML='✅ Logo loaded successfully!';"
+             onerror="document.getElementById('logo-status').innerHTML='❌ Logo failed to load. Make sure ballknowerlogo.png is in the same folder.';">
+        
+        <h1>Ball Knower</h1>
+        
+        <div class="status" id="logo-status">
+            Loading logo...
+        </div>
+        
+        <div class="instructions">
+            <h3>🚀 How to Open Ball Knower:</h3>
+            <ol>
+                <li><strong>Click the button below</strong> to open the main game</li>
+                <li>If the logo doesn't show, <strong>press Ctrl+Shift+R</strong> to hard refresh</li>
+                <li>Make sure you're opening files from the "Ball Knower" folder</li>
+                <li>Check browser console (F12) if there are any issues</li>
+            </ol>
+        </div>
+        
+        <a href="index.html" class="button">🎮 Open Ball Knower Game</a>
+        <a href="test-logo.html" class="button">🔍 Test Logo Loading</a>
+        
+        <div class="status">
+            <strong>Current Directory:</strong> <span id="current-dir">Loading...</span><br>
+            <strong>Logo File:</strong> <span id="logo-file">Checking...</span>
+        </div>
+    </div>
+    
+    <script>
+        // Show current directory
+        document.getElementById('current-dir').textContent = window.location.href;
+        
+        // Check if logo file exists
+        fetch('ballknowerlogo.png')
+            .then(response => {
+                if (response.ok) {
+                    document.getElementById('logo-file').innerHTML = '✅ ballknowerlogo.png found';
+                } else {
+                    document.getElementById('logo-file').innerHTML = '❌ ballknowerlogo.png not found';
+                }
+            })
+            .catch(error => {
+                document.getElementById('logo-file').innerHTML = '❌ Error: ' + error.message;
+            });
+        
+        // Log debug info
+        console.log('🔍 Ball Knower Launcher');
+        console.log('Current URL:', window.location.href);
+        console.log('Logo should be at:', window.location.href.replace('BALL-KNOWER-OPEN-ME.html', 'ballknowerlogo.png'));
+    </script>
+</body>
+</html>
