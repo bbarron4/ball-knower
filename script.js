@@ -3884,14 +3884,66 @@ let leaderboardSyncInterval = null;
 // Helper function to get current user ID
 function getCurrentUserId() {
     const userData = localStorage.getItem('ball_knower_user');
+    console.log('🔍 getCurrentUserId - Raw userData from localStorage:', userData);
+    
     if (userData) {
         try {
             const cached = JSON.parse(userData);
+            console.log('🔍 getCurrentUserId - Parsed userData:', cached);
+            console.log('🔍 getCurrentUserId - User ID:', cached.user ? cached.user.id : 'no user property');
             return cached.user ? cached.user.id : null;
         } catch (error) {
             console.error('Error parsing user data:', error);
         }
+    } else {
+        console.log('🔍 getCurrentUserId - No userData found in localStorage');
     }
+    
+    // Fallback: Try to get user ID from auth token or other sources
+    const authToken = localStorage.getItem('ball_knower_token');
+    console.log('🔍 getCurrentUserId - Auth token:', authToken);
+    
+    if (authToken) {
+        console.log('🔍 getCurrentUserId - Found auth token, attempting to extract user ID');
+        // Try to extract user ID from token (if it contains user info)
+        if (authToken.includes('test_token_')) {
+            const userId = authToken.replace('test_token_', '');
+            console.log('🔍 getCurrentUserId - Extracted user ID from test token:', userId);
+            return userId;
+        }
+        
+        // Try to decode JWT token to get user ID
+        try {
+            const tokenParts = authToken.split('.');
+            if (tokenParts.length === 3) {
+                const payload = JSON.parse(atob(tokenParts[1]));
+                console.log('🔍 getCurrentUserId - Decoded JWT payload:', payload);
+                if (payload.userId || payload.id || payload.sub) {
+                    const userId = payload.userId || payload.id || payload.sub;
+                    console.log('🔍 getCurrentUserId - Extracted user ID from JWT:', userId);
+                    return userId;
+                }
+            }
+        } catch (error) {
+            console.error('Error decoding JWT token:', error);
+        }
+    }
+    
+    // Last resort: Try to get user ID from multiplayerGame state
+    if (multiplayerGame.players && multiplayerGame.players.length > 0) {
+        // If we're the host, we're probably the first player
+        if (multiplayerGame.isHost && multiplayerGame.players[0]) {
+            console.log('🔍 getCurrentUserId - Using host player ID:', multiplayerGame.players[0].id);
+            return multiplayerGame.players[0].id;
+        }
+        // If we're not the host, we're probably the second player
+        if (!multiplayerGame.isHost && multiplayerGame.players[1]) {
+            console.log('🔍 getCurrentUserId - Using joiner player ID:', multiplayerGame.players[1].id);
+            return multiplayerGame.players[1].id;
+        }
+    }
+    
+    console.log('🔍 getCurrentUserId - No user ID found, returning null');
     return null;
 }
 
@@ -4734,6 +4786,11 @@ function resetMultiplayerQuestions() {
         };
         console.log('🔄 Reset multiplayer questions for new game');
     }
+    
+    // Reset trivia cycling index and shuffled questions for fresh question cycling
+    multiplayerGame.triviaIndex = 0;
+    multiplayerGame.shuffledTriviaQuestions = null;
+    
     // Reset cycling indices for systematic mode and sport selection
     multiplayerGame.currentModeIndex = 0;
     multiplayerGame.currentSportIndex = 0;
@@ -4827,27 +4884,36 @@ async function loadTriviaQuestion(sport) {
             return;
         }
         
-        // Shuffle the questions array for better randomization
-        triviaQuestions = shuffleArray([...triviaQuestions]);
-        console.log('🔀 Shuffled trivia questions array');
+        // Initialize trivia index and shuffled questions if not exists
+        if (!multiplayerGame.triviaIndex) {
+            multiplayerGame.triviaIndex = 0;
+        }
         
-        // Pick a random question
-        const randomQuestion = triviaQuestions[Math.floor(Math.random() * triviaQuestions.length)];
-        console.log('📝 Selected random question:', randomQuestion);
+        // Only shuffle once per game session to maintain cycling order
+        if (!multiplayerGame.shuffledTriviaQuestions) {
+            multiplayerGame.shuffledTriviaQuestions = shuffleArray([...triviaQuestions]);
+            console.log('🔀 Shuffled trivia questions array once for this game session');
+        }
+        
+        // Cycle through questions sequentially to ensure variety
+        const question = multiplayerGame.shuffledTriviaQuestions[multiplayerGame.triviaIndex];
+        multiplayerGame.triviaIndex = (multiplayerGame.triviaIndex + 1) % multiplayerGame.shuffledTriviaQuestions.length;
+        
+        console.log(`📝 Selected question ${multiplayerGame.triviaIndex}/${triviaQuestions.length}:`, question);
         
         // Convert to the format expected by displayMultiplayerQuestion
-        const question = {
+        const formattedQuestion = {
             type: 'trivia',
-            question: randomQuestion.question,
-            options: randomQuestion.choices.map(choice => choice.text),
-            correctAnswer: randomQuestion.choices.find(c => c.id === randomQuestion.correctChoiceId)?.text,
-            category: randomQuestion.category || 'General',
-            difficulty: randomQuestion.difficulty || 'medium',
+            question: question.question,
+            options: question.choices.map(choice => choice.text),
+            correctAnswer: question.choices.find(c => c.id === question.correctChoiceId)?.text,
+            category: question.category || 'General',
+            difficulty: question.difficulty || 'medium',
             league: targetSport.toUpperCase()
         };
         
-        console.log('🎯 Converted question:', question);
-        displayMultiplayerQuestion(question);
+        console.log('🎯 Converted question:', formattedQuestion);
+        displayMultiplayerQuestion(formattedQuestion);
         
     } catch (error) {
         console.error('Error loading trivia question:', error);
@@ -5137,9 +5203,32 @@ function handleMultiplayerAnswer(isCorrect) {
     multiplayerGame.questionsAnswered++;
     
     // Update player score in the players array
-    const currentPlayer = multiplayerGame.players.find(p => p.isHost === multiplayerGame.isHost);
+    const currentUserId = getCurrentUserId();
+    console.log('🔍 Debug - Current user ID:', currentUserId);
+    console.log('🔍 Debug - All players before update:', multiplayerGame.players);
+    console.log('🔍 Debug - Current score:', multiplayerGame.score);
+    
+    let currentPlayer = multiplayerGame.players.find(p => p && p.id === currentUserId);
+    console.log('🔍 Debug - Current player found:', currentPlayer);
+    
     if (currentPlayer) {
         currentPlayer.score = multiplayerGame.score;
+        console.log('✅ Updated current player score to:', currentPlayer.score);
+    } else {
+        console.error('❌ Current player not found in players array');
+        console.log('🔍 Available players:', multiplayerGame.players.map(p => ({ id: p?.id, name: p?.displayName || p?.username })));
+        
+        // If player not found but we have a user ID, try to add/update the player
+        if (currentUserId) {
+            console.log('🔧 Attempting to create/update player entry...');
+            const playerIndex = multiplayerGame.isHost ? 0 : 1;
+            if (!multiplayerGame.players[playerIndex]) {
+                multiplayerGame.players[playerIndex] = {};
+            }
+            multiplayerGame.players[playerIndex].id = currentUserId;
+            multiplayerGame.players[playerIndex].score = multiplayerGame.score;
+            console.log('✅ Created/updated player at index', playerIndex, ':', multiplayerGame.players[playerIndex]);
+        }
     }
     
     // Send score update to backend for synchronization
@@ -5159,11 +5248,12 @@ function handleMultiplayerAnswer(isCorrect) {
 
 function simulateOpponentAnswers() {
     // Only simulate if there are no real opponents (for testing)
-    const realOpponents = multiplayerGame.players.filter(p => p.isHost !== multiplayerGame.isHost && p.displayName && p.displayName !== 'Player');
+    const currentUserId = getCurrentUserId();
+    const realOpponents = multiplayerGame.players.filter(p => p.id !== currentUserId && p.displayName && p.displayName !== 'Player');
     
     if (realOpponents.length === 0) {
         // Simulate other players answering (for testing only)
-        const opponents = multiplayerGame.players.filter(p => p.isHost !== multiplayerGame.isHost);
+        const opponents = multiplayerGame.players.filter(p => p.id !== currentUserId);
         opponents.forEach(opponent => {
             // Randomly determine if opponent gets it right
             const isCorrect = Math.random() > 0.3; // 70% chance of being correct
@@ -5229,13 +5319,28 @@ async function syncPlayerScore() {
 
 function updateLeaderboard() {
     // Show only current player's score instead of full leaderboard
-    const currentPlayer = multiplayerGame.players.find(p => p.isHost === multiplayerGame.isHost);
+    const currentUserId = getCurrentUserId();
+    const currentPlayer = multiplayerGame.players.find(p => p.id === currentUserId);
+    
+    console.log('🔍 updateLeaderboard - Current user ID:', currentUserId);
+    console.log('🔍 updateLeaderboard - Current player found:', currentPlayer);
+    console.log('🔍 updateLeaderboard - All players:', multiplayerGame.players.map(p => ({ 
+        id: p.id, 
+        name: p.displayName || p.username, 
+        score: p.score 
+    })));
+    
     if (currentPlayer) {
         const scoreElement = document.getElementById('current-player-score');
         if (scoreElement) {
             scoreElement.textContent = `Your Score: ${currentPlayer.score}`;
             console.log('📊 Updated score display:', currentPlayer.score);
+        } else {
+            console.error('❌ Score element not found in DOM');
         }
+    } else {
+        console.error('❌ Current player not found in updateLeaderboard');
+        console.log('🔍 Available players:', multiplayerGame.players);
     }
     
     // Also update the local score to match
@@ -5244,8 +5349,20 @@ function updateLeaderboard() {
 
 async function endMultiplayerGame() {
     clearInterval(multiplayerGame.gameTimer);
-    stopLeaderboardSync();
     multiplayerGame.gameStarted = false;
+    
+    // Get final leaderboard data before stopping sync
+    console.log('🔄 Getting final leaderboard data...');
+    await syncLeaderboard();
+    
+    // Add a small delay to ensure all score updates are processed
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    // Get one more final sync to ensure we have the latest data
+    await syncLeaderboard();
+    
+    // Stop leaderboard sync after getting final data
+    stopLeaderboardSync();
     
     // Show final results
     showMessage('Game Over!', 'info');
@@ -5260,15 +5377,141 @@ async function showMultiplayerResults() {
     // Get the latest synchronized data from server before showing results
     await syncLeaderboard();
     
+    // Debug: Log the players array before processing
+    console.log('🔍 Debug - multiplayerGame.players:', multiplayerGame.players);
+    console.log('🔍 Debug - players length:', multiplayerGame.players ? multiplayerGame.players.length : 'undefined');
+    console.log('🔍 Debug - players array type:', Array.isArray(multiplayerGame.players));
+    console.log('🔍 Debug - players JSON:', JSON.stringify(multiplayerGame.players));
+    
+    // Store the players array before any operations
+    const playersSnapshot = [...multiplayerGame.players];
+    console.log('🔍 Players snapshot taken:', playersSnapshot);
+    
+    // Ensure we have a valid players array
+    if (!multiplayerGame.players || !Array.isArray(multiplayerGame.players) || multiplayerGame.players.length === 0) {
+        console.error('❌ multiplayerGame.players is invalid or empty');
+        console.log('🔍 Restoring from snapshot...');
+        
+        // Restore from snapshot if we had data
+        if (playersSnapshot && playersSnapshot.length > 0) {
+            multiplayerGame.players = playersSnapshot;
+            console.log('✅ Restored players from snapshot:', multiplayerGame.players);
+        } else {
+            multiplayerGame.players = [];
+        }
+    }
+    
     showScreen('multiplayer-results-screen');
     
     // Update room code display
     document.getElementById('results-room-code').textContent = multiplayerGame.roomCode;
     
     // Sort players by score (highest first) using synchronized data
-    const sortedPlayers = [...multiplayerGame.players].sort((a, b) => b.score - a.score);
+    // Use the snapshot to ensure we have the data
+    const playersToProcess = playersSnapshot.length > 0 ? playersSnapshot : multiplayerGame.players;
+    console.log('🔍 Players to process:', playersToProcess);
+    console.log('🔍 Players to process length:', playersToProcess.length);
     
-    console.log('🏆 Final scores:', sortedPlayers.map(p => `${p.displayName || p.username}: ${p.score}`));
+    // Filter out any players that don't have proper data
+    let validPlayers = [];
+    
+    try {
+        validPlayers = playersToProcess.filter(p => {
+            console.log('🔍 Checking player:', p);
+            const hasName = p && (p.displayName || p.username || p.name);
+            const hasScore = p && (typeof p.score === 'number' || p.score === undefined || p.score === null);
+            console.log('🔍 Validating player:', { 
+                player: p, 
+                hasName, 
+                hasScore, 
+                scoreType: typeof p?.score,
+                scoreValue: p?.score
+            });
+            return hasName; // Only require name, score can be 0 or undefined
+        });
+    } catch (error) {
+        console.error('❌ Error filtering players:', error);
+        validPlayers = [];
+    }
+    
+    console.log('🔍 Valid players found:', validPlayers.length, 'out of', multiplayerGame.players.length);
+    console.log('🔍 Valid players details:', validPlayers.map(p => ({ 
+        id: p.id, 
+        displayName: p.displayName, 
+        username: p.username, 
+        name: p.name,
+        score: p.score,
+        scoreType: typeof p.score
+    })));
+    
+    const sortedPlayers = [...validPlayers].sort((a, b) => {
+        const scoreA = typeof a.score === 'number' ? a.score : 0;
+        const scoreB = typeof b.score === 'number' ? b.score : 0;
+        return scoreB - scoreA;
+    });
+    
+    console.log('🏆 Final scores:', sortedPlayers.map(p => `${p.displayName || p.username || p.name}: ${p.score}`));
+    
+    // Check if we have any players
+    if (sortedPlayers.length === 0) {
+        console.error('❌ No valid players found in multiplayerGame.players');
+        console.log('🔍 Attempting to get fresh data from server...');
+        
+        // Try to get fresh data from server as fallback
+        try {
+            const authToken = localStorage.getItem('ball_knower_token');
+            if (authToken && multiplayerGame.roomCode) {
+                const response = await fetch(getApiUrl(`/api/rooms/${multiplayerGame.roomCode}`), {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    const room = data.room;
+                    console.log('🔍 Fallback - Got fresh server data:', room.players);
+                    
+                    // Try to fix empty player objects by checking if they have data in different properties
+                    if (room.players && room.players.length > 0) {
+                        const fixedPlayers = room.players.map(player => {
+                            // If player appears empty but might have data, try to extract it
+                            if (Object.keys(player).length === 0 || (!player.displayName && !player.username && !player.name)) {
+                                console.log('🔍 Attempting to fix empty player object:', player);
+                                // Try to get data from other sources or use fallback values
+                                return {
+                                    id: player.id || 'unknown',
+                                    displayName: player.displayName || player.username || player.name || 'Player',
+                                    username: player.username || player.displayName || 'player',
+                                    name: player.name || player.displayName || player.username || 'Player',
+                                    score: player.score || 0
+                                };
+                            }
+                            return player;
+                        });
+                        
+                        console.log('🔍 Fixed players:', fixedPlayers);
+                        multiplayerGame.players = fixedPlayers;
+                        
+                        // Recursively call this function with fixed data
+                        return await showMultiplayerResults();
+                    }
+                }
+            }
+        } catch (error) {
+            console.error('❌ Fallback data fetch failed:', error);
+        }
+        
+        // If fallback also fails, show error message
+        const winnerAnnouncement = document.getElementById('winner-announcement');
+        winnerAnnouncement.innerHTML = `
+            <div class="winner-card">
+                <h2>Error</h2>
+                <div class="winner-score">No player data available</div>
+            </div>
+        `;
+        return;
+    }
     
     // Show winner announcement
     const winner = sortedPlayers[0];
@@ -5277,9 +5520,10 @@ async function showMultiplayerResults() {
     // Check for ties
     const topScore = winner.score;
     const tiedPlayers = sortedPlayers.filter(p => p.score === topScore);
-    const isTie = tiedPlayers.length > 1 && topScore > 0;
+    const isTie = tiedPlayers.length > 1;
     
-    if (topScore > 0) {
+    // Always show a winner (highest score wins, even if negative)
+    if (sortedPlayers.length > 0) {
         if (isTie) {
             // Handle tie
             const tiedNames = tiedPlayers.map(p => p.displayName || p.username || p.name || 'Player').join(' & ');
@@ -5294,20 +5538,40 @@ async function showMultiplayerResults() {
         } else {
             // Single winner
             const winnerName = winner.displayName || winner.username || winner.name || 'Player';
-            const currentPlayer = multiplayerGame.players.find(p => p.isHost === multiplayerGame.isHost);
+            const currentUserId = getCurrentUserId();
+            const currentPlayer = multiplayerGame.players.find(p => p.id === currentUserId);
             const isCurrentPlayerWinner = currentPlayer && currentPlayer.id === winner.id;
             
-            let trashTalkMessage = '';
-            if (!isCurrentPlayerWinner && sortedPlayers.length > 1) {
-                const trashTalkMessages = [
-                    "Your bro really knows ball more than you! 🏀",
-                    "Maybe stick to watching from the couch! 📺",
-                    "Time to hit the books and study up! 📚",
+            console.log('🔍 Debug - Winner check:');
+            console.log('  - Winner ID:', winner.id);
+            console.log('  - Winner name:', winnerName);
+            console.log('  - Current user ID:', currentUserId);
+            console.log('  - Current player:', currentPlayer);
+            console.log('  - Is current player winner:', isCurrentPlayerWinner);
+            
+            let personalMessage = '';
+            if (isCurrentPlayerWinner && sortedPlayers.length > 1) {
+                // Winner gets congratulatory messages
+                const winnerMessages = [
+                    "You really know your stuff! 🏆",
+                    "Ball knowledge on point! 🎯",
+                    "You crushed it! 💪",
+                    "That's how you play the game! 🎮",
+                    "You're a trivia champion! 🥇",
+                    "Outstanding performance! ⭐"
+                ];
+                personalMessage = `<div class="trash-talk">${winnerMessages[Math.floor(Math.random() * winnerMessages.length)]}</div>`;
+            } else if (!isCurrentPlayerWinner && sortedPlayers.length > 1) {
+                // Loser gets encouraging messages
+                const loserMessages = [
                     "Better luck next time, champ! 😅",
                     "Your opponent just schooled you! 🎓",
-                    "Looks like someone needs more practice! 🏃‍♂️"
+                    "Time to hit the books and study up! 📚",
+                    "Maybe stick to watching from the couch! 📺",
+                    "Looks like someone needs more practice! 🏃‍♂️",
+                    "Your bro really knows ball more than you! 🏀"
                 ];
-                trashTalkMessage = `<div class="trash-talk">${trashTalkMessages[Math.floor(Math.random() * trashTalkMessages.length)]}</div>`;
+                personalMessage = `<div class="trash-talk">${loserMessages[Math.floor(Math.random() * loserMessages.length)]}</div>`;
             }
             
             winnerAnnouncement.innerHTML = `
@@ -5315,17 +5579,10 @@ async function showMultiplayerResults() {
                     <div class="winner-crown">👑</div>
                     <h2>${winnerName} Wins!</h2>
                     <div class="winner-score">${winner.score} points</div>
-                    ${trashTalkMessage}
+                    ${personalMessage}
                 </div>
             `;
         }
-    } else {
-        winnerAnnouncement.innerHTML = `
-            <div class="winner-card">
-                <h2>No Winner</h2>
-                <div class="winner-score">Everyone scored 0 points</div>
-            </div>
-        `;
     }
     
     // Show final leaderboard
@@ -5376,17 +5633,32 @@ async function showMultiplayerResults() {
 }
 
 function playAgainMultiplayer() {
+    console.log('🎮 Play Again clicked');
+    
+    // Clear any existing timers
+    if (multiplayerGame.gameTimer) {
+        clearInterval(multiplayerGame.gameTimer);
+    }
+    
+    // Stop leaderboard sync
+    stopLeaderboardSync();
+    
     // Reset game state
     multiplayerGame.score = 0;
     multiplayerGame.questionsAnswered = 0;
     multiplayerGame.gameStarted = false;
+    multiplayerGame.timeRemaining = multiplayerGame.gameSettings.duration;
     
     // Reset all player scores
     multiplayerGame.players.forEach(player => {
         player.score = 0;
     });
     
+    // Reset questions
+    resetMultiplayerQuestions();
+    
     // Go back to waiting room
+    console.log('🎮 Returning to waiting room');
     showWaitingRoom();
 }
 
@@ -5578,13 +5850,76 @@ async function syncLeaderboard() {
             const data = await response.json();
             const room = data.room;
             
+            // Debug: Log what we received from server
+            console.log('🔍 Debug - Server room data:', room);
+            console.log('🔍 Debug - Server players:', room.players);
+            console.log('🔍 Debug - Server players details:', room.players.map(p => ({ 
+                id: p.id, 
+                displayName: p.displayName, 
+                username: p.username, 
+                score: p.score,
+                keys: Object.keys(p)
+            })));
+            
             // Update local player scores with server data
             multiplayerGame.players = room.players;
+            
+            // Debug: Log what we set locally
+            console.log('🔍 Debug - Local players after sync:', multiplayerGame.players);
+            console.log('🔍 Debug - Local players details:', multiplayerGame.players.map(p => ({ 
+                id: p.id, 
+                displayName: p.displayName, 
+                username: p.username, 
+                score: p.score,
+                keys: Object.keys(p)
+            })));
             
             // Force update the leaderboard display
             updateLeaderboard();
             
-            console.log('🔄 Leaderboard synced:', multiplayerGame.players.map(p => `${p.displayName || p.username}: ${p.score}`));
+            // Debug: Test the map function that's causing confusion
+            try {
+                // Check each player individually
+                multiplayerGame.players.forEach((player, index) => {
+                    console.log(`🔍 Player ${index}:`, {
+                        id: player.id,
+                        displayName: player.displayName,
+                        username: player.username,
+                        name: player.name,
+                        score: player.score,
+                        allKeys: Object.keys(player),
+                        rawObject: player
+                    });
+                });
+                
+                const leaderboardData = multiplayerGame.players.map(p => `${p.displayName || p.username}: ${p.score}`);
+                console.log('🔄 Leaderboard synced:', leaderboardData);
+                
+                // If players appear empty but leaderboard data shows correct info, try to fix it
+                if (leaderboardData.some(data => data.includes(':') && !data.includes('undefined')) && 
+                    multiplayerGame.players.some(p => Object.keys(p).length === 0)) {
+                    console.log('🔧 Attempting to fix empty player objects using leaderboard data...');
+                    
+                    // Try to reconstruct player data from the leaderboard data
+                    const fixedPlayers = leaderboardData.map((data, index) => {
+                        const [name, scoreStr] = data.split(': ');
+                        const score = parseInt(scoreStr) || 0;
+                        return {
+                            id: multiplayerGame.players[index]?.id || `player_${index}`,
+                            displayName: name,
+                            username: name,
+                            name: name,
+                            score: score
+                        };
+                    });
+                    
+                    console.log('🔧 Fixed players from leaderboard data:', fixedPlayers);
+                    multiplayerGame.players = fixedPlayers;
+                }
+            } catch (error) {
+                console.error('❌ Error in leaderboard map:', error);
+                console.log('🔄 Raw players data:', multiplayerGame.players);
+            }
         }
     } catch (error) {
         console.error('Error syncing leaderboard:', error);

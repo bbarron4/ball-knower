@@ -1292,20 +1292,20 @@
         </div>
 
         <div id="multiplayer-game-screen" class="screen">
-            <div class="game-container">
-                <div class="game-header">
+            <div class="game-root">
+                <header class="game-header" role="banner">
                     <div class="room-info">
                         <span class="room-code">Room: <span id="current-room-code">ABC123</span></span>
-                        <span class="time-remaining" id="time-remaining">1:00</span>
+                        <span class="timer-tile" id="time-remaining" aria-live="polite">1:00</span>
                     </div>
-                    <div class="player-count">
+                    <div class="players-pill">
                         <i class="fas fa-users"></i>
                         <span id="player-count">1</span> players
                     </div>
-                </div>
+                </header>
 
-                <div class="question-container" id="question-container">
-                    <div class="question-card">
+                <main class="game-main">
+                    <section class="question-card" id="question-container" role="region" aria-label="Question">
                         <div class="question-text" id="multiplayer-question-text">Loading question...</div>
                         <div class="question-options" id="question-options">
                             <!-- Options will be populated here -->
@@ -1314,24 +1314,24 @@
                             <input type="text" id="text-answer" placeholder="Type your answer..." maxlength="50">
                             <button class="submit-btn" onclick="submitTextAnswer()">Submit</button>
                         </div>
-                    </div>
-                </div>
+                    </section>
 
-                <div class="current-score" id="current-score">
-                    <h3>Your Score</h3>
-                    <div class="score-display" id="current-player-score">0</div>
-                </div>
-                
-                <div class="opponent-answers" id="opponent-answers" style="display: none;">
-                    <h3>Opponent Answers</h3>
-                    <div class="opponent-list" id="opponent-list">
-                        <!-- Opponent answers will be shown here -->
+                    <div class="current-score" id="current-score">
+                        <h3>Your Score</h3>
+                        <div class="score-display" id="current-player-score">0</div>
                     </div>
-                </div>
+                    
+                    <div class="opponent-answers" id="opponent-answers" style="display: none;">
+                        <h3>Opponent Answers</h3>
+                        <div class="opponent-list" id="opponent-list">
+                            <!-- Opponent answers will be shown here -->
+                        </div>
+                    </div>
 
-                <div class="game-controls">
-                    <button class="btn-secondary" onclick="leaveMultiplayerGame()">Leave Game</button>
-                </div>
+                    <div class="game-controls">
+                        <button class="btn-secondary" onclick="leaveMultiplayerGame()">Leave Game</button>
+                    </div>
+                </main>
             </div>
         </div>
 

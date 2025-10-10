@@ -1359,11 +1359,43 @@ body::-webkit-scrollbar,
     text-align: center;
 }
 
+/* Mobile optimization for room code input */
+@media (max-width: 768px) {
+    .room-code-input {
+        padding: 1.5rem 1rem;
+        margin-bottom: 1.5rem;
+        border-radius: 12px;
+    }
+}
+
+@media (max-width: 400px) {
+    .room-code-input {
+        padding: 1rem 0.75rem;
+        margin-bottom: 1rem;
+        border-radius: 10px;
+    }
+}
+
 .room-code-input h3 {
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 1.5rem;
     color: #ffffff;
+}
+
+/* Mobile optimization for room code input text */
+@media (max-width: 768px) {
+    .room-code-input h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .room-code-input h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.75rem;
+    }
 }
 
 .room-code-input input {
@@ -1381,6 +1413,26 @@ body::-webkit-scrollbar,
     margin-bottom: 2rem;
 }
 
+/* Mobile optimization for room code input field */
+@media (max-width: 768px) {
+    .room-code-input input {
+        max-width: 250px;
+        padding: 0.8rem;
+        font-size: 1.3rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .room-code-input input {
+        max-width: 200px;
+        padding: 0.6rem;
+        font-size: 1.1rem;
+        letter-spacing: 0.3rem;
+        margin-bottom: 1rem;
+    }
+}
+
 .room-code-input input::placeholder {
     color: rgba(255, 255, 255, 0.5);
     letter-spacing: normal;
@@ -1395,6 +1447,23 @@ body::-webkit-scrollbar,
     text-align: center;
 }
 
+/* Mobile optimization for created room */
+@media (max-width: 768px) {
+    .created-room {
+        padding: 1.5rem 1rem;
+        margin-bottom: 1.5rem;
+        border-radius: 12px;
+    }
+}
+
+@media (max-width: 400px) {
+    .created-room {
+        padding: 1rem 0.75rem;
+        margin-bottom: 1rem;
+        border-radius: 10px;
+    }
+}
+
 .created-room h3 {
     font-size: 1.5rem;
     font-weight: 700;
@@ -1402,11 +1471,41 @@ body::-webkit-scrollbar,
     color: #00d4aa;
 }
 
+/* Mobile optimization for created room header */
+@media (max-width: 768px) {
+    .created-room h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .created-room h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.75rem;
+    }
+}
+
 .created-room .room-info {
     margin-bottom: 2rem;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+}
+
+/* Mobile optimization for room info */
+@media (max-width: 768px) {
+    .created-room .room-info {
+        margin-bottom: 1.5rem;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .created-room .room-info {
+        margin-bottom: 1rem;
+        gap: 0.75rem;
+    }
 }
 
 .room-code-display {
@@ -2889,11 +2988,43 @@ body::-webkit-scrollbar,
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* Mobile optimization for room setup */
+@media (max-width: 768px) {
+    .room-setup {
+        padding: 1.5rem 1rem;
+        margin: 0.5rem 0;
+        border-radius: 12px;
+    }
+}
+
+@media (max-width: 400px) {
+    .room-setup {
+        padding: 1rem 0.75rem;
+        margin: 0.25rem 0;
+        border-radius: 10px;
+    }
+}
+
 .setup-options {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
     margin-bottom: 2rem;
+}
+
+/* Mobile optimization for setup options */
+@media (max-width: 768px) {
+    .setup-options {
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .setup-options {
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+    }
 }
 
 .option-group {
@@ -2923,6 +3054,19 @@ body::-webkit-scrollbar,
     flex-wrap: wrap;
 }
 
+/* Mobile optimization for button groups */
+@media (max-width: 768px) {
+    .sport-buttons, .mode-buttons, .input-buttons, .duration-buttons {
+        gap: 0.4rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .sport-buttons, .mode-buttons, .input-buttons, .duration-buttons {
+        gap: 0.3rem;
+    }
+}
+
 .mode-btn, .input-btn, .duration-btn {
     padding: 10px 20px;
     border: 2px solid rgba(255, 255, 255, 0.3);
@@ -2932,6 +3076,22 @@ body::-webkit-scrollbar,
     cursor: pointer;
     transition: all 0.3s ease;
     font-weight: 500;
+}
+
+/* Mobile optimization for buttons */
+@media (max-width: 768px) {
+    .mode-btn, .input-btn, .duration-btn {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .mode-btn, .input-btn, .duration-btn {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+        border-radius: 6px;
+    }
 }
 
 .sport-btn:hover {
@@ -2992,9 +3152,36 @@ body::-webkit-scrollbar,
     padding: 2rem;
 }
 
+/* Mobile optimization for waiting container */
+@media (max-width: 768px) {
+    .waiting-container {
+        padding: 1.5rem 1rem;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 400px) {
+    .waiting-container {
+        padding: 1rem 0.75rem;
+    }
+}
+
 .waiting-header {
     text-align: center;
     margin-bottom: 2rem;
+}
+
+/* Mobile optimization for waiting header */
+@media (max-width: 768px) {
+    .waiting-header {
+        margin-bottom: 1.5rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .waiting-header {
+        margin-bottom: 1rem;
+    }
 }
 
 .waiting-header h2 {
@@ -3009,8 +3196,38 @@ body::-webkit-scrollbar,
     margin-bottom: 2rem;
 }
 
+/* Mobile optimization for waiting content */
+@media (max-width: 768px) {
+    .waiting-content {
+        padding: 1.5rem 1rem;
+        margin-bottom: 1.5rem;
+        border-radius: 10px;
+    }
+}
+
+@media (max-width: 400px) {
+    .waiting-content {
+        padding: 1rem 0.75rem;
+        margin-bottom: 1rem;
+        border-radius: 8px;
+    }
+}
+
 .game-settings-summary {
     margin-bottom: 2rem;
+}
+
+/* Mobile optimization for game settings summary */
+@media (max-width: 768px) {
+    .game-settings-summary {
+        margin-bottom: 1.5rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .game-settings-summary {
+        margin-bottom: 1rem;
+    }
 }
 
 .settings-item {
@@ -3028,6 +3245,19 @@ body::-webkit-scrollbar,
     margin-bottom: 2rem;
 }
 
+/* Mobile optimization for players waiting */
+@media (max-width: 768px) {
+    .players-waiting {
+        margin-bottom: 1.5rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .players-waiting {
+        margin-bottom: 1rem;
+    }
+}
+
 .players-waiting h3 {
     color: #4CAF50;
     margin-bottom: 1rem;
@@ -3039,6 +3269,21 @@ body::-webkit-scrollbar,
     background: rgba(76, 175, 80, 0.1);
     border-radius: 8px;
     border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+/* Mobile optimization for waiting status */
+@media (max-width: 768px) {
+    .waiting-status {
+        padding: 0.8rem;
+        border-radius: 6px;
+    }
+}
+
+@media (max-width: 400px) {
+    .waiting-status {
+        padding: 0.6rem;
+        border-radius: 5px;
+    }
 }
 
 .status-message {
@@ -3129,7 +3374,70 @@ body::-webkit-scrollbar,
     background: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
     margin-bottom: 0.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.player-rank {
+    font-weight: bold;
+    color: #4CAF50;
+    margin-right: 1rem;
+    min-width: 30px;
+}
+
+.player-info {
+    flex: 1;
+}
+
+.player-name {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.player-score {
+    font-weight: bold;
+    color: #4CAF50;
+    font-size: 1.1em;
+}
+
+/* Ensure results screen displays properly */
+#multiplayer-results-screen {
+    display: none;
+}
+
+#multiplayer-results-screen.active {
+    display: block;
+}
+
+.results-controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+
+.stat-label {
+    color: #B0BEC5;
+    font-size: 0.9em;
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    color: #4CAF50;
+    font-size: 1.2em;
+    font-weight: bold;
 }
 
 .leaderboard-item .rank {
@@ -3225,62 +3533,80 @@ body::-webkit-scrollbar,
     margin-left: 1rem;
 }
 
-/* Multiplayer Game Screen */
+/* Multiplayer Game Screen - New Layout */
 #multiplayer-game-screen {
-    padding: 2rem;
+    padding: 0;
 }
 
+/* Mobile optimization for main multiplayer screens */
+@media (max-width: 768px) {
+    #multiplayer-setup-screen .setup-container,
+    #multiplayer-waiting-screen .waiting-container {
+        padding: 1rem;
+    }
+    
+    #multiplayer-setup-screen h2,
+    #multiplayer-waiting-screen h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 400px) {
+    #multiplayer-setup-screen .setup-container,
+    #multiplayer-waiting-screen .waiting-container {
+        padding: 0.75rem;
+    }
+    
+    #multiplayer-setup-screen h2,
+    #multiplayer-waiting-screen h2 {
+        font-size: 1.3rem;
+        margin-bottom: 0.75rem;
+    }
+}
+
+/* Root layout: stack header over content with proper separation */
+.game-root {
+    min-height: 100dvh;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 2rem; /* Physical gap between header and main content */
+}
+
+/* Header: keep same look, but use flow layout (no absolute) */
 .game-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 1rem 1.5rem;
+    position: relative;                 /* ensure it's part of normal flow */
+    z-index: 1;
     background: rgba(255, 255, 255, 0.05);
-    padding: 1rem 2rem;
     border-radius: 15px;
-    margin-bottom: 2rem;
+    margin: 1.5rem auto 0 auto;         /* Only top margin, no bottom margin */
+    max-width: 95%;                     /* Limit width so it doesn't overflow */
     border: 1px solid rgba(255, 255, 255, 0.1);
-    position: relative;
 }
 
-.game-sport-display {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(76, 175, 80, 0.2);
-    border: 1px solid #4CAF50;
-    border-radius: 20px;
-    padding: 0.5rem 1rem;
-}
-
-.game-sport-display span {
-    color: #4CAF50;
-    font-weight: 600;
-    font-size: 0.9em;
-    text-transform: uppercase;
-}
-
-.room-info {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-}
-
+/* Room code styling */
 .room-code {
     font-weight: 600;
     color: #4CAF50;
 }
 
-.time-remaining {
+/* Timer tile styling - RED like other game timers */
+.timer-tile {
     font-size: 1.5em;
     font-weight: bold;
     color: #ffffff;
-    background: rgba(255, 107, 107, 0.1);
+    background: rgba(255, 107, 107, 0.2);
     padding: 0.5rem 1rem;
     border-radius: 8px;
-    border: 1px solid rgba(255, 107, 107, 0.3);
+    border: 1px solid rgba(255, 107, 107, 0.4);
 }
 
-.player-count {
+/* Players pill styling */
+.players-pill {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -3288,16 +3614,33 @@ body::-webkit-scrollbar,
     font-weight: 600;
 }
 
-.question-container {
-    margin-bottom: 2rem;
+/* Room info container */
+.room-info {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
 }
 
+/* Main content spacing */
+.game-main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;          /* space between question card and other elements */
+    padding: 3rem 20px 24px;  /* Large top padding to push content down */
+    margin: 0 auto;
+    max-width: 95%;     /* Match header width */
+}
+
+/* Question card must not be absolutely positioned */
 .question-card {
+    position: relative; /* ensure in normal flow */
+    margin-top: 0; /* No extra margin - spacing handled by gap and header margin */
     background: rgba(255, 255, 255, 0.05);
     border-radius: 12px;
     padding: 1.2rem;
     border: 1px solid rgba(255, 255, 255, 0.1);
     text-align: center;
+    /* keep existing card visuals */
 }
 
 .question-text {
@@ -3307,10 +3650,11 @@ body::-webkit-scrollbar,
     line-height: 1.3;
 }
 
+/* Answer buttons stack with spacing; no overlap */
 .question-options {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
     margin-bottom: 1rem;
 }
 
@@ -3447,21 +3791,56 @@ body::-webkit-scrollbar,
     font-weight: bold;
 }
 
-/* Mobile responsive multiplayer */
+/* Mobile responsive multiplayer - Fix timer overlapping */
 @media (max-width: 768px) {
+    .game-root {
+        gap: 1.5rem; /* Smaller gap on mobile */
+    }
+    
     .game-header {
         flex-direction: column;
-        gap: 1rem;
+        gap: 0.75rem;
         text-align: center;
+        padding: 0.85rem;
+        margin: 1rem auto 0 auto;
+        max-width: 92%;
     }
     
     .room-info {
+        display: flex;
         flex-direction: column;
-        gap: 1rem;
+        align-items: center;
+        gap: 0.75rem;
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .room-code {
+        font-size: 0.95em;
+    }
+    
+    .timer-tile {
+        font-size: 1.3em;
+        padding: 0.5rem 1rem;
+        white-space: nowrap;
+        background: rgba(255, 107, 107, 0.2);
+        border: 1px solid rgba(255, 107, 107, 0.4);
+    }
+    
+    .players-pill {
+        margin-top: 0;
+        font-size: 0.9em;
+    }
+    
+    .game-main {
+        margin: 0 auto;
+        padding: 2.5rem 16px 20px;  /* Large top padding on mobile */
+        gap: 18px;
+        max-width: 92%;
     }
     
     .question-options {
-        grid-template-columns: 1fr;
+        gap: 10px;
     }
     
     .text-input-container {
@@ -3472,6 +3851,52 @@ body::-webkit-scrollbar,
         max-width: 100%;
     }
 }
+
+/* Mobile hardening (375px) */
+@media (max-width: 400px) {
+    .game-root {
+        gap: 1.25rem; /* Even smaller gap on tiny mobile */
+    }
+    
+    .game-header {
+        margin: 0.65rem auto 0 auto;
+        padding: 0.65rem;
+        gap: 0.6rem;
+        max-width: 90%;
+    }
+    
+    .room-info {
+        gap: 0.6rem;
+    }
+    
+    .room-code {
+        font-size: 0.9em;
+    }
+    
+    .timer-tile { 
+        font-size: 1.2em;
+        padding: 0.4rem 0.8rem;
+    }
+    
+    .players-pill {
+        font-size: 0.85em;
+    }
+    
+    .question-card { 
+        margin-top: 0; 
+    }
+    
+    .game-main {
+        padding: 2rem 12px 20px;  /* Large top padding on small mobile */
+        margin: 0 auto;
+        gap: 16px;
+        max-width: 90%;
+    }
+}
+
+/* Prevent accidental overlay z-index issues */
+.question-card { z-index: 0; }
+.timer-tile { z-index: 2; } /* only for stacking of shadows within header */
 
 /* Current Score Display */
 .current-score {
