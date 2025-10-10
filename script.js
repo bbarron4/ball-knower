@@ -1027,17 +1027,17 @@ window.startGame = function startGame(mode) {
     
     if (mode === 'survival') {
         // Show game mode selection and high score, hide question count
-        gameModeSelection.style.display = 'block';
-        questionCountSection.style.display = 'none';
-        highScoreDisplay.style.display = 'block';
+        if (gameModeSelection) gameModeSelection.style.display = 'block';
+        if (questionCountSection) questionCountSection.style.display = 'none';
+        if (highScoreDisplay) highScoreDisplay.style.display = 'block';
         
         // Load and display high score
         loadHighScore();
     } else {
         // Show question count, hide game mode selection and high score
-        gameModeSelection.style.display = 'none';
-        questionCountSection.style.display = 'block';
-        highScoreDisplay.style.display = 'none';
+        if (gameModeSelection) gameModeSelection.style.display = 'none';
+        if (questionCountSection) questionCountSection.style.display = 'block';
+        if (highScoreDisplay) highScoreDisplay.style.display = 'none';
     }
 }
 
@@ -3280,54 +3280,66 @@ function startQuestion() {
 
 function updateQuestionUI(question) {
     // Update progress and question display based on game mode
+    const progressFill = document.querySelector('.progress-fill');
+    const questionCounter = document.getElementById('question-progress'); // Corrected ID
+    
     if (currentGame.mode === 'survival') {
         // For survival mode, show current streak instead of progress
-        document.querySelector('.progress-fill').style.width = '100%'; // Always full for survival
-        document.getElementById('question-counter').textContent = `Survival Streak: ${currentGame.streak}`;
+        if (progressFill) progressFill.style.width = '100%'; // Always full for survival
+        if (questionCounter) questionCounter.textContent = `Survival Streak: ${currentGame.streak}`;
     } else {
         // Regular mode - show progress and question count
         const progress = ((currentGame.currentQuestion + 1) / currentGame.questionCount) * 100;
-        document.querySelector('.progress-fill').style.width = `${progress}%`;
-        document.getElementById('question-counter').textContent = 
+        if (progressFill) progressFill.style.width = `${progress}%`;
+        if (questionCounter) questionCounter.textContent = 
             `Question ${currentGame.currentQuestion + 1} of ${currentGame.questionCount}`;
     }
     
     // Show player info or hide player card for trivia
     const playerCard = document.getElementById('player-card');
-    if (question.type === 'trivia') {
-        // Hide player card for trivia questions
-        playerCard.style.display = 'none';
-    } else {
-        // Show player card for player-based questions
-        playerCard.style.display = 'block';
-        document.getElementById('player-name').textContent = question.player.name;
-        document.getElementById('player-team').textContent = question.player.team;
+    if (playerCard) {
+        if (question.type === 'trivia') {
+            // Hide player card for trivia questions
+            playerCard.style.display = 'none';
+        } else {
+            // Show player card for player-based questions
+            playerCard.style.display = 'block';
+            const playerName = document.getElementById('player-name');
+            const playerTeam = document.getElementById('player-team');
+            if (playerName) playerName.textContent = question.player.name;
+            if (playerTeam) playerTeam.textContent = question.player.team;
+        }
     }
     
     // Set question text
-    document.getElementById('question-text').innerHTML = `<h2>${question.question}</h2>`;
+    const questionText = document.getElementById('question-text');
+    if (questionText) questionText.innerHTML = `<h2>${question.question}</h2>`;
     
     // Set answer options
     const answerOptions = document.getElementById('answer-options');
+    if (!answerOptions) return; // Exit if answer options element doesn't exist
     answerOptions.innerHTML = '';
     
     // Show different input types based on game mode
+    const textInputContainer = document.getElementById('text-input-container');
     if (currentGame.inputMode === 'text-input') {
         // Show text input
-        document.getElementById('text-input-container').style.display = 'block';
-        document.getElementById('answer-options').style.display = 'none';
+        if (textInputContainer) textInputContainer.style.display = 'block';
+        if (answerOptions) answerOptions.style.display = 'none';
         
         // Focus on the text input and add Enter key support
         setTimeout(() => {
             const textInput = document.getElementById('text-answer-input');
-            textInput.focus();
-            
-            // Add Enter key listener
-            textInput.onkeypress = function(e) {
-                if (e.key === 'Enter') {
-                    submitTextAnswer();
-                }
-            };
+            if (textInput) {
+                textInput.focus();
+                
+                // Add Enter key listener
+                textInput.onkeypress = function(e) {
+                    if (e.key === 'Enter') {
+                        submitTextAnswer();
+                    }
+                };
+            }
         }, 100);
     } else {
         // Show multiple choice
@@ -3339,21 +3351,25 @@ function updateQuestionUI(question) {
             answerOptions.appendChild(button);
         });
         
-        document.getElementById('text-input-container').style.display = 'none';
-        document.getElementById('answer-options').style.display = 'grid';
+        if (textInputContainer) textInputContainer.style.display = 'none';
+        if (answerOptions) answerOptions.style.display = 'grid';
     }
 }
 
 function showPlayerToFactQuestion(question) {
     // Show player info
-    document.getElementById('player-name').textContent = question.player.name;
-    document.getElementById('player-team').textContent = question.player.team;
+    const playerName = document.getElementById('player-name');
+    const playerTeam = document.getElementById('player-team');
+    if (playerName) playerName.textContent = question.player.name;
+    if (playerTeam) playerTeam.textContent = question.player.team;
     
     // Set question
-    document.getElementById('question-text').innerHTML = `<h2>${question.question}</h2>`;
+    const questionText = document.getElementById('question-text');
+    if (questionText) questionText.innerHTML = `<h2>${question.question}</h2>`;
     
     // Set answer options
     const answerOptions = document.getElementById('answer-options');
+    if (!answerOptions) return;
     answerOptions.innerHTML = '';
     question.options.forEach((option, index) => {
         const btn = document.createElement('button');
@@ -3366,14 +3382,18 @@ function showPlayerToFactQuestion(question) {
 
 function showCollegeQuestion(question) {
     // Show player info
-    document.getElementById('player-name').textContent = question.player.name;
-    document.getElementById('player-team').textContent = question.player.team;
+    const playerName = document.getElementById('player-name');
+    const playerTeam = document.getElementById('player-team');
+    if (playerName) playerName.textContent = question.player.name;
+    if (playerTeam) playerTeam.textContent = question.player.team;
     
     // Set question
-    document.getElementById('question-text').innerHTML = `<h2>What college did ${question.player.name} attend?</h2>`;
+    const questionText = document.getElementById('question-text');
+    if (questionText) questionText.innerHTML = `<h2>What college did ${question.player.name} attend?</h2>`;
     
     // Set answer options
     const answerOptions = document.getElementById('answer-options');
+    if (!answerOptions) return;
     answerOptions.innerHTML = '';
     question.options.forEach((option, index) => {
         const btn = document.createElement('button');
@@ -3386,14 +3406,18 @@ function showCollegeQuestion(question) {
 
 function showJerseyQuestion(question) {
     // Show player info
-    document.getElementById('player-name').textContent = question.player.name;
-    document.getElementById('player-team').textContent = question.player.team;
+    const playerName = document.getElementById('player-name');
+    const playerTeam = document.getElementById('player-team');
+    if (playerName) playerName.textContent = question.player.name;
+    if (playerTeam) playerTeam.textContent = question.player.team;
     
     // Set question
-    document.getElementById('question-text').innerHTML = `<h2>What jersey number does ${question.player.name} wear?</h2>`;
+    const questionText = document.getElementById('question-text');
+    if (questionText) questionText.innerHTML = `<h2>What jersey number does ${question.player.name} wear?</h2>`;
     
     // Set answer options
     const answerOptions = document.getElementById('answer-options');
+    if (!answerOptions) return;
     answerOptions.innerHTML = '';
     question.options.forEach((option, index) => {
         const btn = document.createElement('button');
@@ -3406,29 +3430,35 @@ function showJerseyQuestion(question) {
 
 function showAchievementQuestion(question) {
     // Hide player info for achievement questions
-    document.getElementById('player-name').textContent = '';
-    document.getElementById('player-team').textContent = '';
+    const playerName = document.getElementById('player-name');
+    const playerTeam = document.getElementById('player-team');
+    if (playerName) playerName.textContent = '';
+    if (playerTeam) playerTeam.textContent = '';
     
     // Set question with player comparison
-    document.getElementById('question-text').innerHTML = `
-        <h2>${question.question}</h2>
-        <div class="player-comparison">
-            <div class="player-option">
-                <div class="player-name">${question.player1.name}</div>
-                <div class="player-team">${question.player1.team}</div>
-                <div class="player-position">${question.player1.position}</div>
+    const questionText = document.getElementById('question-text');
+    if (questionText) {
+        questionText.innerHTML = `
+            <h2>${question.question}</h2>
+            <div class="player-comparison">
+                <div class="player-option">
+                    <div class="player-name">${question.player1.name}</div>
+                    <div class="player-team">${question.player1.team}</div>
+                    <div class="player-position">${question.player1.position}</div>
+                </div>
+                <div class="vs-divider">VS</div>
+                <div class="player-option">
+                    <div class="player-name">${question.player2.name}</div>
+                    <div class="player-team">${question.player2.team}</div>
+                    <div class="player-position">${question.player2.position}</div>
+                </div>
             </div>
-            <div class="vs-divider">VS</div>
-            <div class="player-option">
-                <div class="player-name">${question.player2.name}</div>
-                <div class="player-team">${question.player2.team}</div>
-                <div class="player-position">${question.player2.position}</div>
-            </div>
-        </div>
-    `;
+        `;
+    }
     
     // Set answer options
     const answerOptions = document.getElementById('answer-options');
+    if (!answerOptions) return;
     answerOptions.innerHTML = '';
     question.options.forEach((option, index) => {
         const btn = document.createElement('button');
