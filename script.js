@@ -1418,6 +1418,15 @@ window.startGameSession = async function startGameSession() {
     currentGame.maxStreak = 0;
     currentGame.gameStartTime = Date.now();
     
+    // Clear cached data to ensure fresh question cycling
+    if (typeof dataLoader !== 'undefined' && typeof dataLoader.clearAllCache === 'function') {
+        dataLoader.clearAllCache();
+    } else if (typeof dataLoader !== 'undefined' && typeof dataLoader.clearTriviaCache === 'function') {
+        dataLoader.clearTriviaCache();
+    } else {
+        console.log('⚠️ Cache clearing methods not available, continuing without clearing cache');
+    }
+    
     // Start game session tracking
     await startGameSessionTracking();
     
@@ -4380,6 +4389,15 @@ window.leaveWaitingRoom = async function leaveWaitingRoom() {
 async function startMultiplayerGame() {
     // Both host and joiner should be able to start the game after countdown
     console.log('🎮 startMultiplayerGame called - isHost:', multiplayerGame.isHost);
+    
+    // Clear cached data to ensure fresh question cycling
+    if (typeof dataLoader !== 'undefined' && typeof dataLoader.clearAllCache === 'function') {
+        dataLoader.clearAllCache();
+    } else if (typeof dataLoader !== 'undefined' && typeof dataLoader.clearTriviaCache === 'function') {
+        dataLoader.clearTriviaCache();
+    } else {
+        console.log('⚠️ Cache clearing methods not available, continuing without clearing cache');
+    }
     
     // Reset questions for new game
     resetMultiplayerQuestions();

@@ -11,6 +11,25 @@ class DataLoader {
         };
     }
 
+    // Clear all cached data to ensure fresh content for new games
+    clearAllCache() {
+        this.cache.clear();
+        this.triviaQuestions = {
+            nfl: [],
+            nba: []
+        };
+        console.log('🧹 Cleared all cached data for fresh question cycling');
+    }
+
+    // Clear only trivia cache (for targeted clearing)
+    clearTriviaCache() {
+        this.triviaQuestions = {
+            nfl: [],
+            nba: []
+        };
+        console.log('🧹 Cleared trivia cache for fresh question cycling');
+    }
+
     // Proper Fisher-Yates shuffle algorithm
     shuffleArray(array) {
         const shuffled = [...array];

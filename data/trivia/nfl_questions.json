@@ -3312,5 +3312,685 @@
     "contextNote": "",
     "isActive": true,
     "createdAt": "2025-09-29"
+  },
+  {
+    "number": 1,
+    "id": "nfl2-qb-most-single-season-yards",
+    "question": "Who holds the NFL record for most passing yards in a single season?",
+    "choices": [
+      {"id":"drew_brees","text":"Drew Brees"},
+      {"id":"tom_brady","text":"Tom Brady"},
+      {"id":"dan_marino","text":"Dan Marino"},
+      {"id":"peyton_manning","text":"Peyton Manning"}
+    ],
+    "correctChoiceId": "peyton_manning",
+    "category": "Player",
+    "difficulty": "medium",
+    "tags": ["record","passing","season"],
+    "contextNote": "5,477 yards in 2013",
+    "isActive": true
+  },
+  {
+    "number": 2,
+    "id": "nfl2-wr-most-receiving-tds-career",
+    "question": "Who has the most career receiving touchdowns in NFL history?",
+    "choices": [
+      {"id":"randy_moss","text":"Randy Moss"},
+      {"id":"terrell_owens","text":"Terrell Owens"},
+      {"id":"marvin_harrison","text":"Marvin Harrison"},
+      {"id":"jerry_rice","text":"Jerry Rice"}
+    ],
+    "correctChoiceId": "jerry_rice",
+    "category": "Player",
+    "difficulty": "easy",
+    "tags": ["record","receiving","career"],
+    "contextNote": "197 receiving TDs",
+    "isActive": true
+  },
+  {
+    "number": 3,
+    "id": "nfl2-rb-scrimmage-yards-record",
+    "question": "Who holds the single-season record for most yards from scrimmage?",
+    "choices": [
+      {"id":"marshall_faulk","text":"Marshall Faulk"},
+      {"id":"adrian_peterson","text":"Adrian Peterson"},
+      {"id":"barry_sanders","text":"Barry Sanders"},
+      {"id":"chris_johnson","text":"Chris Johnson"}
+    ],
+    "correctChoiceId": "chris_johnson",
+    "category": "Player",
+    "difficulty": "medium",
+    "tags": ["record","scrimmage","season"],
+    "contextNote": "2,509 yards in 2009",
+    "isActive": true
+  },
+  {
+    "number": 4,
+    "id": "nfl2-kick-pts-career-leader",
+    "question": "Who is the NFL's all-time leader in points scored (kickers included)?",
+    "choices": [
+      {"id":"adam_vinatieri","text":"Adam Vinatieri"},
+      {"id":"gary_anderson","text":"Gary Anderson"},
+      {"id":"morten_andersen","text":"Morten Andersen"},
+      {"id":"justin_tucker","text":"Justin Tucker"}
+    ],
+    "correctChoiceId": "morten_andersen",
+    "category": "Player",
+    "difficulty": "hard",
+    "tags": ["record","kicker","career"],
+    "contextNote": "",
+    "isActive": true
+  },
+  {
+    "number": 5,
+    "id": "nfl2-sacks-career-leader",
+    "question": "Who holds the official NFL record for most career sacks (since 1982)?",
+    "choices": [
+      {"id":"reggie_white","text":"Reggie White"},
+      {"id":"kevin_greene","text":"Kevin Greene"},
+      {"id":"demarcus_ware","text":"DeMarcus Ware"},
+      {"id":"bruce_smith","text":"Bruce Smith"}
+    ],
+    "correctChoiceId": "bruce_smith",
+    "category": "Player",
+    "difficulty": "medium",
+    "tags": ["record","defense","career","sacks"],
+    "contextNote": "200.0 sacks",
+    "isActive": true
+  },
+  {
+    "number": 6,
+    "id": "nfl2-db-pick6-career",
+    "question": "Who has the most career interception return TDs (pick-sixes)?",
+    "choices": [
+      {"id":"deion_sanders","text":"Deion Sanders"},
+      {"id":"charles_woodson","text":"Charles Woodson"},
+      {"id":"darren_sharper","text":"Darren Sharper"},
+      {"id":"rod_woodson","text":"Rod Woodson"}
+    ],
+    "correctChoiceId": "rod_woodson",
+    "category": "Player",
+    "difficulty": "hard",
+    "tags": ["record","defense","career","ints"],
+    "contextNote": "",
+    "isActive": true
+  },
+  {
+    "number": 7,
+    "id": "nfl2-qb-td-pass-streak",
+    "question": "Which QB holds the record for most consecutive games with a TD pass?",
+    "choices": [
+      {"id":"tom_brady","text":"Tom Brady"},
+      {"id":"aaron_rodgers","text":"Aaron Rodgers"},
+      {"id":"peyton_manning","text":"Peyton Manning"},
+      {"id":"drew_brees","text":"Drew Brees"}
+    ],
+    "correctChoiceId": "drew_brees",
+    "category": "Player",
+    "difficulty": "medium",
+    "tags": ["record","passing","streak"],
+    "contextNote": "54 straight games",
+    "isActive": true
+  },
+  {
+    "number": 8,
+    "id": "nfl2-te-most-yards-season",
+    "question": "Which tight end holds the record for most receiving yards in a single season?",
+    "choices": [
+      {"id":"rob_gronkowski","text":"Rob Gronkowski"},
+      {"id":"george_kittle","text":"George Kittle"},
+      {"id":"mark_andrews","text":"Mark Andrews"},
+      {"id":"travis_kelce","text":"Travis Kelce"}
+    ],
+    "correctChoiceId": "travis_kelce",
+    "category": "Player",
+    "difficulty": "medium",
+    "tags": ["record","tight_end","season"],
+    "contextNote": "1,416 yards in 2020",
+    "isActive": true
+  },
+  {
+    "number": 9,
+    "id": "nfl2-rb-receptions-season",
+    "question": "Which RB has the most receptions in a single NFL season?",
+    "choices": [
+      {"id":"marshall_faulk","text":"Marshall Faulk"},
+      {"id":"matt_forte","text":"Matt Forte"},
+      {"id":"larry_centers","text":"Larry Centers"},
+      {"id":"christian_mccaffrey","text":"Christian McCaffrey"}
+    ],
+    "correctChoiceId": "christian_mccaffrey",
+    "category": "Player",
+    "difficulty": "medium",
+    "tags": ["record","rb","receptions","season"],
+    "contextNote": "116 receptions in 2019",
+    "isActive": true
+  },
+  {
+    "number": 10,
+    "id": "nfl2-wr-rookie-single-game-yards",
+    "question": "Which rookie wideout posted 266 receiving yards in a single game in 2021?",
+    "choices": [
+      {"id":"jaylen_waddle","text":"Jaylen Waddle"},
+      {"id":"amon_ra_st_brown","text":"Amon-Ra St. Brown"},
+      {"id":"garrett_wilson","text":"Garrett Wilson"},
+      {"id":"jamarr_chase","text":"Ja'Marr Chase"}
+    ],
+    "correctChoiceId": "jamarr_chase",
+    "category": "Player",
+    "difficulty": "easy",
+    "tags": ["rookie","record","receiving"],
+    "contextNote": "Week 17 vs. KC",
+    "isActive": true
+  },
+  {
+    "number": 11,
+    "id": "nfl2-rb-consecutive-1k-seasons",
+    "question": "Which RB holds the record for most consecutive 1,000-yard rushing seasons?",
+    "choices": [
+      {"id":"curtis_martin","text":"Curtis Martin"},
+      {"id":"barry_sanders","text":"Barry Sanders"},
+      {"id":"walter_payton","text":"Walter Payton"},
+      {"id":"emmitt_smith","text":"Emmitt Smith"}
+    ],
+    "correctChoiceId": "emmitt_smith",
+    "category": "Player",
+    "difficulty": "hard",
+    "tags": ["record","streak","rushing"],
+    "contextNote": "11 straight (1991–2001)",
+    "isActive": true
+  },
+  {
+    "number": 12,
+    "id": "nfl2-qb-50td-club",
+    "question": "Which QB is part of the exclusive 50 TD-pass single-season club?",
+    "choices": [
+      {"id":"joe_montana","text":"Joe Montana"},
+      {"id":"ben_roethlisberger","text":"Ben Roethlisberger"},
+      {"id":"philip_rivers","text":"Philip Rivers"},
+      {"id":"patrick_mahomes","text":"Patrick Mahomes"}
+    ],
+    "correctChoiceId": "patrick_mahomes",
+    "category": "Player",
+    "difficulty": "easy",
+    "tags": ["passing","season","milestone"],
+    "contextNote": "50 TDs in 2018 (Brady 2007, Manning 2013 also 50+)",
+    "isActive": true
+  },
+  {
+    "number": 13,
+    "id": "nfl2-kickoff-punt-return-tds",
+    "question": "Who holds the NFL record for most combined return TDs (punt/kick)?",
+    "choices": [
+      {"id":"corderrelle_patterson","text":"Cordarrelle Patterson"},
+      {"id":"josh_cribbs","text":"Josh Cribbs"},
+      {"id":"deion_sanders","text":"Deion Sanders"},
+      {"id":"devin_hester","text":"Devin Hester"}
+    ],
+    "correctChoiceId": "devin_hester",
+    "category": "Player",
+    "difficulty": "medium",
+    "tags": ["return","record","special_teams"],
+    "contextNote": "",
+    "isActive": true
+  },
+  {
+    "number": 14,
+    "id": "nfl2-longest-punt-ever",
+    "question": "Who booted the longest punt in NFL history (98 yards)?",
+    "choices": [
+      {"id":"riley_dixon","text":"Riley Dixon"},
+      {"id":"randall_cunningham","text":"Randall Cunningham"},
+      {"id":"sam_koch","text":"Sam Koch"},
+      {"id":"steve_oneal","text":"Steve O'Neal"}
+    ],
+    "correctChoiceId": "steve_oneal",
+    "category": "Player",
+    "difficulty": "hard",
+    "tags": ["record","special_teams"],
+    "contextNote": "Jets, 1969",
+    "isActive": true
+  },
+  {
+    "number": 15,
+    "id": "nfl2-team-division-streak",
+    "question": "Which franchise holds the longest streak of consecutive division titles?",
+    "choices": [
+      {"id":"packers","text":"Green Bay Packers"},
+      {"id":"chiefs","text":"Kansas City Chiefs"},
+      {"id":"colts","text":"Indianapolis Colts"},
+      {"id":"patriots","text":"New England Patriots"}
+    ],
+    "correctChoiceId": "patriots",
+    "category": "Team",
+    "difficulty": "medium",
+    "tags": ["streak","division"],
+    "contextNote": "11 straight (2009–2019)",
+    "isActive": true
+  },
+  {
+    "number": 16,
+    "id": "nfl2-perfect-regular-season",
+    "question": "Which team is the only one to finish a 16-game regular season undefeated?",
+    "choices": [
+      {"id":"1972_dolphins","text":"1972 Miami Dolphins"},
+      {"id":"1985_bears","text":"1985 Chicago Bears"},
+      {"id":"2004_patriots","text":"2004 New England Patriots"},
+      {"id":"2007_patriots","text":"2007 New England Patriots"}
+    ],
+    "correctChoiceId": "2007_patriots",
+    "category": "Team",
+    "difficulty": "medium",
+    "tags": ["record","season"],
+    "contextNote": "16–0 regular season (lost SB XLII)",
+    "isActive": true
+  },
+  {
+    "number": 17,
+    "id": "nfl2-droy-sack-record",
+    "question": "Who set the rookie record for sacks in a season (official era)?",
+    "choices": [
+      {"id":"micah_parsons","text":"Micah Parsons"},
+      {"id":"nick_bosa","text":"Nick Bosa"},
+      {"id":"alden_smith","text":"Alden Smith"},
+      {"id":"jevon_kearse","text":"Jevon Kearse"}
+    ],
+    "correctChoiceId": "jevon_kearse",
+    "category": "Player",
+    "difficulty": "medium",
+    "tags": ["rookie","defense","record"],
+    "contextNote": "14.5 sacks in 1999",
+    "isActive": true
+  },
+  {
+    "number": 18,
+    "id": "nfl2-super-bowl-biggest-comeback",
+    "question": "Which team completed the largest comeback in Super Bowl history?",
+    "choices": [
+      {"id":"eagles","text":"Philadelphia Eagles"},
+      {"id":"seahawks","text":"Seattle Seahawks"},
+      {"id":"rams","text":"Los Angeles Rams"},
+      {"id":"patriots","text":"New England Patriots"}
+    ],
+    "correctChoiceId": "patriots",
+    "category": "Moment",
+    "difficulty": "easy",
+    "tags": ["super_bowl","comeback"],
+    "contextNote": "SB LI vs. Falcons (28–3)",
+    "isActive": true
+  },
+  {
+    "number": 19,
+    "id": "nfl2-franchise-move-cards",
+    "question": "Which franchise moved from St. Louis to Phoenix in 1988 (later Arizona)?",
+    "choices": [
+      {"id":"rams","text":"Rams"},
+      {"id":"colts","text":"Colts"},
+      {"id":"chargers","text":"Chargers"},
+      {"id":"cardinals","text":"Cardinals"}
+    ],
+    "correctChoiceId": "cardinals",
+    "category": "Team",
+    "difficulty": "medium",
+    "tags": ["relocation","franchise"],
+    "contextNote": "",
+    "isActive": true
+  },
+  {
+    "number": 20,
+    "id": "nfl2-stadium-arrowhead",
+    "question": "GEHA Field at Arrowhead Stadium is home to which NFL team?",
+    "choices": [
+      {"id":"denver_broncos","text":"Denver Broncos"},
+      {"id":"las_vegas_raiders","text":"Las Vegas Raiders"},
+      {"id":"los_angeles_chargers","text":"Los Angeles Chargers"},
+      {"id":"kansas_city_chiefs","text":"Kansas City Chiefs"}
+    ],
+    "correctChoiceId": "kansas_city_chiefs",
+    "category": "Stadium",
+    "difficulty": "easy",
+    "tags": ["stadium","home"],
+    "contextNote": "",
+    "isActive": true
+  },
+  {
+    "number": 21,
+    "id": "nfl2-stadium-lambeau",
+    "question": "Lambeau Field is the home stadium of which NFL team?",
+    "choices": [
+      {"id":"minnesota_vikings","text":"Minnesota Vikings"},
+      {"id":"chicago_bears","text":"Chicago Bears"},
+      {"id":"detroit_lions","text":"Detroit Lions"},
+      {"id":"green_bay_packers","text":"Green Bay Packers"}
+    ],
+    "correctChoiceId": "green_bay_packers",
+    "category": "Stadium",
+    "difficulty": "easy",
+    "tags": ["stadium"],
+    "contextNote": "",
+    "isActive": true
+  },
+  {
+    "number": 22,
+    "id": "nfl2-college-burrow-chase",
+    "question": "Joe Burrow and Ja'Marr Chase were a prolific college duo at which school?",
+    "choices": [
+      {"id":"ohio_state","text":"Ohio State"},
+      {"id":"oklahoma","text":"Oklahoma"},
+      {"id":"alabama","text":"Alabama"},
+      {"id":"lsu","text":"LSU"}
+    ],
+    "correctChoiceId": "lsu",
+    "category": "College",
+    "difficulty": "easy",
+    "tags": ["college","qb_wr_duo"],
+    "contextNote": "",
+    "isActive": true
+  },
+  {
+    "number": 23,
+    "id": "nfl2-college-kittle-hockenson-laporta",
+    "question": "Which program is often dubbed 'Tight End U' (George Kittle, T.J. Hockenson, Sam LaPorta)?",
+    "choices": [
+      {"id":"notre_dame","text":"Notre Dame"},
+      {"id":"miami_fl","text":"Miami (FL)"},
+      {"id":"penn_state","text":"Penn State"},
+      {"id":"iowa","text":"Iowa"}
+    ],
+    "correctChoiceId": "iowa",
+    "category": "College",
+    "difficulty": "medium",
+    "tags": ["college","position_pipeline"],
+    "contextNote": "",
+    "isActive": true
+  },
+  {
+    "number": 24,
+    "id": "nfl2-college-baker-walkon-tt-to-ou",
+    "question": "Which Heisman-winning NFL QB walked on at Texas Tech and later transferred to Oklahoma?",
+    "choices": [
+      {"id":"kyler_murray","text":"Kyler Murray"},
+      {"id":"caleb_williams","text":"Caleb Williams"},
+      {"id":"jalen_hurts","text":"Jalen Hurts"},
+      {"id":"baker_mayfield","text":"Baker Mayfield"}
+    ],
+    "correctChoiceId": "baker_mayfield",
+    "category": "College",
+    "difficulty": "medium",
+    "tags": ["college","transfer","heisman"],
+    "contextNote": "",
+    "isActive": true
+  },
+  {
+    "number": 25,
+    "id": "nfl2-college-cooper-kupp",
+    "question": "Cooper Kupp played his college football at which FCS school?",
+    "choices": [
+      {"id":"james_madison","text":"James Madison"},
+      {"id":"north_dakota_state","text":"North Dakota State"},
+      {"id":"montana","text":"Montana"},
+      {"id":"eastern_washington","text":"Eastern Washington"}
+    ],
+    "correctChoiceId": "eastern_washington",
+    "category": "College",
+    "difficulty": "medium",
+    "tags": ["college","fcs"],
+    "contextNote": "",
+    "isActive": true
+  },
+  {
+    "number": 26,
+    "id": "nfl2-college-parsons",
+    "question": "Micah Parsons starred at which college before turning pro?",
+    "choices": [
+      {"id":"ohio_state","text":"Ohio State"},
+      {"id":"michigan","text":"Michigan"},
+      {"id":"maryland","text":"Maryland"},
+      {"id":"penn_state","text":"Penn State"}
+    ],
+    "correctChoiceId": "penn_state",
+    "category": "College",
+    "difficulty": "easy",
+    "tags": ["college","defense"],
+    "contextNote": "",
+    "isActive": true
+  },
+  {
+    "number": 27,
+    "id": "nfl2-draft-2020-qb1",
+    "question": "Who was the first QB selected in the 2020 NFL Draft?",
+    "choices": [
+      {"id":"tua_tagovailoa","text":"Tua Tagovailoa"},
+      {"id":"justin_herbert","text":"Justin Herbert"},
+      {"id":"jordan_love","text":"Jordan Love"},
+      {"id":"joe_burrow","text":"Joe Burrow"}
+    ],
+    "correctChoiceId": "joe_burrow",
+    "category": "Draft",
+    "difficulty": "easy",
+    "tags": ["draft","qb"],
+    "contextNote": "",
+    "isActive": true
+  },
+  {
+    "number": 28,
+    "id": "nfl2-draft-2017-rb1",
+    "question": "Who was the first RB off the board in the 2017 NFL Draft?",
+    "choices": [
+      {"id":"alvin_kamara","text":"Alvin Kamara"},
+      {"id":"dalvin_cook","text":"Dalvin Cook"},
+      {"id":"christian_mccaffrey","text":"Christian McCaffrey"},
+      {"id":"leonard_fournette","text":"Leonard Fournette"}
+    ],
+    "correctChoiceId": "leonard_fournette",
+    "category": "Draft",
+    "difficulty": "medium",
+    "tags": ["draft","rb"],
+    "contextNote": "Fourth overall",
+    "isActive": true
+  },
+  {
+    "number": 29,
+    "id": "nfl2-draft-2020-reagor-before-jefferson",
+    "question": "Which WR was drafted one pick before Justin Jefferson in 2020?",
+    "choices": [
+      {"id":"brandon_aiyuk","text":"Brandon Aiyuk"},
+      {"id":"henry_ruggs","text":"Henry Ruggs III"},
+      {"id":"tee_higgins","text":"Tee Higgins"},
+      {"id":"jalen_reagor","text":"Jalen Reagor"}
+    ],
+    "correctChoiceId": "jalen_reagor",
+    "category": "Draft",
+    "difficulty": "medium",
+    "tags": ["draft","wr"],
+    "contextNote": "Reagor #21, Jefferson #22",
+    "isActive": true
+  },
+  {
+    "number": 30,
+    "id": "nfl2-draft-2019-dk-team",
+    "question": "Which team drafted DK Metcalf in 2019?",
+    "choices": [
+      {"id":"baltimore_ravens","text":"Baltimore Ravens"},
+      {"id":"tennessee_titans","text":"Tennessee Titans"},
+      {"id":"green_bay_packers","text":"Green Bay Packers"},
+      {"id":"seattle_seahawks","text":"Seattle Seahawks"}
+    ],
+    "correctChoiceId": "seattle_seahawks",
+    "category": "Draft",
+    "difficulty": "easy",
+    "tags": ["draft","wr"],
+    "contextNote": "",
+    "isActive": true
+  },
+  {
+    "number": 31,
+    "id": "nfl2-draft-2022-mr-irrelevant",
+    "question": "Who was 'Mr. Irrelevant' in the 2022 NFL Draft?",
+    "choices": [
+      {"id":"bailey_zappe","text":"Bailey Zappe"},
+      {"id":"skylar_thompson","text":"Skylar Thompson"},
+      {"id":"sam_howell","text":"Sam Howell"},
+      {"id":"brock_purdy","text":"Brock Purdy"}
+    ],
+    "correctChoiceId": "brock_purdy",
+    "category": "Draft",
+    "difficulty": "easy",
+    "tags": ["draft","qb"],
+    "contextNote": "Final pick of the 2022 draft",
+    "isActive": true
+  },
+  {
+    "number": 32,
+    "id": "nfl2-qb-fastest-10k-rush",
+    "question": "Who reached 10,000 career rushing yards in the fewest games?",
+    "choices": [
+      {"id":"barry_sanders","text":"Barry Sanders"},
+      {"id":"adrian_peterson","text":"Adrian Peterson"},
+      {"id":"thurman_thomas","text":"Thurman Thomas"},
+      {"id":"eric_dickerson","text":"Eric Dickerson"}
+    ],
+    "correctChoiceId": "eric_dickerson",
+    "category": "Player",
+    "difficulty": "hard",
+    "tags": ["rushing","milestone","pace"],
+    "contextNote": "",
+    "isActive": true
+  },
+  {
+    "number": 33,
+    "id": "nfl2-wr-100-receptions-multiple-teams",
+    "question": "Which WR recorded 100+ catches in a season with two different teams?",
+    "choices": [
+      {"id":"keenan_allen","text":"Keenan Allen"},
+      {"id":"deandre_hopkins","text":"DeAndre Hopkins"},
+      {"id":"stefon_diggs","text":"Stefon Diggs"},
+      {"id":"brandon_marshall","text":"Brandon Marshall"}
+    ],
+    "correctChoiceId": "brandon_marshall",
+    "category": "Player",
+    "difficulty": "hard",
+    "tags": ["receiving","milestone","teams"],
+    "contextNote": "",
+    "isActive": true
+  },
+  {
+    "number": 34,
+    "id": "nfl2-db-most-forced-fumbles",
+    "question": "Which edge/OLB is among the all-time leaders in forced fumbles (50+)?",
+    "choices": [
+      {"id":"vonn_miller","text":"Von Miller"},
+      {"id":"julius_peppers","text":"Julius Peppers"},
+      {"id":"michael_strahan","text":"Michael Strahan"},
+      {"id":"robert_mathis","text":"Robert Mathis"}
+    ],
+    "correctChoiceId": "robert_mathis",
+    "category": "Player",
+    "difficulty": "hard",
+    "tags": ["defense","forced_fumbles","career"],
+    "contextNote": "",
+    "isActive": true
+  },
+  {
+    "number": 35,
+    "id": "nfl2-team-longest-playoff-win-streak-single_postseason",
+    "question": "Which team went 4–0 in the playoffs as a wild card and won the SB with all road wins (2007)?",
+    "choices": [
+      {"id":"ravens","text":"Baltimore Ravens"},
+      {"id":"steelers","text":"Pittsburgh Steelers"},
+      {"id":"packers","text":"Green Bay Packers"},
+      {"id":"giants","text":"New York Giants"}
+    ],
+    "correctChoiceId": "giants",
+    "category": "Team",
+    "difficulty": "medium",
+    "tags": ["playoffs","wild_card","road_wins"],
+    "contextNote": "2007 Giants (SB XLII)",
+    "isActive": true
+  },
+  {
+    "number": 36,
+    "id": "nfl2-coach-tree-shanahan-zone",
+    "question": "Which head coach is most associated with the modern wide-zone coaching tree?",
+    "choices": [
+      {"id":"mike_mccarthy","text":"Mike McCarthy"},
+      {"id":"andy_reid","text":"Andy Reid"},
+      {"id":"sean_payton","text":"Sean Payton"},
+      {"id":"kyle_shanahan","text":"Kyle Shanahan"}
+    ],
+    "correctChoiceId": "kyle_shanahan",
+    "category": "Coach",
+    "difficulty": "medium",
+    "tags": ["scheme","coaching_tree","offense"],
+    "contextNote": "",
+    "isActive": true
+  },
+  {
+    "number": 37,
+    "id": "nfl2-team-most-consecutive-afccg-appearances",
+    "question": "Which team made six straight conference championship appearances from 2018–2023?",
+    "choices": [
+      {"id":"patriots","text":"New England Patriots"},
+      {"id":"bengals","text":"Cincinnati Bengals"},
+      {"id":"bills","text":"Buffalo Bills"},
+      {"id":"chiefs","text":"Kansas City Chiefs"}
+    ],
+    "correctChoiceId": "chiefs",
+    "category": "Team",
+    "difficulty": "medium",
+    "tags": ["streak","playoffs","conference"],
+    "contextNote": "",
+    "isActive": true
+  },
+  {
+    "number": 38,
+    "id": "nfl2-rb-1k-run-1k-rec-season",
+    "question": "Which player joined the 1,000 rush / 1,000 rec yards club in 2019?",
+    "choices": [
+      {"id":"marshall_faulk","text":"Marshall Faulk"},
+      {"id":"roger_craig","text":"Roger Craig"},
+      {"id":"leveon_bell","text":"Le'Veon Bell"},
+      {"id":"christian_mccaffrey","text":"Christian McCaffrey"}
+    ],
+    "correctChoiceId": "christian_mccaffrey",
+    "category": "Player",
+    "difficulty": "easy",
+    "tags": ["dual_threat","milestone","season"],
+    "contextNote": "Third member after Faulk and Craig",
+    "isActive": true
+  },
+  {
+    "number": 39,
+    "id": "nfl2-qb-most-playoff-wins",
+    "question": "Which QB holds the record for most playoff wins?",
+    "choices": [
+      {"id":"joe_montana","text":"Joe Montana"},
+      {"id":"peyton_manning","text":"Peyton Manning"},
+      {"id":"john_elway","text":"John Elway"},
+      {"id":"tom_brady","text":"Tom Brady"}
+    ],
+    "correctChoiceId": "tom_brady",
+    "category": "Player",
+    "difficulty": "easy",
+    "tags": ["record","playoffs","qb"],
+    "contextNote": "",
+    "isActive": true
+  },
+  {
+    "number": 40,
+    "id": "nfl2-franchise-oilers-became",
+    "question": "The Houston Oilers ultimately became which current franchise?",
+    "choices": [
+      {"id":"baltimore_ravens","text":"Baltimore Ravens"},
+      {"id":"indianapolis_colts","text":"Indianapolis Colts"},
+      {"id":"los_angeles_chargers","text":"Los Angeles Chargers"},
+      {"id":"tennessee_titans","text":"Tennessee Titans"}
+    ],
+    "correctChoiceId": "tennessee_titans",
+    "category": "Team",
+    "difficulty": "easy",
+    "tags": ["relocation","franchise","history"],
+    "contextNote": "",
+    "isActive": true
   }
 ]

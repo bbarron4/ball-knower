@@ -769,6 +769,15 @@ function startWeeklyChallenge() {
     document.getElementById('challenge-overview-step').style.display = 'none';
     document.getElementById('challenge-interface-step').style.display = 'block';
     
+    // Clear cached data to ensure fresh question cycling
+    if (typeof dataLoader !== 'undefined' && typeof dataLoader.clearAllCache === 'function') {
+        dataLoader.clearAllCache();
+    } else if (typeof dataLoader !== 'undefined' && typeof dataLoader.clearTriviaCache === 'function') {
+        dataLoader.clearTriviaCache();
+    } else {
+        console.log('⚠️ Cache clearing methods not available, continuing without clearing cache');
+    }
+    
     // Load challenge data
     loadChallengeData();
     
