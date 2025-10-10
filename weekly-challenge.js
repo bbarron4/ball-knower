@@ -1123,6 +1123,7 @@ function viewLeaderboard() {
 // Load weekly leaderboard data
 async function loadWeeklyLeaderboard() {
     console.log('🏆 Loading weekly leaderboard...');
+    console.log('🔍 loadWeeklyLeaderboard function called');
     
     try {
         // Get current challenge ID
@@ -1157,7 +1158,7 @@ async function loadWeeklyLeaderboard() {
         
         // Update both home page preview and leaderboard page
         updateWeeklyLeaderboardPreview([]); // Force fake data instead of real data
-        updateWeeklyLeaderboardFull(leaderboard);
+        updateWeeklyLeaderboardFull([]); // Force fake data instead of real data
         
     } catch (error) {
         console.error('❌ Failed to load weekly leaderboard:', error);
@@ -1240,14 +1241,103 @@ function updateWeeklyLeaderboardPreview(leaderboard) {
 
 // Update full weekly leaderboard on leaderboard page
 function updateWeeklyLeaderboardFull(leaderboard) {
+    console.log('🔄 updateWeeklyLeaderboardFull called with:', leaderboard);
     const fullContainer = document.getElementById('weekly-leaderboard-list');
-    if (!fullContainer) return;
+    console.log('📦 fullContainer found:', fullContainer);
+    if (!fullContainer) {
+        console.log('❌ weekly-leaderboard-list element not found!');
+        return;
+    }
     
     if (leaderboard.length === 0) {
+        // Show static fake data when no real data is available
         fullContainer.innerHTML = `
-            <div class="no-data-message">
-                <p>No weekly challenge data yet</p>
-                <p class="subtitle">Be the first to make picks!</p>
+            <div class="leaderboard-item rank-1">
+                <div class="rank">1</div>
+                <div class="player-info">
+                    <div class="player-details">
+                        <span class="player-name">BallKnowerPro</span>
+                        <span class="player-stats">8 games • 92% avg</span>
+                    </div>
+                </div>
+                <div class="score">127</div>
+            </div>
+            
+            <div class="leaderboard-item">
+                <div class="rank">2</div>
+                <div class="player-info">
+                    <div class="player-details">
+                        <span class="player-name">TriviaKing</span>
+                        <span class="player-stats">7 games • 89% avg</span>
+                    </div>
+                </div>
+                <div class="score">115</div>
+            </div>
+
+            <div class="leaderboard-item">
+                <div class="rank">3</div>
+                <div class="player-info">
+                    <div class="player-details">
+                        <span class="player-name">SportsGuru</span>
+                        <span class="player-stats">9 games • 87% avg</span>
+                    </div>
+                </div>
+                <div class="score">108</div>
+            </div>
+
+            <div class="leaderboard-item">
+                <div class="rank">4</div>
+                <div class="player-info">
+                    <div class="player-details">
+                        <span class="player-name">CourtVision</span>
+                        <span class="player-stats">6 games • 85% avg</span>
+                    </div>
+                </div>
+                <div class="score">98</div>
+            </div>
+
+            <div class="leaderboard-item">
+                <div class="rank">5</div>
+                <div class="player-info">
+                    <div class="player-details">
+                        <span class="player-name">HoopMaster</span>
+                        <span class="player-stats">8 games • 83% avg</span>
+                    </div>
+                </div>
+                <div class="score">92</div>
+            </div>
+
+            <div class="leaderboard-item">
+                <div class="rank">6</div>
+                <div class="player-info">
+                    <div class="player-details">
+                        <span class="player-name">Josh23</span>
+                        <span class="player-stats">7 games • 81% avg</span>
+                    </div>
+                </div>
+                <div class="score">87</div>
+            </div>
+
+            <div class="leaderboard-item">
+                <div class="rank">7</div>
+                <div class="player-info">
+                    <div class="player-details">
+                        <span class="player-name">GameTime</span>
+                        <span class="player-stats">9 games • 79% avg</span>
+                    </div>
+                </div>
+                <div class="score">82</div>
+            </div>
+
+            <div class="leaderboard-item">
+                <div class="rank">8</div>
+                <div class="player-info">
+                    <div class="player-details">
+                        <span class="player-name">StatsMaster</span>
+                        <span class="player-stats">6 games • 77% avg</span>
+                    </div>
+                </div>
+                <div class="score">76</div>
             </div>
         `;
         return;

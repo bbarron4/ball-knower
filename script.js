@@ -209,7 +209,7 @@ async function getCurrentUser() {
     
     // Fetch fresh user data from API
     try {
-        const response = await fetch('getApiUrl('/api/')users/me', {
+        const response = await fetch(getApiUrl('/api/users/me'), {
             headers: {
                 'Authorization': `Bearer ${authToken}`
             }
@@ -592,7 +592,10 @@ window.showHome = function showHome() {
 
 window.showLeaderboard = function showLeaderboard() {
     showScreen('leaderboard-screen');
-    loadLeaderboard();
+    // Load weekly leaderboard data when leaderboard screen is shown
+    if (typeof loadWeeklyLeaderboard === 'function') {
+        loadWeeklyLeaderboard();
+    }
 }
 
 // Load leaderboard data
@@ -604,7 +607,7 @@ async function loadLeaderboard() {
         }
         
         // Get current challenge
-        const challengeResponse = await fetch('getApiUrl('/api/')challenges/current');
+        const challengeResponse = await fetch(getApiUrl('/api/challenges/current'));
         if (!challengeResponse.ok) {
             document.getElementById('leaderboard-content').innerHTML = '<p>No active challenge found.</p>';
             return;
@@ -614,7 +617,7 @@ async function loadLeaderboard() {
         const challengeId = challengeData.challenge.id;
         
         // Get leaderboard data
-        const leaderboardResponse = await fetch(`getApiUrl('/api/')leaderboards/${challengeId}/global?limit=50`);
+        const leaderboardResponse = await fetch(getApiUrl(`/api/leaderboards/${challengeId}/global?limit=50`));
         if (!leaderboardResponse.ok) {
             document.getElementById('leaderboard-content').innerHTML = '<p>Failed to load leaderboard.</p>';
             return;
@@ -707,7 +710,7 @@ async function loadUserProfile() {
 
         // Get user profile from backend
         console.log('🔍 Fetching user profile from backend...');
-        const response = await fetch('getApiUrl('/api/')users/me', {
+        const response = await fetch(getApiUrl('/api/users/me'), {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -757,7 +760,7 @@ async function loadUserStats() {
             return;
         }
 
-        const response = await fetch('/api/stats/me', {
+        const response = await fetch(getApiUrl('/api/stats/me'), {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -792,19 +795,19 @@ async function loadUserStats() {
 // Update stats display elements
 function updateStatsDisplay(stats) {
     const bestStreakElement = document.getElementById('best-streak');
-    const accuracyElement = document.getElementById('accuracy');
-    const gamesPlayedElement = document.getElementById('games-played');
+    const averageScoreElement = document.getElementById('average-score');
+    const totalGamesElement = document.getElementById('total-games');
     
     if (bestStreakElement) {
         bestStreakElement.textContent = stats.best_streak || 0;
     }
     
-    if (accuracyElement) {
-        accuracyElement.textContent = `${stats.accuracy || 0}%`;
+    if (averageScoreElement) {
+        averageScoreElement.textContent = `${stats.accuracy || 0}%`;
     }
     
-    if (gamesPlayedElement) {
-        gamesPlayedElement.textContent = stats.total_games || 0;
+    if (totalGamesElement) {
+        totalGamesElement.textContent = stats.total_games || 0;
     }
     
     console.log('✅ Updated stats display:', {
@@ -962,7 +965,7 @@ function displayUserProfile(user, badges) {
     const totalGamesElement = document.getElementById('total-games');
     const averageScoreElement = document.getElementById('average-score');
     const bestStreakElement = document.getElementById('best-streak');
-    const achievementsElement = document.getElementById('achievements');
+    const achievementsElement = document.getElementById('achievements-earned');
     
     if (totalGamesElement) {
         totalGamesElement.textContent = user.total_games || 0;
@@ -1148,7 +1151,10 @@ window.submitTextAnswer = function submitTextAnswer() {
         
         // Update UI immediately for survival mode
         if (currentGame.mode === 'survival') {
-            document.getElementById('question-counter').textContent = `Survival Streak: ${currentGame.streak}`;
+            const questionProgress = document.getElementById('question-progress');
+            if (questionProgress) {
+                questionProgress.textContent = `Survival Streak: ${currentGame.streak}`;
+            }
         }
     } else {
         currentGame.streak = 0;
@@ -1309,7 +1315,10 @@ function loadHighScore() {
     const highScore = localStorage.getItem('ballKnower_highScore');
     if (highScore) {
         const scoreData = JSON.parse(highScore);
-        document.getElementById('best-streak').textContent = scoreData.streak;
+        const highScoreElement = document.getElementById('current-high-score');
+        if (highScoreElement) {
+            highScoreElement.textContent = scoreData.streak;
+        }
         
         // Use display modes if available, otherwise convert modes
         const displayText = scoreData.displayModes ? 
@@ -3540,7 +3549,10 @@ window.selectAnswer = function selectAnswer(answerIndex) {
         
         // Update UI immediately for survival mode
         if (currentGame.mode === 'survival') {
-            document.getElementById('question-counter').textContent = `Survival Streak: ${currentGame.streak}`;
+            const questionProgress = document.getElementById('question-progress');
+            if (questionProgress) {
+                questionProgress.textContent = `Survival Streak: ${currentGame.streak}`;
+            }
             // Don't show score in survival mode - streak is more important
         }
     } else {
@@ -3937,7 +3949,7 @@ window.createRoomWithSettings = async function createRoomWithSettings() {
     
     try {
         // Create room via API
-        const response = await fetch('getApiUrl('/api/')rooms/create', {
+        const response = await fetch(getApiUrl('/api/rooms/create'), {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -4076,7 +4088,7 @@ window.joinRoom = async function joinRoom() {
     if (roomCode.length === 6) {
         try {
             // Join room via API
-            const response = await fetch(`getApiUrl('/api/')rooms/join/${roomCode}`, {
+            const response = await fetch(getApiUrl(`/api/rooms/join/${roomCode}`), {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -4236,7 +4248,7 @@ window.startGameCountdown = async function startGameCountdown() {
     if (multiplayerGame.isHost) {
         try {
             const authToken = localStorage.getItem('ball_knower_token');
-            const response = await fetch(`getApiUrl('/api/')rooms/${multiplayerGame.roomCode}/start`, {
+            const response = await fetch(getApiUrl(`/api/rooms/${multiplayerGame.roomCode}/start`), {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${authToken}`
@@ -4297,7 +4309,7 @@ window.leaveWaitingRoom = async function leaveWaitingRoom() {
     try {
         const authToken = localStorage.getItem('ball_knower_token');
         if (authToken && multiplayerGame.roomCode) {
-            await fetch(`getApiUrl('/api/')rooms/${multiplayerGame.roomCode}/leave`, {
+            await fetch(getApiUrl(`/api/rooms/${multiplayerGame.roomCode}/leave`), {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${authToken}`
@@ -5196,7 +5208,7 @@ async function syncPlayerScore() {
         const authToken = localStorage.getItem('ball_knower_token');
         if (!authToken || !multiplayerGame.roomCode) return;
 
-        const response = await fetch(`getApiUrl('/api/')rooms/${multiplayerGame.roomCode}/score`, {
+        const response = await fetch(getApiUrl(`/api/rooms/${multiplayerGame.roomCode}/score`), {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${authToken}`,
@@ -5418,19 +5430,23 @@ function generateRoomCode() {
 
 // Leaderboard Functions
 window.showLeaderboardTab = function showLeaderboardTab(tab) {
+    // Remove active class from all tab buttons
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.classList.remove('active');
     });
+    
+    // Add active class to clicked tab button
     event.target.classList.add('active');
     
-    // Show/hide leaderboard sections
+    // Hide all leaderboard sections
     document.querySelectorAll('.leaderboard-section').forEach(section => {
         section.classList.remove('active');
     });
     
+    // Show the selected leaderboard section
     if (tab === 'weekly') {
         document.getElementById('weekly-leaderboard').classList.add('active');
-        // Load weekly leaderboard if not already loaded
+        // Load weekly leaderboard data
         if (typeof loadWeeklyLeaderboard === 'function') {
             loadWeeklyLeaderboard();
         }
@@ -5439,8 +5455,6 @@ window.showLeaderboardTab = function showLeaderboardTab(tab) {
     } else if (tab === 'all-time') {
         document.getElementById('all-time-leaderboard').classList.add('active');
     }
-    
-    updateLeaderboardContent(tab);
 }
 
 function updateLeaderboardContent(tab) {
@@ -5554,7 +5568,7 @@ async function syncLeaderboard() {
         const authToken = localStorage.getItem('ball_knower_token');
         if (!authToken || !multiplayerGame.roomCode) return;
 
-        const response = await fetch(`getApiUrl('/api/')rooms/${multiplayerGame.roomCode}`, {
+        const response = await fetch(getApiUrl(`/api/rooms/${multiplayerGame.roomCode}`), {
             headers: {
                 'Authorization': `Bearer ${authToken}`
             }
@@ -5584,7 +5598,7 @@ async function pollRoomUpdates() {
         const authToken = localStorage.getItem('ball_knower_token');
         if (!authToken) return;
         
-        const response = await fetch(`getApiUrl('/api/')rooms/${multiplayerGame.roomCode}`, {
+        const response = await fetch(getApiUrl(`/api/rooms/${multiplayerGame.roomCode}`), {
             headers: {
                 'Authorization': `Bearer ${authToken}`
             }

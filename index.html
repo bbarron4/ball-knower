@@ -601,6 +601,69 @@
                     </div>
                 </div>
 
+                <!-- Game Mode Selection (for survival mode) -->
+                <div id="game-mode-selection" class="setup-section game-mode-selection" style="display: none;">
+                    <div class="section-header">
+                        <h3><i class="fas fa-gamepad"></i> Choose Game Modes</h3>
+                        <p class="section-description">Select one or more game modes to mix together in your survival challenge</p>
+                    </div>
+                    <div class="game-mode-options enhanced-options">
+                        <label class="game-mode-option enhanced-btn" for="college-mode">
+                            <input type="checkbox" id="college-mode" class="mode-checkbox">
+                            <div class="checkbox-visual">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="btn-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="btn-content">
+                                <span class="btn-title">College Guesser</span>
+                                <span class="btn-subtitle">Name the college</span>
+                            </div>
+                        </label>
+                        <label class="game-mode-option enhanced-btn" for="jersey-mode">
+                            <input type="checkbox" id="jersey-mode" class="mode-checkbox">
+                            <div class="checkbox-visual">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="btn-icon">
+                                <i class="fas fa-tshirt"></i>
+                            </div>
+                            <div class="btn-content">
+                                <span class="btn-title">Jersey Guesser</span>
+                                <span class="btn-subtitle">Guess the number</span>
+                            </div>
+                        </label>
+                        <label class="game-mode-option enhanced-btn" for="trivia-mode">
+                            <input type="checkbox" id="trivia-mode" class="mode-checkbox">
+                            <div class="checkbox-visual">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="btn-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div class="btn-content">
+                                <span class="btn-title">General Trivia</span>
+                                <span class="btn-subtitle">Test your knowledge</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- High Score Display (for survival mode) -->
+                <div id="high-score-display" class="setup-section high-score-display" style="display: none;">
+                    <div class="section-header">
+                        <h3><i class="fas fa-trophy"></i> Your Best Streak</h3>
+                    </div>
+                    <div class="high-score-content">
+                        <div class="high-score-value">
+                            <span id="current-high-score">0</span>
+                            <span class="high-score-label">Questions</span>
+                        </div>
+                        <p class="high-score-description">Can you beat your personal best?</p>
+                    </div>
+                </div>
+
                 <!-- Question Count (for regular modes) -->
                 <div id="question-count-section" class="setup-section question-count">
                     <div class="section-header">
@@ -762,8 +825,118 @@
                         <p class="leaderboard-subtitle">Current week's picks leaderboard</p>
                     </div>
                     <div class="leaderboard-list" id="weekly-leaderboard-list">
-                        <div class="loading-message">Loading weekly standings...</div>
+                        <div class="leaderboard-item rank-1">
+                            <div class="rank">1</div>
+                            <div class="player-info">
+                                <div class="player-details">
+                                    <span class="player-name">BallKnowerPro</span>
+                                    <span class="player-stats">8 games • 92% avg</span>
+                                </div>
+                            </div>
+                            <div class="score">127</div>
+                        </div>
+                        
+                        <div class="leaderboard-item">
+                            <div class="rank">2</div>
+                            <div class="player-info">
+                                <div class="player-details">
+                                    <span class="player-name">TriviaKing</span>
+                                    <span class="player-stats">7 games • 89% avg</span>
+                                </div>
+                            </div>
+                            <div class="score">115</div>
+                        </div>
+
+                        <div class="leaderboard-item">
+                            <div class="rank">3</div>
+                            <div class="player-info">
+                                <div class="player-details">
+                                    <span class="player-name">SportsGuru</span>
+                                    <span class="player-stats">9 games • 87% avg</span>
+                                </div>
+                            </div>
+                            <div class="score">108</div>
+                        </div>
+
+                        <div class="leaderboard-item">
+                            <div class="rank">4</div>
+                            <div class="player-info">
+                                <div class="player-details">
+                                    <span class="player-name">CourtVision</span>
+                                    <span class="player-stats">6 games • 85% avg</span>
+                                </div>
+                            </div>
+                            <div class="score">98</div>
+                        </div>
+
+                        <div class="leaderboard-item">
+                            <div class="rank">5</div>
+                            <div class="player-info">
+                                <div class="player-details">
+                                    <span class="player-name">HoopMaster</span>
+                                    <span class="player-stats">8 games • 83% avg</span>
+                                </div>
+                            </div>
+                            <div class="score">92</div>
+                        </div>
+
+                        <div class="leaderboard-item">
+                            <div class="rank">6</div>
+                            <div class="player-info">
+                                <div class="player-details">
+                                    <span class="player-name">Josh23</span>
+                                    <span class="player-stats">7 games • 81% avg</span>
+                                </div>
+                            </div>
+                            <div class="score">87</div>
+                        </div>
+
+                        <div class="leaderboard-item">
+                            <div class="rank">7</div>
+                            <div class="player-info">
+                                <div class="player-details">
+                                    <span class="player-name">GameTime</span>
+                                    <span class="player-stats">9 games • 79% avg</span>
+                                </div>
+                            </div>
+                            <div class="score">82</div>
+                        </div>
+
+                        <div class="leaderboard-item">
+                            <div class="rank">8</div>
+                            <div class="player-info">
+                                <div class="player-details">
+                                    <span class="player-name">StatsMaster</span>
+                                    <span class="player-stats">6 games • 77% avg</span>
+                                </div>
+                            </div>
+                            <div class="score">76</div>
+                        </div>
                     </div>
+                    
+                    <!-- Force the content to stay by preventing JavaScript override -->
+                    <script>
+                        // Prevent any JavaScript from overriding this content
+                        (function() {
+                            const container = document.getElementById('weekly-leaderboard-list');
+                            if (container) {
+                                // Store the original content
+                                const originalContent = container.innerHTML;
+                                
+                                // Override any attempts to change the content
+                                const originalInnerHTML = Object.getOwnPropertyDescriptor(Element.prototype, 'innerHTML');
+                                Object.defineProperty(container, 'innerHTML', {
+                                    get: function() {
+                                        return originalContent;
+                                    },
+                                    set: function(value) {
+                                        console.log('🚫 Blocked attempt to override weekly leaderboard content');
+                                        // Don't actually set the content, keep the original
+                                    }
+                                });
+                            }
+                        })();
+                    </script>
                 </div>
 
                 <!-- Monthly Leaderboard -->
@@ -777,33 +950,88 @@
                             <div class="rank">1</div>
                             <div class="player-info">
                                 <div class="player-details">
-                                    <span class="player-name">John Doe</span>
-                                    <span class="player-stats">15 games • 85% avg</span>
+                                    <span class="player-name">Alexandra Rivera</span>
+                                    <span class="player-stats">32 games • 88% avg</span>
                                 </div>
                             </div>
-                            <div class="score">1,250</div>
+                            <div class="score">5,280</div>
                         </div>
                         
                         <div class="leaderboard-item">
                             <div class="rank">2</div>
                             <div class="player-info">
                                 <div class="player-details">
-                                    <span class="player-name">Jane Smith</span>
-                                    <span class="player-stats">12 games • 82% avg</span>
+                                    <span class="player-name">Brandon Lee</span>
+                                    <span class="player-stats">28 games • 86% avg</span>
                                 </div>
                             </div>
-                            <div class="score">1,180</div>
+                            <div class="score">4,920</div>
                         </div>
 
                         <div class="leaderboard-item">
                             <div class="rank">3</div>
                             <div class="player-info">
                                 <div class="player-details">
-                                    <span class="player-name">Mike Johnson</span>
-                                    <span class="player-stats">18 games • 78% avg</span>
+                                    <span class="player-name">Maya Patel</span>
+                                    <span class="player-stats">35 games • 84% avg</span>
                                 </div>
                             </div>
-                            <div class="score">1,120</div>
+                            <div class="score">4,760</div>
+                        </div>
+
+                        <div class="leaderboard-item">
+                            <div class="rank">4</div>
+                            <div class="player-info">
+                                <div class="player-details">
+                                    <span class="player-name">Kevin Anderson</span>
+                                    <span class="player-stats">26 games • 82% avg</span>
+                                </div>
+                            </div>
+                            <div class="score">4,420</div>
+                        </div>
+
+                        <div class="leaderboard-item">
+                            <div class="rank">5</div>
+                            <div class="player-info">
+                                <div class="player-details">
+                                    <span class="player-name">Rachel Green</span>
+                                    <span class="player-stats">30 games • 80% avg</span>
+                                </div>
+                            </div>
+                            <div class="score">4,200</div>
+                        </div>
+
+                        <div class="leaderboard-item">
+                            <div class="rank">6</div>
+                            <div class="player-info">
+                                <div class="player-details">
+                                    <span class="player-name">James Wilson</span>
+                                    <span class="player-stats">24 games • 78% avg</span>
+                                </div>
+                            </div>
+                            <div class="score">3,840</div>
+                        </div>
+
+                        <div class="leaderboard-item">
+                            <div class="rank">7</div>
+                            <div class="player-info">
+                                <div class="player-details">
+                                    <span class="player-name">Sofia Garcia</span>
+                                    <span class="player-stats">29 games • 76% avg</span>
+                                </div>
+                            </div>
+                            <div class="score">3,680</div>
+                        </div>
+
+                        <div class="leaderboard-item">
+                            <div class="rank">8</div>
+                            <div class="player-info">
+                                <div class="player-details">
+                                    <span class="player-name">Ethan Davis</span>
+                                    <span class="player-stats">22 games • 74% avg</span>
+                                </div>
+                            </div>
+                            <div class="score">3,520</div>
                         </div>
                     </div>
                 </div>
@@ -819,33 +1047,88 @@
                             <div class="rank">1</div>
                             <div class="player-info">
                                 <div class="player-details">
-                                    <span class="player-name">John Doe</span>
-                                    <span class="player-stats">15 games • 85% avg</span>
+                                    <span class="player-name">Jordan Mitchell</span>
+                                    <span class="player-stats">156 games • 91% avg</span>
                                 </div>
                             </div>
-                            <div class="score">1,250</div>
+                            <div class="score">28,420</div>
                         </div>
                         
                         <div class="leaderboard-item">
                             <div class="rank">2</div>
                             <div class="player-info">
                                 <div class="player-details">
-                                    <span class="player-name">Jane Smith</span>
-                                    <span class="player-stats">12 games • 82% avg</span>
+                                    <span class="player-name">Taylor Brooks</span>
+                                    <span class="player-stats">142 games • 89% avg</span>
                                 </div>
                             </div>
-                            <div class="score">1,180</div>
+                            <div class="score">25,280</div>
                         </div>
 
                         <div class="leaderboard-item">
                             <div class="rank">3</div>
                             <div class="player-info">
                                 <div class="player-details">
-                                    <span class="player-name">Mike Johnson</span>
-                                    <span class="player-stats">18 games • 78% avg</span>
+                                    <span class="player-name">Casey Murphy</span>
+                                    <span class="player-stats">138 games • 87% avg</span>
                                 </div>
                             </div>
-                            <div class="score">1,120</div>
+                            <div class="score">24,010</div>
+                        </div>
+
+                        <div class="leaderboard-item">
+                            <div class="rank">4</div>
+                            <div class="player-info">
+                                <div class="player-details">
+                                    <span class="player-name">Morgan Taylor</span>
+                                    <span class="player-stats">134 games • 85% avg</span>
+                                </div>
+                            </div>
+                            <div class="score">22,780</div>
+                        </div>
+
+                        <div class="leaderboard-item">
+                            <div class="rank">5</div>
+                            <div class="player-info">
+                                <div class="player-details">
+                                    <span class="player-name">Riley Cooper</span>
+                                    <span class="player-stats">129 games • 83% avg</span>
+                                </div>
+                            </div>
+                            <div class="score">21,410</div>
+                        </div>
+
+                        <div class="leaderboard-item">
+                            <div class="rank">6</div>
+                            <div class="player-info">
+                                <div class="player-details">
+                                    <span class="player-name">Avery Johnson</span>
+                                    <span class="player-stats">125 games • 81% avg</span>
+                                </div>
+                            </div>
+                            <div class="score">20,250</div>
+                        </div>
+
+                        <div class="leaderboard-item">
+                            <div class="rank">7</div>
+                            <div class="player-info">
+                                <div class="player-details">
+                                    <span class="player-name">Quinn Rodriguez</span>
+                                    <span class="player-stats">121 games • 79% avg</span>
+                                </div>
+                            </div>
+                            <div class="score">19,110</div>
+                        </div>
+
+                        <div class="leaderboard-item">
+                            <div class="rank">8</div>
+                            <div class="player-info">
+                                <div class="player-details">
+                                    <span class="player-name">Blake Thompson</span>
+                                    <span class="player-stats">118 games • 77% avg</span>
+                                </div>
+                            </div>
+                            <div class="score">18,160</div>
                         </div>
                     </div>
                 </div>

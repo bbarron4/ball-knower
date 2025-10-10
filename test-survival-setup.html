@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Survival Setup</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="screen" id="home-screen">
+        <button onclick="startGame('survival')" class="btn-primary">Test Survival Mode Setup</button>
+    </div>
+
+    <!-- Game Setup Screen -->
+    <div id="setup-screen" class="screen">
+        <div class="setup-container enhanced-setup">
+            <div class="setup-header">
+                <h2 id="setup-title" class="setup-title-enhanced">🎮 Game Setup</h2>
+                <p class="setup-subtitle">Configure your perfect Ball Knower experience</p>
+            </div>
+            
+            <div class="setup-section sport-selection">
+                <div class="section-header">
+                    <h3><i class="fas fa-trophy"></i> Choose Your League</h3>
+                </div>
+                <div class="sport-options enhanced-options">
+                    <button class="sport-btn enhanced-btn" onclick="selectSport('nfl')">
+                        <div class="btn-icon">
+                            <i class="fas fa-football-ball"></i>
+                        </div>
+                        <div class="btn-content">
+                            <span class="btn-title">NFL</span>
+                            <span class="btn-subtitle">National Football League</span>
+                        </div>
+                    </button>
+                    <button class="sport-btn enhanced-btn" onclick="selectSport('nba')">
+                        <div class="btn-icon">
+                            <i class="fas fa-basketball-ball"></i>
+                        </div>
+                        <div class="btn-content">
+                            <span class="btn-title">NBA</span>
+                            <span class="btn-subtitle">National Basketball Assoc.</span>
+                        </div>
+                    </button>
+                    <button class="sport-btn enhanced-btn" onclick="selectSport('both')">
+                        <div class="btn-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <div class="btn-content">
+                            <span class="btn-title">Both</span>
+                            <span class="btn-subtitle">Ultimate Challenge</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <div class="setup-section input-type-selection">
+                <div class="section-header">
+                    <h3><i class="fas fa-gamepad"></i> Answer Style</h3>
+                </div>
+                <div class="input-type-options enhanced-options">
+                    <button class="input-type-btn enhanced-btn active" onclick="selectInputType('multiple-choice')">
+                        <div class="btn-icon">
+                            <i class="fas fa-list"></i>
+                        </div>
+                        <div class="btn-content">
+                            <span class="btn-title">Multiple Choice</span>
+                        </div>
+                    </button>
+                    <button class="input-type-btn enhanced-btn" onclick="selectInputType('text-input')">
+                        <div class="btn-icon">
+                            <i class="fas fa-keyboard"></i>
+                        </div>
+                        <div class="btn-content">
+                            <span class="btn-title">Type Answer</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Game Mode Selection (for survival mode) -->
+            <div id="game-mode-selection" class="setup-section game-mode-selection" style="display: none;">
+                <div class="section-header">
+                    <h3><i class="fas fa-gamepad"></i> Choose Game Modes</h3>
+                </div>
+                <div class="game-mode-options enhanced-options">
+                    <label class="game-mode-option enhanced-btn">
+                        <input type="checkbox" id="college-mode" class="mode-checkbox" checked>
+                        <div class="btn-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="btn-content">
+                            <span class="btn-title">College Guesser</span>
+                            <span class="btn-subtitle">Name the college</span>
+                        </div>
+                    </label>
+                    <label class="game-mode-option enhanced-btn">
+                        <input type="checkbox" id="jersey-mode" class="mode-checkbox" checked>
+                        <div class="btn-icon">
+                            <i class="fas fa-tshirt"></i>
+                        </div>
+                        <div class="btn-content">
+                            <span class="btn-title">Jersey Guesser</span>
+                            <span class="btn-subtitle">Guess the number</span>
+                        </div>
+                    </label>
+                    <label class="game-mode-option enhanced-btn">
+                        <input type="checkbox" id="trivia-mode" class="mode-checkbox" checked>
+                        <div class="btn-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="btn-content">
+                            <span class="btn-title">General Trivia</span>
+                            <span class="btn-subtitle">Test your knowledge</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- High Score Display (for survival mode) -->
+            <div id="high-score-display" class="setup-section high-score-display" style="display: none;">
+                <div class="section-header">
+                    <h3><i class="fas fa-trophy"></i> Your Best Streak</h3>
+                </div>
+                <div class="high-score-content">
+                    <div class="high-score-value">
+                        <span id="current-high-score">0</span>
+                        <span class="high-score-label">Questions</span>
+                    </div>
+                    <p class="high-score-description">Can you beat your personal best?</p>
+                </div>
+            </div>
+
+            <!-- Question Count (for regular modes) -->
+            <div id="question-count-section" class="setup-section question-count">
+                <div class="section-header">
+                    <h3><i class="fas fa-hashtag"></i> Question Count</h3>
+                </div>
+                <div class="count-selector enhanced-counter">
+                    <button class="counter-btn" onclick="changeQuestionCount(-1)">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <div class="counter-display">
+                        <span id="question-count" class="counter-value">10</span>
+                        <span class="counter-label">Questions</span>
+                    </div>
+                    <button class="counter-btn" onclick="changeQuestionCount(1)">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="game-controls">
+                <button class="btn-secondary" onclick="showHome()">Back</button>
+                <button class="btn-primary" onclick="testValidation()">Start Game</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mock currentGame object
+        const currentGame = {
+            mode: '',
+            sport: 'nfl',
+            inputMode: 'multiple-choice',
+            questionCount: 10
+        };
+
+        // Mock functions
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.style.display = 'none';
+            });
+            document.getElementById(screenId).style.display = 'block';
+        }
+
+        function showHome() {
+            showScreen('home-screen');
+        }
+
+        function selectSport(sport) {
+            currentGame.sport = sport;
+            document.querySelectorAll('.sport-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.closest('.sport-btn').classList.add('active');
+        }
+
+        function selectInputType(inputType) {
+            currentGame.inputMode = inputType;
+            document.querySelectorAll('.input-type-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.closest('.input-type-btn').classList.add('active');
+        }
+
+        function changeQuestionCount(delta) {
+            const currentCount = parseInt(document.getElementById('question-count').textContent);
+            const newCount = Math.max(5, Math.min(50, currentCount + delta));
+            document.getElementById('question-count').textContent = newCount;
+            currentGame.questionCount = newCount;
+        }
+
+        function loadHighScore() {
+            const highScore = localStorage.getItem('ballKnower_highScore');
+            if (highScore) {
+                const scoreData = JSON.parse(highScore);
+                const highScoreElement = document.getElementById('current-high-score');
+                if (highScoreElement) {
+                    highScoreElement.textContent = scoreData.streak;
+                }
+            }
+        }
+
+        function getSelectedGameModes() {
+            const modes = [];
+            if (document.getElementById('college-mode').checked) modes.push('college-guesser');
+            if (document.getElementById('jersey-mode').checked) modes.push('jersey-guesser');
+            if (document.getElementById('trivia-mode').checked) modes.push('achievement-guesser');
+            return modes;
+        }
+
+        function validateSurvivalSetup() {
+            const selectedModes = getSelectedGameModes();
+            if (selectedModes.length === 0) {
+                alert('Please select at least one game mode for survival mode!');
+                return false;
+            }
+            return true;
+        }
+
+        function testValidation() {
+            if (currentGame.mode === 'survival' && !validateSurvivalSetup()) {
+                return;
+            }
+            alert('Validation passed! Selected modes: ' + getSelectedGameModes().join(', '));
+        }
+
+        function startGame(mode) {
+            console.log(`🎮 startGame called with mode: ${mode}`);
+            
+            currentGame.mode = mode;
+            
+            // Keep previous settings if they exist, otherwise use defaults
+            if (!currentGame.sport) {
+                console.log(`⚠️ No sport set, defaulting to NFL`);
+                currentGame.sport = 'nfl';
+            } else {
+                console.log(`✅ Sport already set to: ${currentGame.sport}`);
+            }
+            if (!currentGame.inputMode) currentGame.inputMode = 'multiple-choice';
+            if (!currentGame.questionCount) currentGame.questionCount = 10;
+            
+            // Show setup screen
+            showScreen('setup-screen');
+            
+            // Update setup title based on mode
+            const titles = {
+                'college-guesser': 'College Guesser - Setup',
+                'jersey-guesser': 'Jersey Number Guesser - Setup',
+                'achievement-guesser': 'General Trivia - Setup',
+                'survival': 'Survival Mode - Setup',
+                'multiplayer': 'Multiplayer - Setup'
+            };
+            
+            document.getElementById('setup-title').textContent = titles[mode] || 'Game Setup';
+            
+            // Show/hide sections based on game mode
+            const gameModeSelection = document.getElementById('game-mode-selection');
+            const questionCountSection = document.getElementById('question-count-section');
+            const highScoreDisplay = document.getElementById('high-score-display');
+            
+            if (mode === 'survival') {
+                // Show game mode selection and high score, hide question count
+                if (gameModeSelection) gameModeSelection.style.display = 'block';
+                if (questionCountSection) questionCountSection.style.display = 'none';
+                if (highScoreDisplay) highScoreDisplay.style.display = 'block';
+                
+                // Load and display high score
+                loadHighScore();
+            } else {
+                // Show question count, hide game mode selection and high score
+                if (gameModeSelection) gameModeSelection.style.display = 'none';
+                if (questionCountSection) questionCountSection.style.display = 'block';
+                if (highScoreDisplay) highScoreDisplay.style.display = 'none';
+            }
+        }
+
+        // Initialize
+        showScreen('home-screen');
+    </script>
+</body>
+</html>

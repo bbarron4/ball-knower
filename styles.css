@@ -1212,6 +1212,15 @@ body::-webkit-scrollbar,
     background: rgba(0, 212, 170, 0.1);
 }
 
+/* Leaderboard sections */
+.leaderboard-section {
+    display: none;
+}
+
+.leaderboard-section.active {
+    display: block;
+}
+
 .leaderboard-list {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1507,6 +1516,10 @@ body::-webkit-scrollbar,
     border-radius: 16px;
     padding: 2rem;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .stat-number {
@@ -1514,11 +1527,16 @@ body::-webkit-scrollbar,
     font-weight: 800;
     color: #00d4aa;
     margin-bottom: 0.5rem;
+    display: block;
+    width: 100%;
+    text-align: center;
 }
 
 .stat-label {
     color: rgba(255, 255, 255, 0.7);
     font-weight: 500;
+    text-align: center;
+    width: 100%;
 }
 
 .achievements h3 {
@@ -4455,6 +4473,119 @@ body::-webkit-scrollbar,
     border-color: #4CAF50;
     background: rgba(76, 175, 80, 0.2);
     box-shadow: 0 0 20px rgba(76, 175, 80, 0.4);
+}
+
+/* Game Mode Selection Styles */
+.game-mode-option {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mode-checkbox {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    z-index: 2;
+}
+
+.checkbox-visual {
+    width: 24px;
+    height: 24px;
+    border: 2px solid rgba(76, 175, 80, 0.5);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.checkbox-visual i {
+    font-size: 12px;
+    color: transparent;
+    transition: all 0.3s ease;
+}
+
+.mode-checkbox:checked + .checkbox-visual {
+    background: rgba(76, 175, 80, 0.3);
+    border-color: #4CAF50;
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+}
+
+.mode-checkbox:checked + .checkbox-visual i {
+    color: #4CAF50;
+}
+
+.mode-checkbox:checked ~ .btn-icon {
+    background: rgba(76, 175, 80, 0.2);
+    border-color: #4CAF50;
+}
+
+.mode-checkbox:checked ~ .btn-content .btn-title {
+    color: #4CAF50;
+}
+
+.game-mode-option:hover .checkbox-visual {
+    border-color: #4CAF50;
+    background: rgba(76, 175, 80, 0.1);
+}
+
+.game-mode-option:hover .btn-icon {
+    background: rgba(76, 175, 80, 0.2);
+    transform: scale(1.05);
+}
+
+/* Section description styling */
+.section-description {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    margin: 0.5rem 0 0 0;
+    font-style: italic;
+}
+
+/* High Score Display Styles */
+.high-score-display {
+    text-align: center;
+}
+
+.high-score-content {
+    padding: 1rem;
+}
+
+.high-score-value {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+#current-high-score {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #4CAF50;
+    text-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+}
+
+.high-score-label {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.high-score-description {
+    color: rgba(255, 255, 255, 0.6);
+    font-style: italic;
+    margin: 0;
 }
 
 .btn-icon {
